@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import GameSettingReducer from '../features/gamesettings/gameSettingSlice';
 import GameReducer from '../features/game/gameSlice';
 import UserSettingReducer from '../features/usersettings/userSettingSlice';
@@ -13,3 +13,9 @@ export const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
