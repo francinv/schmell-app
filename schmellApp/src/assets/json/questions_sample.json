@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "type": "Pekelek",
+        "question_desc": "Hvem synger mest i dusjen?",
+        "hint": "Dere får en påstand og noen teller ned fra tre. Deretter skal man peke på den man mener påstanden passer. Antall slurker personen med flest pek må drikke, vil stå på skjermen.",
+        "related_question": 0,
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 2,
+        "punishment": "Personen med flest pek drikker 1 slurk."
+    },
+    {
+        "id": 2,
+        "type": "Pekelek",
+        "question_desc": "Hvem har de mest spennende brystene?",
+        "hint": "Dere får en påstand og noen teller ned fra tre. Deretter skal man peke på den man mener påstanden passer. Antall slurker personen med flest pek må drikke, vil stå på skjermen.",
+        "related_question": 0,
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 2,
+        "punishment": "Personen med flest pek drikker 1 slurk."
+    }
+]
