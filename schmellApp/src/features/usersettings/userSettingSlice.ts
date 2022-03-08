@@ -8,6 +8,8 @@ import {
 } from '../../constants/common';
 import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
+import {USERNAME, PASSWORD} from '@env';
+import axiosService from '../../services/axios';
 
 const initialState = {
   access: '',
@@ -19,20 +21,15 @@ const initialState = {
   error: '',
 };
 
-export const fetchTokens = createAsyncThunk(
-  'usersetting/fetchTokens',
-  async () => {
-    const access_token = await asyncStorageService(ACCESS_TOKEN, '', 'GET');
-    const refresh_token = await asyncStorageService(REFRESH_TOKEN, '', 'GET');
-
-    if (access_token !== '' && refresh_token !== '') {
-      const tokens = {acc: access_token, ref: refresh_token};
-      return tokens;
-    } else {
-      //TODO - connect with server
-    }
-  },
-);
+export const setTokens = createAsyncThunk('usersetting/setTokens', async () => {
+  const data = {
+    username: USERNAME,
+    password: PASSWORD,
+  };
+  const axe = axiosService.post('auth/login/', data);
+  const login_res = axe.then(res => res.data);
+  return login_res;
+});
 
 export const fetchSettings = createAsyncThunk(
   'usersetting/fetchSettings',
@@ -52,12 +49,7 @@ export const postSettings = createAsyncThunk(
     await asyncStorageService(VOLUME_KEY, data.volume, 'SET');
     await asyncStorageService(VOICE_KEY, data.voice, 'SET');
     await asyncStorageService(LANGUAGE_KEY, data.language, 'SET');
-    const temp = {
-      vol: await asyncStorageService(VOLUME_KEY, '', 'GET'),
-      voi: await asyncStorageService(VOICE_KEY, '', 'GET'),
-      lang: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
-    };
-    return temp;
+    return data;
   },
 );
 
@@ -68,39 +60,8 @@ const UserSettingSlice = createSlice({
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
     },
-    setAccess(state, action: PayloadAction<string>) {
-      state.access = action.payload;
-    },
-    setRefresh(state, action: PayloadAction<string>) {
-      state.refresh = action.payload;
-    },
-    setVolume(state, action: PayloadAction<number>) {
-      state.volume = action.payload;
-    },
-    setVoice(state, action: PayloadAction<string>) {
-      state.voice = action.payload;
-    },
-    setLanguage(state, action: PayloadAction<string>) {
-      state.language = action.payload;
-    },
   },
   extraReducers: builder => {
-    builder.addCase(fetchTokens.pending, state => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchTokens.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.access = action.payload.acc;
-        state.refresh = action.payload.ref;
-      }
-      state.status = 'succeeded';
-    });
-    builder.addCase(fetchTokens.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
     builder.addCase(fetchSettings.pending, state => {
       state.status = 'loading';
     });
@@ -123,9 +84,9 @@ const UserSettingSlice = createSlice({
     });
     builder.addCase(postSettings.fulfilled, (state, action) => {
       if (action.payload) {
-        state.volume = action.payload.vol;
-        state.voice = action.payload.voi;
-        state.language = action.payload.lang;
+        state.volume = action.payload.volume;
+        state.voice = action.payload.voice;
+        state.language = action.payload.language;
       }
       state.status = 'succeeded';
     });
@@ -135,16 +96,27 @@ const UserSettingSlice = createSlice({
       }
       state.status = 'failed';
     });
+    builder.addCase(setTokens.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(setTokens.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.access = action.payload.access;
+        state.refresh = action.payload.refresh;
+        asyncStorageService(ACCESS_TOKEN, action.payload.access, 'SET');
+        asyncStorageService(REFRESH_TOKEN, action.payload.refresh, 'SET');
+      }
+      state.status = 'succeeded';
+    });
+    builder.addCase(setTokens.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
   },
 });
 
-export const {
-  setAccess,
-  setStatus,
-  setRefresh,
-  setVoice,
-  setVolume,
-  setLanguage,
-} = UserSettingSlice.actions;
+export const {setStatus} = UserSettingSlice.actions;
 
 export default UserSettingSlice.reducer;
