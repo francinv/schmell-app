@@ -1,9 +1,7 @@
 export const GAME_KEY = '@games';
 export const QUESTIONS_KEY = '@questions';
 export const WEEKS_KEY = '@weeks';
-export const LAST_UPDATED_GAME = '@last_updated_game';
-export const LAST_UPDATED_QUESTION = '@last_updated_question';
-export const LAST_UPDATED_WEEKS = '@last_updated_weeks';
+export const LAST_UPDATED = '@last_updated';
 export const ACCESS_TOKEN = '@access';
 export const REFRESH_TOKEN = '@refresh';
 export const VOLUME_KEY = '@volume';

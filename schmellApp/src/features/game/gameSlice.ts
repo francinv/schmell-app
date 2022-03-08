@@ -4,17 +4,13 @@ import {weekType} from '../../typings/weekTypes';
 import {questionType} from '../../typings/questionTypes';
 import {
   GAME_KEY,
-  LAST_UPDATED_GAME,
-  LAST_UPDATED_QUESTION,
-  LAST_UPDATED_WEEKS,
+  LAST_UPDATED,
   QUESTIONS_KEY,
   WEEKS_KEY,
 } from '../../constants/common';
-import {getDate, isTimeToUpdate} from '../../utils/dateUtil';
-import game_sample from '../../assets/json/game_sample.json';
-import questions_sample from '../../assets/json/questions_sample.json';
-import week_sample from '../../assets/json/week_sample.json';
+import {getDate, getWeekNumber, isTimeToUpdate} from '../../utils/dateUtil';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
+import axiosService from '../../services/axios';
 
 const games: gameType[] = [];
 const weeks: weekType[] = [];
@@ -26,59 +22,47 @@ const initialState = {
   questions,
   status: 'idle',
   error: '',
+  selectedGame: {},
+  weekNumber: getWeekNumber(),
 };
 
-export const fetchGames = createAsyncThunk('game/fetchGames', async () => {
-  const last_updated = await asyncStorageService(LAST_UPDATED_GAME, '', 'GET');
-  if (last_updated) {
-    if (isTimeToUpdate(last_updated)) {
-      //TODO - updateAsyncStorage with new data.
-      asyncStorageService(LAST_UPDATED_GAME, getDate(), 'SET');
-    }
-  } else {
-    asyncStorageService(GAME_KEY, game_sample, 'SET');
-    //TODO - connect with server, fetch from API. setAsyncStorage.
+export const fetchFromAPI = createAsyncThunk('game/fetchFromAPI', async () => {
+  const game_axe = axiosService.get('game/');
+  const games_res = await game_axe.then(res => res.data);
+  const question_axe = axiosService.get('question/');
+  const question_res = await question_axe.then(res => res.data);
+  const week_axe = axiosService.get('week/');
+  const week_res = await week_axe.then(res => res.data);
+  if (games_res) {
+    asyncStorageService(GAME_KEY, games_res, 'SET');
   }
-  const res = await asyncStorageService(GAME_KEY, '', 'GET')!;
-  return res;
+  if (question_res) {
+    asyncStorageService(QUESTIONS_KEY, question_res, 'SET');
+  }
+  if (week_res) {
+    asyncStorageService(WEEKS_KEY, week_res, 'SET');
+  }
 });
 
-export const fetchQuestions = createAsyncThunk(
-  'game/fetchQuestions',
+export const fetchFromStorage = createAsyncThunk(
+  'game/fetchFromStorage',
   async () => {
-    const last_updated = await asyncStorageService(
-      LAST_UPDATED_QUESTION,
-      '',
-      'GET',
-    );
-    if (last_updated) {
-      if (isTimeToUpdate(last_updated)) {
-        //TODO - updateAsyncStorage with new data.
-        asyncStorageService(LAST_UPDATED_QUESTION, getDate(), 'SET');
-      }
-    } else {
-      asyncStorageService(QUESTIONS_KEY, questions_sample, 'SET');
-      //TODO - connect with server, fetch from API. setAsyncStorage.
+    const last_updated = await asyncStorageService(LAST_UPDATED, '', 'GET');
+    if (isTimeToUpdate(last_updated) || !last_updated) {
+      fetchFromAPI();
+      asyncStorageService(LAST_UPDATED, getDate(), 'SET');
     }
-    const res = await asyncStorageService(QUESTIONS_KEY, '', 'GET')!;
-    return res;
+    const temp_game = await asyncStorageService(GAME_KEY, '', 'GET');
+    const temp_question = await asyncStorageService(QUESTIONS_KEY, '', 'GET');
+    const temp_week = await asyncStorageService(WEEKS_KEY, '', 'GET');
+    const temp = {
+      game: temp_game,
+      question: temp_question,
+      week: temp_week,
+    };
+    return temp;
   },
 );
-
-export const fetchWeeks = createAsyncThunk('game/fetchWeeks', async () => {
-  const last_updated = await asyncStorageService(LAST_UPDATED_WEEKS, '', 'GET');
-  if (last_updated) {
-    if (isTimeToUpdate(last_updated)) {
-      //TODO - updateAsyncStorage with new data.
-      asyncStorageService(LAST_UPDATED_WEEKS, getDate(), 'SET');
-    }
-  } else {
-    asyncStorageService(WEEKS_KEY, week_sample, 'SET');
-    //TODO - connect with server, fetch from API. setAsyncStorage.
-  }
-  const res = await asyncStorageService(WEEKS_KEY, '', 'GET')!;
-  return res;
-});
 
 const GameSlice = createSlice({
   name: 'game',
@@ -87,57 +71,35 @@ const GameSlice = createSlice({
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
     },
-    setGames(state, action: PayloadAction<[]>) {
-      state.games = action.payload;
-    },
-    setWeeks(state, action: PayloadAction<[]>) {
-      state.weeks = action.payload;
-    },
-    setQuestions(state, action: PayloadAction<[]>) {
-      state.questions = action.payload;
+    setSelectedGame(state, action: PayloadAction<object>) {
+      state.selectedGame = action.payload;
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchGames.pending, state => {
+    builder.addCase(fetchFromAPI.pending, state => {
       state.status = 'loading';
     });
-    builder.addCase(fetchGames.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.games = action.payload;
-      }
+    builder.addCase(fetchFromAPI.fulfilled, state => {
       state.status = 'succeeded';
     });
-    builder.addCase(fetchGames.rejected, (state, action) => {
+    builder.addCase(fetchFromAPI.rejected, (state, action) => {
       state.status = 'failed';
       if (action.error.message) {
         state.error = action.error.message;
       }
     });
-    builder.addCase(fetchQuestions.pending, state => {
+    builder.addCase(fetchFromStorage.pending, state => {
       state.status = 'loading';
     });
-    builder.addCase(fetchQuestions.fulfilled, (state, action) => {
+    builder.addCase(fetchFromStorage.fulfilled, (state, action) => {
       if (action.payload) {
-        state.questions = action.payload;
+        state.games = action.payload.game;
+        state.questions = action.payload.question;
+        state.weeks = action.payload.week;
       }
       state.status = 'succeeded';
     });
-    builder.addCase(fetchQuestions.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(fetchWeeks.pending, state => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchWeeks.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.weeks = action.payload;
-      }
-      state.status = 'succeeded';
-    });
-    builder.addCase(fetchWeeks.rejected, (state, action) => {
+    builder.addCase(fetchFromStorage.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
       }
@@ -146,6 +108,6 @@ const GameSlice = createSlice({
   },
 });
 
-export const {setGames, setStatus, setWeeks, setQuestions} = GameSlice.actions;
+export const {setStatus} = GameSlice.actions;
 
 export default GameSlice.reducer;
