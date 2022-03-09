@@ -6,6 +6,7 @@ const initialState = {
   players,
   teams: 0,
   readOut: false,
+  lastPlayer: '',
 };
 
 const GameSettingSlice = createSlice({
@@ -27,10 +28,19 @@ const GameSettingSlice = createSlice({
     noReadOut(state) {
       state.readOut = false;
     },
+    setLastPlayer(state, action: PayloadAction<string>) {
+      state.lastPlayer = action.payload;
+    },
   },
 });
 
-export const {setPlayers, addPlayers, setTeams, wantReadOut, noReadOut} =
-  GameSettingSlice.actions;
+export const {
+  setPlayers,
+  addPlayers,
+  setTeams,
+  wantReadOut,
+  noReadOut,
+  setLastPlayer,
+} = GameSettingSlice.actions;
 
 export default GameSettingSlice.reducer;
