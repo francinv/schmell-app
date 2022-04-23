@@ -4,6 +4,7 @@ import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
 import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import axiosService from '../../services/axios';
+import {decrypt} from '../../utils/crypto';
 
 const initialState = {
   api_key: '',
@@ -20,7 +21,7 @@ export const setTokens = createAsyncThunk(
     const temp = {
       name: id,
     };
-    const axe = axiosService.post('auth/generate_key/', temp);
+    const axe = axiosService.post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), temp);
     const token_res = await axe.then(res => res.data);
     return token_res;
   },
