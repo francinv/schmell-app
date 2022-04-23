@@ -1,20 +1,22 @@
 import axios from 'axios';
-import {ACCESS_TOKEN, REFRESH_TOKEN} from '../constants/common';
-import {asyncStorageService} from '../utils/updateAsyncStorage';
-const baseURL = 'https://schmell-staging.herokuapp.com/api/';
+import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
+import DeviceInfo from 'react-native-device-info';
+import {BASEURL_DEV, PATH_0_DEV} from '@env';
 
 const axiosService = axios.create({
-  baseURL: baseURL,
-  timeout: 5000,
+  baseURL: BASEURL_DEV,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
+const id = DeviceInfo.getUniqueId();
+
 axiosService.interceptors.request.use(
-  async config => {
-    const token = await asyncStorageService(ACCESS_TOKEN, '', 'GET');
-    if (token) {
-      config!.headers!.Authorization = 'Bearer ' + token;
-    }
-    return config;
+  async request => {
+    const token = await encryptedStorageService(`${id}_key`, '', 'GET');
+    request!.headers!.Authorization = `Api-Key ${token}`;
+    return request;
   },
   error => {
     return Promise.reject(error);
@@ -34,49 +36,29 @@ axiosService.interceptors.response.use(
     }
 
     if (
-      error.response.status === 401 &&
-      originalRequest.url === baseURL + 'auth/refresh/'
+      error.response.data.detail ===
+        'Authentication credentials were not provided.' &&
+      error.response.status === 401
     ) {
-      console.error('A server/network error occurred.');
-      return Promise.reject(error);
-    }
+      return axiosService
+        .post(PATH_0_DEV, {name: id})
+        .then(response => {
+          encryptedStorageService(`${id}_key`, response.data.api_key, 'SET');
+          axiosService.defaults.headers.common.Authorization =
+            'Api-Key ' + response.data.api_key;
+          originalRequest.headers.Authorization =
+            'Api-Key ' + response.data.api_key;
 
-    if (
-      error.response.data.code === 'token_not_valid' &&
-      error.response.status === 401 &&
-      error.response.statusText === 'Unauthorized'
-    ) {
-      const refreshToken = await asyncStorageService(REFRESH_TOKEN, '', 'GET');
-
-      if (refreshToken) {
-        const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
-
-        // exp date in token is expressed in seconds, while now() returns milliseconds:
-        const now = Math.ceil(Date.now() / 1000);
-        console.log(tokenParts.exp);
-
-        if (tokenParts.exp > now) {
-          return axiosService
-            .post('auth/refresh/', {refresh: refreshToken})
-            .then(response => {
-              asyncStorageService(ACCESS_TOKEN, response.data.access, 'SET');
-
-              axiosService.defaults.headers.common.Authorization =
-                'Bearer ' + response.data.access;
-              originalRequest.headers.common.Authorization =
-                'Bearer ' + response.data.access;
-
-              return axiosService(originalRequest);
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        } else {
-          console.log('Refresh token is expired', tokenParts.exp, now);
-        }
-      } else {
-        console.log('Refresh token not available.');
-      }
+          return axiosService(originalRequest);
+        })
+        .catch(err => {
+          if (
+            err.response.status === 400 &&
+            err.response.data.error === 'API Key already exists'
+          ) {
+            return;
+          }
+        });
     }
 
     // specific error handling done elsewhere

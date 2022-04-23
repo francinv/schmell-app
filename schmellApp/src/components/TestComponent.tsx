@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {fetchFromStorage} from '../features/game/gameSlice';
+import {
+  fetchFromStorage,
+  setSelectedGame,
+  setWeek,
+} from '../features/game/gameSlice';
 import {useAppDispatch} from '../features/hooks';
 import {
   selectedGame,
@@ -12,11 +17,25 @@ import {
   selectWeeks,
 } from '../features/selectors';
 import {setTokens} from '../features/usersettings/userSettingSlice';
+// import {playerPush} from '../utils/selectPlayer';
+import DeviceInfo from 'react-native-device-info';
+import {Dispatch} from '@reduxjs/toolkit';
+import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import {filterList, randomizeList} from '../utils/filterMethods';
 import {playerPush} from '../utils/selectPlayer';
 
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  authToken: (query: string) => dispatch(setTokens(query)),
+  fetchData: () => dispatch(fetchFromStorage()),
+  setCurrentWeek: (query: number) => dispatch(setWeek(query)),
+  setCurrentGame: (query: number) => dispatch(setSelectedGame(query)),
+});
+
 export default function TestComponent() {
-  const dispatch = useAppDispatch();
+  const {authToken, fetchData, setCurrentWeek, setCurrentGame} = actionDispatch(
+    useAppDispatch(),
+  );
   const games = useSelector(selectGames);
   const weeks = useSelector(selectWeeks);
   const questions = useSelector(selectQuestions);
@@ -25,12 +44,24 @@ export default function TestComponent() {
   const players = ['Francin', 'Lisa', 'Ola', 'Herman', 'Seran'];
 
   useEffect(() => {
-    dispatch(setTokens());
-    dispatch(fetchFromStorage());
+    const unique_ID = DeviceInfo.getUniqueId();
+    async function checkUserHasToken() {
+      const token = await encryptedStorageService(
+        `${unique_ID}_key`,
+        '',
+        'GET',
+      );
+      if (token === undefined) {
+        authToken(unique_ID);
+      }
+    }
+    checkUserHasToken();
+    fetchData();
+    setCurrentWeek(1);
+    setCurrentGame(3);
     async function x() {
-      const t = await AsyncStorage.getAllKeys();
-      // AsyncStorage.removeItem(LAST_UPDATED);
-      console.log(t);
+      // const t = await AsyncStorage.getAllKeys();
+      // console.log(t);
     }
     x();
     // eslint-disable-next-line react-hooks/exhaustive-deps

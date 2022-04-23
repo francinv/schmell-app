@@ -1,6 +1,7 @@
 export function isTimeToUpdate(date: string) {
   let last_updated = new Date(date);
   let today = new Date();
+  // today.setDate(today.getDate() - 1);
   return last_updated < today;
 }
 
