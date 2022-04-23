@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
 import DeviceInfo from 'react-native-device-info';
-import {BASEURL_DEV, PATH_0_DEV} from '@env';
+import {BASEURL_DEV} from '@env';
+import {decrypt} from '../utils/crypto';
 
 const axiosService = axios.create({
   baseURL: BASEURL_DEV,
@@ -41,7 +42,7 @@ axiosService.interceptors.response.use(
       error.response.status === 401
     ) {
       return axiosService
-        .post(PATH_0_DEV, {name: id})
+        .post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), {name: id})
         .then(response => {
           encryptedStorageService(`${id}_key`, response.data.api_key, 'SET');
           axiosService.defaults.headers.common.Authorization =
