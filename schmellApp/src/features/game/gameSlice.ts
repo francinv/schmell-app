@@ -63,8 +63,13 @@ const GameSlice = createSlice({
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
     },
-    setSelectedGame(state, action: PayloadAction<gameType>) {
-      state.selectedGame = action.payload;
+    setSelectedGame(state, action: PayloadAction<number>) {
+      let tempObject = state.games.find(function (object) {
+        return object.id === action.payload;
+      });
+      if (tempObject) {
+        state.selectedGame = tempObject;
+      }
     },
     setWeek(state, action: PayloadAction<number>) {
       state.weekNumber = action.payload;

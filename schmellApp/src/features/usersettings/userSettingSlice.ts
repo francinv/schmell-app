@@ -1,19 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {
-  ACCESS_TOKEN,
-  LANGUAGE_KEY,
-  REFRESH_TOKEN,
-  VOICE_KEY,
-  VOLUME_KEY,
-} from '../../constants/common';
+import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
-import {USERNAME, PASSWORD} from '@env';
+import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import axiosService from '../../services/axios';
 
 const initialState = {
-  access: '',
-  refresh: '',
+  api_key: '',
   volume: 3,
   voice: 'L',
   language: 'N',
@@ -21,15 +14,17 @@ const initialState = {
   error: '',
 };
 
-export const setTokens = createAsyncThunk('usersetting/setTokens', async () => {
-  const data = {
-    username: USERNAME,
-    password: PASSWORD,
-  };
-  const axe = axiosService.post('auth/login/', data);
-  const login_res = axe.then(res => res.data);
-  return login_res;
-});
+export const setTokens = createAsyncThunk(
+  'usersetting/setTokens',
+  async (id: string) => {
+    const temp = {
+      name: id,
+    };
+    const axe = axiosService.post('auth/generate_key/', temp);
+    const token_res = await axe.then(res => res.data);
+    return token_res;
+  },
+);
 
 export const fetchSettings = createAsyncThunk(
   'usersetting/fetchSettings',
@@ -101,10 +96,12 @@ const UserSettingSlice = createSlice({
     });
     builder.addCase(setTokens.fulfilled, (state, action) => {
       if (action.payload) {
-        state.access = action.payload.access;
-        state.refresh = action.payload.refresh;
-        asyncStorageService(ACCESS_TOKEN, action.payload.access, 'SET');
-        asyncStorageService(REFRESH_TOKEN, action.payload.refresh, 'SET');
+        state.api_key = action.payload.api_key;
+        encryptedStorageService(
+          `${action.payload.key}_key`,
+          action.payload.api_key,
+          'SET',
+        );
       }
       state.status = 'succeeded';
     });

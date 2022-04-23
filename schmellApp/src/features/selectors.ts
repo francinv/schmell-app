@@ -12,8 +12,6 @@ export const selectQuestions = (state: RootState) => state.game.questions;
 export const selectWeeks = (state: RootState) => state.game.weeks;
 export const selectedGame = (state: RootState) => state.game.selectedGame;
 export const selectWeekNumber = (state: RootState) => state.game.weekNumber;
-export const selectAccess = (state: RootState) => state.usersetting.access;
-export const selectRefresh = (state: RootState) => state.usersetting.refresh;
 export const selectUserStatus = (state: RootState) => state.usersetting.status;
 export const selectUserError = (state: RootState) => state.usersetting.error;
 export const selectVoice = (state: RootState) => state.usersetting.voice;
