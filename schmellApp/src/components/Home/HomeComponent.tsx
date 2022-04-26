@@ -1,11 +1,17 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {SafeAreaView, Text} from 'react-native';
+import globalStyles from '../../styles/global.styles';
+import LayoutContainer from '../Background/LayoutContainer';
+import Header from '../Header/Header';
 
 const HomeComponent: React.FC = () => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Hjem</Text>
-    </View>
+    <LayoutContainer>
+      <Header />
+      <SafeAreaView style={globalStyles.flex_1}>
+        <Text>Hjem</Text>
+      </SafeAreaView>
+    </LayoutContainer>
   );
 };
 
