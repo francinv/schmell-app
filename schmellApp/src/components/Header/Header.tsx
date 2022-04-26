@@ -32,7 +32,7 @@ const Header: React.FC = () => {
             source={require('../../assets/images/logo.png')}
             style={[styles.logo, globalStyles.ml_auto, globalStyles.mr_auto]}
           />
-          {/* <View style={[globalStyles.mr_10, globalStyles.ml_auto]} /> */}
+          <View style={[globalStyles.mr_10, globalStyles.ml_auto]} />
         </View>
       </SafeAreaView>
     );

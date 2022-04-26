@@ -12,6 +12,7 @@ import {StatusBar, useColorScheme} from 'react-native';
 const App = () => {
   const Stack = createNativeStackNavigator();
   const isDarkMode = useColorScheme() === 'dark';
+
   return (
     <NavigationContainer>
       <Provider store={store}>
