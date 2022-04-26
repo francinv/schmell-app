@@ -9,7 +9,7 @@ const HomeComponent: React.FC = () => {
     <LayoutContainer>
       <Header />
       <SafeAreaView style={globalStyles.flex_1}>
-        <Text>Hjem</Text>
+        <Text style={{fontFamily: 'CCBiffBamBoomW00-Regular'}}>Hjem</Text>
       </SafeAreaView>
     </LayoutContainer>
   );
