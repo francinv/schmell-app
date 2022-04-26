@@ -1,19 +1,38 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {store} from './src/services/store';
 import {Provider} from 'react-redux';
-import TestComponent from './src/components/TestComponent';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeComponent from './src/components/Home/HomeComponent';
+import SettingsComponent from './src/components/Settings/SettingsComponent';
+import StoreComponent from './src/components/Store/StoreComponent';
+import GameSettingsComponent from './src/components/GameSettings/GameSettingsComponent';
+import {StatusBar, useColorScheme} from 'react-native';
 
 const App = () => {
+  const Stack = createNativeStackNavigator();
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <Provider store={store}>
-      <SafeAreaView>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <TestComponent />
-      </SafeAreaView>
-    </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          hidden={false}
+        />
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerTransparent: true,
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={HomeComponent} />
+          <Stack.Screen name="Settings" component={SettingsComponent} />
+          <Stack.Screen name="Store" component={StoreComponent} />
+          <Stack.Screen name="GameSettings" component={GameSettingsComponent} />
+        </Stack.Navigator>
+      </Provider>
+    </NavigationContainer>
   );
 };
 

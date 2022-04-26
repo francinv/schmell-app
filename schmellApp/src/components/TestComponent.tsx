@@ -21,7 +21,6 @@ import {setTokens} from '../features/usersettings/userSettingSlice';
 import DeviceInfo from 'react-native-device-info';
 import {Dispatch} from '@reduxjs/toolkit';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
-import EncryptedStorage from 'react-native-encrypted-storage';
 import {filterList, randomizeList} from '../utils/filterMethods';
 import {playerPush} from '../utils/selectPlayer';
 
@@ -57,13 +56,6 @@ export default function TestComponent() {
     }
     checkUserHasToken();
     fetchData();
-    setCurrentWeek(1);
-    setCurrentGame(3);
-    async function x() {
-      // const t = await AsyncStorage.getAllKeys();
-      // console.log(t);
-    }
-    x();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
