@@ -8,12 +8,12 @@ const LayoutContainer: React.FC = ({children}) => {
   const handleAnimation = () => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 3500,
+      duration: 5000,
       useNativeDriver: false,
     }).start(() => {
       Animated.timing(animation, {
         toValue: 0,
-        duration: 3500,
+        duration: 5000,
         useNativeDriver: false,
       }).start(() => handleAnimation());
     });

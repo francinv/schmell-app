@@ -9,8 +9,8 @@ import {decrypt} from '../../utils/crypto';
 const initialState = {
   api_key: '',
   volume: 3,
-  voice: 'L',
-  language: 'N',
+  voice: 'F',
+  language: 'nb-NO',
   status: 'idle',
   error: '',
 };
@@ -45,6 +45,14 @@ export const postSettings = createAsyncThunk(
     await asyncStorageService(VOLUME_KEY, data.volume, 'SET');
     await asyncStorageService(VOICE_KEY, data.voice, 'SET');
     await asyncStorageService(LANGUAGE_KEY, data.language, 'SET');
+    return data;
+  },
+);
+
+export const postVolume = createAsyncThunk(
+  'usersetting/postVolume',
+  async (data: number) => {
+    await asyncStorageService(VOLUME_KEY, data, 'SET');
     return data;
   },
 );
@@ -107,6 +115,23 @@ const UserSettingSlice = createSlice({
       state.status = 'succeeded';
     });
     builder.addCase(setTokens.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(postVolume.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(postVolume.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.volume = action.payload;
+      } else if (action.payload === 0) {
+        state.volume = 0;
+      }
+      state.status = 'succeeded';
+    });
+    builder.addCase(postVolume.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
       }
