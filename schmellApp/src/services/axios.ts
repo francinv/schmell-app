@@ -1,13 +1,15 @@
 import axios from 'axios';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
 import DeviceInfo from 'react-native-device-info';
-import {BASEURL_DEV} from '@env';
+import {BASEURL_DEV_ANDROID, BASEURL_DEV_IOS} from '@env';
 import {decrypt} from '../utils/crypto';
+import {Platform} from 'react-native';
 
 const axiosService = axios.create({
-  baseURL: BASEURL_DEV,
+  baseURL: Platform.OS === 'ios' ? BASEURL_DEV_IOS : BASEURL_DEV_ANDROID,
   headers: {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
 });
 
@@ -32,6 +34,7 @@ axiosService.interceptors.response.use(
     const originalRequest = error.config;
 
     if (typeof error.response === 'undefined') {
+      console.error(error);
       console.error('Something went wrong.');
       return Promise.reject(error);
     }

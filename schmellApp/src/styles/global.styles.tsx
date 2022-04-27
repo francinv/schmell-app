@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const globalStyles = StyleSheet.create({
+  m_hor_auto: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   ml_auto: {
     marginLeft: 'auto',
   },
@@ -9,6 +13,9 @@ const globalStyles = StyleSheet.create({
   },
   mt_10: {
     marginTop: 10,
+  },
+  mt_15: {
+    marginTop: 15,
   },
   ml_10: {
     marginLeft: 10,
@@ -39,6 +46,20 @@ const globalStyles = StyleSheet.create({
   },
   w_p_80: {
     width: '80%',
+  },
+  flex_column: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  flex_row: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  align_center: {
+    alignItems: 'center',
+  },
+  justify_center: {
+    justifyContent: 'center',
   },
 });
 
