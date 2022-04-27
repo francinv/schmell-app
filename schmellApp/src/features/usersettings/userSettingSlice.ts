@@ -57,6 +57,14 @@ export const postVolume = createAsyncThunk(
   },
 );
 
+export const postVoice = createAsyncThunk(
+  'usersetting/postVoice',
+  async (data: string) => {
+    await asyncStorageService(VOICE_KEY, data, 'SET');
+    return data;
+  },
+);
+
 const UserSettingSlice = createSlice({
   name: 'usersetting',
   initialState: initialState,
@@ -132,6 +140,21 @@ const UserSettingSlice = createSlice({
       state.status = 'succeeded';
     });
     builder.addCase(postVolume.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(postVoice.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(postVoice.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.voice = action.payload;
+      }
+      state.status = 'succeeded';
+    });
+    builder.addCase(postVoice.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
       }

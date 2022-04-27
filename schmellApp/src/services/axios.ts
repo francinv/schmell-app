@@ -8,6 +8,7 @@ const axiosService = axios.create({
   baseURL: BASEURL_DEV,
   headers: {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
 });
 

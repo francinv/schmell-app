@@ -19,6 +19,7 @@ import {asyncStorageService} from '../../utils/updateAsyncStorage';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
 import Volume from './Components/Volume';
+import Voice from './Components/Voice';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   getUserSettings: () => dispatch(fetchSettings()),
@@ -63,6 +64,7 @@ const SettingsComponent: React.FC = () => {
       <SafeAreaView style={globalStyles.flex_1}>
         <Text style={styles.title}>Innstillinger</Text>
         <Volume />
+        <Voice />
       </SafeAreaView>
     </LayoutContainer>
   );

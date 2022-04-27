@@ -31,7 +31,7 @@ const HomeComponent: React.FC = () => {
         '',
         'GET',
       );
-      if (token === undefined) {
+      if (token === undefined || token === null) {
         authToken(unique_ID);
       }
     }

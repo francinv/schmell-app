@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     backgroundColor: '#FFD700',
     borderRadius: 8,
+    color: '#141400',
     fontFamily: 'Quicksand-Regular',
   },
   volumeTextContainer: {
@@ -17,6 +18,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 40,
     height: 40,
+  },
+  divider: {
+    borderColor: '#FFD700',
+    borderWidth: 1,
+    // transform: [{rotate: '-90deg'}],
+    height: '100%',
+    marginLeft: 22,
+    marginRight: 22,
+  },
+  emoji: {
+    fontSize: 40,
   },
 });
 
