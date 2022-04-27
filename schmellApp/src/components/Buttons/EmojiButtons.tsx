@@ -37,7 +37,6 @@ export const FemaleEmojiButton: React.FC<ButtonProps> = ({selected}) => {
 export const MaleEmojiButton: React.FC<ButtonProps> = ({selected}) => {
   const {setVoice} = actionDispatch(useAppDispatch());
   const handleClick = () => {
-    console.log('MaleClicked');
     setVoice('M');
   };
 

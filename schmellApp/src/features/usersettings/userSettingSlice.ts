@@ -22,6 +22,7 @@ export const setTokens = createAsyncThunk(
       name: id,
     };
     const axe = axiosService.post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), temp);
+    axe.catch(res => console.log(res));
     const token_res = await axe.then(res => res.data);
     return token_res;
   },
@@ -61,6 +62,14 @@ export const postVoice = createAsyncThunk(
   'usersetting/postVoice',
   async (data: string) => {
     await asyncStorageService(VOICE_KEY, data, 'SET');
+    return data;
+  },
+);
+
+export const postLanguage = createAsyncThunk(
+  'usersetting/postLanguage',
+  async (data: string) => {
+    await asyncStorageService(LANGUAGE_KEY, data, 'SET');
     return data;
   },
 );
@@ -155,6 +164,21 @@ const UserSettingSlice = createSlice({
       state.status = 'succeeded';
     });
     builder.addCase(postVoice.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(postLanguage.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(postLanguage.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.language = action.payload;
+      }
+      state.status = 'succeeded';
+    });
+    builder.addCase(postLanguage.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
       }

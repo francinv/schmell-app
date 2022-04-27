@@ -20,6 +20,7 @@ import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
 import Volume from './Components/Volume';
 import Voice from './Components/Voice';
+import Language from './Components/Language';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   getUserSettings: () => dispatch(fetchSettings()),
@@ -65,6 +66,7 @@ const SettingsComponent: React.FC = () => {
         <Text style={styles.title}>Innstillinger</Text>
         <Volume />
         <Voice />
+        <Language />
       </SafeAreaView>
     </LayoutContainer>
   );
