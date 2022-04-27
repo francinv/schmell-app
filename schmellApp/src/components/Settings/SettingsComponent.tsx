@@ -21,6 +21,8 @@ import Header from '../Header/Header';
 import Volume from './Components/Volume';
 import Voice from './Components/Voice';
 import Language from './Components/Language';
+import Social from './Components/Social';
+import CallToAction from '../Buttons/CallToAction';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   getUserSettings: () => dispatch(fetchSettings()),
@@ -67,6 +69,8 @@ const SettingsComponent: React.FC = () => {
         <Volume />
         <Voice />
         <Language />
+        <Social />
+        <CallToAction />
       </SafeAreaView>
     </LayoutContainer>
   );
