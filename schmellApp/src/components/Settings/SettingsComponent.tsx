@@ -93,7 +93,11 @@ const SettingsComponent: React.FC = () => {
         <Voice />
         <Language />
         <Social />
-        <CallToAction handleClick={handleClick} content="Kontakt oss" />
+        <CallToAction
+          handleClick={handleClick}
+          content="Kontakt oss"
+          customStyle={undefined}
+        />
       </SafeAreaView>
     </LayoutContainer>
   );

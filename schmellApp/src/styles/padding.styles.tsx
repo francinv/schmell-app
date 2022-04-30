@@ -25,6 +25,12 @@ const paddingStyles = StyleSheet.create({
   p_hor_5: {
     paddingHorizontal: 5,
   },
+  p_hor_15: {
+    paddingHorizontal: 15,
+  },
+  p_ver_10: {
+    paddingVertical: 10,
+  },
 });
 
 export default paddingStyles;

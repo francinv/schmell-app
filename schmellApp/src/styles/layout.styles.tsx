@@ -31,11 +31,22 @@ const layoutStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  row_wrap: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    display: 'flex',
+  },
   pos_rel: {
     position: 'relative',
   },
   top_min_20: {
     top: -20,
+  },
+  o_hidden: {
+    overflow: 'hidden',
+  },
+  flex_wrap: {
+    flexWrap: 'wrap',
   },
 });
 
