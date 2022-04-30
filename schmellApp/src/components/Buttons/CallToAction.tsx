@@ -1,44 +1,50 @@
 import React from 'react';
-import {Linking, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
+import colorStyles from '../../styles/color.styles';
+import globalStyles from '../../styles/global.styles';
+import heightStyles from '../../styles/height.styles';
+import layoutStyles from '../../styles/layout.styles';
+import marginStyles from '../../styles/margin.styles';
+import paddingStyles from '../../styles/padding.styles';
+import textStyles from '../../styles/text.styles';
+import widthStyles from '../../styles/width.styles';
 
-const CallToAction: React.FC = () => {
-  async function handleClick() {
-    const url = 'mailto:schmellapp@gmail.com';
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      Linking.openURL(url);
-    } else {
-      console.error("Don't know how to open URI: " + url);
-    }
-  }
-
+interface CallToActionProps {
+  handleClick: () => void;
+  content: string;
+  customStyle: any | undefined;
+}
+const CallToAction: React.FC<CallToActionProps> = ({
+  handleClick,
+  content,
+  customStyle,
+}) => {
   return (
-    <TouchableOpacity onPress={handleClick} style={styles.buttonStyle}>
-      <Text style={styles.textStyle}>Kontakt oss</Text>
+    <TouchableOpacity
+      onPress={handleClick}
+      style={[
+        widthStyles(0).w_p_60,
+        heightStyles(40).h_custom,
+        colorStyles.bg_primary,
+        globalStyles.border_radius_4,
+        layoutStyles.flex_container,
+        marginStyles.m_hor_auto,
+        marginStyles.mt_10,
+        globalStyles.boxShadow,
+        customStyle,
+      ]}>
+      <Text
+        style={[
+          textStyles.text_22,
+          textStyles.text_font_primary,
+          textStyles.text_center,
+          paddingStyles.p_5,
+          colorStyles.color_secondary,
+        ]}>
+        {content}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    width: '60%',
-    height: 40,
-    borderRadius: 4,
-    backgroundColor: '#FFD700',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 10,
-  },
-  textStyle: {
-    fontSize: 22,
-    fontFamily: 'CCBiffBamBoomW00-Regular',
-    color: '#141400',
-    textAlign: 'center',
-    padding: 5,
-  },
-});
 
 export default CallToAction;
