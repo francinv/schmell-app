@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Animated} from 'react-native';
-import globalStyles from '../../styles/global.styles';
+import layoutStyles from '../../styles/layout.styles';
 
 const LayoutContainer: React.FC = ({children}) => {
   const [animation] = useState(new Animated.Value(0));
@@ -34,7 +34,7 @@ const LayoutContainer: React.FC = ({children}) => {
   }, []);
 
   return (
-    <Animated.View style={[globalStyles.flex_1, animatedStyle]}>
+    <Animated.View style={[layoutStyles.flex_1, animatedStyle]}>
       {children}
     </Animated.View>
   );

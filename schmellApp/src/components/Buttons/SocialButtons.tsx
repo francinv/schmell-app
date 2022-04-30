@@ -5,7 +5,7 @@ import {
   InstagramIcon,
   TikTokIcon,
 } from '../../assets/icons/SocialIcons';
-import globalStyles from '../../styles/global.styles';
+import marginStyles from '../../styles/margin.styles';
 
 interface SocialButtonProps {
   icon: string;
@@ -51,7 +51,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({icon}) => {
   return (
     <TouchableOpacity
       onPress={handleClick}
-      style={[globalStyles.ml_10, globalStyles.mr_10]}>
+      style={[marginStyles.ml_10, marginStyles.mr_10]}>
       {getIcon()}
     </TouchableOpacity>
   );

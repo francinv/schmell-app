@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {Linking, SafeAreaView, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import {useAppDispatch} from '../../features/hooks';
@@ -13,7 +13,6 @@ import {
   fetchSettings,
   postSettings,
 } from '../../features/usersettings/userSettingSlice';
-import globalStyles from '../../styles/global.styles';
 import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
 import LayoutContainer from '../Background/LayoutContainer';
@@ -23,6 +22,10 @@ import Voice from './Components/Voice';
 import Language from './Components/Language';
 import Social from './Components/Social';
 import CallToAction from '../Buttons/CallToAction';
+import layoutStyles from '../../styles/layout.styles';
+import textStyles from '../../styles/text.styles';
+import colorStyles from '../../styles/color.styles';
+import marginStyles from '../../styles/margin.styles';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   getUserSettings: () => dispatch(fetchSettings()),
@@ -61,35 +64,39 @@ const SettingsComponent: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [volume, voice, language]);
 
+  async function handleClick() {
+    const url = 'mailto:schmellapp@gmail.com';
+    const supported = await Linking.canOpenURL(url);
+    if (supported) {
+      Linking.openURL(url);
+    } else {
+      console.error("Don't know how to open URI: " + url);
+    }
+  }
+
   return (
     <LayoutContainer>
       <Header />
-      <SafeAreaView style={globalStyles.flex_1}>
-        <Text style={styles.title}>Innstillinger</Text>
+      <SafeAreaView style={layoutStyles.flex_1}>
+        <Text
+          style={[
+            textStyles.text_font_primary,
+            textStyles.text_30,
+            colorStyles.color_primary,
+            marginStyles.m_ver_20,
+            marginStyles.ml_15,
+            textStyles.text_shadow,
+          ]}>
+          Innstillinger
+        </Text>
         <Volume />
         <Voice />
         <Language />
         <Social />
-        <CallToAction />
+        <CallToAction handleClick={handleClick} content="Kontakt oss" />
       </SafeAreaView>
     </LayoutContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontFamily: 'CCBiffBamBoomW00-Regular',
-    fontSize: 30,
-    lineHeight: 36,
-    letterSpacing: 1,
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
-    color: '#FFD700',
-    marginTop: 20,
-    marginLeft: 15,
-    marginBottom: 20,
-  },
-});
 
 export default SettingsComponent;

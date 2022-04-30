@@ -2,7 +2,10 @@ import React from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
 import {useAppDispatch} from '../../features/hooks';
 import {postLanguage} from '../../features/usersettings/userSettingSlice';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
+import globalStyles from '../../styles/global.styles';
+import heightStyles from '../../styles/height.styles';
+import widthStyles from '../../styles/width.styles';
 
 interface FlagButtonProps {
   locale: string;
@@ -35,26 +38,14 @@ const FlagButton: React.FC<FlagButtonProps> = ({locale, selected}) => {
     <TouchableOpacity onPress={() => setLanguage(locale)}>
       <Image
         source={getUrl()}
-        style={[selected ? styles.selected : styles.unselected, styles.image]}
+        style={[
+          selected ? globalStyles.opacity_100 : globalStyles.opacity_50,
+          heightStyles(40).h_custom,
+          widthStyles(40).w_custom,
+        ]}
       />
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  unselected: {
-    opacity: 0.5,
-  },
-  selected: {
-    opacity: 1,
-  },
-  buttonStyle: {
-    width: 40,
-    height: 40,
-  },
-  image: {
-    width: 40,
-    height: 40,
-  },
-});
 export default FlagButton;
