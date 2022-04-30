@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Image, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {Animated, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectedGame} from '../../features/selectors';
 import CallToAction from '../Buttons/CallToAction';
@@ -12,6 +12,7 @@ import textStyles from '../../styles/text.styles';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import paddingStyles from '../../styles/padding.styles';
+import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
 
 interface GameDetailProps {
   handleShow: () => void;
@@ -19,22 +20,52 @@ interface GameDetailProps {
 
 const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
   const game = useSelector(selectedGame);
-  const navigation = useNavigation();
+  const [opacityAnim] = useState(new Animated.Value(0));
+  const [moveInAnim] = useState(new Animated.Value(500));
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const handleClick = () => {
     navigation.navigate('GameSettings');
   };
 
+  function closeOverlay() {
+    Animated.timing(opacityAnim, {
+      toValue: 0,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(moveInAnim, {
+      toValue: 500,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+    setTimeout(handleShow, 2000);
+  }
+
+  useEffect(() => {
+    Animated.timing(opacityAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(moveInAnim, {
+      toValue: 0,
+      duration: 2000,
+      useNativeDriver: false,
+    }).start();
+  }, [moveInAnim, opacityAnim]);
+
   return (
     <SafeAreaView style={[layoutStyles.flex_column, layoutStyles.align_center]}>
-      <View
+      <Animated.View
         style={[
           widthStyles(0).w_p_90,
           marginStyles.m_hor_auto,
           heightStyles(0).h_p_50,
+          {opacity: opacityAnim},
         ]}>
         <TouchableOpacity
-          onPress={handleShow}
+          onPress={closeOverlay}
           style={[widthStyles(0).w_p_100, heightStyles(0).h_p_100]}>
           <Text
             style={[
@@ -47,18 +78,19 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
             ]}>
             {game.name}
           </Text>
-          <Image
+          <Animated.Image
             source={{uri: game.logo}}
             style={[
               heightStyles(0).h_p_75,
               marginStyles.m_hor_auto,
               widthStyles(0).w_p_90,
               marginStyles.mt_10,
+              {opacity: opacityAnim},
             ]}
           />
         </TouchableOpacity>
-      </View>
-      <View
+      </Animated.View>
+      <Animated.View
         style={[
           widthStyles(0).w_p_100,
           heightStyles(0).h_p_50,
@@ -66,6 +98,7 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
           globalStyles.border_top_start_30,
           globalStyles.border_top_end_30,
           paddingStyles.p_hor_5,
+          {transform: [{translateY: moveInAnim}]},
         ]}>
         <CallToAction
           handleClick={handleClick}
@@ -96,7 +129,7 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
           ]}>
           {game.description}
         </Text>
-      </View>
+      </Animated.View>
     </SafeAreaView>
   );
 };
