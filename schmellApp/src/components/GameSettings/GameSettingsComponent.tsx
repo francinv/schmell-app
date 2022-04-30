@@ -1,24 +1,17 @@
 import React from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
-import {SafeAreaView, Text} from 'react-native';
-import {addPlayers} from '../../features/gamesettings/gameSettingSlice';
-import {useAppDispatch} from '../../features/hooks';
+import {SafeAreaView} from 'react-native';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
 import PlayerDisplay from './Components/PlayerDisplay';
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  pushPlayer: (player: string) => dispatch(addPlayers(player)),
-});
+import PlayerInput from './Components/PlayerInput';
 
 const GameSettingsComponent: React.FC = () => {
-  const {pushPlayer} = actionDispatch(useAppDispatch());
-
   return (
     <LayoutContainer>
       <Header />
       <SafeAreaView>
         <PlayerDisplay />
+        <PlayerInput />
       </SafeAreaView>
     </LayoutContainer>
   );
