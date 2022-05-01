@@ -64,6 +64,9 @@ const marginStyles = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 'auto',
   },
+  mb_20: {
+    marginBottom: 20,
+  },
 });
 
 export default marginStyles;

@@ -40,8 +40,11 @@ const widthStyles = StyleSheet.create((width: number) => ({
   border_width_1: {
     borderWidth: 1,
   },
-  w_p_30: {
-    width: '33%',
+  w_p_33: {
+    width: '33.33333%',
+  },
+  w_p_99: {
+    width: '99%',
   },
 }));
 

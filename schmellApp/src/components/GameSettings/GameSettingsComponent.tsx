@@ -4,6 +4,7 @@ import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
 import PlayerDisplay from './Components/PlayerDisplay';
 import PlayerInput from './Components/PlayerInput';
+import TeamComponent from './Components/TeamComponent';
 
 const GameSettingsComponent: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const GameSettingsComponent: React.FC = () => {
       <SafeAreaView>
         <PlayerDisplay />
         <PlayerInput />
+        <TeamComponent />
       </SafeAreaView>
     </LayoutContainer>
   );
