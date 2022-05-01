@@ -4,6 +4,7 @@ import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
 import PlayerDisplay from './Components/PlayerDisplay';
 import PlayerInput from './Components/PlayerInput';
+import ReadOut from './Components/ReadOut';
 import TeamComponent from './Components/TeamComponent';
 
 const GameSettingsComponent: React.FC = () => {
@@ -14,6 +15,7 @@ const GameSettingsComponent: React.FC = () => {
         <PlayerDisplay />
         <PlayerInput />
         <TeamComponent />
+        <ReadOut />
       </SafeAreaView>
     </LayoutContainer>
   );
