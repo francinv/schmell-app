@@ -1,6 +1,7 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
 import LayoutContainer from '../Background/LayoutContainer';
+import StartButton from '../Buttons/StartButton';
 import Header from '../Header/Header';
 import PlayerDisplay from './Components/PlayerDisplay';
 import PlayerInput from './Components/PlayerInput';
@@ -16,6 +17,7 @@ const GameSettingsComponent: React.FC = () => {
         <PlayerInput />
         <TeamComponent />
         <ReadOut />
+        <StartButton />
       </SafeAreaView>
     </LayoutContainer>
   );
