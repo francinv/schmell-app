@@ -48,7 +48,7 @@ const ReadOut: FC = () => {
           colorStyles.color_tertiary,
           marginStyles.mb_20,
         ]}>
-        Spille med lag?
+        Opplesning?
       </Text>
       <LinearGradientBorder width={'70%'}>
         <View

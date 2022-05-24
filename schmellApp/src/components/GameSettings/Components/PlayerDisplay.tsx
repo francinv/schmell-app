@@ -40,7 +40,7 @@ const PlayerDisplay: React.FC = () => {
           <Text
             key={index}
             style={[
-              widthStyles(0).w_p_30,
+              widthStyles(0).w_p_33,
               textStyles.text_center,
               marginStyles.m_ver_10,
               textStyles.text_font_primary,

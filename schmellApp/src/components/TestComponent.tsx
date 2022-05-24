@@ -18,7 +18,6 @@ import {
 } from '../features/selectors';
 import {setTokens} from '../features/usersettings/userSettingSlice';
 // import {playerPush} from '../utils/selectPlayer';
-import DeviceInfo from 'react-native-device-info';
 import {Dispatch} from '@reduxjs/toolkit';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
 import {filterList, randomizeList} from '../utils/filterMethods';
@@ -43,16 +42,16 @@ export default function TestComponent() {
   const players = ['Francin', 'Lisa', 'Ola', 'Herman', 'Seran'];
 
   useEffect(() => {
-    const unique_ID = DeviceInfo.getUniqueId();
+    // const unique_ID = DeviceInfo.getUniqueId();
     async function checkUserHasToken() {
-      const token = await encryptedStorageService(
-        `${unique_ID}_key`,
-        '',
-        'GET',
-      );
-      if (token === undefined) {
-        authToken(unique_ID);
-      }
+      // const token = await encryptedStorageService(
+      //   `${unique_ID}_key`,
+      //   '',
+      //   'GET',
+      // );
+      // if (token === undefined) {
+      //   authToken(unique_ID);
+      // }
     }
     checkUserHasToken();
     fetchData();

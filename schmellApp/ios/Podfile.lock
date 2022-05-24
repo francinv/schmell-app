@@ -88,6 +88,8 @@ PODS:
     - fmt (~> 6.2.1)
     - glog
   - RCTRequired (0.67.3)
+  - RCTSystemSetting (1.7.6):
+    - React
   - RCTTypeSafety (0.67.3):
     - FBLazyVector (= 0.67.3)
     - RCT-Folly (= 2021.06.28.00-v2)
@@ -391,6 +393,7 @@ DEPENDENCIES:
   - OpenSSL-Universal (= 1.1.180)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
+  - RCTSystemSetting (from `../node_modules/react-native-system-setting`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
@@ -457,6 +460,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
+  RCTSystemSetting:
+    :path: "../node_modules/react-native-system-setting"
   RCTTypeSafety:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
   React:
@@ -538,6 +543,7 @@ SPEC CHECKSUMS:
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: 3c77b683474faf23920fbefc71c4e13af21470c0
+  RCTSystemSetting: 5107b7350d63b3f7b42a1277d07e4e5d9df879be
   RCTTypeSafety: 720b1841260dac692444c2822b27403178da8b28
   React: 25970dd74abbdac449ca66dec4107652cacc606d
   React-callinvoker: 2d158700bc27b3d49c3c95721d288ed6c1a489ef
