@@ -7,8 +7,14 @@ const globalStyles = StyleSheet.create({
   border_radius_8: {
     borderRadius: 8,
   },
+  border_radius_10: {
+    borderRadius: 10,
+  },
   border_radius_20: {
     borderRadius: 20,
+  },
+  border_radius_100: {
+    borderRadius: 100,
   },
   border_bottom_end_20: {
     borderBottomEndRadius: 20,

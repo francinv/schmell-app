@@ -6,11 +6,11 @@ import {fetchFromStorage} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {selectGames} from '../../features/selectors';
 import {setTokens} from '../../features/usersettings/userSettingSlice';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import LayoutContainer from '../Background/LayoutContainer';
 import GameButton from '../Buttons/GameButton';
 import Header from '../Header/Header';
-import DeviceInfo from 'react-native-device-info';
 import GameDetail from './GameDetail';
 import layoutStyles from '../../styles/layout.styles';
 import heightStyles from '../../styles/height.styles';
@@ -27,22 +27,23 @@ interface HomeInnerContentProps {
 }
 
 const HomeComponent: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {authToken, fetchData} = actionDispatch(useAppDispatch());
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const unique_ID = DeviceInfo.getUniqueId();
-    async function checkUserHasToken() {
-      const token = await encryptedStorageService(
-        `${unique_ID}_key`,
-        '',
-        'GET',
-      );
-      if (token === undefined || token === null) {
-        authToken(unique_ID);
-      }
-    }
-    checkUserHasToken();
+    // const unique_ID = DeviceInfo.getUniqueId();
+    // async function checkUserHasToken() {
+    //   const token = await encryptedStorageService(
+    //     `${unique_ID}_key`,
+    //     '',
+    //     'GET',
+    //   );
+    //   if (token === undefined || token === null) {
+    //     authToken(unique_ID);
+    //   }
+    // }
+    // checkUserHasToken();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

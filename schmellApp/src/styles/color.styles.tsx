@@ -22,6 +22,9 @@ const colorStyles = StyleSheet.create({
   bg_quaternary: {
     backgroundColor: '#00A88A',
   },
+  bg_quinary: {
+    backgroundColor: '#0080D5',
+  },
   shadow_primary: {
     shadowColor: '#AEAC99',
   },

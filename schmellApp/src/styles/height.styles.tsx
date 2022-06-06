@@ -4,6 +4,12 @@ const heightStyles = StyleSheet.create((height: number) => ({
   h_custom: {
     height: height,
   },
+  h_p_40: {
+    height: '40%',
+  },
+  h_p_96: {
+    height: '96%',
+  },
   h_p_90: {
     height: '90%',
   },

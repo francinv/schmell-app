@@ -5,6 +5,7 @@ export type RootStackParamList = {
   Settings: undefined;
   Store: undefined;
   GameSettings: undefined;
+  Game: undefined;
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<
@@ -22,4 +23,8 @@ export type StoreScreenNavigationProp = StackNavigationProp<
 export type GameSettingsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'GameSettings'
+>;
+export type GameScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Game'
 >;
