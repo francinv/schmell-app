@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
 import {BASEURL_DEV_ANDROID, BASEURL_DEV_IOS} from '@env';
@@ -15,16 +16,16 @@ const axiosService = axios.create({
 
 let id = getUniqueId();
 
-axiosService.interceptors.request.use(
-  async request => {
-    const token = await encryptedStorageService(`${id}_key`, '', 'GET');
-    request!.headers!.Authorization = `Api-Key ${token}`;
-    return request;
-  },
-  error => {
-    return Promise.reject(error);
-  },
-);
+// axiosService.interceptors.request.use(
+//   async request => {
+//     const token = await encryptedStorageService(`${id}_key`, '', 'GET');
+//     request!.headers!.Authorization = `Api-Key ${token}`;
+//     return request;
+//   },
+//   error => {
+//     return Promise.reject(error);
+//   },
+// );
 
 // axiosService.interceptors.response.use(
 //   response => {
@@ -44,33 +45,27 @@ axiosService.interceptors.request.use(
 //         'Authentication credentials were not provided.' &&
 //       error.response.status === 401
 //     ) {
-//       RNUniqueId.getUniqueString(async (result: string) => {
-//         console.log(result);
-//         return axiosService
-//           .post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), {name: result})
-//           .then(response => {
-//             encryptedStorageService(
-//               `${result}_key`,
-//               response.data.api_key,
-//               'SET',
-//             );
-//             axiosService.defaults.headers.common.Authorization =
-//               'Api-Key ' + response.data.api_key;
-//             originalRequest.headers.Authorization =
-//               'Api-Key ' + response.data.api_key;
+//       return axiosService
+//         .post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), {name: id})
+//         .then(response => {
+//           encryptedStorageService(`${id}_key`, response.data.api_key, 'SET');
+//           axiosService.defaults.headers.common.Authorization =
+//             'Api-Key ' + response.data.api_key;
+//           originalRequest.headers.Authorization =
+//             'Api-Key ' + response.data.api_key;
 
-//             return axiosService(originalRequest);
-//           })
-//           .catch(err => {
-//             if (
-//               err.response.status === 400 &&
-//               err.response.data.error === 'API Key already exists'
-//             ) {
-//               return;
-//             }
-//           });
-//       });
+//           return axiosService(originalRequest);
+//         })
+//         .catch(err => {
+//           if (
+//             err.response.status === 400 &&
+//             err.response.data.error === 'API Key already exists'
+//           ) {
+//             return;
+//           }
+//         });
 //     }
+
 //     // specific error handling done elsewhere
 //     return Promise.reject(error);
 //   },

@@ -1,65 +1,44 @@
 import {StyleSheet} from 'react-native';
 
 const globalStyles = StyleSheet.create({
-  m_hor_auto: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
+  border_radius_4: {
+    borderRadius: 4,
   },
-  ml_auto: {
-    marginLeft: 'auto',
+  border_radius_8: {
+    borderRadius: 8,
   },
-  mr_auto: {
-    marginRight: 'auto',
+  border_radius_10: {
+    borderRadius: 10,
   },
-  mt_10: {
-    marginTop: 10,
+  border_radius_20: {
+    borderRadius: 20,
   },
-  mt_15: {
-    marginTop: 15,
+  border_radius_100: {
+    borderRadius: 100,
   },
-  ml_10: {
-    marginLeft: 10,
+  border_bottom_end_20: {
+    borderBottomEndRadius: 20,
   },
-  ml_15: {
-    marginLeft: 15,
+  border_bottom_start_20: {
+    borderBottomStartRadius: 20,
   },
-  mr_10: {
-    marginRight: 10,
+  border_top_end_30: {
+    borderTopEndRadius: 30,
   },
-  mr_15: {
-    marginRight: 15,
+  border_top_start_30: {
+    borderTopStartRadius: 30,
   },
-  flex_1: {
-    flex: 1,
+  opacity_50: {
+    opacity: 0.5,
   },
-  mt_30: {
-    marginTop: 30,
+  opacity_100: {
+    opacity: 1,
   },
-  mt_40: {
-    marginTop: 40,
-  },
-  w_p_90: {
-    width: '90%',
-  },
-  w_p_85: {
-    width: '85%',
-  },
-  w_p_80: {
-    width: '80%',
-  },
-  flex_column: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  flex_row: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  align_center: {
-    alignItems: 'center',
-  },
-  justify_center: {
-    justifyContent: 'center',
+  boxShadow: {
+    shadowColor: '#000',
+    shadowOpacity: 0.25,
+    shadowOffset: {width: 4, height: 4},
+    shadowRadius: 4,
   },
 });
 

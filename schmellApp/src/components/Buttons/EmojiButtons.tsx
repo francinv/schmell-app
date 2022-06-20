@@ -1,8 +1,10 @@
 import React from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {useAppDispatch} from '../../features/hooks';
 import {postVoice} from '../../features/usersettings/userSettingSlice';
+import textStyles from '../../styles/text.styles';
+import globalStyles from '../../styles/global.styles';
 
 interface ButtonProps {
   selected: boolean;
@@ -22,13 +24,13 @@ export const FemaleEmojiButton: React.FC<ButtonProps> = ({selected}) => {
   if (selected) {
     return (
       <TouchableOpacity onPress={handleClick}>
-        <Text style={styles.emoji}>🙋‍♀️</Text>
+        <Text style={textStyles.text_40}>🙋‍♀️</Text>
       </TouchableOpacity>
     );
   } else {
     return (
       <TouchableOpacity onPress={handleClick}>
-        <Text style={[styles.emoji, styles.op]}>🙍‍♀️</Text>
+        <Text style={[textStyles.text_40, globalStyles.opacity_50]}>🙍‍♀️</Text>
       </TouchableOpacity>
     );
   }
@@ -43,23 +45,14 @@ export const MaleEmojiButton: React.FC<ButtonProps> = ({selected}) => {
   if (selected) {
     return (
       <TouchableOpacity onPress={handleClick}>
-        <Text style={styles.emoji}>🙋‍♂️</Text>
+        <Text style={textStyles.text_40}>🙋‍♂️</Text>
       </TouchableOpacity>
     );
   } else {
     return (
       <TouchableOpacity onPress={handleClick}>
-        <Text style={[styles.emoji, styles.op]}>🙎‍♂️</Text>
+        <Text style={[textStyles.text_40, globalStyles.opacity_50]}>🙎‍♂️</Text>
       </TouchableOpacity>
     );
   }
 };
-
-const styles = StyleSheet.create({
-  emoji: {
-    fontSize: 40,
-  },
-  op: {
-    opacity: 0.5,
-  },
-});

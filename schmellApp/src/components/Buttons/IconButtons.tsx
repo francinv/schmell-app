@@ -3,11 +3,11 @@ import {TouchableOpacity} from 'react-native';
 import SettingsIcon from '../../assets/icons/SettingsIcon';
 import StoreIcon from '../../assets/icons/StoreIcon';
 import BackIcon from '../../assets/icons/BackIcon';
-import globalStyles from '../../styles/global.styles';
 import {SoundHighIcon, SoundLowIcon} from '../../assets/icons/SoundIcons';
 import {Dispatch} from '@reduxjs/toolkit';
 import {postVolume} from '../../features/usersettings/userSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
+import marginStyles from '../../styles/margin.styles';
 
 interface ButtonProps {
   navigation: any;
@@ -25,7 +25,7 @@ export const StoreIconButton: React.FC<ButtonProps> = ({navigation}) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Store')}
-      style={[globalStyles.ml_10, globalStyles.mr_auto]}>
+      style={[marginStyles.ml_10, marginStyles.mr_auto]}>
       <StoreIcon />
     </TouchableOpacity>
   );
@@ -35,7 +35,7 @@ export const SettingsIconButton: React.FC<ButtonProps> = ({navigation}) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Settings')}
-      style={[globalStyles.mr_10, globalStyles.ml_auto]}>
+      style={[marginStyles.mr_10, marginStyles.ml_auto]}>
       <SettingsIcon />
     </TouchableOpacity>
   );
@@ -45,7 +45,7 @@ export const BackIconButton: React.FC<ButtonProps> = ({navigation}) => {
   return (
     <TouchableOpacity
       onPress={() => navigation.goBack()}
-      style={globalStyles.ml_10}>
+      style={marginStyles.ml_10}>
       <BackIcon />
     </TouchableOpacity>
   );

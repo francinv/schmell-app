@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
-import styles from './HeaderStyles';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import globalStyles from '../../styles/global.styles';
 import {
@@ -8,6 +7,11 @@ import {
   SettingsIconButton,
   StoreIconButton,
 } from '../Buttons/IconButtons';
+import marginStyles from '../../styles/margin.styles';
+import heightStyles from '../../styles/height.styles';
+import colorStyles from '../../styles/color.styles';
+import widthStyles from '../../styles/width.styles';
+import layoutStyles from '../../styles/layout.styles';
 
 const Header: React.FC = () => {
   const navigation = useNavigation();
@@ -16,8 +20,20 @@ const Header: React.FC = () => {
 
   if (title === 'Home') {
     return (
-      <SafeAreaView style={styles.outerContainer}>
-        <View style={styles.container}>
+      <SafeAreaView
+        style={[
+          heightStyles(95).h_custom,
+          colorStyles.bg_tertiary,
+          globalStyles.border_bottom_end_20,
+          globalStyles.border_bottom_start_20,
+        ]}>
+        <View
+          style={[
+            widthStyles(0).w_p_100,
+            layoutStyles.flex_row,
+            layoutStyles.align_center,
+            layoutStyles.justify_space,
+          ]}>
           <StoreIconButton navigation={navigation} />
           <SettingsIconButton navigation={navigation} />
         </View>
@@ -25,14 +41,31 @@ const Header: React.FC = () => {
     );
   } else {
     return (
-      <SafeAreaView style={styles.outerContainer}>
-        <View style={styles.container}>
+      <SafeAreaView
+        style={[
+          heightStyles(95).h_custom,
+          colorStyles.bg_tertiary,
+          globalStyles.border_bottom_end_20,
+          globalStyles.border_bottom_start_20,
+        ]}>
+        <View
+          style={[
+            widthStyles(0).w_p_100,
+            layoutStyles.flex_row,
+            layoutStyles.align_center,
+            layoutStyles.justify_space,
+          ]}>
           <BackIconButton navigation={navigation} />
           <Image
             source={require('../../assets/images/logo.png')}
-            style={[styles.logo, globalStyles.ml_auto, globalStyles.mr_auto]}
+            style={[
+              widthStyles(240).w_custom,
+              heightStyles(55).h_custom,
+              marginStyles.ml_auto,
+              marginStyles.mr_auto,
+            ]}
           />
-          <View style={[globalStyles.mr_10, globalStyles.ml_auto]} />
+          <View style={[marginStyles.mr_10, marginStyles.ml_auto]} />
         </View>
       </SafeAreaView>
     );
