@@ -12,7 +12,7 @@ import LayoutContainer from '../Background/LayoutContainer';
 import GameButton from '../Buttons/GameButton';
 import Header from '../Header/Header';
 import styles from './styles';
-import DeviceInfo from 'react-native-device-info';
+import getUniqueId from '../../native/RNUniqueId';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),
@@ -24,15 +24,11 @@ const HomeComponent: React.FC = () => {
   const {authToken, fetchData} = actionDispatch(useAppDispatch());
 
   useEffect(() => {
-    const unique_ID = DeviceInfo.getUniqueId();
+    const id = getUniqueId();
     async function checkUserHasToken() {
-      const token = await encryptedStorageService(
-        `${unique_ID}_key`,
-        '',
-        'GET',
-      );
+      const token = await encryptedStorageService(`${id}_key`, '', 'GET');
       if (token === undefined || token === null) {
-        authToken(unique_ID);
+        authToken(id);
       }
     }
     checkUserHasToken();

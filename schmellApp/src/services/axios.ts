@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
-import DeviceInfo from 'react-native-device-info';
 import {BASEURL_DEV_ANDROID, BASEURL_DEV_IOS} from '@env';
-import {decrypt} from '../utils/crypto';
+// import {decrypt} from '../utils/crypto';
 import {Platform} from 'react-native';
+import getUniqueId from '../native/RNUniqueId';
 
 const axiosService = axios.create({
   baseURL: Platform.OS === 'ios' ? BASEURL_DEV_IOS : BASEURL_DEV_ANDROID,
@@ -13,7 +13,7 @@ const axiosService = axios.create({
   },
 });
 
-const id = DeviceInfo.getUniqueId();
+let id = getUniqueId();
 
 axiosService.interceptors.request.use(
   async request => {
@@ -26,48 +26,54 @@ axiosService.interceptors.request.use(
   },
 );
 
-axiosService.interceptors.response.use(
-  response => {
-    return response;
-  },
-  async function (error) {
-    const originalRequest = error.config;
+// axiosService.interceptors.response.use(
+//   response => {
+//     return response;
+//   },
+//   async function (error) {
+//     const originalRequest = error.config;
 
-    if (typeof error.response === 'undefined') {
-      console.error(error);
-      console.error('Something went wrong.');
-      return Promise.reject(error);
-    }
+//     if (typeof error.response === 'undefined') {
+//       console.error(error);
+//       console.error('Something went wrong.');
+//       return Promise.reject(error);
+//     }
 
-    if (
-      error.response.data.detail ===
-        'Authentication credentials were not provided.' &&
-      error.response.status === 401
-    ) {
-      return axiosService
-        .post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), {name: id})
-        .then(response => {
-          encryptedStorageService(`${id}_key`, response.data.api_key, 'SET');
-          axiosService.defaults.headers.common.Authorization =
-            'Api-Key ' + response.data.api_key;
-          originalRequest.headers.Authorization =
-            'Api-Key ' + response.data.api_key;
+//     if (
+//       error.response.data.detail ===
+//         'Authentication credentials were not provided.' &&
+//       error.response.status === 401
+//     ) {
+//       RNUniqueId.getUniqueString(async (result: string) => {
+//         console.log(result);
+//         return axiosService
+//           .post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), {name: result})
+//           .then(response => {
+//             encryptedStorageService(
+//               `${result}_key`,
+//               response.data.api_key,
+//               'SET',
+//             );
+//             axiosService.defaults.headers.common.Authorization =
+//               'Api-Key ' + response.data.api_key;
+//             originalRequest.headers.Authorization =
+//               'Api-Key ' + response.data.api_key;
 
-          return axiosService(originalRequest);
-        })
-        .catch(err => {
-          if (
-            err.response.status === 400 &&
-            err.response.data.error === 'API Key already exists'
-          ) {
-            return;
-          }
-        });
-    }
-
-    // specific error handling done elsewhere
-    return Promise.reject(error);
-  },
-);
+//             return axiosService(originalRequest);
+//           })
+//           .catch(err => {
+//             if (
+//               err.response.status === 400 &&
+//               err.response.data.error === 'API Key already exists'
+//             ) {
+//               return;
+//             }
+//           });
+//       });
+//     }
+//     // specific error handling done elsewhere
+//     return Promise.reject(error);
+//   },
+// );
 
 export default axiosService;
