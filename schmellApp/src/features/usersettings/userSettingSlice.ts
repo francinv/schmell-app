@@ -21,7 +21,7 @@ export const setTokens = createAsyncThunk(
     const temp = {
       name: id,
     };
-    const axe = axiosService.post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), temp);
+    const axe = axiosService.post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), temp);
     axe.catch(res => console.log(res));
     const token_res = await axe.then(res => res.data);
     return token_res;

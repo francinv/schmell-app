@@ -2,8 +2,9 @@
 import axios from 'axios';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
 import {BASEURL_DEV_ANDROID, BASEURL_DEV_IOS} from '@env';
-import {decrypt} from '../utils/crypto';
+// import {decrypt} from '../utils/crypto';
 import {Platform} from 'react-native';
+import getUniqueId from '../native/RNUniqueId';
 
 const axiosService = axios.create({
   baseURL: Platform.OS === 'ios' ? BASEURL_DEV_IOS : BASEURL_DEV_ANDROID,
@@ -13,7 +14,7 @@ const axiosService = axios.create({
   },
 });
 
-// const id = DeviceInfo.getUniqueId();
+let id = getUniqueId();
 
 // axiosService.interceptors.request.use(
 //   async request => {

@@ -11,6 +11,7 @@ import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import LayoutContainer from '../Background/LayoutContainer';
 import GameButton from '../Buttons/GameButton';
 import Header from '../Header/Header';
+import getUniqueId from '../../native/RNUniqueId';
 import GameDetail from './GameDetail';
 import layoutStyles from '../../styles/layout.styles';
 import heightStyles from '../../styles/height.styles';
@@ -32,18 +33,14 @@ const HomeComponent: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // const unique_ID = DeviceInfo.getUniqueId();
-    // async function checkUserHasToken() {
-    //   const token = await encryptedStorageService(
-    //     `${unique_ID}_key`,
-    //     '',
-    //     'GET',
-    //   );
-    //   if (token === undefined || token === null) {
-    //     authToken(unique_ID);
-    //   }
-    // }
-    // checkUserHasToken();
+    const id = getUniqueId();
+    async function checkUserHasToken() {
+      const token = await encryptedStorageService(`${id}_key`, '', 'GET');
+      if (token === undefined || token === null) {
+        authToken(id);
+      }
+    }
+    checkUserHasToken();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
