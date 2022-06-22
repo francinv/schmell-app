@@ -9,7 +9,6 @@ class RNUniqueId: NSObject {
     return false
   }
 
-
   @objc func getUniqueString(_ callback: @escaping RCTResponseSenderBlock) -> Void {
     DispatchQueue.main.async {
       self._getUniqueString(callback: callback)
