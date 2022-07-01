@@ -17,6 +17,9 @@ let id = getUniqueId();
 
 axiosService.interceptors.request.use(
   async request => {
+    if (!id) {
+      id = 'fallback_key_must_change';
+    }
     const token = await encryptedStorageService(`${id}_key`, '', 'GET');
     request!.headers!.Authorization = `Api-Key ${token}`;
     return request;
@@ -44,8 +47,11 @@ axiosService.interceptors.response.use(
         'Authentication credentials were not provided.' &&
       error.response.status === 401
     ) {
+      if (!id) {
+        id = 'fallback_key_must_change';
+      }
       return axiosService
-        .post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), {name: id})
+        .post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGUv'), {name: id})
         .then(response => {
           encryptedStorageService(`${id}_key`, response.data.api_key, 'SET');
           axiosService.defaults.headers.common.Authorization =
