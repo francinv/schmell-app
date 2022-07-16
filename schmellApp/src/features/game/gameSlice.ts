@@ -2,19 +2,17 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {gameType} from '../../typings/gameTypes';
 import {weekType} from '../../typings/weekTypes';
 import {questionType} from '../../typings/questionTypes';
-import {
-  GAME_KEY,
-  LAST_UPDATED,
-  QUESTIONS_KEY,
-  WEEKS_KEY,
-} from '../../constants/common';
-import {getDate, getWeekNumber, isTimeToUpdate} from '../../utils/dateUtil';
-import {asyncStorageService} from '../../utils/updateAsyncStorage';
-import {fetchFromAPI} from '../../services/fetchFromApi';
+import axiosService from '../../services/axios';
+import {decrypt} from '../../utils/crypto';
 
 const games: gameType[] = [];
-const weeks: weekType[] = [];
+const week: weekType = {
+  id: 0,
+  week_number: 0,
+  game: 0,
+};
 const questions: questionType[] = [];
+
 const selectedGame: gameType = {
   id: 1,
   name: '',
@@ -28,31 +26,32 @@ const selectedGame: gameType = {
 
 const initialState = {
   games,
-  weeks,
+  week,
   questions,
   status: 'idle',
   error: '',
   selectedGame,
-  weekNumber: getWeekNumber(),
 };
 
-export const fetchFromStorage = createAsyncThunk(
-  'game/fetchFromStorage',
-  async () => {
-    const last_updated = await asyncStorageService(LAST_UPDATED, '', 'GET');
-    if (isTimeToUpdate(last_updated) || !last_updated) {
-      fetchFromAPI();
-      asyncStorageService(LAST_UPDATED, getDate(), 'SET');
-    }
-    const temp_game = await asyncStorageService(GAME_KEY, '', 'GET');
-    const temp_question = await asyncStorageService(QUESTIONS_KEY, '', 'GET');
-    const temp_week = await asyncStorageService(WEEKS_KEY, '', 'GET');
-    const temp = {
-      game: temp_game,
-      question: temp_question,
-      week: temp_week,
-    };
-    return temp;
+export const fetchGames = createAsyncThunk('game/fetchGames', async () => {
+  return axiosService.get(decrypt('Y21zL2dhbWUv')).then(res => res.data);
+});
+
+export const fetchWeek = createAsyncThunk(
+  'game/fetchWeek',
+  async (filters: {weekNumber: number; idGame: number}) => {
+    const {weekNumber, idGame} = filters;
+    const urlOfEndpoint = `cms/week/?weekNum=${weekNumber}&game=${idGame}`;
+    return axiosService.get(urlOfEndpoint).then(res => res.data);
+  },
+);
+
+export const fetchQuestions = createAsyncThunk(
+  'game/fetchQuestions',
+  async (idWeek: number) => {
+    return axiosService
+      .get(`${decrypt('Y21zL3F1ZXN0aW9uP3JlbGF0ZWRfd2Vlaz0=')}${idWeek}`)
+      .then(res => res.data);
   },
 );
 
@@ -71,23 +70,50 @@ const GameSlice = createSlice({
         state.selectedGame = tempObject;
       }
     },
-    setWeek(state, action: PayloadAction<number>) {
-      state.weekNumber = action.payload;
-    },
   },
   extraReducers: builder => {
-    builder.addCase(fetchFromStorage.pending, state => {
+    builder.addCase(fetchGames.pending, state => {
       state.status = 'loading';
     });
-    builder.addCase(fetchFromStorage.fulfilled, (state, action) => {
+    builder.addCase(fetchGames.fulfilled, (state, action) => {
       if (action.payload) {
-        state.games = action.payload.game;
-        state.weeks = action.payload.week;
-        state.questions = action.payload.question;
+        state.games = action.payload;
+        console.log('fetched games', action.payload);
       }
       state.status = 'succeeded';
     });
-    builder.addCase(fetchFromStorage.rejected, (state, action) => {
+    builder.addCase(fetchGames.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(fetchWeek.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchWeek.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.week = action.payload[0];
+      }
+      state.status = 'succeeded';
+    });
+    builder.addCase(fetchWeek.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+        console.log(action.error.message);
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(fetchQuestions.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchQuestions.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.questions = action.payload;
+      }
+      state.status = 'succeeded';
+    });
+    builder.addCase(fetchQuestions.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
       }
@@ -96,6 +122,6 @@ const GameSlice = createSlice({
   },
 });
 
-export const {setStatus, setWeek, setSelectedGame} = GameSlice.actions;
+export const {setStatus, setSelectedGame} = GameSlice.actions;
 
 export default GameSlice.reducer;

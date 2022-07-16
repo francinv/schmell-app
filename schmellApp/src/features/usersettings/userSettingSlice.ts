@@ -21,7 +21,7 @@ export const setTokens = createAsyncThunk(
     const temp = {
       name: id,
     };
-    const axe = axiosService.post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGUv'), temp);
+    const axe = axiosService.post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), temp);
     console.log(temp);
     const token_res = await axe.then(res => res.data);
     console.log('returned token', token_res);
@@ -135,6 +135,8 @@ const UserSettingSlice = createSlice({
     builder.addCase(setTokens.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
+        console.log(action);
+        console.log(action.error.message);
       }
       state.status = 'failed';
     });
