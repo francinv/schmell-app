@@ -30,14 +30,18 @@ const HomeComponent: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    function checkUserHasToken() {
-      RNUniqueId.getUniqueString(async (result: string) => {
-        const token = await encryptedStorageService(`${result}_key`, '', 'GET');
-        console.log('token', token);
-        if (token === undefined || token === null) {
-          authToken(result);
-        }
-      });
+    const {uniqueString} = RNUniqueId.getConstants();
+    async function checkUserHasToken() {
+      const token = await encryptedStorageService(
+        `${uniqueString}_key`,
+        '',
+        'GET',
+      );
+      console.log('token', token);
+      if (token === undefined || token === null) {
+        console.log('triggered');
+        authToken(uniqueString);
+      }
     }
     checkUserHasToken();
     fetchData();

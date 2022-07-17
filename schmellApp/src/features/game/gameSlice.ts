@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {gameType} from '../../typings/gameTypes';
 import {weekType} from '../../typings/weekTypes';
 import {questionType} from '../../typings/questionTypes';
-import axiosService from '../../services/axios';
+import axiosService from '../../services/axiosService';
 import {decrypt} from '../../utils/crypto';
 
 const games: gameType[] = [];
@@ -85,6 +85,7 @@ const GameSlice = createSlice({
     builder.addCase(fetchGames.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
+        console.log('could not fetch games', action.error.message);
       }
       state.status = 'failed';
     });

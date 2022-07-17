@@ -14,11 +14,14 @@ const axiosService = axios.create({
 
 axiosService.interceptors.request.use(
   async request => {
-    RNUniqueId.getUniqueString(async (result: string) => {
-      const token = await encryptedStorageService(`${result}_key`, '', 'GET');
-      request!.headers!.Authorization = `Api-Key ${token}`;
-      return request;
-    });
+    const {uniqueString} = RNUniqueId.getConstants();
+    const token = await encryptedStorageService(
+      `${uniqueString}_key`,
+      '',
+      'GET',
+    );
+    request!.headers!.Authorization = `Api-Key ${token}`;
+    return request;
   },
   error => {
     console.log('error');

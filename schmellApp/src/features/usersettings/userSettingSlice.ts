@@ -3,7 +3,7 @@ import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
 import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
-import axiosService from '../../services/axios';
+import axiosService from '../../services/axiosService';
 import {decrypt} from '../../utils/crypto';
 
 const initialState = {
@@ -18,26 +18,22 @@ const initialState = {
 export const setTokens = createAsyncThunk(
   'usersetting/setTokens',
   async (id: string) => {
-    const temp = {
-      name: id,
-    };
-    const axe = axiosService.post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), temp);
-    console.log(temp);
-    const token_res = await axe.then(res => res.data);
-    console.log('returned token', token_res);
-    return token_res;
+    return axiosService
+      .post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), {
+        name: id,
+      })
+      .then(res => res.data);
   },
 );
 
 export const fetchSettings = createAsyncThunk(
   'usersetting/fetchSettings',
   async () => {
-    const temp = {
+    return {
       vol: await asyncStorageService(VOLUME_KEY, '', 'GET'),
       voi: await asyncStorageService(VOICE_KEY, '', 'GET'),
       lang: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
     };
-    return temp;
   },
 );
 
@@ -129,14 +125,14 @@ const UserSettingSlice = createSlice({
           action.payload.api_key,
           'SET',
         );
+        console.log('returned from Api-Key', action.payload);
       }
       state.status = 'succeeded';
     });
     builder.addCase(setTokens.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
-        console.log(action);
-        console.log(action.error.message);
+        console.log('could not fetch Token', action.error.message);
       }
       state.status = 'failed';
     });
