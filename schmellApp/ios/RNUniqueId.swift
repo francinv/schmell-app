@@ -9,15 +9,25 @@ class RNUniqueId: NSObject {
     return false
   }
 
-  @objc func getUniqueString(_ callback: @escaping RCTResponseSenderBlock) -> Void {
+  @objc func getUniqueCallback(_ callback: @escaping RCTResponseSenderBlock) -> Void {
     DispatchQueue.main.async {
-      self._getUniqueString(callback: callback)
+      self._getUniqueCallback(callback: callback)
     }
   }
 
-  func _getUniqueString(callback: RCTResponseSenderBlock) -> Void {
+  func _getUniqueCallback(callback: RCTResponseSenderBlock) -> Void {
     let uuid = UIDevice.current.identifierForVendor?.uuidString
     callback([uuid])
   }
+
+  func _getUniqueString() -> String {
+    let uuid = UIDevice.current.identifierForVendor!.uuidString
+    return uuid
+  }
+
+  @objc
+ func constantsToExport() -> [String: Any]! {
+   return ["uniqueString": self._getUniqueString()]
+ }
 
 }
