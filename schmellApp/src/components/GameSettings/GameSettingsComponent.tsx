@@ -14,7 +14,7 @@ const GameSettingsComponent: React.FC = () => {
       <Header />
       <SafeAreaView>
         <PlayerDisplay />
-        <PlayerInput />
+        <PlayerInput inputPlace="Settings" />
         <TeamComponent />
         <ReadOut />
         <StartButton />

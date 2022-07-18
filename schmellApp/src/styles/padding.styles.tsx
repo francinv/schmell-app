@@ -34,6 +34,9 @@ const paddingStyles = StyleSheet.create({
   pr_0: {
     paddingRight: 0,
   },
+  pb_20: {
+    paddingBottom: 20,
+  }
 });
 
 export default paddingStyles;

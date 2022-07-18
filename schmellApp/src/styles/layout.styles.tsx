@@ -26,6 +26,9 @@ const layoutStyles = StyleSheet.create({
   justify_space: {
     justifyContent: 'space-between',
   },
+  justify_end: {
+    justifyContent: 'flex-end',
+  },
   flex_center: {
     display: 'flex',
     justifyContent: 'center',

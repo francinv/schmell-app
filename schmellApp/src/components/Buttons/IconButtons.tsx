@@ -10,6 +10,7 @@ import {useAppDispatch} from '../../features/hooks';
 import marginStyles from '../../styles/margin.styles';
 import LightBulbIcon from '../../assets/icons/LightBulbIcon';
 import {XIconHeader, XIconModal} from '../../assets/icons/XIcon';
+import {GamePlusIcon} from '../../assets/icons/PlusIcon';
 
 interface ButtonProps {
   onPress: () => void;
@@ -23,6 +24,14 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
   setVolume: (query: number) => dispatch(postVolume(query)),
 });
 
+export const PlusIconButton: FC<ButtonProps> = ({onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <GamePlusIcon />
+    </TouchableOpacity>
+  );
+};
+
 export const XHeaderButton: FC<ButtonProps> = ({onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
@@ -33,7 +42,9 @@ export const XHeaderButton: FC<ButtonProps> = ({onPress}) => {
 
 export const XModalButton: FC<ButtonProps> = ({onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={marginStyles.ml_auto}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[marginStyles.ml_auto, marginStyles.mr_10]}>
       <XIconModal />
     </TouchableOpacity>
   );

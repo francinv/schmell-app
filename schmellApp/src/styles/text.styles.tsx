@@ -22,6 +22,9 @@ const textStyles = StyleSheet.create({
   text_40: {
     fontSize: 40,
   },
+  text_50: {
+    fontSize: 50,
+  },
   text_center: {
     textAlign: 'center',
   },
@@ -35,6 +38,15 @@ const textStyles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: {width: 0, height: 4},
     textShadowRadius: 4,
+  },
+  font_500: {
+    fontWeight: '500',
+  },
+  font_600: {
+    fontWeight: '600',
+  },
+  text_underline: {
+    textDecorationLine: 'underline',
   },
 });
 

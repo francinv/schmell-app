@@ -25,6 +25,9 @@ const colorStyles = StyleSheet.create({
   bg_quinary: {
     backgroundColor: '#0080D5',
   },
+  bg_senary: {
+    backgroundColor: 'rgba(20, 20, 0, 0.3)',
+  },
   shadow_primary: {
     shadowColor: '#AEAC99',
   },
