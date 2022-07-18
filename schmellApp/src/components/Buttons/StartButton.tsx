@@ -1,6 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
+import {Dispatch} from '@reduxjs/toolkit';
 import React, {FC, useState} from 'react';
 import {Animated, TouchableOpacity} from 'react-native';
+import {useSelector} from 'react-redux';
+import {fetchQuestions} from '../../features/game/gameSlice';
+import {useAppDispatch} from '../../features/hooks';
+import {selectWeeks} from '../../features/selectors';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import heightStyles from '../../styles/height.styles';
@@ -11,7 +16,13 @@ import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
 import {GameSettingsScreenNavigationProp} from '../../typings/navigationTypes';
 
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setQuestions: (query: number) => dispatch(fetchQuestions(query)),
+});
+
 const StartButton: FC = () => {
+  const {setQuestions} = actionDispatch(useAppDispatch());
+  const week = useSelector(selectWeeks);
   let buttonTexts = ['3', '2', '1', 'Go!'];
   const [buttonText, setButtonText] = useState('Start');
   const [animation] = useState(new Animated.Value(1));
@@ -20,6 +31,7 @@ const StartButton: FC = () => {
     for (let i = 0; i < buttonTexts.length; i++) {
       setTimeout(() => handleAnimation(buttonTexts[i]), 1000 * i);
     }
+    setQuestions(week.id);
   };
 
   function handleAnimation(newText: string) {
