@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {TouchableOpacity} from 'react-native';
 import SettingsIcon from '../../assets/icons/SettingsIcon';
 import StoreIcon from '../../assets/icons/StoreIcon';
@@ -8,9 +8,11 @@ import {Dispatch} from '@reduxjs/toolkit';
 import {postVolume} from '../../features/usersettings/userSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
 import marginStyles from '../../styles/margin.styles';
+import LightBulbIcon from '../../assets/icons/LightBulbIcon';
+import {XIconHeader, XIconModal} from '../../assets/icons/XIcon';
 
 interface ButtonProps {
-  navigation: any;
+  onPress: () => void;
 }
 
 interface SoundButtonProps {
@@ -21,37 +23,59 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
   setVolume: (query: number) => dispatch(postVolume(query)),
 });
 
-export const StoreIconButton: React.FC<ButtonProps> = ({navigation}) => {
+export const XHeaderButton: FC<ButtonProps> = ({onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <XIconHeader />
+    </TouchableOpacity>
+  );
+};
+
+export const XModalButton: FC<ButtonProps> = ({onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={marginStyles.ml_auto}>
+      <XIconModal />
+    </TouchableOpacity>
+  );
+};
+
+export const LightBulbButton: FC<ButtonProps> = ({onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <LightBulbIcon />
+    </TouchableOpacity>
+  );
+};
+
+export const StoreIconButton: FC<ButtonProps> = ({onPress}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Store')}
+      onPress={onPress}
       style={[marginStyles.ml_10, marginStyles.mr_auto]}>
       <StoreIcon />
     </TouchableOpacity>
   );
 };
 
-export const SettingsIconButton: React.FC<ButtonProps> = ({navigation}) => {
+export const SettingsIconButton: FC<ButtonProps> = ({onPress}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Settings')}
+      onPress={onPress}
       style={[marginStyles.mr_10, marginStyles.ml_auto]}>
       <SettingsIcon />
     </TouchableOpacity>
   );
 };
 
-export const BackIconButton: React.FC<ButtonProps> = ({navigation}) => {
+export const BackIconButton: FC<ButtonProps> = ({onPress}) => {
   return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={marginStyles.ml_10}>
+    <TouchableOpacity onPress={onPress} style={marginStyles.ml_10}>
       <BackIcon />
     </TouchableOpacity>
   );
 };
 
-export const SoundLowIconButton: React.FC<SoundButtonProps> = ({volume}) => {
+export const SoundLowIconButton: FC<SoundButtonProps> = ({volume}) => {
   const {setVolume} = actionDispatch(useAppDispatch());
 
   const handleClick = () => {
@@ -71,7 +95,7 @@ export const SoundLowIconButton: React.FC<SoundButtonProps> = ({volume}) => {
   );
 };
 
-export const SoundHighIconButton: React.FC<SoundButtonProps> = ({volume}) => {
+export const SoundHighIconButton: FC<SoundButtonProps> = ({volume}) => {
   const {setVolume} = actionDispatch(useAppDispatch());
 
   const handleClick = () => {
