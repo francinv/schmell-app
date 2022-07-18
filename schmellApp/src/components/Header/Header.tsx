@@ -34,8 +34,12 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <StoreIconButton navigation={navigation} />
-          <SettingsIconButton navigation={navigation} />
+          <StoreIconButton
+            onPress={() => navigation.navigate('Store' as never)}
+          />
+          <SettingsIconButton
+            onPress={() => navigation.navigate('Settings' as never)}
+          />
         </View>
       </SafeAreaView>
     );
@@ -55,7 +59,7 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <BackIconButton navigation={navigation} />
+          <BackIconButton onPress={() => navigation.goBack()} />
           <Image
             source={require('../../assets/images/logo.png')}
             style={[
