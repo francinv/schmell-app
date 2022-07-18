@@ -7,8 +7,10 @@ import {selectQuestions} from '../../features/selectors';
 import layoutStyles from '../../styles/layout.styles';
 import {questionType} from '../../typings/questionTypes';
 import {randomizeList} from '../../utils/filterMethods';
+import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
+import QuestionsComponent from './QuestionsComponent';
 
 export type carouselType = {
   firstQuestionId: number;
@@ -41,6 +43,12 @@ const GamePlay: FC = () => {
         handleShow={() => handleShow({show: true, modalType: 'H'})}
         navigation={navigation}
       />
+      <QuestionsComponent
+        carouselState={carouselState}
+        setCarouselState={setCarouselState}
+        navigation={navigation}
+      />
+      <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
       <GameModal
         currentQuestion={
           carouselState.questionList[carouselState.currentQuestionIndex]

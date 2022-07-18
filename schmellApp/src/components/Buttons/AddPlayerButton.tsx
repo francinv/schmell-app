@@ -1,5 +1,5 @@
-import {Dispatch} from '@reduxjs/toolkit';
 import React from 'react';
+import {Dispatch} from '@reduxjs/toolkit';
 import {TouchableOpacity} from 'react-native';
 import PlusIcon from '../../assets/icons/PlusIcon';
 import {addPlayers} from '../../features/gamesettings/gameSettingSlice';
@@ -14,11 +14,13 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 interface AddPlayerButtonProps {
   player: string;
   setPlayer: React.Dispatch<React.SetStateAction<string>>;
+  inputPlace: 'Settings' | 'InGame';
 }
 
 const AddPlayerButton: React.FC<AddPlayerButtonProps> = ({
   player,
   setPlayer,
+  inputPlace,
 }) => {
   const {addPlayer} = actionDispatch(useAppDispatch());
 
@@ -32,7 +34,7 @@ const AddPlayerButton: React.FC<AddPlayerButtonProps> = ({
     <TouchableOpacity
       onPress={handlePress}
       style={[marginStyles.ml_auto, globalStyles.boxShadow]}>
-      <PlusIcon />
+      <PlusIcon color={inputPlace === 'Settings' ? 'gold' : 'black'} />
     </TouchableOpacity>
   );
 };
