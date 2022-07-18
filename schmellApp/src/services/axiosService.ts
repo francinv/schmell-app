@@ -1,11 +1,10 @@
 import axios from 'axios';
 import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {decrypt} from '../utils/crypto';
 import RNUniqueId from '../native/RNUniqueId';
 
 const axiosService = axios.create({
-  baseURL: 'https://schmell-staging.herokuapp.com/api/',
+  baseURL: decrypt('aHR0cHM6Ly9zY2htZWxsLXN0YWdpbmcuaGVyb2t1YXBwLmNvbS9hcGkv'),
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -20,7 +19,7 @@ axiosService.interceptors.request.use(
       '',
       'GET',
     );
-    request!.headers!.Authorization = `Api-Key ${token}`;
+    request.headers!.Authorization = `Api-Key ${token}`;
     return request;
   },
   error => {
