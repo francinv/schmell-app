@@ -46,6 +46,12 @@ const widthStyles = StyleSheet.create((width: number) => ({
   w_p_99: {
     width: '99%',
   },
+  w_max_80: {
+    maxWidth: '80%',
+  },
+  w_min_custom: {
+    minWidth: width,
+  },
 }));
 
 export default widthStyles;
