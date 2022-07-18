@@ -36,6 +36,8 @@ const GamePlay: FC = () => {
     questionList: randomizeList(questions),
   });
   const [moveAnim] = useState(new Animated.Value(0));
+  const isLast =
+    carouselState.currentQuestionIndex + 1 > carouselState.questionList.length;
 
   return (
     <SafeAreaView
@@ -47,7 +49,11 @@ const GamePlay: FC = () => {
         handleShow={() => handleShow({show: true, modalType: 'H'})}
         navigation={navigation}
       />
-      <QuestionsComponent carouselState={carouselState} moveAnim={moveAnim} />
+      <QuestionsComponent
+        carouselState={carouselState}
+        moveAnim={moveAnim}
+        isLast={isLast}
+      />
       <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
       <GameModal
         currentQuestion={
@@ -61,6 +67,7 @@ const GamePlay: FC = () => {
         navigation={navigation}
         setCarouselState={setCarouselState}
         moveAnim={moveAnim}
+        isLast={isLast}
       />
     </SafeAreaView>
   );

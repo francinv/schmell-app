@@ -9,12 +9,14 @@ export const carouselPrev = (
   setCarouselState: Dispatch<SetStateAction<carouselType>>,
   moveAnim: Animated.Value,
 ) => {
-  if (carouselState.firstQuestionId === 0) {
+  const {firstQuestionId, currentColor, currentQuestionIndex} = carouselState;
+
+  if (firstQuestionId === 0) {
     return;
   }
   while (true) {
     let newColorIndex = getRandomNumber(colorList.length);
-    if (carouselState.currentColor !== newColorIndex) {
+    if (currentColor !== newColorIndex) {
       Animated.timing(moveAnim, {
         toValue: -600,
         duration: 500,
@@ -23,7 +25,7 @@ export const carouselPrev = (
         setCarouselState({
           ...carouselState,
           currentColor: newColorIndex,
-          currentQuestionIndex: carouselState.currentQuestionIndex - 1,
+          currentQuestionIndex: currentQuestionIndex - 1,
         });
         moveAnim.setValue(600);
         Animated.timing(moveAnim, {
@@ -42,15 +44,14 @@ export const carouselNext = (
   setCarouselState: Dispatch<SetStateAction<carouselType>>,
   moveAnim: Animated.Value,
 ) => {
-  if (
-    carouselState.currentQuestionIndex + 1 >
-    carouselState.questionList.length
-  ) {
+  const {currentColor, currentQuestionIndex, questionList} = carouselState;
+
+  if (currentQuestionIndex + 1 > questionList.length) {
     return;
   }
   while (true) {
     let newColorIndex = getRandomNumber(colorList.length);
-    if (carouselState.currentColor !== newColorIndex) {
+    if (currentColor !== newColorIndex) {
       Animated.timing(moveAnim, {
         toValue: 600,
         duration: 500,
@@ -59,8 +60,8 @@ export const carouselNext = (
         setCarouselState({
           ...carouselState,
           currentColor: newColorIndex,
-          currentQuestionIndex: carouselState.currentQuestionIndex + 1,
-          firstQuestionId: carouselState.questionList[0].id,
+          currentQuestionIndex: currentQuestionIndex + 1,
+          firstQuestionId: questionList[0].id,
         });
         moveAnim.setValue(-600);
         Animated.timing(moveAnim, {

@@ -11,9 +11,14 @@ import {carouselType} from './GamePlay';
 interface QuestionsProps {
   carouselState: carouselType;
   moveAnim: Animated.Value;
+  isLast: boolean;
 }
 
-const QuestionsComponent: FC<QuestionsProps> = ({carouselState, moveAnim}) => {
+const QuestionsComponent: FC<QuestionsProps> = ({
+  carouselState,
+  moveAnim,
+  isLast,
+}) => {
   return (
     <Animated.View
       style={[
@@ -31,7 +36,9 @@ const QuestionsComponent: FC<QuestionsProps> = ({carouselState, moveAnim}) => {
           paddingStyles.p_10,
           textStyles.text_shadow,
         ]}>
-        {carouselState.questionList[carouselState.currentQuestionIndex].type}
+        {isLast
+          ? 'Ooops!'
+          : carouselState.questionList[carouselState.currentQuestionIndex].type}
       </Text>
       <Text
         style={[
@@ -40,10 +47,10 @@ const QuestionsComponent: FC<QuestionsProps> = ({carouselState, moveAnim}) => {
           textStyles.text_30,
           textStyles.font_500,
         ]}>
-        {
-          carouselState.questionList[carouselState.currentQuestionIndex]
-            .question_desc
-        }
+        {isLast
+          ? 'Da var det tomt :('
+          : carouselState.questionList[carouselState.currentQuestionIndex]
+              .question_desc}
       </Text>
       <Text
         style={[
@@ -53,9 +60,11 @@ const QuestionsComponent: FC<QuestionsProps> = ({carouselState, moveAnim}) => {
           marginStyles.mt_10,
           textStyles.text_underline,
         ]}>
-        {getPunishmentText(
-          carouselState.questionList[carouselState.currentQuestionIndex],
-        )}
+        {isLast
+          ? 'Kanskje prøve et annet spill?'
+          : getPunishmentText(
+              carouselState.questionList[carouselState.currentQuestionIndex],
+            )}
       </Text>
     </Animated.View>
   );

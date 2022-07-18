@@ -15,6 +15,7 @@ interface CarouselProps {
   setCarouselState: Dispatch<SetStateAction<carouselType>>;
   navigation: any;
   moveAnim: Animated.Value;
+  isLast: boolean;
 }
 
 const Carousel: FC<CarouselProps> = ({
@@ -22,24 +23,22 @@ const Carousel: FC<CarouselProps> = ({
   setCarouselState,
   navigation,
   moveAnim,
+  isLast,
 }) => {
   const {width, height} = useWindowDimensions();
+  const {currentQuestionIndex, questionList, firstQuestionId} = carouselState;
   const isFirstQuestion = () => {
     if (isLast) {
-      return;
+      return false;
     }
-    if (
-      carouselState.questionList[carouselState.currentQuestionIndex].id ===
-      carouselState.firstQuestionId
-    ) {
+    if (questionList[currentQuestionIndex].id === firstQuestionId) {
       return true;
     }
     if (carouselState.firstQuestionId === 0) {
       return true;
     }
+    return false;
   };
-  const isLast =
-    carouselState.currentQuestionIndex + 1 > carouselState.questionList.length;
 
   return (
     <View style={[globalStyles.carouselView, {width: width}]}>
@@ -57,9 +56,7 @@ const Carousel: FC<CarouselProps> = ({
       </TouchableOpacity>
       <TouchableOpacity
         disabled={isLast}
-        onPress={() => {
-          carouselNext(carouselState, setCarouselState, moveAnim);
-        }}
+        onPress={() => carouselNext(carouselState, setCarouselState, moveAnim)}
         style={{flex: 1}}
       />
     </View>
