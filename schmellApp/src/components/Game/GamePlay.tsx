@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useState} from 'react';
+import {Animated} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import {colorList} from '../../constants/colors';
@@ -7,6 +8,7 @@ import {selectQuestions} from '../../features/selectors';
 import layoutStyles from '../../styles/layout.styles';
 import {questionType} from '../../typings/questionTypes';
 import {randomizeList} from '../../utils/filterMethods';
+import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
@@ -33,6 +35,8 @@ const GamePlay: FC = () => {
     currentColor: 0,
     questionList: randomizeList(questions),
   });
+  const [moveAnim] = useState(new Animated.Value(0));
+
   return (
     <SafeAreaView
       style={[
@@ -43,11 +47,7 @@ const GamePlay: FC = () => {
         handleShow={() => handleShow({show: true, modalType: 'H'})}
         navigation={navigation}
       />
-      <QuestionsComponent
-        carouselState={carouselState}
-        setCarouselState={setCarouselState}
-        navigation={navigation}
-      />
+      <QuestionsComponent carouselState={carouselState} moveAnim={moveAnim} />
       <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
       <GameModal
         currentQuestion={
@@ -55,6 +55,12 @@ const GamePlay: FC = () => {
         }
         modalShow={modalShow}
         handleShow={handleShow}
+      />
+      <Carousel
+        carouselState={carouselState}
+        navigation={navigation}
+        setCarouselState={setCarouselState}
+        moveAnim={moveAnim}
       />
     </SafeAreaView>
   );

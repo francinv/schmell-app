@@ -56,6 +56,16 @@ const globalStyles = StyleSheet.create({
     elevation: 5,
     width: 400,
   },
+  carouselView: {
+    position: 'absolute',
+    top: 60,
+    bottom: 80,
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    zIndex: 1,
+    left: 0,
+  },
 });
 
 export default globalStyles;

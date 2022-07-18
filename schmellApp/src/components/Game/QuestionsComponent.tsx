@@ -1,48 +1,26 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, {FC} from 'react';
+import {Animated, Text} from 'react-native';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';
 import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
-import {carouselNext, carouselPrev} from '../../utils/carousel';
 import {getPunishmentText} from '../../utils/textBuilders';
 import {carouselType} from './GamePlay';
 
 interface QuestionsProps {
   carouselState: carouselType;
-  setCarouselState: Dispatch<SetStateAction<carouselType>>;
-  navigation: any;
+  moveAnim: Animated.Value;
 }
 
-const QuestionsComponent: FC<QuestionsProps> = ({
-  carouselState,
-  setCarouselState,
-  navigation,
-}) => {
-  const isFirstQuestion = () => {
-    if (isLast) {
-      return;
-    }
-    if (
-      carouselState.questionList[carouselState.currentQuestionIndex].id ===
-      carouselState.firstQuestionId
-    ) {
-      return true;
-    }
-    if (carouselState.firstQuestionId === 0) {
-      return true;
-    }
-  };
-  const isLast =
-    carouselState.currentQuestionIndex + 1 > carouselState.questionList.length;
-
+const QuestionsComponent: FC<QuestionsProps> = ({carouselState, moveAnim}) => {
   return (
-    <View
+    <Animated.View
       style={[
         layoutStyles.flex_column,
         layoutStyles.flex_center,
         marginStyles.m_ver_auto,
+        {transform: [{translateX: moveAnim}]},
       ]}>
       <Text
         style={[
@@ -79,22 +57,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           carouselState.questionList[carouselState.currentQuestionIndex],
         )}
       </Text>
-      {/* <TouchableOpacity
-        onPress={() => {
-          isFirstQuestion()
-            ? navigation.goBack()
-            : carouselPrev(carouselState, setCarouselState);
-        }} style={{flex: 1, backgroundColor: 'black', top: 30, height: 250, position: 'absolute'}}>
-        <View style={{backgroundColor: 'black'}} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        disabled={isLast}
-        onPress={() => {
-          carouselNext(carouselState, setCarouselState);
-        }}
-        style={{flex: 1, backgroundColor: 'white'}}
-      /> */}
-    </View>
+    </Animated.View>
   );
 };
 
