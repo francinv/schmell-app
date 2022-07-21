@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Animated, Text} from 'react-native';
+import {useSelector} from 'react-redux';
 import BombIcon from '../../assets/icons/BombIcon';
+import {selectLanguage} from '../../features/selectors';
+import useLocale from '../../locale/useLocale';
 import colorStyles from '../../styles/color.styles';
 import marginStyles from '../../styles/margin.styles';
 import textStyles from '../../styles/text.styles';
@@ -8,6 +11,7 @@ import {HomeWrapper} from './HomeComponent';
 
 const Loading = () => {
   const [opacityAnim] = useState(new Animated.Value(0));
+  const lang = useSelector(selectLanguage);
 
   const handleAnimation = () => {
     Animated.timing(opacityAnim, {
@@ -41,7 +45,7 @@ const Loading = () => {
           colorStyles.color_primary,
           marginStyles.mt_10,
         ]}>
-        Vi henter spillene nå...
+        {useLocale(lang, 'LOADING')}
       </Text>
     </HomeWrapper>
   );

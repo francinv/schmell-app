@@ -10,12 +10,16 @@ import textStyles from '../../styles/text.styles';
 import globalStyles from '../../styles/global.styles';
 import layoutStyles from '../../styles/layout.styles';
 import {HomeWrapper} from './HomeComponent';
+import useLocale from '../../locale/useLocale';
+import {useSelector} from 'react-redux';
+import {selectLanguage} from '../../features/selectors';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   fetchData: () => dispatch(fetchGames()),
 });
 
 const Failed = () => {
+  const lang = useSelector(selectLanguage);
   const {fetchData} = actionDispatch(useAppDispatch());
 
   return (
@@ -30,7 +34,7 @@ const Failed = () => {
             textStyles.text_shadow,
             paddingStyles.p_hor_15,
           ]}>
-          Oisann,
+          {useLocale(lang, 'FAILED_PRE')}
         </Text>
         <Text
           style={[
@@ -41,7 +45,7 @@ const Failed = () => {
             colorStyles.color_primary,
             marginStyles.mt_10,
           ]}>
-          du er ikke tilkoblet for øyeblikket 😿
+          {useLocale(lang, 'FAILED_CONTENT')}
         </Text>
       </View>
       <Pressable
@@ -62,7 +66,7 @@ const Failed = () => {
             paddingStyles.p_hor_15,
             paddingStyles.p_ver_10,
           ]}>
-          Prøv igjen
+          {useLocale(lang, 'RETRY')}
         </Text>
         <RetryIcon />
       </Pressable>

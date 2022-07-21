@@ -1,11 +1,13 @@
 import React, {FC} from 'react';
 import {Animated, Text} from 'react-native';
+import {useSelector} from 'react-redux';
+import {selectLanguage} from '../../features/selectors';
+import useLocale from '../../locale/useLocale';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';
 import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
-import {getPunishmentText} from '../../utils/textBuilders';
 import {carouselType} from './GamePlay';
 
 interface QuestionsProps {
@@ -19,6 +21,10 @@ const QuestionsComponent: FC<QuestionsProps> = ({
   moveAnim,
   isLast,
 }) => {
+  const lang = useSelector(selectLanguage);
+  const title = useLocale(lang, 'GAME_END_TITLE');
+  const information = useLocale(lang, 'GAME_END_INFORMATION');
+
   return (
     <Animated.View
       style={[
@@ -37,7 +43,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           textStyles.text_shadow,
         ]}>
         {isLast
-          ? 'Ooops!'
+          ? title
           : carouselState.questionList[carouselState.currentQuestionIndex].type}
       </Text>
       <Text
@@ -48,11 +54,11 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           textStyles.font_500,
         ]}>
         {isLast
-          ? 'Da var det tomt :('
+          ? information
           : carouselState.questionList[carouselState.currentQuestionIndex]
               .question_desc}
       </Text>
-      <Text
+      {/* <Text
         style={[
           colorStyles.color_tertiary,
           textStyles.text_font_secondary,
@@ -65,7 +71,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           : getPunishmentText(
               carouselState.questionList[carouselState.currentQuestionIndex],
             )}
-      </Text>
+      </Text> */}
     </Animated.View>
   );
 };

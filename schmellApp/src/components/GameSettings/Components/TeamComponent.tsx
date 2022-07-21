@@ -4,7 +4,8 @@ import {Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {setTeams} from '../../../features/gamesettings/gameSettingSlice';
 import {useAppDispatch} from '../../../features/hooks';
-import {selectTeams} from '../../../features/selectors';
+import {selectLanguage, selectTeams} from '../../../features/selectors';
+import useLocale from '../../../locale/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import globalStyles from '../../../styles/global.styles';
 import heightStyles from '../../../styles/height.styles';
@@ -21,6 +22,7 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 
 const TeamComponent: FC = () => {
   const activeTeam = useSelector(selectTeams);
+  const lang = useSelector(selectLanguage);
   const {editTeams} = actionDispatch(useAppDispatch());
 
   function handlePress(team: number) {
@@ -29,19 +31,6 @@ const TeamComponent: FC = () => {
 
   function isSelected(content: number) {
     return activeTeam === content;
-  }
-
-  function parseContent(contentToParse: number) {
-    switch (contentToParse) {
-      case 0:
-        return 'Nei';
-      case 1:
-        return '2 lag';
-      case 2:
-        return '3 lag';
-      default:
-        break;
-    }
   }
 
   return (
@@ -58,7 +47,7 @@ const TeamComponent: FC = () => {
           colorStyles.color_tertiary,
           marginStyles.mb_20,
         ]}>
-        Spille med lag?
+        {useLocale(lang, 'GAMESETTINGS_TEAMS')}
       </Text>
       <LinearGradientBorder width={'70%'}>
         <View
@@ -72,21 +61,21 @@ const TeamComponent: FC = () => {
           ]}>
           <ToggleButton
             amountOfElements={3}
-            content={parseContent(0)}
+            content={useLocale(lang, 'GAMESETTINGS_TEAMS_OPTIONS')[0]}
             handlePress={() => handlePress(0)}
             selected={isSelected(0)}
             directionOfAnimation={undefined}
           />
           <ToggleButton
             amountOfElements={3}
-            content={parseContent(1)}
+            content={useLocale(lang, 'GAMESETTINGS_TEAMS_OPTIONS')[1]}
             handlePress={() => handlePress(1)}
             selected={isSelected(1)}
             directionOfAnimation={undefined}
           />
           <ToggleButton
             amountOfElements={3}
-            content={parseContent(2)}
+            content={useLocale(lang, 'GAMESETTINGS_TEAMS_OPTIONS')[2]}
             handlePress={() => handlePress(2)}
             selected={isSelected(2)}
             directionOfAnimation={undefined}

@@ -11,6 +11,9 @@ import {questionType} from '../../typings/questionTypes';
 import {XModalButton} from '../Buttons/IconButtons';
 import PlayerInput from '../GameSettings/Components/PlayerInput';
 import {Modal, Portal} from 'react-native-paper';
+import {useSelector} from 'react-redux';
+import {selectLanguage} from '../../features/selectors';
+import useLocale from '../../locale/useLocale';
 
 interface ModalProps {
   modalShow: {
@@ -23,6 +26,8 @@ interface ModalProps {
 
 const ModalContent: FC<ModalProps> = props => {
   const {modalShow, currentQuestion, handleShow} = props;
+  const lang = useSelector(selectLanguage);
+  const modalTitle = useLocale(lang, 'GAME_PLAYER_INPUT') as string;
 
   const ModalTitle: FC<{title: string}> = ({title}) => (
     <Text
@@ -62,7 +67,7 @@ const ModalContent: FC<ModalProps> = props => {
   } else if (modalShow.modalType === 'P') {
     return (
       <View style={[layoutStyles.flex_center, widthStyles(0).w_p_100]}>
-        <ModalTitle title={'Hvem kom forsent?'} />
+        <ModalTitle title={modalTitle} />
         <XModalButton
           onPress={() => handleShow({show: false, modalType: ''})}
         />

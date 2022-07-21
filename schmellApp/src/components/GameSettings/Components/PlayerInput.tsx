@@ -1,5 +1,8 @@
 import React, {FC, useState} from 'react';
 import {TextInput, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {selectLanguage} from '../../../features/selectors';
+import useLocale from '../../../locale/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import globalStyles from '../../../styles/global.styles';
 import heightStyles from '../../../styles/height.styles';
@@ -16,6 +19,7 @@ interface InputProps {
 
 const PlayerInput: FC<InputProps> = ({inputPlace}) => {
   const [player, setPlayer] = useState('');
+  const lang = useSelector(selectLanguage);
 
   const isSettings = inputPlace === 'Settings';
 
@@ -44,7 +48,7 @@ const PlayerInput: FC<InputProps> = ({inputPlace}) => {
         placeholderTextColor={
           isSettings ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)'
         }
-        placeholder="Skriv inn et navn..."
+        placeholder={useLocale(lang, 'PLAYER_INPUT_PLACEHOLDER') as string}
       />
       <AddPlayerButton
         player={player}

@@ -1,7 +1,8 @@
 import React from 'react';
 import {ScrollView, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectPlayers} from '../../../features/selectors';
+import {selectLanguage, selectPlayers} from '../../../features/selectors';
+import useLocale from '../../../locale/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import globalStyles from '../../../styles/global.styles';
 import heightStyles from '../../../styles/height.styles';
@@ -13,6 +14,8 @@ import widthStyles from '../../../styles/width.styles';
 
 const PlayerDisplay: React.FC = () => {
   const players = useSelector(selectPlayers);
+  const lang = useSelector(selectLanguage);
+  const playerDisplayText = useLocale(lang, 'GAMESETTINGS_NO_PLAYERS');
 
   function isPlayers() {
     return players.length > 0;
@@ -58,7 +61,7 @@ const PlayerDisplay: React.FC = () => {
             textStyles.text_20,
             globalStyles.opacity_50,
           ]}>
-          Ingen spillere her enda...
+          {playerDisplayText}
         </Text>
       )}
     </ScrollView>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectVolume} from '../../../features/selectors';
+import {selectLanguage, selectVolume} from '../../../features/selectors';
+import useLocale from '../../../locale/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import globalStyles from '../../../styles/global.styles';
 import heightStyles from '../../../styles/height.styles';
@@ -18,10 +19,11 @@ import SubTitle from './SubTitle';
 
 const Volume: React.FC = () => {
   const volume = useSelector(selectVolume);
+  const language = useSelector(selectLanguage);
 
   return (
     <InputContainer>
-      <SubTitle title="Lydnivå" />
+      <SubTitle title={useLocale(language, 'SETTINGS_VOLUME') as string} />
       <View
         style={[
           layoutStyles.flex_row,

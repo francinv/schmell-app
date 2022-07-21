@@ -4,7 +4,8 @@ import {Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {setReadOut} from '../../../features/gamesettings/gameSettingSlice';
 import {useAppDispatch} from '../../../features/hooks';
-import {selectReadOut} from '../../../features/selectors';
+import {selectLanguage, selectReadOut} from '../../../features/selectors';
+import useLocale from '../../../locale/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import globalStyles from '../../../styles/global.styles';
 import heightStyles from '../../../styles/height.styles';
@@ -22,6 +23,7 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 const ReadOut: FC = () => {
   const {readOut} = actionDispatch(useAppDispatch());
   const isReadOut = useSelector(selectReadOut);
+  const lang = useSelector(selectLanguage);
 
   function handlePress(editReadOut: boolean) {
     readOut(editReadOut);
@@ -31,9 +33,6 @@ const ReadOut: FC = () => {
     return isReadOut === content;
   }
 
-  function parseContent(content: boolean) {
-    return content === true ? 'Ja' : 'Nei';
-  }
   return (
     <View
       style={[
@@ -48,7 +47,7 @@ const ReadOut: FC = () => {
           colorStyles.color_tertiary,
           marginStyles.mb_20,
         ]}>
-        Opplesning?
+        {useLocale(lang, 'GAMESETTINGS_READOUT')}
       </Text>
       <LinearGradientBorder width={'70%'}>
         <View
@@ -62,14 +61,14 @@ const ReadOut: FC = () => {
           ]}>
           <ToggleButton
             amountOfElements={2}
-            content={parseContent(true)}
+            content={useLocale(lang, 'GAMESETTINGS_READOUT_OPTIONS')[0]}
             handlePress={() => handlePress(true)}
             selected={isSelected(true)}
             directionOfAnimation={undefined}
           />
           <ToggleButton
             amountOfElements={2}
-            content={parseContent(false)}
+            content={useLocale(lang, 'GAMESETTINGS_READOUT_OPTIONS')[1]}
             handlePress={() => handlePress(false)}
             selected={isSelected(false)}
             directionOfAnimation={undefined}
