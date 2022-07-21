@@ -4,7 +4,11 @@ import {Image, SafeAreaView, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../../features/hooks';
 import {selectGameStatus} from '../../features/selectors';
-import {setTokens} from '../../features/usersettings/userSettingSlice';
+import {
+  fetchSettings,
+  postSettings,
+  setTokens,
+} from '../../features/usersettings/userSettingSlice';
 import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
@@ -18,17 +22,24 @@ import RNUniqueId from '../../native/RNUniqueId';
 import HomeButtons from './GameButtons';
 import Failed from './Failed';
 import Loading from './Loading';
+import {user_settings} from '../../typings/settingsTypes';
+import {asyncStorageService} from '../../utils/updateAsyncStorage';
+import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),
   fetchData: () => dispatch(fetchGames()),
+  getUserSettings: () => dispatch(fetchSettings()),
+  setSettings: (query: user_settings) => dispatch(postSettings(query)),
 });
 interface HomeInnerContentProps {
   handleShow: () => void;
 }
 
 const HomeComponent: React.FC = () => {
-  const {authToken, fetchData} = actionDispatch(useAppDispatch());
+  const {authToken, fetchData, getUserSettings, setSettings} = actionDispatch(
+    useAppDispatch(),
+  );
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -44,6 +55,28 @@ const HomeComponent: React.FC = () => {
         authToken(uniqueString);
       }
     }
+    async function checkIfSettingsSet() {
+      let vol_temp = await asyncStorageService(VOLUME_KEY, '', 'GET');
+      let voi_temp = await asyncStorageService(VOICE_KEY, '', 'GET');
+      let lan_temp = await asyncStorageService(LANGUAGE_KEY, '', 'GET');
+      if (vol_temp === undefined) {
+        vol_temp = 3;
+      }
+      if (voi_temp === undefined) {
+        voi_temp = 'F';
+      }
+      if (lan_temp === undefined) {
+        lan_temp = 'nb-NO';
+      }
+      const temp = {
+        volume: vol_temp,
+        voice: voi_temp,
+        language: lan_temp,
+      };
+      setSettings(temp);
+    }
+    checkIfSettingsSet();
+    getUserSettings();
     checkUserHasToken();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
