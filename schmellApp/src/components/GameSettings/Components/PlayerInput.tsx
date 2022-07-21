@@ -50,7 +50,7 @@ const PlayerInput: FC<InputProps> = props => {
         style={[
           heightStyles(35).h_custom,
           widthStyles(0).w_p_80,
-          isSettings ? colorStyles.bg_quinary : colorStyles.bg_senary,
+          colorStyles.bg_senary,
           globalStyles.border_radius_4,
           globalStyles.boxShadow,
           paddingStyles.p_hor_5,

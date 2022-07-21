@@ -53,7 +53,7 @@ const TeamComponent: FC = () => {
         <View
           style={[
             widthStyles(0).w_p_99,
-            colorStyles.bg_quinary,
+            colorStyles.bg_senary,
             globalStyles.border_radius_100,
             heightStyles(0).h_p_96,
             layoutStyles.flex_row,

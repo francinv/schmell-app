@@ -3,8 +3,8 @@ import React, {FC, useState} from 'react';
 import {Animated} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
-import {colorList} from '../../constants/colors';
 import {selectQuestions} from '../../features/selectors';
+import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 import {questionType} from '../../typings/questionTypes';
 import {randomizeList} from '../../utils/filterMethods';
@@ -17,7 +17,6 @@ import QuestionsComponent from './QuestionsComponent';
 export type carouselType = {
   firstQuestionId: number;
   currentQuestionIndex: number;
-  currentColor: number;
   questionList: questionType[];
 };
 
@@ -32,7 +31,6 @@ const GamePlay: FC = () => {
   const [carouselState, setCarouselState] = useState<carouselType>({
     firstQuestionId: 0,
     currentQuestionIndex: 0,
-    currentColor: 0,
     questionList: randomizeList(questions),
   });
   const [moveAnim] = useState(new Animated.Value(0));
@@ -40,11 +38,7 @@ const GamePlay: FC = () => {
     carouselState.currentQuestionIndex + 1 > carouselState.questionList.length;
 
   return (
-    <SafeAreaView
-      style={[
-        layoutStyles.flex_1,
-        {backgroundColor: colorList[carouselState.currentColor]},
-      ]}>
+    <SafeAreaView style={[layoutStyles.flex_1, colorStyles.bg_septenary]}>
       <GameHeader
         handleShow={() => handleShow({show: true, modalType: 'H'})}
         navigation={navigation}
@@ -54,7 +48,12 @@ const GamePlay: FC = () => {
         moveAnim={moveAnim}
         isLast={isLast}
       />
-      <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
+      <GameFooter
+        handleShow={() => handleShow({show: true, modalType: 'P'})}
+        currentQuestion={
+          carouselState.questionList[carouselState.currentQuestionIndex]
+        }
+      />
       <GameModal
         currentQuestion={
           carouselState.questionList[carouselState.currentQuestionIndex]

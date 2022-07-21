@@ -96,7 +96,7 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
         style={[
           widthStyles(0).w_p_100,
           heightStyles(0).h_p_50,
-          colorStyles.bg_quaternary,
+          colorStyles.bg_septenary,
           globalStyles.border_top_start_30,
           globalStyles.border_top_end_30,
           paddingStyles.p_hor_5,

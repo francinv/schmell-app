@@ -41,7 +41,7 @@ const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
         marginStyles.mt_15,
         paddingStyles.p_hor_15,
         paddingStyles.p_ver_10,
-        colorStyles.bg_quinary,
+        colorStyles.bg_septenary,
         globalStyles.border_radius_20,
         marginStyles.m_hor_auto,
         boxStyle,

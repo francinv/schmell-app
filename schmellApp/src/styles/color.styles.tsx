@@ -28,6 +28,9 @@ const colorStyles = StyleSheet.create({
   bg_senary: {
     backgroundColor: 'rgba(20, 20, 0, 0.3)',
   },
+  bg_septenary: {
+    backgroundColor: '#262423',
+  },
   shadow_primary: {
     shadowColor: '#AEAC99',
   },
