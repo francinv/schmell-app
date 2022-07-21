@@ -3,7 +3,7 @@ import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../utils/updateAsyncStorage';
 import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
-import axiosService from '../../services/axiosService';
+import {authService} from '../../services/axiosService';
 import {decrypt} from '../../utils/crypto';
 
 const initialState = {
@@ -18,8 +18,8 @@ const initialState = {
 export const setTokens = createAsyncThunk(
   'usersetting/setTokens',
   async (id: string) => {
-    return axiosService
-      .post(decrypt('YXV0aC9rZXkvZ2VuZXJhdGU='), {
+    return authService
+      .post(decrypt('a2V5L2dlbmVyYXRlLw=='), {
         name: id,
       })
       .then(res => res.data);
@@ -78,6 +78,9 @@ const UserSettingSlice = createSlice({
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
     },
+    setApiKey(state, action: PayloadAction<string>) {
+      state.api_key = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(fetchSettings.pending, state => {
@@ -125,7 +128,6 @@ const UserSettingSlice = createSlice({
           action.payload.api_key,
           'SET',
         );
-        console.log('returned from Api-Key', action.payload);
       }
       state.status = 'succeeded';
     });
