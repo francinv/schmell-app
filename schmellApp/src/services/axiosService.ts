@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {encryptedStorageService} from '../utils/EncryptedStorageUtil';
 import RNUniqueId from '../native/RNUniqueId';
 import {decrypt} from '../utils/crypto';
+import encryptedStorageService from './encryptedStorageService';
 
 const axiosService = axios.create({
   baseURL: decrypt('aHR0cHM6Ly9zY2htZWxsLXN0YWdpbmcuaGVyb2t1YXBwLmNvbS9hcGkv'),

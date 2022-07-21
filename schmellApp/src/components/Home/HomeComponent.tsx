@@ -9,7 +9,6 @@ import {
   postSettings,
   setTokens,
 } from '../../features/usersettings/userSettingSlice';
-import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
 import GameDetail from './GameDetail';
@@ -23,8 +22,9 @@ import HomeButtons from './GameButtons';
 import Failed from './Failed';
 import Loading from './Loading';
 import {user_settings} from '../../typings/settingsTypes';
-import {asyncStorageService} from '../../utils/updateAsyncStorage';
+import {asyncStorageService} from '../../services/asyncStorageService';
 import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
+import encryptedStorageService from '../../services/encryptedStorageService';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),

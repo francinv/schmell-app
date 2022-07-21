@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import {user_settings} from '../../typings/settingsTypes';
-import {asyncStorageService} from '../../utils/updateAsyncStorage';
-import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
+import {asyncStorageService} from '../../services/asyncStorageService';
 import {authService} from '../../services/axiosService';
 import {decrypt} from '../../utils/crypto';
+import encryptedStorageService from '../../services/encryptedStorageService';
 
 const initialState = {
   api_key: '',
