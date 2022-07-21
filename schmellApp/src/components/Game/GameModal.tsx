@@ -14,6 +14,7 @@ import {Modal, Portal} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
 import useLocale from '../../locale/useLocale';
+import useHint from '../../hooks/useHint';
 
 interface ModalProps {
   modalShow: {
@@ -28,6 +29,11 @@ const ModalContent: FC<ModalProps> = props => {
   const {modalShow, currentQuestion, handleShow} = props;
   const lang = useSelector(selectLanguage);
   const modalTitle = useLocale(lang, 'GAME_PLAYER_INPUT') as string;
+  const modalPunishmentInformation = useLocale(
+    lang,
+    'GAME_HINT_INFORMATION',
+  ) as string;
+  const questionHint = useHint(currentQuestion.type);
 
   const ModalTitle: FC<{title: string}> = ({title}) => (
     <Text
@@ -59,7 +65,18 @@ const ModalContent: FC<ModalProps> = props => {
               marginStyles.mb_20,
               widthStyles(0).w_max_80,
             ]}>
-            {currentQuestion?.hint}
+            {questionHint}
+          </Text>
+          <Text
+            style={[
+              textStyles.text_font_secondary,
+              textStyles.text_16,
+              colorStyles.color_secondary,
+              textStyles.text_center,
+              marginStyles.mb_20,
+              widthStyles(0).w_max_80,
+            ]}>
+            {modalPunishmentInformation}
           </Text>
         </View>
       </View>
@@ -71,7 +88,11 @@ const ModalContent: FC<ModalProps> = props => {
         <XModalButton
           onPress={() => handleShow({show: false, modalType: ''})}
         />
-        <PlayerInput inputPlace="InGame" />
+        <PlayerInput
+          inputPlace="InGame"
+          buttonText={''}
+          setButtonText={() => console.log('must ignore')}
+        />
       </View>
     );
   } else {
