@@ -8,6 +8,7 @@ import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';
 import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
+import widthStyles from '../../styles/width.styles';
 import {carouselType} from './GamePlay';
 
 interface QuestionsProps {
@@ -52,26 +53,14 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           textStyles.text_font_secondary,
           textStyles.text_30,
           textStyles.font_500,
+          widthStyles(0).w_p_70,
+          textStyles.text_center,
         ]}>
         {isLast
           ? information
           : carouselState.questionList[carouselState.currentQuestionIndex]
               .question_desc}
       </Text>
-      {/* <Text
-        style={[
-          colorStyles.color_tertiary,
-          textStyles.text_font_secondary,
-          textStyles.font_600,
-          marginStyles.mt_10,
-          textStyles.text_underline,
-        ]}>
-        {isLast
-          ? 'Kanskje prøve et annet spill?'
-          : getPunishmentText(
-              carouselState.questionList[carouselState.currentQuestionIndex],
-            )}
-      </Text> */}
     </Animated.View>
   );
 };
