@@ -65,6 +65,11 @@ const globalStyles = StyleSheet.create({
     zIndex: 1,
     left: 0,
   },
+  modalButton: {
+    top: 0,
+    right: 5,
+    position: 'absolute',
+  },
 });
 
 export default globalStyles;
