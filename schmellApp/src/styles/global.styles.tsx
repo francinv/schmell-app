@@ -41,7 +41,6 @@ const globalStyles = StyleSheet.create({
     shadowRadius: 4,
   },
   modalView: {
-    margin: 20,
     backgroundColor: '#FFD700',
     borderRadius: 20,
     paddingVertical: 5,
@@ -54,7 +53,7 @@ const globalStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    width: 400,
+    width: '60%',
   },
   carouselView: {
     position: 'absolute',

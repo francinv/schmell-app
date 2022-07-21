@@ -51,6 +51,9 @@ const layoutStyles = StyleSheet.create({
   flex_wrap: {
     flexWrap: 'wrap',
   },
+  justify_evenly: {
+    justifyContent: 'space-evenly',
+  },
 });
 
 export default layoutStyles;

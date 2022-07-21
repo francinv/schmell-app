@@ -5,6 +5,12 @@ const marginStyles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
+  mt_auto: {
+    marginTop: 'auto',
+  },
+  mb_auto: {
+    marginBottom: 'auto',
+  },
   ml_auto: {
     marginLeft: 'auto',
   },
