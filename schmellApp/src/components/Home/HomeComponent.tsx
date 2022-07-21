@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
-import {Image, SafeAreaView} from 'react-native';
+import {Image, SafeAreaView, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../../features/hooks';
-import {selectGames} from '../../features/selectors';
+import {selectGameStatus} from '../../features/selectors';
 import {setTokens} from '../../features/usersettings/userSettingSlice';
 import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
 import LayoutContainer from '../Background/LayoutContainer';
@@ -13,9 +13,11 @@ import layoutStyles from '../../styles/layout.styles';
 import heightStyles from '../../styles/height.styles';
 import marginStyles from '../../styles/margin.styles';
 import widthStyles from '../../styles/width.styles';
-import GameButton from '../Buttons/GameButton';
 import {fetchGames} from '../../features/game/gameSlice';
 import RNUniqueId from '../../native/RNUniqueId';
+import HomeButtons from './GameButtons';
+import Failed from './Failed';
+import Loading from './Loading';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),
@@ -39,7 +41,6 @@ const HomeComponent: React.FC = () => {
       );
       console.log('token', token);
       if (token === undefined || token === null) {
-        console.log('triggered');
         authToken(uniqueString);
       }
     }
@@ -65,10 +66,25 @@ const HomeComponent: React.FC = () => {
 };
 
 const HomeInnerContent: React.FC<HomeInnerContentProps> = ({handleShow}) => {
-  const games = useSelector(selectGames);
+  const gameStatus = useSelector(selectGameStatus);
+
+  const getContent = () => {
+    if (gameStatus === 'loading') {
+      return <Loading />;
+    } else if (gameStatus === 'failed') {
+      return <Failed />;
+    } else if (gameStatus === 'succeeded') {
+      return <HomeButtons handleShow={handleShow} />;
+    }
+  };
 
   return (
-    <SafeAreaView style={[layoutStyles.flex_column, layoutStyles.align_center]}>
+    <SafeAreaView
+      style={[
+        layoutStyles.flex_column,
+        layoutStyles.align_center,
+        layoutStyles.flex_1,
+      ]}>
       <Image
         source={require('../../assets/images/logo.png')}
         style={[
@@ -78,16 +94,22 @@ const HomeInnerContent: React.FC<HomeInnerContentProps> = ({handleShow}) => {
           marginStyles.mt_10,
         ]}
       />
-      {games.map(game => (
-        <GameButton
-          key={game.id}
-          id={game.id}
-          name={game.name}
-          handleShow={handleShow}
-        />
-      ))}
+      {getContent()}
     </SafeAreaView>
   );
 };
+
+export const HomeWrapper: FC = ({children}) => (
+  <View
+    style={[
+      layoutStyles.flex_column,
+      layoutStyles.align_center,
+      widthStyles(0).w_p_90,
+      layoutStyles.flex_1,
+      layoutStyles.justify_evenly,
+    ]}>
+    {children}
+  </View>
+);
 
 export default HomeComponent;
