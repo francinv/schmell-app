@@ -22,4 +22,5 @@ export default {
   GAME_PLAYER_INPUT: 'Who was late?',
   GAME_END_TITLE: 'Oh snap!',
   GAME_END_INFORMATION: 'it is empty 😒',
+  GAME_HINT_INFORMATION: 'The number of sips can be seen in the left corner.',
 };

@@ -26,7 +26,8 @@ type allowedAttribute =
   | 'GAMESETTINGS_START_CAROUSEL'
   | 'GAME_PLAYER_INPUT'
   | 'GAME_END_TITLE'
-  | 'GAME_END_INFORMATION';
+  | 'GAME_END_INFORMATION'
+  | 'GAME_HINT_INFORMATION';
 
 function useLocale(wantedLanguage: string, wantedAttribute: allowedAttribute) {
   switch (wantedLanguage) {

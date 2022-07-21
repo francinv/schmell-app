@@ -22,4 +22,6 @@ export default {
   GAME_PLAYER_INPUT: 'Vem var sen?',
   GAME_END_TITLE: 'Hoppsan!',
   GAME_END_INFORMATION: 'då var det tomt 😒',
+  GAME_HINT_INFORMATION:
+    'Antalet klunkar som ska drickas kan ses i det vänstra hörnet.',
 };

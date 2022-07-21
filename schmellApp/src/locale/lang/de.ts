@@ -22,4 +22,6 @@ export default {
   GAME_PLAYER_INPUT: 'Hvem kom for sent?',
   GAME_END_TITLE: 'Uuups!',
   GAME_END_INFORMATION: 'så var den tom 😒',
+  GAME_HINT_INFORMATION:
+    'Antallet af slurke, der skal drikkes, kan ses i venstre hjørne.',
 };
