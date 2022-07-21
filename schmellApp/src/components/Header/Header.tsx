@@ -12,8 +12,10 @@ import heightStyles from '../../styles/height.styles';
 import colorStyles from '../../styles/color.styles';
 import widthStyles from '../../styles/width.styles';
 import layoutStyles from '../../styles/layout.styles';
+import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
 
 const Header: React.FC = () => {
+  const homeNavigation = useNavigation<HomeScreenNavigationProp>();
   const navigation = useNavigation();
   const route = useRoute();
   const title = route.name;
@@ -34,11 +36,9 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <StoreIconButton
-            onPress={() => navigation.navigate('Store' as never)}
-          />
+          <StoreIconButton onPress={() => homeNavigation.navigate('Store')} />
           <SettingsIconButton
-            onPress={() => navigation.navigate('Settings' as never)}
+            onPress={() => homeNavigation.navigate('Settings')}
           />
         </View>
       </SafeAreaView>
