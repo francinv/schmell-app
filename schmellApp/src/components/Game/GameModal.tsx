@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Modal, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import layoutStyles from '../../styles/layout.styles';
@@ -10,6 +10,7 @@ import widthStyles from '../../styles/width.styles';
 import {questionType} from '../../typings/questionTypes';
 import {XModalButton} from '../Buttons/IconButtons';
 import PlayerInput from '../GameSettings/Components/PlayerInput';
+import {Modal, Portal} from 'react-native-paper';
 
 interface ModalProps {
   modalShow: {
@@ -19,12 +20,6 @@ interface ModalProps {
   currentQuestion: questionType;
   handleShow: (modalInfo: {show: boolean; modalType: string}) => void;
 }
-
-const ModalWrapper: FC = ({children}) => (
-  <View style={[layoutStyles.flex_1, layoutStyles.flex_center]}>
-    <View style={globalStyles.modalView}>{children}</View>
-  </View>
-);
 
 const ModalContent: FC<ModalProps> = props => {
   const {modalShow, currentQuestion, handleShow} = props;
@@ -36,8 +31,7 @@ const ModalContent: FC<ModalProps> = props => {
         textStyles.text_25,
         colorStyles.color_secondary,
         paddingStyles.p_5,
-        marginStyles.m_hor_auto,
-        marginStyles.m_hor_14,
+        textStyles.text_center,
       ]}>
       {title}
     </Text>
@@ -45,22 +39,11 @@ const ModalContent: FC<ModalProps> = props => {
 
   if (modalShow.modalType === 'H') {
     return (
-      <View style={[layoutStyles.flex_column, layoutStyles.flex_center]}>
-        <View
-          style={[
-            layoutStyles.flex_row,
-            layoutStyles.align_center,
-            marginStyles.mb_10,
-            widthStyles(400).w_min_custom,
-          ]}>
-          <Text style={[colorStyles.color_primary, marginStyles.mr_auto]}>
-            text
-          </Text>
-          <ModalTitle title={currentQuestion?.type} />
-          <XModalButton
-            onPress={() => handleShow({show: false, modalType: ''})}
-          />
-        </View>
+      <View style={[layoutStyles.flex_center, widthStyles(0).w_p_100]}>
+        <ModalTitle title={currentQuestion?.type} />
+        <XModalButton
+          onPress={() => handleShow({show: false, modalType: ''})}
+        />
         <View style={[paddingStyles.p_10]}>
           <Text
             style={[
@@ -78,27 +61,11 @@ const ModalContent: FC<ModalProps> = props => {
     );
   } else if (modalShow.modalType === 'P') {
     return (
-      <View
-        style={[
-          layoutStyles.flex_column,
-          layoutStyles.flex_center,
-          paddingStyles.pb_20,
-        ]}>
-        <View
-          style={[
-            layoutStyles.flex_row,
-            layoutStyles.align_center,
-            marginStyles.mb_10,
-            widthStyles(400).w_min_custom,
-          ]}>
-          <Text style={[colorStyles.color_primary, marginStyles.mr_auto]}>
-            text
-          </Text>
-          <ModalTitle title={'Hvem kom forsent?'} />
-          <XModalButton
-            onPress={() => handleShow({show: false, modalType: ''})}
-          />
-        </View>
+      <View style={[layoutStyles.flex_center, widthStyles(0).w_p_100]}>
+        <ModalTitle title={'Hvem kom forsent?'} />
+        <XModalButton
+          onPress={() => handleShow({show: false, modalType: ''})}
+        />
         <PlayerInput inputPlace="InGame" />
       </View>
     );
@@ -111,20 +78,19 @@ const GameModal: FC<ModalProps> = props => {
   const {modalShow, currentQuestion, handleShow} = props;
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={modalShow.show}
-      onRequestClose={() => handleShow({show: false, modalType: ''})}
-      supportedOrientations={['landscape']}>
-      <ModalWrapper>
+    <Portal>
+      <Modal
+        visible={modalShow.show}
+        onDismiss={() => handleShow({show: false, modalType: ''})}
+        contentContainerStyle={globalStyles.modalView}
+        style={[layoutStyles.flex_center]}>
         <ModalContent
           currentQuestion={currentQuestion}
           modalShow={modalShow}
           handleShow={handleShow}
         />
-      </ModalWrapper>
-    </Modal>
+      </Modal>
+    </Portal>
   );
 };
 

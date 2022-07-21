@@ -11,6 +11,7 @@ import marginStyles from '../../styles/margin.styles';
 import LightBulbIcon from '../../assets/icons/LightBulbIcon';
 import {XIconHeader, XIconModal} from '../../assets/icons/XIcon';
 import {GamePlusIcon} from '../../assets/icons/PlusIcon';
+import globalStyles from '../../styles/global.styles';
 
 interface ButtonProps {
   onPress: () => void;
@@ -42,9 +43,7 @@ export const XHeaderButton: FC<ButtonProps> = ({onPress}) => {
 
 export const XModalButton: FC<ButtonProps> = ({onPress}) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[marginStyles.ml_auto, marginStyles.mr_10]}>
+    <TouchableOpacity onPress={onPress} style={globalStyles.modalButton}>
       <XIconModal />
     </TouchableOpacity>
   );
