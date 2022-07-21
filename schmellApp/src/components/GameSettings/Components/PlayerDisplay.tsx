@@ -1,5 +1,5 @@
-import React from 'react';
-import {ScrollView, Text} from 'react-native';
+import React, {FC} from 'react';
+import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage, selectPlayers} from '../../../features/selectors';
 import useLocale from '../../../locale/useLocale';
@@ -12,7 +12,11 @@ import paddingStyles from '../../../styles/padding.styles';
 import textStyles from '../../../styles/text.styles';
 import widthStyles from '../../../styles/width.styles';
 
-const PlayerDisplay: React.FC = () => {
+interface ButtonProps {
+  interpolatedShake: Animated.AnimatedInterpolation;
+}
+
+const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
   const players = useSelector(selectPlayers);
   const lang = useSelector(selectLanguage);
   const playerDisplayText = useLocale(lang, 'GAMESETTINGS_NO_PLAYERS');
@@ -21,8 +25,16 @@ const PlayerDisplay: React.FC = () => {
     return players.length > 0;
   }
 
+  const boxStyle = {
+    transform: [
+      {
+        translateX: interpolatedShake,
+      },
+    ],
+  };
+
   return (
-    <ScrollView
+    <Animated.ScrollView
       style={[
         widthStyles(0).w_p_90,
         heightStyles(0).h_p_40,
@@ -32,6 +44,7 @@ const PlayerDisplay: React.FC = () => {
         colorStyles.bg_quinary,
         globalStyles.border_radius_20,
         marginStyles.m_hor_auto,
+        boxStyle,
       ]}
       contentContainerStyle={[
         heightStyles(0).h_p_100,
@@ -64,7 +77,7 @@ const PlayerDisplay: React.FC = () => {
           {playerDisplayText}
         </Text>
       )}
-    </ScrollView>
+    </Animated.ScrollView>
   );
 };
 

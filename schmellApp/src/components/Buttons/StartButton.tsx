@@ -1,11 +1,17 @@
+import React, {
+  FC,
+  useState,
+  Dispatch as ReactDispatch,
+  SetStateAction,
+} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Dispatch} from '@reduxjs/toolkit';
-import React, {FC, useState} from 'react';
 import {Animated, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
+import moveAnimation from '../../animations/moveAnimation';
 import {fetchQuestions} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
-import {selectWeeks} from '../../features/selectors';
+import {selectPlayers, selectWeeks} from '../../features/selectors';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import heightStyles from '../../styles/height.styles';
@@ -20,18 +26,34 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
   setQuestions: (query: number) => dispatch(fetchQuestions(query)),
 });
 
-const StartButton: FC = () => {
+interface ButtonProps {
+  buttonText: string;
+  setButtonText: ReactDispatch<SetStateAction<string>>;
+  shakeAnimation: Animated.Value;
+  interpolatedShake: Animated.AnimatedInterpolation;
+}
+const StartButton: FC<ButtonProps> = props => {
+  const {buttonText, setButtonText, shakeAnimation, interpolatedShake} = props;
   const {setQuestions} = actionDispatch(useAppDispatch());
   const week = useSelector(selectWeeks);
+  const players = useSelector(selectPlayers);
+
   let buttonTexts = ['3', '2', '1', 'Go!'];
-  const [buttonText, setButtonText] = useState('Start');
   const [animation] = useState(new Animated.Value(1));
+
   const navigation = useNavigation<GameSettingsScreenNavigationProp>();
+
   const handlePress = () => {
-    for (let i = 0; i < buttonTexts.length; i++) {
-      setTimeout(() => handleAnimation(buttonTexts[i]), 1000 * i);
+    if (players.length === 0) {
+      shakeAnimation.setValue(0);
+      setButtonText('Mangler spillere!');
+      moveAnimation(shakeAnimation);
+    } else {
+      for (let i = 0; i < buttonTexts.length; i++) {
+        setTimeout(() => handleAnimation(buttonTexts[i]), 1000 * i);
+      }
+      setQuestions(week.id);
     }
-    setQuestions(week.id);
   };
 
   function handleAnimation(newText: string) {
@@ -54,29 +76,39 @@ const StartButton: FC = () => {
     }
   }
 
+  const boxStyle = {
+    transform: [
+      {
+        translateX: interpolatedShake,
+      },
+    ],
+  };
+
   return (
-    <TouchableOpacity
-      onPress={handlePress}
-      style={[
-        widthStyles(0).w_p_90,
-        marginStyles.mt_20,
-        marginStyles.m_hor_auto,
-        heightStyles(70).h_custom,
-        globalStyles.border_radius_10,
-        colorStyles.bg_primary,
-        globalStyles.boxShadow,
-        layoutStyles.flex_center,
-      ]}>
-      <Animated.Text
+    <TouchableOpacity onPress={handlePress}>
+      <Animated.View
         style={[
-          textStyles.text_font_primary,
-          textStyles.text_center,
-          textStyles.text_35,
-          paddingStyles.p_5,
-          {opacity: animation},
+          widthStyles(0).w_p_90,
+          marginStyles.mt_20,
+          marginStyles.m_hor_auto,
+          heightStyles(70).h_custom,
+          globalStyles.border_radius_10,
+          colorStyles.bg_primary,
+          globalStyles.boxShadow,
+          layoutStyles.flex_center,
+          boxStyle,
         ]}>
-        {buttonText}
-      </Animated.Text>
+        <Animated.Text
+          style={[
+            textStyles.text_font_primary,
+            textStyles.text_center,
+            textStyles.text_35,
+            paddingStyles.p_5,
+            {opacity: animation},
+          ]}>
+          {buttonText}
+        </Animated.Text>
+      </Animated.View>
     </TouchableOpacity>
   );
 };

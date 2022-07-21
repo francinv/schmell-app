@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../../features/selectors';
@@ -15,13 +15,24 @@ import AddPlayerButton from '../../Buttons/AddPlayerButton';
 
 interface InputProps {
   inputPlace: 'Settings' | 'InGame';
+  buttonText: string;
+  setButtonText: Dispatch<SetStateAction<string>>;
 }
 
-const PlayerInput: FC<InputProps> = ({inputPlace}) => {
+const PlayerInput: FC<InputProps> = props => {
+  const {inputPlace, buttonText, setButtonText} = props;
   const [player, setPlayer] = useState('');
   const lang = useSelector(selectLanguage);
 
   const isSettings = inputPlace === 'Settings';
+
+  const handleChange = () => {
+    if (inputPlace === 'Settings') {
+      if (buttonText !== 'Start') {
+        setButtonText('Start');
+      }
+    }
+  };
 
   return (
     <View
@@ -34,6 +45,7 @@ const PlayerInput: FC<InputProps> = ({inputPlace}) => {
       ]}>
       <TextInput
         value={player}
+        onChange={handleChange}
         onChangeText={setPlayer}
         style={[
           heightStyles(35).h_custom,
