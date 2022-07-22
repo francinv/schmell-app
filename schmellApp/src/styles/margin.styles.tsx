@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 const marginStyles = StyleSheet.create({
+  m_10: {
+    margin: 10,
+  },
   m_hor_auto: {
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -16,6 +19,9 @@ const marginStyles = StyleSheet.create({
   },
   mr_auto: {
     marginRight: 'auto',
+  },
+  mr_5: {
+    marginRight: 5,
   },
   mt_0: {
     marginTop: 0,

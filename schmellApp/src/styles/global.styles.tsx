@@ -22,6 +22,10 @@ const globalStyles = StyleSheet.create({
   border_bottom_start_20: {
     borderBottomStartRadius: 20,
   },
+  border_top_20: {
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
+  },
   border_top_end_30: {
     borderTopEndRadius: 30,
   },
@@ -78,6 +82,11 @@ const globalStyles = StyleSheet.create({
   rightAbsolute: {
     top: 0,
     right: 0,
+    position: 'absolute',
+  },
+  iconTop: {
+    top: 2,
+    left: 2,
     position: 'absolute',
   },
 });

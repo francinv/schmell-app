@@ -34,6 +34,9 @@ const widthStyles = StyleSheet.create((width: number) => ({
   w_p_50: {
     width: '50%',
   },
+  w_p_45: {
+    width: '45%',
+  },
   w_p_100: {
     width: '100%',
   },

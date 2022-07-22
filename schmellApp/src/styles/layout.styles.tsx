@@ -38,6 +38,8 @@ const layoutStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   pos_rel: {
     position: 'relative',
