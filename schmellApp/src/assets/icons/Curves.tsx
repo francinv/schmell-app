@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import Svg, {Path} from 'react-native-svg';
 import useColor from '../../hooks/useColor';
+import globalStyles from '../../styles/global.styles';
 
 interface CurveProps {
   type: string;
@@ -15,7 +16,7 @@ export const LeftCurve: FC<CurveProps> = ({type}) => {
       height={335}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{position: 'absolute', top: 0, left: 0}}>
+      style={globalStyles.leftAbsolute}>
       <Path
         d="M-212.12 224.614c23.228 20.072 53.874 31.375 84.953 31.33 8.842-.012 18.044-1.017 25.772-5.566 22.33-13.144 24.972-45.135 30.18-67.674 6.287-27.2 11.924-54.583 20.396-81.273 4.755-14.984 11.847-31.307 26.286-37.47 14.621-6.24 30.771.352 45.589 5.202 17.266 5.652 35.73 8.935 53.922 6.209 18.192-2.727 36.123-12.056 46.594-27.464 8.199-12.066 11.292-26.769 13.019-41.125 4.536-37.72.817-76.178-10.817-111.852"
         stroke={fillColor}
@@ -253,7 +254,7 @@ export const RightCurve: FC<CurveProps> = ({type}) => {
       height={131}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{position: 'absolute', top: 0, right: 0}}>
+      style={globalStyles.rightAbsolute}>
       <Path
         d="M80.87-192.72c-13.051 27.788-15.65 60.344-7.206 90.248 2.403 8.507 5.858 17.092 12.327 23.3 18.695 17.937 50.216 11.826 73.331 10.741 27.893-1.308 55.786-3.29 83.779-2.357 15.715.524 33.352 2.934 43.189 15.164 9.962 12.386 7.981 29.714 7.316 45.289-.775 18.148 1.054 36.809 8.598 53.582 7.544 16.774 21.375 31.51 39.044 37.42 13.836 4.627 28.831 3.626 43.123 1.404 37.55-5.838 73.581-19.823 104.789-40.673"
         stroke={fillColor}

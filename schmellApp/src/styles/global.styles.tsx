@@ -70,6 +70,16 @@ const globalStyles = StyleSheet.create({
     right: 5,
     position: 'absolute',
   },
+  leftAbsolute: {
+    top: 0,
+    left: 0,
+    position: 'absolute',
+  },
+  rightAbsolute: {
+    top: 0,
+    right: 0,
+    position: 'absolute',
+  },
 });
 
 export default globalStyles;
