@@ -1,7 +1,7 @@
 import React from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
 import {Text, TouchableOpacity} from 'react-native';
-import {setSelectedGame} from '../../features/game/gameSlice';
+import {fetchWeek, setSelectedGame} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
 import globalStyles from '../../styles/global.styles';
 import widthStyles from '../../styles/width.styles';
@@ -12,6 +12,7 @@ import layoutStyles from '../../styles/layout.styles';
 import themeStyles from '../../styles/theme.styles';
 import textStyles from '../../styles/text.styles';
 import paddingStyles from '../../styles/padding.styles';
+import {getCurrentWeekNumber} from '../../utils/dateUtil';
 
 interface GameButtonProps {
   id: number;
@@ -21,11 +22,14 @@ interface GameButtonProps {
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   selectedGame: (query: number) => dispatch(setSelectedGame(query)),
+  setWeek: (query: {weekNumber: number; idGame: number}) =>
+    dispatch(fetchWeek(query)),
 });
 
 const GameButton: React.FC<GameButtonProps> = ({id, name, handleShow}) => {
-  const {selectedGame} = actionDispatch(useAppDispatch());
+  const {selectedGame, setWeek} = actionDispatch(useAppDispatch());
   const handleClick = () => {
+    setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
     selectedGame(id);
     handleShow();
   };

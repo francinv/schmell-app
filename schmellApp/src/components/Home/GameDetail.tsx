@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, SafeAreaView, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectedGame} from '../../features/selectors';
+import {selectedGame, selectLanguage} from '../../features/selectors';
 import CallToAction from '../Buttons/CallToAction';
 import layoutStyles from '../../styles/layout.styles';
 import widthStyles from '../../styles/width.styles';
@@ -13,6 +13,7 @@ import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import paddingStyles from '../../styles/padding.styles';
 import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
+import useLocale from '../../locale/useLocale';
 
 interface GameDetailProps {
   handleShow: () => void;
@@ -20,6 +21,7 @@ interface GameDetailProps {
 
 const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
   const game = useSelector(selectedGame);
+  const lang = useSelector(selectLanguage);
   const [opacityAnim] = useState(new Animated.Value(0));
   const [moveInAnim] = useState(new Animated.Value(500));
   const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -94,7 +96,7 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
         style={[
           widthStyles(0).w_p_100,
           heightStyles(0).h_p_50,
-          colorStyles.bg_quaternary,
+          colorStyles.bg_septenary,
           globalStyles.border_top_start_30,
           globalStyles.border_top_end_30,
           paddingStyles.p_hor_5,
@@ -102,7 +104,7 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
         ]}>
         <CallToAction
           handleClick={handleClick}
-          content="Let's play"
+          content={useLocale(lang, 'GAME_DETAIL_GO') as string}
           customStyle={[
             layoutStyles.top_min_20,
             layoutStyles.pos_rel,
@@ -117,7 +119,7 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
             marginStyles.mt_10,
             textStyles.text_center,
           ]}>
-          Hva er i dette spillet?
+          {useLocale(lang, 'GAME_DETAIL')}
         </Text>
         <Text
           style={[

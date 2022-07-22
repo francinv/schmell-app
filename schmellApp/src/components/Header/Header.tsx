@@ -12,8 +12,10 @@ import heightStyles from '../../styles/height.styles';
 import colorStyles from '../../styles/color.styles';
 import widthStyles from '../../styles/width.styles';
 import layoutStyles from '../../styles/layout.styles';
+import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
 
 const Header: React.FC = () => {
+  const homeNavigation = useNavigation<HomeScreenNavigationProp>();
   const navigation = useNavigation();
   const route = useRoute();
   const title = route.name;
@@ -34,8 +36,10 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <StoreIconButton navigation={navigation} />
-          <SettingsIconButton navigation={navigation} />
+          <StoreIconButton onPress={() => homeNavigation.navigate('Store')} />
+          <SettingsIconButton
+            onPress={() => homeNavigation.navigate('Settings')}
+          />
         </View>
       </SafeAreaView>
     );
@@ -44,7 +48,7 @@ const Header: React.FC = () => {
       <SafeAreaView
         style={[
           heightStyles(95).h_custom,
-          colorStyles.bg_tertiary,
+          title !== 'GameSettings' ? colorStyles.bg_tertiary : null,
           globalStyles.border_bottom_end_20,
           globalStyles.border_bottom_start_20,
         ]}>
@@ -55,7 +59,7 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <BackIconButton navigation={navigation} />
+          <BackIconButton onPress={() => navigation.goBack()} />
           <Image
             source={require('../../assets/images/logo.png')}
             style={[

@@ -1,7 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectVoice} from '../../../features/selectors';
+import {selectLanguage, selectVoice} from '../../../features/selectors';
+import useLocale from '../../../locale/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import heightStyles from '../../../styles/height.styles';
 import layoutStyles from '../../../styles/layout.styles';
@@ -13,9 +14,11 @@ import SubTitle from './SubTitle';
 
 const Voice: React.FC = () => {
   const voice = useSelector(selectVoice);
+  const language = useSelector(selectLanguage);
+
   return (
     <InputContainer>
-      <SubTitle title="Stemme" />
+      <SubTitle title={useLocale(language, 'SETTINGS_VOICE') as string} />
       <View
         style={[
           layoutStyles.flex_row,

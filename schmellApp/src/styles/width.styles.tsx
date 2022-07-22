@@ -4,6 +4,9 @@ const widthStyles = StyleSheet.create((width: number) => ({
   w_custom: {
     width: width,
   },
+  w_p_20: {
+    width: '20%',
+  },
   w_p_90: {
     width: '90%',
   },
@@ -31,6 +34,9 @@ const widthStyles = StyleSheet.create((width: number) => ({
   w_p_50: {
     width: '50%',
   },
+  w_p_45: {
+    width: '45%',
+  },
   w_p_100: {
     width: '100%',
   },
@@ -45,6 +51,12 @@ const widthStyles = StyleSheet.create((width: number) => ({
   },
   w_p_99: {
     width: '99%',
+  },
+  w_max_80: {
+    maxWidth: '80%',
+  },
+  w_min_custom: {
+    minWidth: width,
   },
 }));
 

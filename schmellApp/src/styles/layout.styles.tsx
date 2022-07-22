@@ -26,6 +26,9 @@ const layoutStyles = StyleSheet.create({
   justify_space: {
     justifyContent: 'space-between',
   },
+  justify_end: {
+    justifyContent: 'flex-end',
+  },
   flex_center: {
     display: 'flex',
     justifyContent: 'center',
@@ -35,6 +38,8 @@ const layoutStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   pos_rel: {
     position: 'relative',
@@ -47,6 +52,9 @@ const layoutStyles = StyleSheet.create({
   },
   flex_wrap: {
     flexWrap: 'wrap',
+  },
+  justify_evenly: {
+    justifyContent: 'space-evenly',
   },
 });
 

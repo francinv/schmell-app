@@ -8,7 +8,8 @@ import SettingsComponent from './src/components/Settings/SettingsComponent';
 import StoreComponent from './src/components/Store/StoreComponent';
 import GameSettingsComponent from './src/components/GameSettings/GameSettingsComponent';
 import {StatusBar, useColorScheme} from 'react-native';
-import GameComponent from './src/components/Game/GameComponent';
+import GamePlay from './src/components/Game/GamePlay';
+import {Provider as PaperProvider} from 'react-native-paper';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -17,22 +18,27 @@ const App = () => {
   return (
     <NavigationContainer>
       <Provider store={store}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          hidden={false}
-        />
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerTransparent: true,
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Home" component={HomeComponent} />
-          <Stack.Screen name="Settings" component={SettingsComponent} />
-          <Stack.Screen name="Store" component={StoreComponent} />
-          <Stack.Screen name="GameSettings" component={GameSettingsComponent} />
-          <Stack.Screen name="Game" component={GameComponent} />
-        </Stack.Navigator>
+        <PaperProvider>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            hidden={false}
+          />
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerTransparent: true,
+              headerShown: false,
+            }}>
+            <Stack.Screen name="Home" component={HomeComponent} />
+            <Stack.Screen name="Settings" component={SettingsComponent} />
+            <Stack.Screen name="Store" component={StoreComponent} />
+            <Stack.Screen
+              name="GameSettings"
+              component={GameSettingsComponent}
+            />
+            <Stack.Screen name="Game" component={GamePlay} />
+          </Stack.Navigator>
+        </PaperProvider>
       </Provider>
     </NavigationContainer>
   );

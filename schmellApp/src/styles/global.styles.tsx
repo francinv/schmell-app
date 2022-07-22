@@ -22,6 +22,10 @@ const globalStyles = StyleSheet.create({
   border_bottom_start_20: {
     borderBottomStartRadius: 20,
   },
+  border_top_20: {
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
+  },
   border_top_end_30: {
     borderTopEndRadius: 30,
   },
@@ -39,6 +43,51 @@ const globalStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: {width: 4, height: 4},
     shadowRadius: 4,
+  },
+  modalView: {
+    backgroundColor: '#FFD700',
+    borderRadius: 20,
+    paddingVertical: 5,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '60%',
+  },
+  carouselView: {
+    position: 'absolute',
+    top: 60,
+    bottom: 80,
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    zIndex: 1,
+    left: 0,
+  },
+  modalButton: {
+    top: 0,
+    right: 5,
+    position: 'absolute',
+  },
+  leftAbsolute: {
+    top: 0,
+    left: 0,
+    position: 'absolute',
+  },
+  rightAbsolute: {
+    top: 0,
+    right: 0,
+    position: 'absolute',
+  },
+  iconTop: {
+    top: 2,
+    left: 2,
+    position: 'absolute',
   },
 });
 
