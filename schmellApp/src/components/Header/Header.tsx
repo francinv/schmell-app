@@ -48,7 +48,7 @@ const Header: React.FC = () => {
       <SafeAreaView
         style={[
           heightStyles(95).h_custom,
-          colorStyles.bg_tertiary,
+          title !== 'GameSettings' ? colorStyles.bg_tertiary : null,
           globalStyles.border_bottom_end_20,
           globalStyles.border_bottom_start_20,
         ]}>
