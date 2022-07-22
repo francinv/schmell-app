@@ -67,7 +67,7 @@ const ToggleButton: FC<ToggleButtonProps> = ({
         onPress={handleClick}>
         <Text
           style={[
-            colorStyles.color_primary,
+            colorStyles.color_tertiary,
             selected ? globalStyles.opacity_100 : globalStyles.opacity_50,
             textStyles.text_font_primary,
             textStyles.text_center,

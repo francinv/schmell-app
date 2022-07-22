@@ -9,7 +9,7 @@ import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
 import {questionType} from '../../typings/questionTypes';
 import {XModalButton} from '../Buttons/IconButtons';
-import PlayerInput from '../GameSettings/Components/PlayerInput';
+import PlayerInput from '../GameSettings/PlayerInput';
 import {Modal, Portal} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';

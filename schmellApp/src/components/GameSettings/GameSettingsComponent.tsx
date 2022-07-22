@@ -1,14 +1,23 @@
 import React, {useState} from 'react';
-import {Animated, SafeAreaView} from 'react-native';
+import {Animated, SafeAreaView, View} from 'react-native';
+import colorStyles from '../../styles/color.styles';
+import globalStyles from '../../styles/global.styles';
+import layoutStyles from '../../styles/layout.styles';
 import LayoutContainer from '../Background/LayoutContainer';
 import StartButton from '../Buttons/StartButton';
 import Header from '../Header/Header';
-import PlayerDisplay from './Components/PlayerDisplay';
-import PlayerInput from './Components/PlayerInput';
-import ReadOut from './Components/ReadOut';
-import TeamComponent from './Components/TeamComponent';
+import PlayerDisplay from './PlayerDisplay';
+import PlayerInput from './PlayerInput';
+import SettingsSection, {
+  settingsState as settingsStateType,
+} from './SettingsSection';
 
 const GameSettingsComponent: React.FC = () => {
+  const [settingsState, setSettingsState] = useState<settingsStateType>({
+    show: false,
+    wantedSettings: '',
+  });
+
   const [buttonText, setButtonText] = useState('Start');
   const [shakeAnimation] = useState(new Animated.Value(0));
   const shakeInterpolated = shakeAnimation.interpolate({
@@ -19,21 +28,22 @@ const GameSettingsComponent: React.FC = () => {
   return (
     <LayoutContainer>
       <Header />
-      <SafeAreaView>
+      <SafeAreaView style={layoutStyles.flex_1}>
         <PlayerDisplay interpolatedShake={shakeInterpolated} />
-        <PlayerInput
-          inputPlace="Settings"
-          buttonText={buttonText}
-          setButtonText={setButtonText}
-        />
-        <TeamComponent />
-        <ReadOut />
-        <StartButton
-          buttonText={buttonText}
-          setButtonText={setButtonText}
-          shakeAnimation={shakeAnimation}
-          interpolatedShake={shakeInterpolated}
-        />
+        <View style={[colorStyles.bg_tertiary, globalStyles.border_top_20]}>
+          <SettingsSection state={settingsState} setState={setSettingsState} />
+          <PlayerInput
+            inputPlace="Settings"
+            buttonText={buttonText}
+            setButtonText={setButtonText}
+          />
+          <StartButton
+            buttonText={buttonText}
+            setButtonText={setButtonText}
+            shakeAnimation={shakeAnimation}
+            interpolatedShake={shakeInterpolated}
+          />
+        </View>
       </SafeAreaView>
     </LayoutContainer>
   );
