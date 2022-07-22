@@ -3,6 +3,7 @@ import React, {FC, useState} from 'react';
 import {Animated} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
+import {LeftCurve, RightCurve} from '../../assets/icons/Curves';
 import {selectQuestions} from '../../features/selectors';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
@@ -39,6 +40,22 @@ const GamePlay: FC = () => {
 
   return (
     <SafeAreaView style={[layoutStyles.flex_1, colorStyles.bg_septenary]}>
+      <LeftCurve
+        type={
+          !isLast
+            ? carouselState.questionList[carouselState.currentQuestionIndex]
+                .type
+            : 'Pekelek'
+        }
+      />
+      <RightCurve
+        type={
+          !isLast
+            ? carouselState.questionList[carouselState.currentQuestionIndex]
+                .type
+            : 'Pekelek'
+        }
+      />
       <GameHeader
         handleShow={() => handleShow({show: true, modalType: 'H'})}
         navigation={navigation}
