@@ -13,7 +13,7 @@ import PlayerInput from '../GameSettings/PlayerInput';
 import {Modal, Portal} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import useHint from '../../hooks/useHint';
 
 interface ModalProps {

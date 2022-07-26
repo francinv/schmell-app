@@ -6,7 +6,7 @@ import scaleAnimation from '../../animations/scaleAnimation';
 import slideAnimation from '../../animations/slideAnimation';
 import UserIcon from '../../assets/icons/UserIcon';
 import {selectLanguage, selectPlayers} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import heightStyles from '../../styles/height.styles';

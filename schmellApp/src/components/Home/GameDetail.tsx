@@ -13,7 +13,7 @@ import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import paddingStyles from '../../styles/padding.styles';
 import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 
 interface GameDetailProps {
   handleShow: () => void;

@@ -9,7 +9,6 @@ import {
 } from '../Buttons/IconButtons';
 import marginStyles from '../../styles/margin.styles';
 import heightStyles from '../../styles/height.styles';
-import colorStyles from '../../styles/color.styles';
 import widthStyles from '../../styles/width.styles';
 import layoutStyles from '../../styles/layout.styles';
 import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
@@ -25,7 +24,6 @@ const Header: React.FC = () => {
       <SafeAreaView
         style={[
           heightStyles(95).h_custom,
-          colorStyles.bg_tertiary,
           globalStyles.border_bottom_end_20,
           globalStyles.border_bottom_start_20,
         ]}>
@@ -48,7 +46,6 @@ const Header: React.FC = () => {
       <SafeAreaView
         style={[
           heightStyles(95).h_custom,
-          title !== 'GameSettings' ? colorStyles.bg_tertiary : null,
           globalStyles.border_bottom_end_20,
           globalStyles.border_bottom_start_20,
         ]}>

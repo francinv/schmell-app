@@ -2,7 +2,7 @@ import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import heightStyles from '../../styles/height.styles';

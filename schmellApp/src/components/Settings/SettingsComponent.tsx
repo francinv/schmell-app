@@ -13,7 +13,7 @@ import layoutStyles from '../../styles/layout.styles';
 import textStyles from '../../styles/text.styles';
 import colorStyles from '../../styles/color.styles';
 import marginStyles from '../../styles/margin.styles';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 
 const SettingsComponent: React.FC = () => {
   const language = useSelector(selectLanguage);

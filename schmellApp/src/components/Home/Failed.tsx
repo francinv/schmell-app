@@ -10,7 +10,7 @@ import textStyles from '../../styles/text.styles';
 import globalStyles from '../../styles/global.styles';
 import layoutStyles from '../../styles/layout.styles';
 import {HomeWrapper} from './HomeComponent';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
 
