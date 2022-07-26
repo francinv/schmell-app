@@ -17,7 +17,7 @@ const GameSettingSlice = createSlice({
       state.players = action.payload;
     },
     addPlayers(state, action: PayloadAction<string>) {
-      state.players.unshift(action.payload);
+      state.players.push(action.payload);
     },
     setTeams(state, action: PayloadAction<number>) {
       state.teams = action.payload;

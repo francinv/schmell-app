@@ -15,6 +15,7 @@ import marginStyles from '../../styles/margin.styles';
 import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
+import {getInitialList} from '../../utils/listGenerators';
 
 interface ButtonProps {
   interpolatedShake: Animated.AnimatedInterpolation;
@@ -77,11 +78,15 @@ const PlayerName: FC<NameProps> = props => {
 };
 
 const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
-  const [scaleValues] = useState<Animated.Value[]>([]);
-  const [moveValues] = useState<Animated.Value[]>([]);
-
   const players = useSelector(selectPlayers);
   const lang = useSelector(selectLanguage);
+
+  const [scaleValues] = useState<Animated.Value[]>(
+    getInitialList(players?.length, 1),
+  );
+  const [moveValues] = useState<Animated.Value[]>(
+    getInitialList(players?.length, 0),
+  );
   const playerDisplayText = useLocale(lang, 'GAMESETTINGS_NO_PLAYERS');
 
   useEffect(() => {
@@ -113,16 +118,23 @@ const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
         isPlayers ? layoutStyles.row_wrap : layoutStyles.flex_center,
         layoutStyles.justify_evenly,
       ]}>
-      {players.length > 0 ? (
-        players.map((player, index) => (
-          <PlayerName
-            key={index}
-            name={player}
-            index={index}
-            scaleValue={scaleValues}
-            moveValue={moveValues}
-          />
-        ))
+      {isPlayers ? (
+        players.map((player, index) => {
+          console.log('index', index);
+          console.log('moveList', moveValues);
+          console.log('scaleList', scaleValues);
+          console.log('moveValues', moveValues[index]);
+          console.log('scaleValues', scaleValues[index]);
+          return (
+            <PlayerName
+              key={index}
+              index={index}
+              moveValue={moveValues}
+              scaleValue={scaleValues}
+              name={player}
+            />
+          );
+        })
       ) : (
         <Animated.Text
           style={[
