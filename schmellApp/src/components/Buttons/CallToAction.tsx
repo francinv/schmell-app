@@ -38,7 +38,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
           textStyles.text_22,
           textStyles.text_font_primary,
           textStyles.text_center,
-          paddingStyles.p_5,
+          paddingStyles.p_2,
           colorStyles.color_secondary,
         ]}>
         {content}

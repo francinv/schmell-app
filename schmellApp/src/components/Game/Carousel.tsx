@@ -51,13 +51,14 @@ const Carousel: FC<CarouselProps> = ({
         style={{
           flex: 1,
           height: height - 140,
+          zIndex: 100,
         }}>
         <View style={{backgroundColor: 'white'}} />
       </TouchableOpacity>
       <TouchableOpacity
         disabled={isLast}
         onPress={() => carouselNext(carouselState, setCarouselState, moveAnim)}
-        style={{flex: 1}}
+        style={{flex: 1, zIndex: 101}}
       />
     </View>
   );

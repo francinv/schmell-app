@@ -3,6 +3,7 @@ import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
 import useColor from '../../hooks/useColor';
+import useFunction from '../../hooks/useFunction';
 import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
@@ -28,6 +29,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
   const information = useLocale(lang, 'GAME_END_INFORMATION');
   const currentQuestion =
     carouselState.questionList[carouselState.currentQuestionIndex];
+  const questionsContent = isLast ? information : currentQuestion.question_desc;
 
   return (
     <Animated.View
@@ -35,7 +37,9 @@ const QuestionsComponent: FC<QuestionsProps> = ({
         layoutStyles.flex_column,
         layoutStyles.flex_center,
         marginStyles.m_ver_auto,
-        {transform: [{translateX: moveAnim}]},
+        widthStyles(0).w_p_70,
+        marginStyles.m_hor_auto,
+        {transform: [{translateX: moveAnim}], zIndex: 10, position: 'relative'},
       ]}>
       <Text
         style={[
@@ -50,17 +54,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
         ]}>
         {isLast ? title : currentQuestion.type}
       </Text>
-      <Text
-        style={[
-          colorStyles.color_tertiary,
-          textStyles.text_font_secondary,
-          textStyles.text_30,
-          textStyles.font_500,
-          widthStyles(0).w_p_70,
-          textStyles.text_center,
-        ]}>
-        {isLast ? information : currentQuestion.question_desc}
-      </Text>
+      {useFunction(questionsContent as string, currentQuestion.type)}
     </Animated.View>
   );
 };
