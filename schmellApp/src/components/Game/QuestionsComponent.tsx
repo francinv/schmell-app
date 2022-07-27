@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
+import useColor from '../../hooks/useColor';
 import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
@@ -25,6 +26,8 @@ const QuestionsComponent: FC<QuestionsProps> = ({
   const lang = useSelector(selectLanguage);
   const title = useLocale(lang, 'GAME_END_TITLE');
   const information = useLocale(lang, 'GAME_END_INFORMATION');
+  const currentQuestion =
+    carouselState.questionList[carouselState.currentQuestionIndex];
 
   return (
     <Animated.View
@@ -41,11 +44,11 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           textStyles.text_center,
           textStyles.text_50,
           paddingStyles.p_10,
-          textStyles.text_shadow,
+          textStyles.text_type_shadow,
+          textStyles.spacing,
+          {textShadowColor: useColor(currentQuestion.type)},
         ]}>
-        {isLast
-          ? title
-          : carouselState.questionList[carouselState.currentQuestionIndex].type}
+        {isLast ? title : currentQuestion.type}
       </Text>
       <Text
         style={[
@@ -56,10 +59,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           widthStyles(0).w_p_70,
           textStyles.text_center,
         ]}>
-        {isLast
-          ? information
-          : carouselState.questionList[carouselState.currentQuestionIndex]
-              .question_desc}
+        {isLast ? information : currentQuestion.question_desc}
       </Text>
     </Animated.View>
   );

@@ -9,7 +9,6 @@ import marginStyles from '../../styles/margin.styles';
 import colorStyles from '../../styles/color.styles';
 import heightStyles from '../../styles/height.styles';
 import layoutStyles from '../../styles/layout.styles';
-import themeStyles from '../../styles/theme.styles';
 import textStyles from '../../styles/text.styles';
 import paddingStyles from '../../styles/padding.styles';
 import {getCurrentWeekNumber} from '../../utils/dateUtil';
@@ -38,18 +37,13 @@ const GameButton: React.FC<GameButtonProps> = ({id, name, handleShow}) => {
     <TouchableOpacity
       onPress={handleClick}
       style={[
-        colorStyles.bg_primary,
         widthStyles(0).w_p_85,
         marginStyles.mt_30,
         heightStyles(75).h_custom,
-        globalStyles.border_radius_8,
+        globalStyles.border_radius_10,
+        colorStyles.bg_primary,
+        globalStyles.boxShadow,
         layoutStyles.flex_center,
-        colorStyles.shadow_primary,
-        colorStyles.border_secondary,
-        widthStyles(0).border_width_05,
-        themeStyles.sh_off_w_2_h_2,
-        themeStyles.sh_op_02,
-        themeStyles.sh_rad_3,
       ]}>
       <Text
         style={[
