@@ -1,7 +1,7 @@
-import en from './lang/en';
-import no from './lang/no';
-import se from './lang/se';
-import de from './lang/de';
+import en from '../locale/en';
+import no from '../locale/no';
+import se from '../locale/se';
+import de from '../locale/de';
 
 type allowedAttribute =
   | 'LOADING'

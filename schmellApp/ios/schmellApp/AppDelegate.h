@@ -4,5 +4,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, RCTBridgeDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
+@property UIInterfaceOrientationMask orientationLock;
 
 @end

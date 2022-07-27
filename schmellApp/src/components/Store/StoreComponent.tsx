@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import layoutStyles from '../../styles/layout.styles';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';

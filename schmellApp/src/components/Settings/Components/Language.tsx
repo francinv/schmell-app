@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../../features/selectors';
-import useLocale from '../../../locale/useLocale';
+import useLocale from '../../../hooks/useLocale';
 import colorStyles from '../../../styles/color.styles';
 import heightStyles from '../../../styles/height.styles';
 import layoutStyles from '../../../styles/layout.styles';

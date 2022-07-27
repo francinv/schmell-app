@@ -9,3 +9,8 @@ RCT_EXTERN_METHOD(
   playSound: (NSString *)urlOfFile
 )
 @end
+
+@interface RCT_EXTERN_MODULE(RNLockOrientation, NSObject)
+RCT_EXTERN_METHOD(lockToLandscapeLeft)
+RCT_EXTERN_METHOD(lockToPortrait)
+@end

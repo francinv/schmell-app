@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {setTeams} from '../../features/gamesettings/gameSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {selectLanguage, selectTeams} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import heightStyles from '../../styles/height.styles';

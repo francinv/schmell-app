@@ -16,6 +16,7 @@
 		2F851EB928666ADD001235A2 /* RNMp3Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F851EB828666ADD001235A2 /* RNMp3Player.swift */; };
 		57F698E8526140D199395C0B /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58CB8A531D7049B9BDFCD325 /* Quicksand-Light.ttf */; };
 		6172F2D35A4C3AA820D92908 /* libPods-schmellApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-schmellApp.a */; };
+		755A2710288B49E000401FB3 /* RNLockOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755A270F288B49E000401FB3 /* RNLockOrientation.swift */; };
 		7596CD1889EF4674B41D200E /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B58D34FF1E40448D929EEC66 /* Quicksand-Regular.ttf */; };
 		7EF68E3733C33B6898317E18 /* libPods-schmellApp-schmellAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-schmellApp-schmellAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -55,6 +56,7 @@
 		60242801F7444BEAAF5921C2 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-schmellApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-schmellApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-schmellApp-schmellAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-schmellApp-schmellAppTests.debug.xcconfig"; path = "Target Support Files/Pods-schmellApp-schmellAppTests/Pods-schmellApp-schmellAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		755A270F288B49E000401FB3 /* RNLockOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNLockOrientation.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = schmellApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88DF0B3C610C4F9C8F7B62A2 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		91EB46EE7F1C4F91A2C9FC1E /* CCBiffBamBoomW00-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "CCBiffBamBoomW00-Regular.ttf"; path = "../src/assets/fonts/CCBiffBamBoomW00-Regular.ttf"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				755A270F288B49E000401FB3 /* RNLockOrientation.swift */,
 				2F851EB828666ADD001235A2 /* RNMp3Player.swift */,
 				2F5152DD285FEDBF00DA4288 /* schmell-Bridge.m */,
 				2F64C618285B15E900EF9D1A /* RNUniqueId.swift */,
@@ -306,7 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nexport NODE_BINARY=/opt/homebrew/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		077E01280D4B4AD18B2E1770 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -457,6 +460,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				2F5152DE285FEDBF00DA4288 /* schmell-Bridge.m in Sources */,
 				2F64C619285B15E900EF9D1A /* RNUniqueId.swift in Sources */,
+				755A2710288B49E000401FB3 /* RNLockOrientation.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				2F851EB928666ADD001235A2 /* RNMp3Player.swift in Sources */,
 			);

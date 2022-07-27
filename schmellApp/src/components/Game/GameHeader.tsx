@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
+import {lockPortrait} from '../../native/RNLockOrientation';
 import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';
 import {LightBulbButton, XHeaderButton} from '../Buttons/IconButtons';
@@ -20,7 +21,12 @@ const GameHeader: FC<GameHeaderProps> = props => {
         marginStyles.mt_10,
       ]}>
       <LightBulbButton onPress={handleShow} />
-      <XHeaderButton onPress={() => navigation.goBack()} />
+      <XHeaderButton
+        onPress={() => {
+          navigation.goBack();
+          lockPortrait();
+        }}
+      />
     </View>
   );
 };

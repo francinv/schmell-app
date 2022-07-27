@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';

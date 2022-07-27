@@ -37,6 +37,8 @@ const SettingsSection: FC<SettingsProps> = ({state, setState}) => {
     }
   };
 
+  const content = selected('ReadOut') ? <ReadOut /> : <TeamComponent />;
+
   return (
     <View>
       <View
@@ -63,9 +65,7 @@ const SettingsSection: FC<SettingsProps> = ({state, setState}) => {
           <UsersIcon />
         </TouchableOpacity>
       </View>
-      <View>
-        {show ? selected('ReadOut') ? <ReadOut /> : <TeamComponent /> : null}
-      </View>
+      <View>{show ? content : null}</View>
     </View>
   );
 };

@@ -6,7 +6,7 @@ import scaleAnimation from '../../animations/scaleAnimation';
 import slideAnimation from '../../animations/slideAnimation';
 import UserIcon from '../../assets/icons/UserIcon';
 import {selectLanguage, selectPlayers} from '../../features/selectors';
-import useLocale from '../../locale/useLocale';
+import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import heightStyles from '../../styles/height.styles';
@@ -15,6 +15,7 @@ import marginStyles from '../../styles/margin.styles';
 import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
+import {getInitialList} from '../../utils/listGenerators';
 
 interface ButtonProps {
   interpolatedShake: Animated.AnimatedInterpolation;
@@ -77,11 +78,15 @@ const PlayerName: FC<NameProps> = props => {
 };
 
 const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
-  const [scaleValues] = useState<Animated.Value[]>([]);
-  const [moveValues] = useState<Animated.Value[]>([]);
-
   const players = useSelector(selectPlayers);
   const lang = useSelector(selectLanguage);
+
+  const [scaleValues] = useState<Animated.Value[]>(
+    getInitialList(players?.length, 1),
+  );
+  const [moveValues] = useState<Animated.Value[]>(
+    getInitialList(players?.length, 0),
+  );
   const playerDisplayText = useLocale(lang, 'GAMESETTINGS_NO_PLAYERS');
 
   useEffect(() => {
@@ -113,14 +118,14 @@ const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
         isPlayers ? layoutStyles.row_wrap : layoutStyles.flex_center,
         layoutStyles.justify_evenly,
       ]}>
-      {players.length > 0 ? (
+      {isPlayers ? (
         players.map((player, index) => (
           <PlayerName
             key={index}
-            name={player}
             index={index}
-            scaleValue={scaleValues}
             moveValue={moveValues}
+            scaleValue={scaleValues}
+            name={player}
           />
         ))
       ) : (
