@@ -1,0 +1,140 @@
+[
+    {
+        "type": "Svar eller drikk",
+        "question_desc": "Har du noen gang kjøpt eller tatt en angrepille?",
+        "phase": 2,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "type": "Guess The Gibberish",
+        "question_desc": "Les opp siste melding på messenger eller drikk",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 42,
+        "type": "Svar eller drikk",
+        "question_desc": "Hvem ville du drept i dette rommet?",
+        "phase": 2,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 2
+    },
+    {
+        "id": 36,
+        "type": "Challenge accepted?",
+        "question_desc": "Hvor gammel var du første gang du hadde samleie?",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 44,
+        "type": "Svar eller drikk",
+        "question_desc": "Høyre eller venstre. Hvem hadde du kysset?",
+        "phase": 2,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 2
+    },
+    {
+        "id": 45,
+        "type": "Svar eller drikk",
+        "question_desc": "Hvor mange har du hatt samleie med?",
+        "phase": 3,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 3
+    },
+    {
+        "id": 33,
+        "type": "Svar eller drikk",
+        "question_desc": "Les opp siste meldinger mellom deg og eksen på messenger",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 43,
+        "type": "Svar eller drikk",
+        "question_desc": "Hvem var den siste du kysset?",
+        "phase": 2,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 2
+    },
+    {
+        "id": 32,
+        "type": "Jeg har aldri",
+        "question_desc": "Jeg har aldri hatt sex i et svømmebasseng",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 37,
+        "type": "Skal vi vedde?",
+        "question_desc": "Vis det siste bilde i kamerarullen",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 34,
+        "type": "Pekelek",
+        "question_desc": "Vis dine tre siste bilder fra snapchat minner",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 38,
+        "type": "Best - Worst - First",
+        "question_desc": "Hvor ofte har du samleie?",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 39,
+        "type": "Verste forklaringen",
+        "question_desc": "250 kroner per dag resten av ditt liv eller aldri drikke alkohol",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    },
+    {
+        "id": 40,
+        "type": "Tommel opp/ned",
+        "question_desc": "Hvem misliker du mest i dette rommet?",
+        "phase": 1,
+        "function": "0",
+        "related_game": 1,
+        "related_week": 10,
+        "punishment": 1
+    }
+]
