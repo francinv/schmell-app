@@ -39,6 +39,10 @@ const textStyles = StyleSheet.create({
     textShadowOffset: {width: 0, height: 4},
     textShadowRadius: 4,
   },
+  text_type_shadow: {
+    textShadowOffset: {width: 0, height: 2},
+    textShadowRadius: 4,
+  },
   font_500: {
     fontWeight: '500',
   },
@@ -47,6 +51,9 @@ const textStyles = StyleSheet.create({
   },
   text_underline: {
     textDecorationLine: 'underline',
+  },
+  spacing: {
+    letterSpacing: 2,
   },
 });
 
