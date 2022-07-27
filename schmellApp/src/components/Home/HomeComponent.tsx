@@ -25,6 +25,7 @@ import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
 import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import encryptedStorageService from '../../services/encryptedStorageService';
+import {lockPortrait} from '../../native/RNLockOrientation';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),
@@ -43,6 +44,7 @@ const HomeComponent: React.FC = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    lockPortrait();
     const {uniqueString} = RNUniqueId.getConstants();
     async function checkUserHasToken() {
       const token = await encryptedStorageService(

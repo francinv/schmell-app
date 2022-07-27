@@ -21,6 +21,7 @@ import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
 import {GameSettingsScreenNavigationProp} from '../../typings/navigationTypes';
+import {lockToLandscape} from '../../native/RNLockOrientation';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setQuestions: (query: number) => dispatch(fetchQuestions(query)),
@@ -72,6 +73,7 @@ const StartButton: FC<ButtonProps> = props => {
     if (newText === 'Go!') {
       setTimeout(() => {
         navigation.navigate('Game');
+        lockToLandscape();
       }, 1000);
     }
   }
