@@ -119,22 +119,15 @@ const PlayerDisplay: FC<ButtonProps> = ({interpolatedShake}) => {
         layoutStyles.justify_evenly,
       ]}>
       {isPlayers ? (
-        players.map((player, index) => {
-          console.log('index', index);
-          console.log('moveList', moveValues);
-          console.log('scaleList', scaleValues);
-          console.log('moveValues', moveValues[index]);
-          console.log('scaleValues', scaleValues[index]);
-          return (
-            <PlayerName
-              key={index}
-              index={index}
-              moveValue={moveValues}
-              scaleValue={scaleValues}
-              name={player}
-            />
-          );
-        })
+        players.map((player, index) => (
+          <PlayerName
+            key={index}
+            index={index}
+            moveValue={moveValues}
+            scaleValue={scaleValues}
+            name={player}
+          />
+        ))
       ) : (
         <Animated.Text
           style={[
