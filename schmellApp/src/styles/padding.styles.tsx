@@ -25,6 +25,9 @@ const paddingStyles = StyleSheet.create({
   p_hor_5: {
     paddingHorizontal: 5,
   },
+  p_hor_75: {
+    paddingHorizontal: 7.5,
+  },
   p_hor_15: {
     paddingHorizontal: 15,
   },
@@ -36,7 +39,7 @@ const paddingStyles = StyleSheet.create({
   },
   pb_20: {
     paddingBottom: 20,
-  }
+  },
 });
 
 export default paddingStyles;
