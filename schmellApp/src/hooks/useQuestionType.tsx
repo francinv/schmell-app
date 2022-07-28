@@ -6,7 +6,7 @@ import {questionType} from '../typings/questionTypes';
 import {parseFunction} from '../utils/parsers';
 
 export default (question_desc: string, question: questionType) => {
-  switch (question.type) {
+  switch (question?.type) {
     case 'Guess The Gibberish':
       return (
         <GTGShow
