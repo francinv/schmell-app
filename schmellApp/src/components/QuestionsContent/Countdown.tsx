@@ -70,6 +70,7 @@ const CountDown: FC<CountDownProps> = ({countDownSeconds, questionDesc}) => {
         textStyles.text_shadow,
         colorStyles.color_tertiary,
         textStyle,
+        globalStyles.z_100,
       ]}>
       {getContent()}
     </Animated.Text>

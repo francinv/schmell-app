@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {Text} from 'react-native';
 import colorStyles from '../../styles/color.styles';
+import globalStyles from '../../styles/global.styles';
 import textStyles from '../../styles/text.styles';
-import widthStyles from '../../styles/width.styles';
 
 const SimpleText: FC<{text: string}> = ({text}) => (
   <Text
@@ -11,8 +11,8 @@ const SimpleText: FC<{text: string}> = ({text}) => (
       textStyles.text_font_secondary,
       textStyles.text_30,
       textStyles.font_500,
-      widthStyles(0).w_p_70,
       textStyles.text_center,
+      globalStyles.z_100,
     ]}>
     {text}
   </Text>

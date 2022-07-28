@@ -3,15 +3,15 @@ import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
 import useColor from '../../hooks/useColor';
-import useFunction from '../../hooks/useFunction';
 import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';
-import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
 import {carouselType} from './GamePlay';
+import useQuestionType from '../../hooks/useQuestionType';
+import paddingStyles from '../../styles/padding.styles';
 
 interface QuestionsProps {
   carouselState: carouselType;
@@ -28,33 +28,33 @@ const QuestionsComponent: FC<QuestionsProps> = ({
   const title = useLocale(lang, 'GAME_END_TITLE');
   const information = useLocale(lang, 'GAME_END_INFORMATION');
   const currentQuestion =
-    carouselState.questionList[carouselState.currentQuestionIndex];
+    carouselState?.questionList[carouselState.currentQuestionIndex];
   const questionsContent = isLast ? information : currentQuestion.question_desc;
 
   return (
     <Animated.View
       style={[
-        layoutStyles.flex_column,
-        layoutStyles.flex_center,
         marginStyles.m_ver_auto,
-        widthStyles(0).w_p_70,
         marginStyles.m_hor_auto,
-        {transform: [{translateX: moveAnim}], zIndex: 10, position: 'relative'},
+        widthStyles(0).w_max_70,
+        layoutStyles.flex_center,
+        {transform: [{translateX: moveAnim}]},
       ]}>
       <Text
         style={[
           colorStyles.color_tertiary,
           textStyles.text_font_primary,
-          textStyles.text_center,
-          textStyles.text_50,
-          paddingStyles.p_10,
+          textStyles.text_45,
           textStyles.text_type_shadow,
-          textStyles.spacing,
-          {textShadowColor: useColor(currentQuestion.type)},
+          paddingStyles.py_10,
+          {
+            textShadowColor: useColor(currentQuestion?.type),
+          },
+          widthStyles(0).w_p_100,
         ]}>
         {isLast ? title : currentQuestion.type}
       </Text>
-      {useFunction(questionsContent as string, currentQuestion)}
+      {useQuestionType(questionsContent as string, currentQuestion)}
     </Animated.View>
   );
 };
