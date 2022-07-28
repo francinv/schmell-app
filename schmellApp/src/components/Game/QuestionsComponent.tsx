@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectLanguage} from '../../features/selectors';
+import {selectLanguage, selectPlayers} from '../../features/selectors';
 import useColor from '../../hooks/useColor';
 import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
@@ -12,6 +12,7 @@ import widthStyles from '../../styles/width.styles';
 import {carouselType} from './GamePlay';
 import useQuestionType from '../../hooks/useQuestionType';
 import paddingStyles from '../../styles/padding.styles';
+import {playerPush} from '../../utils/selectPlayer';
 
 interface QuestionsProps {
   carouselState: carouselType;
@@ -25,6 +26,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
   isLast,
 }) => {
   const lang = useSelector(selectLanguage);
+  const players = useSelector(selectPlayers);
   const title = useLocale(lang, 'GAME_END_TITLE');
   const information = useLocale(lang, 'GAME_END_INFORMATION');
   const currentQuestion =
@@ -54,7 +56,10 @@ const QuestionsComponent: FC<QuestionsProps> = ({
         ]}>
         {isLast ? title : currentQuestion.type}
       </Text>
-      {useQuestionType(questionsContent as string, currentQuestion)}
+      {useQuestionType(
+        playerPush(questionsContent as string, players),
+        currentQuestion,
+      )}
     </Animated.View>
   );
 };
