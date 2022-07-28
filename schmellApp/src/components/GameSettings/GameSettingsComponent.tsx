@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {Animated, SafeAreaView, View} from 'react-native';
+import {
+  Animated,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  View,
+} from 'react-native';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import layoutStyles from '../../styles/layout.styles';
@@ -29,21 +35,28 @@ const GameSettingsComponent: React.FC = () => {
     <LayoutContainer>
       <Header />
       <SafeAreaView style={layoutStyles.flex_1}>
-        <PlayerDisplay interpolatedShake={shakeInterpolated} />
-        <View style={[colorStyles.bg_tertiary, globalStyles.border_top_20]}>
-          <SettingsSection state={settingsState} setState={setSettingsState} />
-          <PlayerInput
-            inputPlace="Settings"
-            buttonText={buttonText}
-            setButtonText={setButtonText}
-          />
-          <StartButton
-            buttonText={buttonText}
-            setButtonText={setButtonText}
-            shakeAnimation={shakeAnimation}
-            interpolatedShake={shakeInterpolated}
-          />
-        </View>
+        <KeyboardAvoidingView
+          style={layoutStyles.flex_1}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <PlayerDisplay interpolatedShake={shakeInterpolated} />
+          <View style={[colorStyles.bg_tertiary, globalStyles.border_top_20]}>
+            <SettingsSection
+              state={settingsState}
+              setState={setSettingsState}
+            />
+            <PlayerInput
+              inputPlace="Settings"
+              buttonText={buttonText}
+              setButtonText={setButtonText}
+            />
+            <StartButton
+              buttonText={buttonText}
+              setButtonText={setButtonText}
+              shakeAnimation={shakeAnimation}
+              interpolatedShake={shakeInterpolated}
+            />
+          </View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </LayoutContainer>
   );

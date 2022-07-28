@@ -41,6 +41,7 @@ const PlayerInput: FC<InputProps> = props => {
         layoutStyles.flex_row,
         layoutStyles.align_center,
         marginStyles.mt_20,
+        marginStyles.mb_10,
         marginStyles.m_hor_auto,
       ]}>
       <TextInput
