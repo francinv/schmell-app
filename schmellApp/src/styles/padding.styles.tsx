@@ -40,6 +40,10 @@ const paddingStyles = StyleSheet.create({
   pb_20: {
     paddingBottom: 20,
   },
+  py_10: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
 });
 
 export default paddingStyles;

@@ -56,6 +56,9 @@ const layoutStyles = StyleSheet.create({
   justify_evenly: {
     justifyContent: 'space-evenly',
   },
+  align_end: {
+    alignItems: 'flex-end',
+  },
 });
 
 export default layoutStyles;

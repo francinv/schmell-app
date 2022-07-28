@@ -66,7 +66,7 @@ const globalStyles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'row',
-    zIndex: 1,
+    zIndex: -100,
     left: 0,
   },
   modalButton: {
@@ -88,6 +88,10 @@ const globalStyles = StyleSheet.create({
     top: 2,
     left: 2,
     position: 'absolute',
+  },
+  z_100: {
+    position: 'relative',
+    zIndex: 100,
   },
 });
 

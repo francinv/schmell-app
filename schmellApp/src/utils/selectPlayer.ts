@@ -1,11 +1,12 @@
 import {getRandomNumber} from './numberUtil';
 
 export function playerPush(question_desc: string, listOfPlayers: string[]) {
-  let arraySize = listOfPlayers.length;
+  const arraySize = listOfPlayers.length;
   if (
     question_desc.includes('N1') ||
     question_desc.includes('N2') ||
-    question_desc.includes('N3')
+    question_desc.includes('N3') ||
+    question_desc.includes('N4')
   ) {
     let tempArray = question_desc.replace(
       'N1',
@@ -24,6 +25,13 @@ export function playerPush(question_desc: string, listOfPlayers: string[]) {
         name = listOfPlayers[getRandomNumber(arraySize)];
       }
       tempArray = tempArray.replace('N3', name);
+    }
+    if (tempArray.includes('N4')) {
+      let name = listOfPlayers[getRandomNumber(arraySize)];
+      while (tempArray.includes(name)) {
+        name = listOfPlayers[getRandomNumber(arraySize)];
+      }
+      tempArray = tempArray.replace('N4', name);
     }
     return tempArray;
   } else {

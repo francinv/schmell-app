@@ -20,6 +20,10 @@ export default (type: string) => {
       return colors.VF;
     case 'Tommel opp/ned':
       return colors.TON;
+    case 'Fu*k/Marry/Kill':
+      return colors.FMK;
+    case '2 truths and a lie':
+      return colors.TWOTONEL;
     default:
       break;
   }

@@ -8,4 +8,6 @@ export default {
   BWF: '#8BC9EC',
   VF: '#BCBEEE',
   TON: '#ECD4FF',
+  TWOTONEL: '#EA9DE2',
+  FMK: '#F18181',
 };

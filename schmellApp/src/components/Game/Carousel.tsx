@@ -6,6 +6,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import {lockPortrait} from '../../native/RNLockOrientation';
 import globalStyles from '../../styles/global.styles';
 import {carouselNext, carouselPrev} from '../../utils/carousel';
 import {carouselType} from './GamePlay';
@@ -40,25 +41,31 @@ const Carousel: FC<CarouselProps> = ({
     return false;
   };
 
+  const handleOut = () => {
+    navigation.goBack();
+    lockPortrait();
+  };
+
   return (
     <View style={[globalStyles.carouselView, {width: width}]}>
       <TouchableOpacity
         onPress={() => {
           isFirstQuestion()
-            ? navigation.goBack()
+            ? handleOut()
             : carouselPrev(carouselState, setCarouselState, moveAnim);
         }}
         style={{
           flex: 1,
           height: height - 140,
-          zIndex: 100,
+          zIndex: 1,
+          position: 'relative',
         }}>
         <View style={{backgroundColor: 'white'}} />
       </TouchableOpacity>
       <TouchableOpacity
         disabled={isLast}
         onPress={() => carouselNext(carouselState, setCarouselState, moveAnim)}
-        style={{flex: 1, zIndex: 101}}
+        style={{flex: 1, zIndex: 1, position: 'relative'}}
       />
     </View>
   );
