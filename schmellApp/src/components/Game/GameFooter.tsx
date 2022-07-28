@@ -16,7 +16,7 @@ const GameFooter: FC<GameFooterProps> = ({handleShow, currentQuestion}) => {
     <View
       style={[
         layoutStyles.flex_row,
-        layoutStyles.align_center,
+        layoutStyles.align_end,
         marginStyles.mt_10,
         layoutStyles.justify_space,
       ]}>
