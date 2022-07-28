@@ -54,7 +54,7 @@ const QuestionsComponent: FC<QuestionsProps> = ({
         ]}>
         {isLast ? title : currentQuestion.type}
       </Text>
-      {useFunction(questionsContent as string, currentQuestion.type)}
+      {useFunction(questionsContent as string, currentQuestion)}
     </Animated.View>
   );
 };
