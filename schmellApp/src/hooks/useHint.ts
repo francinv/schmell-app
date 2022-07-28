@@ -20,6 +20,10 @@ export default (type: string) => {
       return hints.VF;
     case 'Tommel opp/ned':
       return hints.TON;
+    case '2 truths and a lie':
+      return hints.TWOTONEL;
+    case 'Fu*k/Marry/Kill':
+      return hints.FMK;
     default:
       break;
   }
