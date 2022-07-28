@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 const heightStyles = StyleSheet.create((height: number) => ({
+  h_min_custom: {
+    minHeight: height,
+  },
   h_custom: {
     height: height,
   },

@@ -22,6 +22,9 @@ const textStyles = StyleSheet.create({
   text_40: {
     fontSize: 40,
   },
+  text_45: {
+    fontSize: 45,
+  },
   text_50: {
     fontSize: 50,
   },
