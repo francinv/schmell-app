@@ -5,7 +5,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 59,
@@ -14,17 +14,17 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
-    "id": 13,
+    "id": 12,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Hvem misliker du mest i dette rommet?",
-    "phase": 2,
+    "question_desc": "250 kroner per dag resten av ditt liv eller aldri drikke alkohol",
+    "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
-    "punishment": 2
+    "related_week": 10,
+    "punishment": 1
 }, {
     "id": 23,
     "type": "Jeg har aldri",
@@ -32,7 +32,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 1
 }, {
     "id": 24,
@@ -41,26 +41,26 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
-    "id": 17,
+    "id": 13,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Nærmeste til Høyre eller nærmeste venstre. Hvem hadde du kysset?",
+    "question_desc": "Hvem misliker du mest i dette rommet?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 20,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvem er den dårligste du har ligget med?",
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
-}, {
-    "id": 21,
-    "type": "Pekelek",
-    "question_desc": "Mest sannsynlig til å få seg en sugar daddy/mommy",
-    "phase": 1,
-    "function": "0",
-    "related_game": 1,
-    "related_week": 16,
-    "punishment": 1
 }, {
     "id": 60,
     "type": "2 truths and a lie",
@@ -68,7 +68,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 56,
@@ -77,7 +77,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 1,
@@ -86,7 +86,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 1
 }, {
     "id": 25,
@@ -95,7 +95,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 26,
@@ -104,7 +104,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 39,
@@ -113,62 +113,98 @@
     "phase": 1,
     "function": "Svar: Du kommer så fort",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
-    "id": 9,
+    "id": 7,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Hvor gammel var du første gang du hadde sex?",
+    "question_desc": "Vis dine tre siste bilder fra snapchat minner",
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 9,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvor gammel var du første gang du hadde samleie?",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 11,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvor ofte har du samleie?",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
     "punishment": 1
 }, {
     "id": 14,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Har du noen gang kjøpt eller tatt en angrepille?",
+    "question_desc": "Har du noen gang kjøpt eller tatt en angrepille?",
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 15,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Hvem ville du drept i dette rommet?",
+    "question_desc": "Hvem ville du drept i dette rommet?",
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
-    "id": 18,
+    "id": 16,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Hvor mange har du hatt sex med?",
+    "question_desc": "Hvem var den siste du kysset?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 17,
+    "type": "Svar eller drikk",
+    "question_desc": "Høyre eller venstre. Hvem hadde du kysset?",
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 18,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvor mange har du hatt samleie med?",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 19,
     "type": "Svar eller drikk",
-    "question_desc": "N1 Hvem har du på snap topplisten på din?",
+    "question_desc": "Hvem har du på topplisten på snapchat?",
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
-    "id": 20,
-    "type": "Svar eller drikk",
-    "question_desc": "N1 Hvem er den dårligste du har ligget med?",
-    "phase": 3,
+    "id": 21,
+    "type": "Pekelek",
+    "question_desc": "Mest sannsynlig til å bli sammen med en sugar daddy",
+    "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
-    "punishment": 3
+    "related_week": 10,
+    "punishment": 1
 }, {
     "id": 22,
     "type": "Pekelek",
@@ -176,7 +212,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 1
 }, {
     "id": 28,
@@ -185,7 +221,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 1
 }, {
     "id": 29,
@@ -194,7 +230,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 30,
@@ -203,7 +239,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 31,
@@ -212,7 +248,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 27,
@@ -221,7 +257,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 40,
@@ -230,7 +266,7 @@
     "phase": 1,
     "function": "SVAR: Klitoris",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 41,
@@ -239,7 +275,7 @@
     "phase": 1,
     "function": "Svar: Sett deg på ansiktet mitt",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 42,
@@ -248,7 +284,7 @@
     "phase": 1,
     "function": "Svar: Analsex",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 43,
@@ -257,7 +293,7 @@
     "phase": 2,
     "function": "Svar: Opplåsbar sexdukke",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 44,
@@ -266,7 +302,7 @@
     "phase": 2,
     "function": "Svar: Pikken klør",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 5
 }, {
     "id": 45,
@@ -275,7 +311,7 @@
     "phase": 2,
     "function": "Svar: Sexhuske i kjelleren",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 5
 }, {
     "id": 46,
@@ -284,7 +320,7 @@
     "phase": 2,
     "function": "Svar: Naken fotoshot",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 5
 }, {
     "id": 47,
@@ -293,7 +329,7 @@
     "phase": 3,
     "function": "Svar: Vil noen pule?",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 48,
@@ -302,7 +338,7 @@
     "phase": 3,
     "function": "Svar: Miste jomfrudommen",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 49,
@@ -311,7 +347,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 1
 }, {
     "id": 50,
@@ -320,7 +356,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 51,
@@ -329,7 +365,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 52,
@@ -338,7 +374,7 @@
     "phase": 3,
     "function": "klokke",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 54,
@@ -347,7 +383,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 53,
@@ -356,7 +392,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 57,
@@ -365,7 +401,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 58,
@@ -374,7 +410,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 61,
@@ -383,34 +419,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
-    "punishment": 2
-}, {
-    "id": 7,
-    "type": "Svar eller drikk",
-    "question_desc": "N1 Vis dine tre siste bilder fra snapchat minner",
-    "phase": 1,
-    "function": "0",
-    "related_game": 1,
-    "related_week": 16,
-    "punishment": 1
-}, {
-    "id": 11,
-    "type": "Svar eller drikk",
-    "question_desc": "N1 Hvor ofte har du sex?",
-    "phase": 1,
-    "function": "0",
-    "related_game": 1,
-    "related_week": 16,
-    "punishment": 1
-}, {
-    "id": 16,
-    "type": "Svar eller drikk",
-    "question_desc": "N1 Hvem var den siste du kysset?",
-    "phase": 2,
-    "function": "0",
-    "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 2
 }, {
     "id": 73,
@@ -419,7 +428,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 74,
@@ -428,7 +437,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 3
 }, {
     "id": 66,
@@ -437,7 +446,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 67,
@@ -446,7 +455,7 @@
     "phase": 1,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 68,
@@ -455,7 +464,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 8
 }, {
     "id": 69,
@@ -464,7 +473,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 8
 }, {
     "id": 70,
@@ -473,7 +482,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 8
 }, {
     "id": 71,
@@ -482,7 +491,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 12
 }, {
     "id": 72,
@@ -491,7 +500,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 12
 }, {
     "id": 75,
@@ -500,7 +509,7 @@
     "phase": 3,
     "function": "Klokke",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 8
 }, {
     "id": 62,
@@ -509,7 +518,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 63,
@@ -518,7 +527,7 @@
     "phase": 2,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 4
 }, {
     "id": 64,
@@ -527,7 +536,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }, {
     "id": 65,
@@ -536,7 +545,7 @@
     "phase": 3,
     "function": "0",
     "related_game": 1,
-    "related_week": 16,
+    "related_week": 10,
     "punishment": 6
 }]
 
