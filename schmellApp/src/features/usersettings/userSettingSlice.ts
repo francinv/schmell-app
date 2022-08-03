@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import {user_settings} from '../../typings/settingsTypes';
-import {asyncStorageService} from '../../utils/updateAsyncStorage';
-import {encryptedStorageService} from '../../utils/EncryptedStorageUtil';
-import axiosService from '../../services/axios';
+import {asyncStorageService} from '../../services/asyncStorageService';
+import {authService} from '../../services/axiosService';
 import {decrypt} from '../../utils/crypto';
+import encryptedStorageService from '../../services/encryptedStorageService';
 
 const initialState = {
   api_key: '',
@@ -18,25 +18,22 @@ const initialState = {
 export const setTokens = createAsyncThunk(
   'usersetting/setTokens',
   async (id: string) => {
-    const temp = {
-      name: id,
-    };
-    const axe = axiosService.post(decrypt('YXV0aC9nZW5lcmF0ZV9rZXkv'), temp);
-    axe.catch(res => console.log(res));
-    const token_res = await axe.then(res => res.data);
-    return token_res;
+    return authService
+      .post(decrypt('a2V5L2dlbmVyYXRlLw=='), {
+        name: id,
+      })
+      .then(res => res.data);
   },
 );
 
 export const fetchSettings = createAsyncThunk(
   'usersetting/fetchSettings',
   async () => {
-    const temp = {
+    return {
       vol: await asyncStorageService(VOLUME_KEY, '', 'GET'),
       voi: await asyncStorageService(VOICE_KEY, '', 'GET'),
       lang: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
     };
-    return temp;
   },
 );
 
@@ -80,6 +77,9 @@ const UserSettingSlice = createSlice({
   reducers: {
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
+    },
+    setApiKey(state, action: PayloadAction<string>) {
+      state.api_key = action.payload;
     },
   },
   extraReducers: builder => {
@@ -134,6 +134,7 @@ const UserSettingSlice = createSlice({
     builder.addCase(setTokens.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
+        console.log('could not fetch Token', action.error.message);
       }
       state.status = 'failed';
     });

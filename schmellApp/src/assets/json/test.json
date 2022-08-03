@@ -1,0 +1,551 @@
+[{
+    "id": 55,
+    "type": "Verste forklaringen",
+    "question_desc": "N1 forklar din favoritt film dårlig. \nFørste til å gjette film kan dele ut 6 slurker",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 59,
+    "type": "2 truths and a lie",
+    "question_desc": "N1 fortell tre ting du ikke liker at det motsatte kjønn gjør, men la en av tingene være en løgn.",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 12,
+    "type": "Svar eller drikk",
+    "question_desc": "250 kroner per dag resten av ditt liv eller aldri drikke alkohol",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 23,
+    "type": "Jeg har aldri",
+    "question_desc": "Jeg har aldri vært redd for å bli mamma/pappa",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 24,
+    "type": "Jeg har aldri",
+    "question_desc": "Jeg har aldri gitt noen andre klamydia",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 13,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvem misliker du mest i dette rommet?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 20,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvem er den dårligste du har ligget med?",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 60,
+    "type": "2 truths and a lie",
+    "question_desc": "N1 fortell om tre land du har vært i, men la en av dem være en løgn.",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 56,
+    "type": "2 truths and a lie",
+    "question_desc": "N1, fortell 3 ting du har gjort i dag, men la en av tingene være en løgn.",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 1,
+    "type": "Jeg har aldri",
+    "question_desc": "Jeg har aldri hatt sex i et svømmebasseng",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 25,
+    "type": "Jeg har aldri",
+    "question_desc": "Jeg har aldri hatt mer enn 4 ulike seksuelle partnere ila en uke",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 26,
+    "type": "Jeg har aldri",
+    "question_desc": "Jeg har aldri hatt sex med flere i løpet av samme kveld",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 39,
+    "type": "Guess The Gibberish",
+    "question_desc": "dok å er såf f hort",
+    "phase": 1,
+    "function": "Svar: Du kommer så fort",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 7,
+    "type": "Svar eller drikk",
+    "question_desc": "Vis dine tre siste bilder fra snapchat minner",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 9,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvor gammel var du første gang du hadde samleie?",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 11,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvor ofte har du samleie?",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 14,
+    "type": "Svar eller drikk",
+    "question_desc": "Har du noen gang kjøpt eller tatt en angrepille?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 15,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvem ville du drept i dette rommet?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 16,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvem var den siste du kysset?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 17,
+    "type": "Svar eller drikk",
+    "question_desc": "Høyre eller venstre. Hvem hadde du kysset?",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 18,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvor mange har du hatt samleie med?",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 19,
+    "type": "Svar eller drikk",
+    "question_desc": "Hvem har du på topplisten på snapchat?",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 21,
+    "type": "Pekelek",
+    "question_desc": "Mest sannsynlig til å bli sammen med en sugar daddy",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 22,
+    "type": "Pekelek",
+    "question_desc": "Mest sannsynlig til å bli en sugar daddy",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 28,
+    "type": "Pekelek",
+    "question_desc": "Har størst kjendisfaktor",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 29,
+    "type": "Pekelek",
+    "question_desc": "Hvem har størst kjendisfaktor",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 30,
+    "type": "Pekelek",
+    "question_desc": "Hvem har finest smil?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 31,
+    "type": "Jeg har aldri",
+    "question_desc": "Jeg har aldri tatt tattovering i fylla",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 27,
+    "type": "Challenge accepted?",
+    "question_desc": "N1, N2, N3 & N4 legg ut en tiktok av at dere danser, hvis ikke drikk 6 slurker hver",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 40,
+    "type": "Guess The Gibberish",
+    "question_desc": "Kel itt oh reis",
+    "phase": 1,
+    "function": "SVAR: Klitoris",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 41,
+    "type": "Guess The Gibberish",
+    "question_desc": "Cei teg pan sikk teitmit",
+    "phase": 1,
+    "function": "Svar: Sett deg på ansiktet mitt",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 42,
+    "type": "Guess The Gibberish",
+    "question_desc": "Han hals eks",
+    "phase": 1,
+    "function": "Svar: Analsex",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 43,
+    "type": "Guess The Gibberish",
+    "question_desc": "Hop løs bars eks do que",
+    "phase": 2,
+    "function": "Svar: Opplåsbar sexdukke",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 44,
+    "type": "Guess The Gibberish",
+    "question_desc": "Peh hikken kul hør",
+    "phase": 2,
+    "function": "Svar: Pikken klør",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 5
+}, {
+    "id": 45,
+    "type": "Guess The Gibberish",
+    "question_desc": "Se eks uske i shell lærern",
+    "phase": 2,
+    "function": "Svar: Sexhuske i kjelleren",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 5
+}, {
+    "id": 46,
+    "type": "Guess The Gibberish",
+    "question_desc": "Nu akk enfo to husj ut",
+    "phase": 2,
+    "function": "Svar: Naken fotoshot",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 5
+}, {
+    "id": 47,
+    "type": "Guess The Gibberish",
+    "question_desc": "Hvil nå en bø hule",
+    "phase": 3,
+    "function": "Svar: Vil noen pule?",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 48,
+    "type": "Guess The Gibberish",
+    "question_desc": "My iste jo frod åmøn",
+    "phase": 3,
+    "function": "Svar: Miste jomfrudommen",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 49,
+    "type": "Skal vi vedde?",
+    "question_desc": "Greier N1 å stå i 90grader i 2 minutter?",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 1
+}, {
+    "id": 50,
+    "type": "Skal vi vedde?",
+    "question_desc": "N2 greier å nevne 6 land som starter på bokstaven \"S\"",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 51,
+    "type": "Skal vi vedde?",
+    "question_desc": "N1 og N2, ta stein saks papir. Resten vedd om hvem som vinner.",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 52,
+    "type": "Skal vi vedde?",
+    "question_desc": "Greier n1 å chugge resten av drikka innen 10sekk?",
+    "phase": 3,
+    "function": "klokke",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 54,
+    "type": "Best - Worst - First",
+    "question_desc": "N1 hvem har best outfit i kveld\nN2 Hvem har verst outfit i kveld\nN3 Hvem kler av seg først i kveld",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 53,
+    "type": "Best - Worst - First",
+    "question_desc": "N1 fortell om ditt beste kyss\nN2 Fortell om ditt verste kyss\nN3 Fortell om ditt første kyss",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 57,
+    "type": "2 truths and a lie",
+    "question_desc": "N1 fortell gjengen 3 steder du har hatt sex, men la en av dem være løgn.",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 58,
+    "type": "2 truths and a lie",
+    "question_desc": "N1 fortell om tre merkelige ting som har skjedd deg i barndommen, la et av disse være en løgn.",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 61,
+    "type": "Fu*k/Marry/Kill",
+    "question_desc": "N1, hvem i dette rommet ville du ha fu*k/marry/kill",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 2
+}, {
+    "id": 73,
+    "type": "Skal vi vedde?",
+    "question_desc": "Greier N1 å synge første 20 sekundene av sangen \"Hearltess\" av kanye?",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 74,
+    "type": "Skal vi vedde?",
+    "question_desc": "N1 & N2, si vitser til hverandre på tur. Den første som ler, taper. \nResten, vedd på hvem som vinner.",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 3
+}, {
+    "id": 66,
+    "type": "Challenge Accepted?",
+    "question_desc": "N1 og N2, bytt et plagg med hverandre, eller ta straffen.",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 67,
+    "type": "Challenge Accepted?",
+    "question_desc": "N1, vis frem din siste tindermelding. \nHvis du ikke har tinder, tøm resten av drikka.",
+    "phase": 1,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 68,
+    "type": "Challenge Accepted?",
+    "question_desc": "N1, la gjengen velge ut en person i kontaktlisten din. \nDu skal ringe personen og holde en samtale i 30 sekunder.\nLegg på med en eneste gang timeren viser 30.",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 8
+}, {
+    "id": 69,
+    "type": "Challenge accepted?",
+    "question_desc": "N1, N2 og N3, legg ut en tiktok av dere eller ta straffen.",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 8
+}, {
+    "id": 70,
+    "type": "Challenge Accepted?",
+    "question_desc": "N1 ta 10 push ups, eller drikk",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 8
+}, {
+    "id": 71,
+    "type": "Challenge Accepted?",
+    "question_desc": "N1, vis gjengen din beste dance move eller drikk",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 12
+}, {
+    "id": 72,
+    "type": "Challenge accepted?",
+    "question_desc": "N1, gi oss ditt beste sjekkereplikk. \nN2 godkjenner om du greide challengen eller må drikke.",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 12
+}, {
+    "id": 75,
+    "type": "Challenge accepted?",
+    "question_desc": "Greier N1 å nevne 3 land som begynner på F innen 30 sekunder?",
+    "phase": 3,
+    "function": "Klokke",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 8
+}, {
+    "id": 62,
+    "type": "Fu*k/Marry/Kill",
+    "question_desc": "N1 - fu*k/marry/kill - Nicki Minaj - Cardi B - Kim K",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 63,
+    "type": "Fu*k/Marry/Kill",
+    "question_desc": "N1 Fu*k/Marry/Kill: Johnny Depp/ Leonardo Dicaprio / Brad Pitt",
+    "phase": 2,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 4
+}, {
+    "id": 64,
+    "type": "Fu*k/Marry/Kill",
+    "question_desc": "N1 Fu*k/Marry/Kill - Tom (fra Tom & Jerry) / Abu (Aladdin) / Timon (Løvenes Konge)",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}, {
+    "id": 65,
+    "type": "Fu*k/Marry/Kill",
+    "question_desc": "N1 Fu*k/Marry/Kill - Jasmine (Aladdin)/ Snøhvit / Elsa",
+    "phase": 3,
+    "function": "0",
+    "related_game": 1,
+    "related_week": 10,
+    "punishment": 6
+}]
+

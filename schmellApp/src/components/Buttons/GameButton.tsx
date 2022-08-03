@@ -1,55 +1,61 @@
 import React from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {setSelectedGame} from '../../features/game/gameSlice';
+import {Text, TouchableOpacity} from 'react-native';
+import {fetchWeek, setSelectedGame} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
 import globalStyles from '../../styles/global.styles';
+import widthStyles from '../../styles/width.styles';
+import marginStyles from '../../styles/margin.styles';
+import colorStyles from '../../styles/color.styles';
+import heightStyles from '../../styles/height.styles';
+import layoutStyles from '../../styles/layout.styles';
+import textStyles from '../../styles/text.styles';
+import paddingStyles from '../../styles/padding.styles';
+import {getCurrentWeekNumber} from '../../utils/dateUtil';
 
 interface GameButtonProps {
   id: number;
   name: string;
+  handleShow: () => void;
 }
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   selectedGame: (query: number) => dispatch(setSelectedGame(query)),
+  setWeek: (query: {weekNumber: number; idGame: number}) =>
+    dispatch(fetchWeek(query)),
 });
 
-const GameButton: React.FC<GameButtonProps> = ({id, name}) => {
-  const {selectedGame} = actionDispatch(useAppDispatch());
+const GameButton: React.FC<GameButtonProps> = ({id, name, handleShow}) => {
+  const {selectedGame, setWeek} = actionDispatch(useAppDispatch());
   const handleClick = () => {
+    setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
     selectedGame(id);
+    handleShow();
   };
 
   return (
     <TouchableOpacity
       onPress={handleClick}
-      style={[styles.button, globalStyles.w_p_85, globalStyles.mt_30]}>
-      <Text style={[styles.text]}>{name}</Text>
+      style={[
+        widthStyles(0).w_p_85,
+        marginStyles.mt_30,
+        heightStyles(75).h_custom,
+        globalStyles.border_radius_10,
+        colorStyles.bg_primary,
+        globalStyles.boxShadow,
+        layoutStyles.flex_center,
+      ]}>
+      <Text
+        style={[
+          textStyles.text_font_primary,
+          textStyles.text_35,
+          colorStyles.color_secondary,
+          paddingStyles.p_10,
+        ]}>
+        {name}
+      </Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#FFD700',
-    border: '0.5px solid #141400',
-    height: 75,
-    borderRadius: 8,
-    shadowColor: '#AEAC99',
-    shadowOffset: {width: 2, height: 2},
-    shadowRadius: 3,
-    shadowOpacity: 0.2,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontFamily: 'CCBiffBamBoomW00-Regular',
-    fontSize: 35,
-    color: '#141400',
-    letterSpacing: 0.05,
-    padding: 10,
-  },
-});
 
 export default GameButton;

@@ -60,3 +60,5 @@ buck-out/
 /ios/Pods/
 
 .env
+node_modules.nosync
+node_modules.nosync/

@@ -2,10 +2,14 @@ import React from 'react';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../../features/selectors';
-import globalStyles from '../../../styles/global.styles';
+import useLocale from '../../../hooks/useLocale';
+import colorStyles from '../../../styles/color.styles';
+import heightStyles from '../../../styles/height.styles';
+import layoutStyles from '../../../styles/layout.styles';
+import marginStyles from '../../../styles/margin.styles';
+import widthStyles from '../../../styles/width.styles';
 import FlagButton from '../../Buttons/FlagButtons';
 import InputContainer from './InputContainer';
-import styles from './styles';
 import SubTitle from './SubTitle';
 
 const Language: React.FC = () => {
@@ -13,29 +17,50 @@ const Language: React.FC = () => {
 
   return (
     <InputContainer>
-      <SubTitle title="Språk" />
+      <SubTitle title={useLocale(language, 'SETTINGS_LANGUAGE') as string} />
       <View
         style={[
-          globalStyles.flex_row,
-          globalStyles.align_center,
-          globalStyles.justify_center,
-          globalStyles.mt_15,
+          layoutStyles.flex_row,
+          layoutStyles.align_center,
+          layoutStyles.justify_center,
+          marginStyles.mt_15,
         ]}>
         <FlagButton
           locale="nb-NO"
           selected={language === 'nb-NO' ? true : false}
         />
-        <View style={styles.divider} />
+        <View
+          style={[
+            colorStyles.border_primary,
+            widthStyles(0).border_width_1,
+            heightStyles(0).h_p_100,
+            marginStyles.m_hor_22,
+          ]}
+        />
         <FlagButton
           locale="en-GB"
           selected={language === 'en-GB' ? true : false}
         />
-        <View style={styles.divider} />
+        <View
+          style={[
+            colorStyles.border_primary,
+            widthStyles(0).border_width_1,
+            heightStyles(0).h_p_100,
+            marginStyles.m_hor_22,
+          ]}
+        />
         <FlagButton
           locale="sv-SE"
           selected={language === 'sv-SE' ? true : false}
         />
-        <View style={styles.divider} />
+        <View
+          style={[
+            colorStyles.border_primary,
+            widthStyles(0).border_width_1,
+            heightStyles(0).h_p_100,
+            marginStyles.m_hor_22,
+          ]}
+        />
         <FlagButton
           locale="da-DA"
           selected={language === 'da-DA' ? true : false}
