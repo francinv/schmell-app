@@ -50,7 +50,9 @@ export const fetchQuestions = createAsyncThunk(
   'game/fetchQuestions',
   async (idWeek: number) => {
     return axiosService
-      .get(`cms/question/?related_week=${idWeek}`)
+      .get(
+        `cms/question/?related_week=${idWeek}&sort=PHASE_ASC&function=RANDOMIZE`,
+      )
       .then(res => res.data);
   },
 );
@@ -84,7 +86,6 @@ const GameSlice = createSlice({
     builder.addCase(fetchGames.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
-        console.log('could not fetch games', action.error.message);
       }
       state.status = 'failed';
     });
@@ -94,14 +95,12 @@ const GameSlice = createSlice({
     builder.addCase(fetchWeek.fulfilled, (state, action) => {
       if (action.payload) {
         state.week = action.payload[0];
-        console.log('successfull fetch week', action.payload);
       }
       state.status = 'succeeded';
     });
     builder.addCase(fetchWeek.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
-        console.log(action.error.message);
       }
       state.status = 'failed';
     });
