@@ -9,7 +9,7 @@ const SimpleText: FC<{text: string}> = ({text}) => (
     style={[
       colorStyles.color_tertiary,
       textStyles.text_font_secondary,
-      textStyles.text_30,
+      textStyles.text_20,
       textStyles.font_500,
       textStyles.text_center,
       globalStyles.z_100,
