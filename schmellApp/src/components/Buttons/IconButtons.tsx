@@ -33,7 +33,7 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 
 export const PlusIconButton: FC<ButtonProps> = ({onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} style={marginStyles.ml_auto}>
       <GamePlusIcon />
     </TouchableOpacity>
   );
