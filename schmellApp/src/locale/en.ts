@@ -18,9 +18,10 @@ export default {
   GAMESETTINGS_READOUT: 'Read it out?',
   GAMESETTINGS_READOUT_OPTIONS: ['Yes', 'No'],
   GAMESETTINGS_START: 'Start',
-  GAMESETTINGS_START_CAROUSEL: ['3', '2', '1', 'Go!'],
   GAME_PLAYER_INPUT: 'Who was late?',
   GAME_END_TITLE: 'Oh snap!',
   GAME_END_INFORMATION: 'it is empty 😒',
   GAME_HINT_INFORMATION: 'The number of sips can be seen in the left corner.',
+  GAME_LOADING_INFORMATION: 'fetching the questions... ⚡️',
+  GAME_LOADING_TITLE: 'Hold on!',
 };

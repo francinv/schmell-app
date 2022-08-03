@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectLanguage, selectPlayers} from '../../features/selectors';
+import {selectGameStatus, selectLanguage} from '../../features/selectors';
 import useColor from '../../hooks/useColor';
 import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
@@ -12,8 +12,6 @@ import widthStyles from '../../styles/width.styles';
 import {carouselType} from './GamePlay';
 import useQuestionType from '../../hooks/useQuestionType';
 import paddingStyles from '../../styles/padding.styles';
-import {playerPush} from '../../utils/selectPlayer';
-
 interface QuestionsProps {
   carouselState: carouselType;
   moveAnim: Animated.Value;
@@ -26,18 +24,28 @@ const QuestionsComponent: FC<QuestionsProps> = ({
   isLast,
 }) => {
   const lang = useSelector(selectLanguage);
-  const players = useSelector(selectPlayers);
-  const title = useLocale(lang, 'GAME_END_TITLE');
-  const information = useLocale(lang, 'GAME_END_INFORMATION');
+  const lastTitle = useLocale(lang, 'GAME_END_TITLE');
+  const loadingTitle = useLocale(lang, 'GAME_LOADING_TITLE');
+  const questionStatus = useSelector(selectGameStatus);
   const currentQuestion =
     carouselState?.questionList[carouselState.currentQuestionIndex];
-  const questionsContent = isLast ? information : currentQuestion.question_desc;
 
+  const getContent = () => {
+    if (questionStatus === 'loading') {
+      return loadingTitle;
+    } else {
+      if (isLast) {
+        return lastTitle;
+      } else {
+        return currentQuestion.type;
+      }
+    }
+  };
   return (
     <Animated.View
       style={[
-        marginStyles.m_ver_auto,
         marginStyles.m_hor_auto,
+        marginStyles.m_ver_auto,
         widthStyles(0).w_max_70,
         layoutStyles.flex_center,
         {transform: [{translateX: moveAnim}]},
@@ -54,12 +62,9 @@ const QuestionsComponent: FC<QuestionsProps> = ({
           },
           widthStyles(0).w_p_100,
         ]}>
-        {isLast ? title : currentQuestion.type}
+        {getContent()}
       </Text>
-      {useQuestionType(
-        playerPush(questionsContent as string, players),
-        currentQuestion,
-      )}
+      {useQuestionType(currentQuestion, isLast)}
     </Animated.View>
   );
 };
