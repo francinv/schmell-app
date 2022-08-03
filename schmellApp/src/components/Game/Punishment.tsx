@@ -2,22 +2,27 @@ import React, {FC, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import CocktailIcon from '../../assets/icons/CocktailIcon';
 import layoutStyles from '../../styles/layout.styles';
+import marginStyles from '../../styles/margin.styles';
+import {questionType} from '../../typings/questionTypes';
 
 interface PunishmentProps {
-  punishment: number;
+  currentQuestion: questionType;
 }
 
-const Punishment: FC<PunishmentProps> = ({punishment}) => {
+const Punishment: FC<PunishmentProps> = ({currentQuestion}) => {
   const [arrayOfCups, setArrayOfCups] = useState<JSX.Element[]>([]);
   const medianOfArray = arrayOfCups.length / 2;
+  const isSvv = currentQuestion?.type === 'Skal vi vedde?';
 
   useEffect(() => {
     let temporaryArrayOfCups = [];
-    for (let i = 0; i < punishment; i++) {
-      temporaryArrayOfCups.push(<CocktailIcon key={i} />);
+    for (let i = 0; i < currentQuestion?.punishment; i++) {
+      temporaryArrayOfCups.push(
+        <CocktailIcon key={i} color={isSvv ? '#262423' : 'gold'} />,
+      );
     }
     setArrayOfCups(temporaryArrayOfCups);
-  }, [punishment]);
+  }, [currentQuestion?.punishment, isSvv]);
 
   return (
     <>
@@ -33,7 +38,12 @@ const Punishment: FC<PunishmentProps> = ({punishment}) => {
           </View>
         </View>
       ) : (
-        <View style={[layoutStyles.flex_row, layoutStyles.flex_center]}>
+        <View
+          style={[
+            layoutStyles.flex_row,
+            layoutStyles.flex_center,
+            arrayOfCups.length === 1 ? marginStyles.mr_auto : null,
+          ]}>
           {arrayOfCups.map(cup => cup)}
         </View>
       )}
