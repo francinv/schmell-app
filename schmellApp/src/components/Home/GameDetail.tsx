@@ -33,12 +33,12 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
   function closeOverlay() {
     Animated.timing(opacityAnim, {
       toValue: 0,
-      duration: 2000,
+      duration: 500,
       useNativeDriver: false,
     }).start();
     Animated.timing(moveInAnim, {
       toValue: 500,
-      duration: 2000,
+      duration: 750,
       useNativeDriver: false,
     }).start();
     setTimeout(handleShow, 2000);
@@ -47,12 +47,12 @@ const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
   useEffect(() => {
     Animated.timing(opacityAnim, {
       toValue: 1,
-      duration: 2000,
+      duration: 500,
       useNativeDriver: false,
     }).start();
     Animated.timing(moveInAnim, {
       toValue: 0,
-      duration: 2000,
+      duration: 750,
       useNativeDriver: false,
     }).start();
   }, [moveInAnim, opacityAnim]);
