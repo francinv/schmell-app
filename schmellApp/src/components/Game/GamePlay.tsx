@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {FC, useEffect, useState} from 'react';
 import {Animated} from 'react-native';
@@ -8,7 +9,7 @@ import {selectPlayers, selectQuestions} from '../../features/selectors';
 import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 import {questionType} from '../../typings/questionTypes';
-import {playerPush} from '../../utils/selectPlayer';
+import {playerInGamePush, playerPush} from '../../utils/selectPlayer';
 import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
@@ -45,9 +46,19 @@ const GamePlay: FC = () => {
       ...carouselState,
       questionList: playerPush(questions, players),
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questions, players]);
+  }, [questions]);
 
+  useEffect(() => {
+    setCarouselState({
+      ...carouselState,
+      questionList: playerInGamePush(
+        questions,
+        carouselState.questionList,
+        players,
+        carouselState.currentQuestionIndex,
+      ),
+    });
+  }, [players]);
   return (
     <SafeAreaView style={[layoutStyles.flex_1, colorStyles.bg_septenary]}>
       <LeftCurve
