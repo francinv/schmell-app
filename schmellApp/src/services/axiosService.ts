@@ -4,7 +4,7 @@ import {decrypt} from '../utils/crypto';
 import encryptedStorageService from './encryptedStorageService';
 
 const axiosService = axios.create({
-  baseURL: decrypt('aHR0cHM6Ly9zY2htZWxsLXN0YWdpbmcuaGVyb2t1YXBwLmNvbS9hcGkv'),
+  baseURL: decrypt('aHR0cHM6Ly9zY2htZWxsLmhlcm9rdWFwcC5jb20vYXBpLw=='),
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -12,9 +12,7 @@ const axiosService = axios.create({
 });
 
 export const authService = axios.create({
-  baseURL: decrypt(
-    'aHR0cHM6Ly9zY2htZWxsLXN0YWdpbmcuaGVyb2t1YXBwLmNvbS9hcGkvYXV0aC8=',
-  ),
+  baseURL: decrypt('aHR0cHM6Ly9zY2htZWxsLmhlcm9rdWFwcC5jb20vYXBpL2F1dGgv'),
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
