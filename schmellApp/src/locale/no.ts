@@ -3,7 +3,7 @@ export default {
   FAILED_PRE: 'Oisann,',
   FAILED_CONTENT: 'du er ikke tilkoblet for øyeblikket 😿',
   RETRY: 'Prøv igjen',
-  STORE: 'Butikk',
+  STORE: 'Butikken er ikke klar enda 😿',
   SETTINGS: 'Innstillinger',
   SETTINGS_VOLUME: 'Lydnivå',
   SETTINGS_VOICE: 'Stemme',

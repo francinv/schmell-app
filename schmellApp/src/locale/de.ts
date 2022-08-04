@@ -3,7 +3,7 @@ export default {
   FAILED_PRE: 'Ups,',
   FAILED_CONTENT: 'du er offline i øjeblikket 😿',
   RETRY: 'Prøv igen',
-  STORE: 'Butik',
+  STORE: 'Butikken er ikke klar endnu 😿',
   SETTINGS: 'Indstillinger',
   SETTINGS_VOLUME: 'Lydniveau',
   SETTINGS_VOICE: 'Stemme',

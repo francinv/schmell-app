@@ -3,7 +3,7 @@ export default {
   FAILED_PRE: 'Ouch,',
   FAILED_CONTENT: 'you are currently offline 😿',
   RETRY: 'Try again',
-  STORE: 'Store',
+  STORE: 'The shop is not ready yet 😿',
   SETTINGS: 'Settings',
   SETTINGS_VOLUME: 'Sound level',
   SETTINGS_VOICE: 'Voice',
