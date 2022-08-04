@@ -39,44 +39,22 @@ const StartButton: FC<ButtonProps> = props => {
   const week = useSelector(selectWeeks);
   const players = useSelector(selectPlayers);
 
-  let buttonTexts = ['3', '2', '1', 'Go!'];
   const [animation] = useState(new Animated.Value(1));
 
   const navigation = useNavigation<GameSettingsScreenNavigationProp>();
 
   const handlePress = () => {
-    if (players.length === 0) {
+    if (players.length < 4) {
       shakeAnimation.setValue(0);
-      setButtonText('Mangler spillere!');
+      setButtonText(`Mangler ${4 - players.length} spillere!`);
       moveAnimation(shakeAnimation);
     } else {
-      for (let i = 0; i < buttonTexts.length; i++) {
-        setTimeout(() => handleAnimation(buttonTexts[i]), 1000 * i);
-      }
       setQuestions(week.id);
+      setButtonText("Let's go!");
+      navigation.navigate('Game');
+      lockToLandscape();
     }
   };
-
-  function handleAnimation(newText: string) {
-    Animated.timing(animation, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: false,
-    }).start(() => {
-      setButtonText(newText);
-      Animated.timing(animation, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: false,
-      }).start();
-    });
-    if (newText === 'Go!') {
-      setTimeout(() => {
-        navigation.navigate('Game');
-        lockToLandscape();
-      }, 1000);
-    }
-  }
 
   const boxStyle = {
     transform: [
@@ -104,7 +82,7 @@ const StartButton: FC<ButtonProps> = props => {
           style={[
             textStyles.text_font_primary,
             textStyles.text_center,
-            textStyles.text_35,
+            textStyles.text_30,
             paddingStyles.p_5,
             {opacity: animation},
           ]}>

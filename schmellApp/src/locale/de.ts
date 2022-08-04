@@ -3,7 +3,7 @@ export default {
   FAILED_PRE: 'Ups,',
   FAILED_CONTENT: 'du er offline i øjeblikket 😿',
   RETRY: 'Prøv igen',
-  STORE: 'Butik',
+  STORE: 'Butikken er ikke klar endnu 😿',
   SETTINGS: 'Indstillinger',
   SETTINGS_VOLUME: 'Lydniveau',
   SETTINGS_VOICE: 'Stemme',
@@ -18,10 +18,11 @@ export default {
   GAMESETTINGS_READOUT: 'Opplesning?',
   GAMESETTINGS_READOUT_OPTIONS: ['Ja', 'Ingen'],
   GAMESETTINGS_START: 'Start',
-  GAMESETTINGS_START_CAROUSEL: ['3', '2', '1', 'Go!'],
   GAME_PLAYER_INPUT: 'Hvem kom for sent?',
   GAME_END_TITLE: 'Uuups!',
   GAME_END_INFORMATION: 'så var den tom 😒',
   GAME_HINT_INFORMATION:
     'Antallet af slurke, der skal drikkes, kan ses i venstre hjørne.',
+  GAME_LOADING_INFORMATION: 'henter spørgsmålene... ⚡️',
+  GAME_LOADING_TITLE: 'Vent!',
 };

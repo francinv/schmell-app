@@ -29,6 +29,7 @@ const ModalContent: FC<ModalProps> = props => {
   const {modalShow, currentQuestion, handleShow} = props;
   const lang = useSelector(selectLanguage);
   const modalTitle = useLocale(lang, 'GAME_PLAYER_INPUT') as string;
+  const isSvv = currentQuestion?.type === 'Skal vi vedde?';
   const modalPunishmentInformation = useLocale(
     lang,
     'GAME_HINT_INFORMATION',
@@ -76,7 +77,7 @@ const ModalContent: FC<ModalProps> = props => {
               marginStyles.mb_20,
               widthStyles(0).w_max_80,
             ]}>
-            {modalPunishmentInformation}
+            {isSvv ? null : modalPunishmentInformation}
           </Text>
         </View>
       </View>

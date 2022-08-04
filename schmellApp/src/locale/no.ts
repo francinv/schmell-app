@@ -3,7 +3,7 @@ export default {
   FAILED_PRE: 'Oisann,',
   FAILED_CONTENT: 'du er ikke tilkoblet for øyeblikket 😿',
   RETRY: 'Prøv igjen',
-  STORE: 'Butikk',
+  STORE: 'Butikken er ikke klar enda 😿',
   SETTINGS: 'Innstillinger',
   SETTINGS_VOLUME: 'Lydnivå',
   SETTINGS_VOICE: 'Stemme',
@@ -18,10 +18,11 @@ export default {
   GAMESETTINGS_READOUT: 'Opplesning?',
   GAMESETTINGS_READOUT_OPTIONS: ['Ja', 'Nei'],
   GAMESETTINGS_START: 'Start',
-  GAMESETTINGS_START_CAROUSEL: ['3', '2', '1', 'Go!'],
   GAME_PLAYER_INPUT: 'Hvem kom for sent?',
   GAME_END_TITLE: 'Ooops!',
   GAME_END_INFORMATION: 'Da var det tomt 😒',
   GAME_HINT_INFORMATION:
     'Antall slurker som skal drikkes kan man se i venstre hjørne.',
+  GAME_LOADING_INFORMATION: 'henter spørsmålene... ⚡️',
+  GAME_LOADING_TITLE: 'Vent litt!',
 };

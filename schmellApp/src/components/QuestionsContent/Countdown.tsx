@@ -9,13 +9,11 @@ import paddingStyles from '../../styles/padding.styles';
 import textStyles from '../../styles/text.styles';
 import widthStyles from '../../styles/width.styles';
 import {PlayPauseButton} from '../Buttons/IconButtons';
-import SimpleText from './SimpleText';
 
 interface CountDownProps {
   countDownSeconds: number;
-  questionDesc: string;
 }
-const CountDown: FC<CountDownProps> = ({countDownSeconds, questionDesc}) => {
+const CountDown: FC<CountDownProps> = ({countDownSeconds}) => {
   const [counter, setCounter] = useState(countDownSeconds);
   const [started, setStarted] = useState(false);
   const [bounceAnimation] = useState(new Animated.Value(0));
@@ -76,26 +74,23 @@ const CountDown: FC<CountDownProps> = ({countDownSeconds, questionDesc}) => {
     </Animated.Text>
   );
   return (
-    <>
-      <SimpleText text={questionDesc} />
-      <View
-        style={[
-          layoutStyles.flex_center,
-          marginStyles.mt_10,
-          paddingStyles.p_ver_10,
-          paddingStyles.p_hor_75,
-          globalStyles.border_radius_10,
-          widthStyles(120).w_custom,
-          colorStyles.bg_tertiary,
-        ]}>
-        <Timer />
-        <PlayPauseButton
-          onPress={handleStart}
-          started={started}
-          finished={finished}
-        />
-      </View>
-    </>
+    <View
+      style={[
+        layoutStyles.flex_center,
+        paddingStyles.p_ver_10,
+        paddingStyles.p_hor_75,
+        globalStyles.border_radius_10,
+        widthStyles(120).w_custom,
+        colorStyles.bg_tertiary,
+        marginStyles.m_hor_auto,
+      ]}>
+      <Timer />
+      <PlayPauseButton
+        onPress={handleStart}
+        started={started}
+        finished={finished}
+      />
+    </View>
   );
 };
 
