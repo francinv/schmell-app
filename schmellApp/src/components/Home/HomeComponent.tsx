@@ -25,7 +25,7 @@ import {user_settings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
 import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
 import encryptedStorageService from '../../services/encryptedStorageService';
-import {lockPortrait} from '../../native/RNLockOrientation';
+import {lockPortrait} from '../../utils/lockOrientation';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),

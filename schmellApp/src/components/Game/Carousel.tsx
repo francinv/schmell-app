@@ -6,9 +6,9 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import {lockPortrait} from '../../native/RNLockOrientation';
 import globalStyles from '../../styles/global.styles';
 import {carouselNext, carouselPrev} from '../../utils/carousel';
+import {lockPortrait} from '../../utils/lockOrientation';
 import {carouselType} from './GamePlay';
 
 interface CarouselProps {
