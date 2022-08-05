@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
-import {lockPortrait} from '../../native/RNLockOrientation';
 import layoutStyles from '../../styles/layout.styles';
 import marginStyles from '../../styles/margin.styles';
+import {lockPortrait} from '../../utils/lockOrientation';
 import {LightBulbButton, XHeaderButton} from '../Buttons/IconButtons';
 
 interface GameHeaderProps {
