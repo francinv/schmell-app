@@ -14,7 +14,7 @@ export const carouselPrev = (
   }
 
   Animated.timing(moveAnim, {
-    toValue: -600,
+    toValue: 600,
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
@@ -22,7 +22,7 @@ export const carouselPrev = (
       ...carouselState,
       currentQuestionIndex: currentQuestionIndex - 1,
     });
-    moveAnim.setValue(600);
+    moveAnim.setValue(-600);
     Animated.timing(moveAnim, {
       toValue: 0,
       duration: 500,
@@ -43,7 +43,7 @@ export const carouselNext = (
   }
 
   Animated.timing(moveAnim, {
-    toValue: 600,
+    toValue: -600,
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
@@ -52,7 +52,7 @@ export const carouselNext = (
       currentQuestionIndex: currentQuestionIndex + 1,
       firstQuestionId: questionList[0].id,
     });
-    moveAnim.setValue(-600);
+    moveAnim.setValue(600);
     Animated.timing(moveAnim, {
       toValue: 0,
       duration: 500,
