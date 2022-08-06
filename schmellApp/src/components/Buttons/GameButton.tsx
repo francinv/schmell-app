@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
 import {Text, TouchableOpacity} from 'react-native';
 import {fetchWeek, setSelectedGame} from '../../features/game/gameSlice';
@@ -12,11 +12,15 @@ import layoutStyles from '../../styles/layout.styles';
 import textStyles from '../../styles/text.styles';
 import paddingStyles from '../../styles/padding.styles';
 import {getCurrentWeekNumber} from '../../utils/dateUtil';
+import {gameType} from '../../typings/gameTypes';
+import {useNavigation} from '@react-navigation/native';
+import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
+import GameDetail from '../Home/GameDetail';
+import {useSelector} from 'react-redux';
+import {selectGameDetail} from '../../features/selectors';
 
 interface GameButtonProps {
-  id: number;
-  name: string;
-  handleShow: () => void;
+  game: gameType;
 }
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
@@ -25,36 +29,68 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
     dispatch(fetchWeek(query)),
 });
 
-const GameButton: React.FC<GameButtonProps> = ({id, name, handleShow}) => {
+const GameButton: FC<GameButtonProps> = ({game}) => {
+  const {id, name} = game;
+  const detailShow = useSelector(selectGameDetail);
+  const [shouldShowDetail, setShouldShowDetail] = useState(true);
+  const [showDetail, setShowDetail] = useState(false);
   const {selectedGame, setWeek} = actionDispatch(useAppDispatch());
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  useEffect(() => {
+    if (detailShow) {
+      detailShow.forEach(detail => {
+        if (detail.id === id && !detail.show) {
+          setShouldShowDetail(true);
+        } else if (detail.id === id && detail.show) {
+          setShouldShowDetail(false);
+        } else {
+          setShouldShowDetail(true);
+        }
+      });
+    } else {
+      setShouldShowDetail(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleClick = () => {
-    setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
-    selectedGame(id);
-    handleShow();
+    if (shouldShowDetail) {
+      setShowDetail(wasShown => !wasShown);
+    } else {
+      setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
+      selectedGame(id);
+      navigation.navigate('GameSettings');
+    }
   };
 
   return (
-    <TouchableOpacity
-      onPress={handleClick}
-      style={[
-        widthStyles(0).w_p_85,
-        marginStyles.mt_30,
-        heightStyles(75).h_custom,
-        globalStyles.border_radius_10,
-        colorStyles.bg_primary,
-        globalStyles.boxShadow,
-        layoutStyles.flex_center,
-      ]}>
-      <Text
+    <>
+      <TouchableOpacity
+        onPress={handleClick}
         style={[
-          textStyles.text_font_primary,
-          textStyles.text_35,
-          colorStyles.color_secondary,
-          paddingStyles.p_10,
+          widthStyles(0).w_p_85,
+          marginStyles.mt_30,
+          heightStyles(75).h_custom,
+          showDetail
+            ? globalStyles.border_top_10
+            : globalStyles.border_radius_10,
+          colorStyles.bg_primary,
+          !showDetail ? globalStyles.boxShadow : null,
+          layoutStyles.flex_center,
         ]}>
-        {name}
-      </Text>
-    </TouchableOpacity>
+        <Text
+          style={[
+            textStyles.text_font_primary,
+            textStyles.text_35,
+            colorStyles.color_secondary,
+            paddingStyles.p_10,
+          ]}>
+          {name}
+        </Text>
+      </TouchableOpacity>
+      {showDetail ? <GameDetail game={game} /> : null}
+    </>
   );
 };
 

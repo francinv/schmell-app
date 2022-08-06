@@ -1,17 +1,17 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
 import {Image, SafeAreaView, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {useAppDispatch} from '../../features/hooks';
 import {selectGameStatus} from '../../features/selectors';
 import {
+  fetchDetail,
   fetchSettings,
   postSettings,
   setTokens,
 } from '../../features/usersettings/userSettingSlice';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
-import GameDetail from './GameDetail';
 import layoutStyles from '../../styles/layout.styles';
 import heightStyles from '../../styles/height.styles';
 import marginStyles from '../../styles/margin.styles';
@@ -21,9 +21,14 @@ import RNUniqueId from '../../native/RNUniqueId';
 import HomeButtons from './GameButtons';
 import Failed from './Failed';
 import Loading from './Loading';
-import {user_settings} from '../../typings/settingsTypes';
+import {userSettings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
-import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
+import {
+  LANGUAGE_KEY,
+  SHOW_DETAIL_KEY,
+  VOICE_KEY,
+  VOLUME_KEY,
+} from '../../constants/common';
 import encryptedStorageService from '../../services/encryptedStorageService';
 import {lockPortrait} from '../../utils/lockOrientation';
 
@@ -31,17 +36,13 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
   authToken: (query: string) => dispatch(setTokens(query)),
   fetchData: () => dispatch(fetchGames()),
   getUserSettings: () => dispatch(fetchSettings()),
-  setSettings: (query: user_settings) => dispatch(postSettings(query)),
+  setSettings: (query: userSettings) => dispatch(postSettings(query)),
+  fetchGameDetail: () => dispatch(fetchDetail()),
 });
-interface HomeInnerContentProps {
-  handleShow: () => void;
-}
 
-const HomeComponent: React.FC = () => {
-  const {authToken, fetchData, getUserSettings, setSettings} = actionDispatch(
-    useAppDispatch(),
-  );
-  const [open, setOpen] = useState(false);
+const HomeComponent: FC = () => {
+  const {authToken, fetchData, getUserSettings, setSettings, fetchGameDetail} =
+    actionDispatch(useAppDispatch());
 
   useEffect(() => {
     lockPortrait();
@@ -52,12 +53,12 @@ const HomeComponent: React.FC = () => {
         '',
         'GET',
       );
-      console.log('token', token);
       if (token === undefined || token === null) {
         authToken(uniqueString);
       }
     }
     async function checkIfSettingsSet() {
+      let showDetail = await asyncStorageService(SHOW_DETAIL_KEY, '', 'GET');
       let vol_temp = await asyncStorageService(VOLUME_KEY, '', 'GET');
       let voi_temp = await asyncStorageService(VOICE_KEY, '', 'GET');
       let lan_temp = await asyncStorageService(LANGUAGE_KEY, '', 'GET');
@@ -70,10 +71,14 @@ const HomeComponent: React.FC = () => {
       if (lan_temp === undefined) {
         lan_temp = 'nb-NO';
       }
+      if (!showDetail) {
+        showDetail = [];
+      }
       const temp = {
         volume: vol_temp,
         voice: voi_temp,
         language: lan_temp,
+        showDetail: showDetail,
       };
       setSettings(temp);
     }
@@ -81,26 +86,19 @@ const HomeComponent: React.FC = () => {
     getUserSettings();
     checkUserHasToken();
     fetchData();
+    fetchGameDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  function handleShow() {
-    setOpen(wasOpen => !wasOpen);
-  }
 
   return (
     <LayoutContainer>
       <Header />
-      {open ? (
-        <GameDetail handleShow={handleShow} />
-      ) : (
-        <HomeInnerContent handleShow={handleShow} />
-      )}
+      <HomeInnerContent />
     </LayoutContainer>
   );
 };
 
-const HomeInnerContent: React.FC<HomeInnerContentProps> = ({handleShow}) => {
+const HomeInnerContent: FC = () => {
   const gameStatus = useSelector(selectGameStatus);
 
   const getContent = () => {
@@ -109,7 +107,7 @@ const HomeInnerContent: React.FC<HomeInnerContentProps> = ({handleShow}) => {
     } else if (gameStatus === 'failed') {
       return <Failed />;
     } else if (gameStatus === 'succeeded') {
-      return <HomeButtons handleShow={handleShow} />;
+      return <HomeButtons />;
     }
   };
 
