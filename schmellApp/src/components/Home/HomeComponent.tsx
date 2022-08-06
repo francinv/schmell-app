@@ -23,12 +23,7 @@ import Failed from './Failed';
 import Loading from './Loading';
 import {userSettings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
-import {
-  LANGUAGE_KEY,
-  SHOW_DETAIL_KEY,
-  VOICE_KEY,
-  VOLUME_KEY,
-} from '../../constants/common';
+import {LANGUAGE_KEY, SHOW_DETAIL_KEY, VOICE_KEY} from '../../constants/common';
 import encryptedStorageService from '../../services/encryptedStorageService';
 import {lockPortrait} from '../../utils/lockOrientation';
 
@@ -59,12 +54,8 @@ const HomeComponent: FC = () => {
     }
     async function checkIfSettingsSet() {
       let showDetail = await asyncStorageService(SHOW_DETAIL_KEY, '', 'GET');
-      let vol_temp = await asyncStorageService(VOLUME_KEY, '', 'GET');
       let voi_temp = await asyncStorageService(VOICE_KEY, '', 'GET');
       let lan_temp = await asyncStorageService(LANGUAGE_KEY, '', 'GET');
-      if (vol_temp === undefined) {
-        vol_temp = 3;
-      }
       if (voi_temp === undefined) {
         voi_temp = 'F';
       }
@@ -75,7 +66,6 @@ const HomeComponent: FC = () => {
         showDetail = [];
       }
       const temp = {
-        volume: vol_temp,
         voice: voi_temp,
         language: lan_temp,
         showDetail: showDetail,

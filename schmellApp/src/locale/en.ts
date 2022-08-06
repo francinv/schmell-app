@@ -5,7 +5,6 @@ export default {
   RETRY: 'Try again',
   STORE: 'The shop is not ready yet 😿',
   SETTINGS: 'Settings',
-  SETTINGS_VOLUME: 'Sound level',
   SETTINGS_VOICE: 'Voice',
   SETTINGS_LANGUAGE: 'Language',
   SETTINGS_C2A: 'Contact us',

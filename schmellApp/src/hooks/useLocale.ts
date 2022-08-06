@@ -10,7 +10,6 @@ type allowedAttribute =
   | 'RETRY'
   | 'STORE'
   | 'SETTINGS'
-  | 'SETTINGS_VOLUME'
   | 'SETTINGS_VOICE'
   | 'SETTINGS_LANGUAGE'
   | 'SETTINGS_C2A'

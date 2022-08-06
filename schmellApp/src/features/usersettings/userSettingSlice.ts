@@ -1,10 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {
-  LANGUAGE_KEY,
-  SHOW_DETAIL_KEY,
-  VOICE_KEY,
-  VOLUME_KEY,
-} from '../../constants/common';
+import {LANGUAGE_KEY, SHOW_DETAIL_KEY, VOICE_KEY} from '../../constants/common';
 import {showDetailType, userSettings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
 import {authService} from '../../services/axiosService';
@@ -15,7 +10,6 @@ const showDetail: showDetailType[] = [];
 
 const initialState = {
   api_key: '',
-  volume: 3,
   voice: 'F',
   showDetail,
   language: 'nb-NO',
@@ -38,7 +32,6 @@ export const fetchSettings = createAsyncThunk(
   'usersetting/fetchSettings',
   async () => {
     return {
-      vol: await asyncStorageService(VOLUME_KEY, '', 'GET'),
       voi: await asyncStorageService(VOICE_KEY, '', 'GET'),
       lang: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
     };
@@ -55,7 +48,6 @@ export const fetchDetail = createAsyncThunk(
 export const postSettings = createAsyncThunk(
   'usersetting/postSettings',
   async (data: userSettings) => {
-    await asyncStorageService(VOLUME_KEY, data.volume, 'SET');
     await asyncStorageService(VOICE_KEY, data.voice, 'SET');
     await asyncStorageService(LANGUAGE_KEY, data.language, 'SET');
     await asyncStorageService(SHOW_DETAIL_KEY, data.showDetail, 'SET');
@@ -70,14 +62,6 @@ export const postDetail = createAsyncThunk(
     const arrayOfDetailShow = currentState.concat({id: id, show: show});
     await asyncStorageService(SHOW_DETAIL_KEY, arrayOfDetailShow, 'SET');
     return arrayOfDetailShow;
-  },
-);
-
-export const postVolume = createAsyncThunk(
-  'usersetting/postVolume',
-  async (data: number) => {
-    await asyncStorageService(VOLUME_KEY, data, 'SET');
-    return data;
   },
 );
 
@@ -114,7 +98,6 @@ const UserSettingSlice = createSlice({
     });
     builder.addCase(fetchSettings.fulfilled, (state, action) => {
       if (action.payload) {
-        state.volume = action.payload.vol;
         state.voice = action.payload.voi;
         state.language = action.payload.lang;
       }
@@ -131,7 +114,6 @@ const UserSettingSlice = createSlice({
     });
     builder.addCase(postSettings.fulfilled, (state, action) => {
       if (action.payload) {
-        state.volume = action.payload.volume;
         state.voice = action.payload.voice;
         state.language = action.payload.language;
       }
@@ -161,23 +143,6 @@ const UserSettingSlice = createSlice({
       if (action.error.message) {
         state.error = action.error.message;
         console.log('could not fetch Token', action.error.message);
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(postVolume.pending, state => {
-      state.status = 'loading';
-    });
-    builder.addCase(postVolume.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.volume = action.payload;
-      } else if (action.payload === 0) {
-        state.volume = 0;
-      }
-      state.status = 'succeeded';
-    });
-    builder.addCase(postVolume.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
       }
       state.status = 'failed';
     });

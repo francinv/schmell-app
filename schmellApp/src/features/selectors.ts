@@ -14,7 +14,6 @@ export const selectedGame = (state: RootState) => state.game.selectedGame;
 export const selectUserStatus = (state: RootState) => state.usersetting.status;
 export const selectUserError = (state: RootState) => state.usersetting.error;
 export const selectVoice = (state: RootState) => state.usersetting.voice;
-export const selectVolume = (state: RootState) => state.usersetting.volume;
 export const selectLanguage = (state: RootState) => state.usersetting.language;
 export const selectGameDetail = (state: RootState) =>
   state.usersetting.showDetail;

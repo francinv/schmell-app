@@ -5,7 +5,6 @@ export default {
   RETRY: 'Prøv igen',
   STORE: 'Butikken er ikke klar endnu 😿',
   SETTINGS: 'Indstillinger',
-  SETTINGS_VOLUME: 'Lydniveau',
   SETTINGS_VOICE: 'Stemme',
   SETTINGS_LANGUAGE: 'Sprog',
   SETTINGS_C2A: 'Kontakt os',
