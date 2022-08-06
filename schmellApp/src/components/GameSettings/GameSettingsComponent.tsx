@@ -1,28 +1,23 @@
 import React, {useState} from 'react';
-import {
-  Animated,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  View,
-} from 'react-native';
+import {Animated, KeyboardAvoidingView, Platform, View} from 'react-native';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import layoutStyles from '../../styles/layout.styles';
+import paddingStyles from '../../styles/padding.styles';
 import LayoutContainer from '../Background/LayoutContainer';
 import StartButton from '../Buttons/StartButton';
 import Header from '../Header/Header';
 import PlayerDisplay from './PlayerDisplay';
 import PlayerInput from './PlayerInput';
-import SettingsSection, {
+/* import SettingsSection, {
   settingsState as settingsStateType,
-} from './SettingsSection';
+} from './SettingsSection'; */
 
 const GameSettingsComponent: React.FC = () => {
-  const [settingsState, setSettingsState] = useState<settingsStateType>({
+  /* const [settingsState, setSettingsState] = useState<settingsStateType>({
     show: false,
     wantedSettings: '',
-  });
+  }); */
 
   const [buttonText, setButtonText] = useState('Start');
   const [shakeAnimation] = useState(new Animated.Value(0));
@@ -34,16 +29,21 @@ const GameSettingsComponent: React.FC = () => {
   return (
     <LayoutContainer>
       <Header />
-      <SafeAreaView style={layoutStyles.flex_1}>
+      <View style={layoutStyles.flex_1}>
         <KeyboardAvoidingView
           style={layoutStyles.flex_1}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <PlayerDisplay interpolatedShake={shakeInterpolated} />
-          <View style={[colorStyles.bg_tertiary, globalStyles.border_top_20]}>
-            <SettingsSection
+          <View
+            style={[
+              colorStyles.bg_tertiary,
+              globalStyles.border_top_20,
+              paddingStyles.pb_20,
+            ]}>
+            {/* <SettingsSection
               state={settingsState}
               setState={setSettingsState}
-            />
+            /> */}
             <PlayerInput
               inputPlace="Settings"
               buttonText={buttonText}
@@ -57,7 +57,7 @@ const GameSettingsComponent: React.FC = () => {
             />
           </View>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </LayoutContainer>
   );
 };
