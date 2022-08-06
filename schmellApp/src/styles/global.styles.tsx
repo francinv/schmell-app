@@ -16,11 +16,13 @@ const globalStyles = StyleSheet.create({
   border_radius_100: {
     borderRadius: 100,
   },
-  border_bottom_end_20: {
-    borderBottomEndRadius: 20,
+  border_bottom_10: {
+    borderBottomStartRadius: 10,
+    borderBottomEndRadius: 10,
   },
-  border_bottom_start_20: {
-    borderBottomStartRadius: 20,
+  border_top_10: {
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
   },
   border_top_20: {
     borderTopStartRadius: 20,
@@ -85,7 +87,7 @@ const globalStyles = StyleSheet.create({
     position: 'absolute',
   },
   iconLeftTop: {
-    top: 2,
+    top: 11,
     left: 5,
     position: 'absolute',
   },

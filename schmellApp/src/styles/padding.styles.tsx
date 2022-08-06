@@ -34,8 +34,14 @@ const paddingStyles = StyleSheet.create({
   p_ver_10: {
     paddingVertical: 10,
   },
+  p_ver_15: {
+    paddingVertical: 15,
+  },
   pr_0: {
     paddingRight: 0,
+  },
+  pb_10: {
+    paddingBottom: 10,
   },
   pb_20: {
     paddingBottom: 20,
