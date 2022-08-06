@@ -74,6 +74,8 @@ const PlayerName: FC<NameProps> = props => {
         paddingStyles.p_5,
         colorStyles.bg_tertiary,
         layoutStyles.flex_center,
+        layoutStyles.flex_row,
+        layoutStyles.justify_space,
         globalStyles.border_radius_8,
       ]}>
       <UserIcon />
@@ -83,11 +85,12 @@ const PlayerName: FC<NameProps> = props => {
           textStyles.text_font_primary,
           textStyles.text_22,
           colorStyles.color_tertiary,
-          widthStyles(0).w_p_100,
+          widthStyles(0).w_max_80,
+          paddingStyles.p_hor_5,
         ]}>
         {name}
       </Animated.Text>
-      <TouchableOpacity style={globalStyles.iconRightTop} onPress={handlePress}>
+      <TouchableOpacity onPress={handlePress} style={layoutStyles.self_start}>
         <XIconPlayerDisplay />
       </TouchableOpacity>
     </Animated.View>
