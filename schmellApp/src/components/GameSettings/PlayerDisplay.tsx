@@ -1,10 +1,14 @@
+import {Dispatch} from '@reduxjs/toolkit';
 import React, {FC, useEffect, useState} from 'react';
 
-import {Animated} from 'react-native';
+import {Animated, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 import scaleAnimation from '../../animations/scaleAnimation';
 import slideAnimation from '../../animations/slideAnimation';
 import UserIcon from '../../assets/icons/UserIcon';
+import {XIconPlayerDisplay} from '../../assets/icons/XIcon';
+import {removePlayer} from '../../features/gamesettings/gameSettingSlice';
+import {useAppDispatch} from '../../features/hooks';
 import {selectLanguage, selectPlayers} from '../../features/selectors';
 import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
@@ -27,8 +31,14 @@ interface NameProps {
   scaleValue: Animated.Value[];
   moveValue: Animated.Value[];
 }
+
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  removeFromList: (query: number) => dispatch(removePlayer(query)),
+});
+
 const PlayerName: FC<NameProps> = props => {
   const {index, name, scaleValue, moveValue} = props;
+  const {removeFromList} = actionDispatch(useAppDispatch());
 
   useEffect(() => {
     if (moveValue[1] !== undefined) {
@@ -48,6 +58,10 @@ const PlayerName: FC<NameProps> = props => {
         translateX: moveValue[index],
       },
     ],
+  };
+
+  const handlePress = () => {
+    removeFromList(index);
   };
 
   return (
@@ -73,6 +87,9 @@ const PlayerName: FC<NameProps> = props => {
         ]}>
         {name}
       </Animated.Text>
+      <TouchableOpacity style={globalStyles.iconRightTop} onPress={handlePress}>
+        <XIconPlayerDisplay />
+      </TouchableOpacity>
     </Animated.View>
   );
 };
