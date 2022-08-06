@@ -84,9 +84,14 @@ const globalStyles = StyleSheet.create({
     right: 0,
     position: 'absolute',
   },
-  iconTop: {
+  iconLeftTop: {
     top: 2,
-    left: 2,
+    left: 5,
+    position: 'absolute',
+  },
+  iconRightTop: {
+    top: 2,
+    right: 5,
     position: 'absolute',
   },
   z_100: {
