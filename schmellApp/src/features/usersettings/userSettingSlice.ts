@@ -1,15 +1,23 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {LANGUAGE_KEY, VOICE_KEY, VOLUME_KEY} from '../../constants/common';
-import {user_settings} from '../../typings/settingsTypes';
+import {
+  LANGUAGE_KEY,
+  SHOW_DETAIL_KEY,
+  VOICE_KEY,
+  VOLUME_KEY,
+} from '../../constants/common';
+import {showDetailType, userSettings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
 import {authService} from '../../services/axiosService';
 import {decrypt} from '../../utils/crypto';
 import encryptedStorageService from '../../services/encryptedStorageService';
 
+const showDetail: showDetailType[] = [];
+
 const initialState = {
   api_key: '',
   volume: 3,
   voice: 'F',
+  showDetail,
   language: 'nb-NO',
   status: 'idle',
   error: '',
@@ -37,13 +45,31 @@ export const fetchSettings = createAsyncThunk(
   },
 );
 
+export const fetchDetail = createAsyncThunk(
+  'userSetting/fetchDetail',
+  async () => {
+    return asyncStorageService(SHOW_DETAIL_KEY, '', 'GET');
+  },
+);
+
 export const postSettings = createAsyncThunk(
   'usersetting/postSettings',
-  async (data: user_settings) => {
+  async (data: userSettings) => {
     await asyncStorageService(VOLUME_KEY, data.volume, 'SET');
     await asyncStorageService(VOICE_KEY, data.voice, 'SET');
     await asyncStorageService(LANGUAGE_KEY, data.language, 'SET');
+    await asyncStorageService(SHOW_DETAIL_KEY, data.showDetail, 'SET');
     return data;
+  },
+);
+
+export const postDetail = createAsyncThunk(
+  'userSetting/postDetail',
+  async (data: {id: number; show: boolean; currentState: showDetailType[]}) => {
+    const {id, show, currentState} = data;
+    const arrayOfDetailShow = currentState.concat({id: id, show: show});
+    await asyncStorageService(SHOW_DETAIL_KEY, arrayOfDetailShow, 'SET');
+    return arrayOfDetailShow;
   },
 );
 
@@ -180,6 +206,34 @@ const UserSettingSlice = createSlice({
       state.status = 'succeeded';
     });
     builder.addCase(postLanguage.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(fetchDetail.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchDetail.fulfilled, (state, action) => {
+      state.showDetail = action.payload;
+      console.log('fetch detail', action.payload);
+      state.status = 'succeeded';
+    });
+    builder.addCase(fetchDetail.rejected, (state, action) => {
+      if (action.error.message) {
+        state.error = action.error.message;
+      }
+      state.status = 'failed';
+    });
+    builder.addCase(postDetail.pending, state => {
+      state.status = 'loading';
+    });
+    builder.addCase(postDetail.fulfilled, (state, action) => {
+      state.showDetail = action.payload;
+      console.log('detail added', action.payload);
+      state.status = 'succeeded';
+    });
+    builder.addCase(postDetail.rejected, (state, action) => {
       if (action.error.message) {
         state.error = action.error.message;
       }
