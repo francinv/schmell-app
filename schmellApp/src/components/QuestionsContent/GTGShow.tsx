@@ -1,4 +1,5 @@
-import React, {FC, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {FC, useEffect, useState} from 'react';
 import {Animated} from 'react-native';
 import {rotate} from '../../animations/rotateAnimation';
 import colorStyles from '../../styles/color.styles';
@@ -31,6 +32,12 @@ const GTGShow: FC<Props> = ({questionDesc, answer}) => {
     setShow(wasShown => !wasShown);
   };
 
+  useEffect(() => {
+    if (show) {
+      setShow(false);
+    }
+  }, []);
+
   const boxStyle = {
     transform: [
       {
@@ -59,6 +66,7 @@ const GTGShow: FC<Props> = ({questionDesc, answer}) => {
         content={show ? 'Skjul svar' : 'Vis svar'}
         customStyle={[marginStyles.mb_10, widthStyles(150).w_custom]}
         handleClick={handlePress}
+        customTextStyle={''}
       />
     </Animated.View>
   );
