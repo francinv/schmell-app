@@ -100,6 +100,12 @@ const globalStyles = StyleSheet.create({
     position: 'relative',
     zIndex: 100,
   },
+  z_1: {
+    zIndex: 1,
+  },
+  z_10: {
+    zIndex: 10,
+  },
 });
 
 export default globalStyles;
