@@ -1,10 +1,15 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {
+  AnyAction,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import {LANGUAGE_KEY, SHOW_DETAIL_KEY, VOICE_KEY} from '../../constants/common';
-import {showDetailType, userSettings} from '../../typings/settingsTypes';
 import {asyncStorageService} from '../../services/asyncStorageService';
 import {authService} from '../../services/axiosService';
-import {decrypt} from '../../utils/crypto';
 import encryptedStorageService from '../../services/encryptedStorageService';
+import {showDetailType, userSettings} from '../../typings/settingsTypes';
+import {decrypt} from '../../utils/crypto';
 
 const showDetail: showDetailType[] = [];
 
@@ -57,11 +62,24 @@ export const postSettings = createAsyncThunk(
 
 export const postDetail = createAsyncThunk(
   'userSetting/postDetail',
-  async (data: {id: number; show: boolean; currentState: showDetailType[]}) => {
-    const {id, show, currentState} = data;
-    const arrayOfDetailShow = currentState.concat({id: id, show: show});
-    await asyncStorageService(SHOW_DETAIL_KEY, arrayOfDetailShow, 'SET');
-    return arrayOfDetailShow;
+  async (data: {
+    id: number;
+    show: boolean;
+    currentState: showDetailType[];
+    update: boolean;
+  }) => {
+    const {id, show, currentState, update} = data;
+    if (update) {
+      const arrayAfterUpdate = currentState.map(item => {
+        return item.id === id ? {id: id, show: show} : item;
+      });
+      await asyncStorageService(SHOW_DETAIL_KEY, arrayAfterUpdate, 'SET');
+      return arrayAfterUpdate;
+    } else {
+      const arrayOfDetailShow = currentState.concat({id: id, show: show});
+      await asyncStorageService(SHOW_DETAIL_KEY, arrayOfDetailShow, 'SET');
+      return arrayOfDetailShow;
+    }
   },
 );
 
@@ -81,6 +99,23 @@ export const postLanguage = createAsyncThunk(
   },
 );
 
+const hasPrefix = (action: AnyAction, prefix: string) =>
+  action.type.startsWith(prefix);
+const isPending = (action: AnyAction) => action.type.endsWith('/pending');
+const isRejected = (action: AnyAction) => action.type.endsWith('/rejected');
+
+const isPendingAction =
+  (prefix: string) =>
+  (action: AnyAction): action is AnyAction => {
+    return hasPrefix(action, prefix) && isPending(action);
+  };
+
+const isRejectedAction =
+  (prefix: string) =>
+  (action: AnyAction): action is AnyAction => {
+    return hasPrefix(action, prefix) && isRejected(action);
+  };
+
 const UserSettingSlice = createSlice({
   name: 'usersetting',
   initialState: initialState,
@@ -93,40 +128,12 @@ const UserSettingSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchSettings.pending, state => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchSettings.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.voice = action.payload.voi;
-        state.language = action.payload.lang;
-      }
-      state.status = 'succeeded';
-    });
-    builder.addCase(fetchSettings.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(postSettings.pending, state => {
-      state.status = 'loading';
-    });
     builder.addCase(postSettings.fulfilled, (state, action) => {
       if (action.payload) {
         state.voice = action.payload.voice;
         state.language = action.payload.language;
       }
       state.status = 'succeeded';
-    });
-    builder.addCase(postSettings.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(setTokens.pending, state => {
-      state.status = 'loading';
     });
     builder.addCase(setTokens.fulfilled, (state, action) => {
       if (action.payload) {
@@ -139,30 +146,11 @@ const UserSettingSlice = createSlice({
       }
       state.status = 'succeeded';
     });
-    builder.addCase(setTokens.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-        console.log('could not fetch Token', action.error.message);
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(postVoice.pending, state => {
-      state.status = 'loading';
-    });
     builder.addCase(postVoice.fulfilled, (state, action) => {
       if (action.payload) {
         state.voice = action.payload;
       }
       state.status = 'succeeded';
-    });
-    builder.addCase(postVoice.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(postLanguage.pending, state => {
-      state.status = 'loading';
     });
     builder.addCase(postLanguage.fulfilled, (state, action) => {
       if (action.payload) {
@@ -170,40 +158,30 @@ const UserSettingSlice = createSlice({
       }
       state.status = 'succeeded';
     });
-    builder.addCase(postLanguage.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(fetchDetail.pending, state => {
-      state.status = 'loading';
-    });
     builder.addCase(fetchDetail.fulfilled, (state, action) => {
       state.showDetail = action.payload;
-      console.log('fetch detail', action.payload);
       state.status = 'succeeded';
-    });
-    builder.addCase(fetchDetail.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(postDetail.pending, state => {
-      state.status = 'loading';
     });
     builder.addCase(postDetail.fulfilled, (state, action) => {
       state.showDetail = action.payload;
-      console.log('detail added', action.payload);
       state.status = 'succeeded';
     });
-    builder.addCase(postDetail.rejected, (state, action) => {
-      if (action.error.message) {
+    builder
+      .addCase(fetchSettings.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.voice = action.payload.voi;
+          state.language = action.payload.lang;
+        }
+        state.status = 'succeeded';
+      })
+      .addMatcher(isPendingAction('usersetting/'), state => {
+        state.status = 'loading';
+        state.error = '';
+      })
+      .addMatcher(isRejectedAction('usersetting/'), (state, action) => {
+        state.status = 'failed';
         state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
+      });
   },
 });
 
