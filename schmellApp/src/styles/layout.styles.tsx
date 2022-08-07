@@ -59,6 +59,9 @@ const layoutStyles = StyleSheet.create({
   align_end: {
     alignItems: 'flex-end',
   },
+  self_start: {
+    alignSelf: 'flex-start',
+  },
 });
 
 export default layoutStyles;

@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 import {selectLanguage} from '../../features/selectors';
 import LayoutContainer from '../Background/LayoutContainer';
 import Header from '../Header/Header';
-import Volume from './Components/Volume';
 import Voice from './Components/Voice';
 import Language from './Components/Language';
 import Social from './Components/Social';
@@ -43,7 +42,6 @@ const SettingsComponent: React.FC = () => {
           ]}>
           {useLocale(language, 'SETTINGS')}
         </Text>
-        <Volume />
         <Voice />
         <Language />
         <Social />
@@ -51,6 +49,7 @@ const SettingsComponent: React.FC = () => {
           handleClick={handleClick}
           content={useLocale(language, 'SETTINGS_C2A') as string}
           customStyle={undefined}
+          customTextStyle={''}
         />
       </SafeAreaView>
     </LayoutContainer>

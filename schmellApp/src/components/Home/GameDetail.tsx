@@ -1,138 +1,158 @@
-import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Animated, SafeAreaView, Text, TouchableOpacity} from 'react-native';
+import {Dispatch} from '@reduxjs/toolkit';
+import React, {FC, useState} from 'react';
+import {Animated, Image, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectedGame, selectLanguage} from '../../features/selectors';
-import CallToAction from '../Buttons/CallToAction';
-import layoutStyles from '../../styles/layout.styles';
-import widthStyles from '../../styles/width.styles';
-import marginStyles from '../../styles/margin.styles';
-import heightStyles from '../../styles/height.styles';
-import textStyles from '../../styles/text.styles';
+import {fetchWeek, setSelectedGame} from '../../features/game/gameSlice';
+import {useAppDispatch} from '../../features/hooks';
+import {selectGameDetail, selectLanguage} from '../../features/selectors';
+import {postDetail} from '../../features/usersettings/userSettingSlice';
+import useLocale from '../../hooks/useLocale';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
+import heightStyles from '../../styles/height.styles';
+import layoutStyles from '../../styles/layout.styles';
+import marginStyles from '../../styles/margin.styles';
 import paddingStyles from '../../styles/padding.styles';
+import textStyles from '../../styles/text.styles';
+import widthStyles from '../../styles/width.styles';
+import {gameType} from '../../typings/gameTypes';
 import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
-import useLocale from '../../hooks/useLocale';
+import {showDetailType} from '../../typings/settingsTypes';
+import {getCurrentWeekNumber} from '../../utils/dateUtil';
+import CallToAction from '../Buttons/CallToAction';
+import Checkbox from '../Form/Checkbox';
 
-interface GameDetailProps {
-  handleShow: () => void;
+interface Props {
+  game: gameType;
+  opacityAnim: Animated.Value;
 }
 
-const GameDetail: React.FC<GameDetailProps> = ({handleShow}) => {
-  const game = useSelector(selectedGame);
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setDetailShow: (query: {
+    id: number;
+    show: boolean;
+    currentState: showDetailType[];
+    update: boolean;
+  }) => dispatch(postDetail(query)),
+  selectedGame: (query: number) => dispatch(setSelectedGame(query)),
+  setWeek: (query: {weekNumber: number; idGame: number}) =>
+    dispatch(fetchWeek(query)),
+});
+
+const GameDetail: FC<Props> = ({game, opacityAnim}) => {
+  const {description, logo, name, id} = game;
+  const {setDetailShow, selectedGame, setWeek} = actionDispatch(
+    useAppDispatch(),
+  );
+  const showDetail = useSelector(selectGameDetail);
   const lang = useSelector(selectLanguage);
-  const [opacityAnim] = useState(new Animated.Value(0));
-  const [moveInAnim] = useState(new Animated.Value(500));
+  const buttonText = useLocale(lang, 'GAME_DETAIL_GO') as string;
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [showCheckbox, setShowCheckbox] = useState(false);
 
   const handleClick = () => {
+    if (!showDetail.some(e => e.id === id)) {
+      setDetailShow({
+        id: id,
+        show: showCheckbox,
+        currentState: showDetail,
+        update: false,
+      });
+    } else {
+      setDetailShow({
+        id: id,
+        show: showCheckbox,
+        currentState: showDetail,
+        update: true,
+      });
+    }
+
+    setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
+    selectedGame(id);
     navigation.navigate('GameSettings');
   };
 
-  function closeOverlay() {
-    Animated.timing(opacityAnim, {
-      toValue: 0,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(moveInAnim, {
-      toValue: 500,
-      duration: 750,
-      useNativeDriver: false,
-    }).start();
-    setTimeout(handleShow, 2000);
-  }
+  const opacityStyle = {
+    opacity: opacityAnim,
+  };
 
-  useEffect(() => {
-    Animated.timing(opacityAnim, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: false,
-    }).start();
-    Animated.timing(moveInAnim, {
-      toValue: 0,
-      duration: 750,
-      useNativeDriver: false,
-    }).start();
-  }, [moveInAnim, opacityAnim]);
+  const CheckBoxView = (
+    <View
+      style={[
+        layoutStyles.flex_center,
+        layoutStyles.flex_row,
+        marginStyles.mt_10,
+        widthStyles(0).w_p_60,
+        layoutStyles.justify_evenly,
+      ]}>
+      <Checkbox
+        isChecked={showCheckbox}
+        onCheck={() => {
+          setShowCheckbox(wasShown => !wasShown);
+        }}
+      />
+      <Text
+        style={[
+          textStyles.text_font_secondary,
+          textStyles.text_20,
+          textStyles.font_500,
+          colorStyles.color_tertiary,
+        ]}>
+        {useLocale(lang, 'GAME_DETAIL_SHOW')}
+      </Text>
+    </View>
+  );
 
   return (
-    <SafeAreaView style={[layoutStyles.flex_column, layoutStyles.align_center]}>
-      <Animated.View
+    <Animated.View
+      style={[
+        widthStyles(0).w_p_85,
+        globalStyles.border_bottom_10,
+        colorStyles.bg_tertiary,
+        paddingStyles.p_ver_10,
+        paddingStyles.pb_20,
+        layoutStyles.flex_center,
+        globalStyles.z_1,
+        opacityStyle,
+      ]}>
+      <Image
+        source={{uri: logo}}
         style={[
-          widthStyles(0).w_p_90,
           marginStyles.m_hor_auto,
-          heightStyles(0).h_p_50,
-          {opacity: opacityAnim},
-        ]}>
-        <TouchableOpacity
-          onPress={closeOverlay}
-          style={[widthStyles(0).w_p_100, heightStyles(0).h_p_100]}>
-          <Text
-            style={[
-              textStyles.text_font_primary,
-              textStyles.text_shadow,
-              colorStyles.color_primary,
-              textStyles.text_40,
-              textStyles.text_center,
-              marginStyles.mt_20,
-            ]}>
-            {game.name}
-          </Text>
-          <Animated.Image
-            source={{uri: game.logo}}
-            style={[
-              heightStyles(0).h_p_75,
-              marginStyles.m_hor_auto,
-              widthStyles(0).w_p_90,
-              marginStyles.mt_10,
-              {opacity: opacityAnim},
-            ]}
-          />
-        </TouchableOpacity>
-      </Animated.View>
-      <Animated.View
+          widthStyles(200).w_custom,
+          heightStyles(200).h_custom,
+        ]}
+      />
+      <Text
         style={[
-          widthStyles(0).w_p_100,
-          heightStyles(0).h_p_50,
-          colorStyles.bg_septenary,
-          globalStyles.border_top_start_30,
-          globalStyles.border_top_end_30,
-          paddingStyles.p_hor_5,
-          {transform: [{translateY: moveInAnim}]},
+          textStyles.text_30,
+          textStyles.text_center,
+          textStyles.text_font_primary,
+          colorStyles.color_tertiary,
+          widthStyles(0).w_p_90,
         ]}>
-        <CallToAction
-          handleClick={handleClick}
-          content={useLocale(lang, 'GAME_DETAIL_GO') as string}
-          customStyle={[
-            layoutStyles.top_min_20,
-            layoutStyles.pos_rel,
-            marginStyles.mt_0,
-          ]}
-        />
-        <Text
-          style={[
-            textStyles.text_font_primary,
-            colorStyles.color_tertiary,
-            textStyles.text_30,
-            marginStyles.mt_10,
-            textStyles.text_center,
-          ]}>
-          {useLocale(lang, 'GAME_DETAIL')}
-        </Text>
-        <Text
-          style={[
-            textStyles.text_font_secondary,
-            colorStyles.color_tertiary,
-            marginStyles.mt_15,
-            textStyles.text_center,
-            textStyles.text_20,
-          ]}>
-          {game.description}
-        </Text>
-      </Animated.View>
-    </SafeAreaView>
+        {useLocale(lang, 'GAME_DETAIL')} {name}?
+      </Text>
+      <Text
+        style={[
+          textStyles.text_center,
+          textStyles.text_font_secondary,
+          colorStyles.color_tertiary,
+          textStyles.text_16,
+          widthStyles(0).w_p_90,
+          marginStyles.mt_5,
+        ]}>
+        {description}
+      </Text>
+      {CheckBoxView}
+      <CallToAction
+        content={buttonText}
+        handleClick={handleClick}
+        customStyle={[widthStyles(0).w_p_80, heightStyles(60).h_custom]}
+        customTextStyle={textStyles.text_30}
+      />
+    </Animated.View>
   );
 };
 

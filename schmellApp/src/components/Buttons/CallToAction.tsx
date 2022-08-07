@@ -12,12 +12,14 @@ import widthStyles from '../../styles/width.styles';
 interface CallToActionProps {
   handleClick: () => void;
   content: string;
-  customStyle: any | undefined;
+  customStyle: any;
+  customTextStyle: any;
 }
 const CallToAction: React.FC<CallToActionProps> = ({
   handleClick,
   content,
   customStyle,
+  customTextStyle,
 }) => {
   return (
     <TouchableOpacity
@@ -40,6 +42,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
           textStyles.text_center,
           paddingStyles.p_2,
           colorStyles.color_secondary,
+          customTextStyle,
         ]}>
         {content}
       </Text>

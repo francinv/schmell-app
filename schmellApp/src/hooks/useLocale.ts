@@ -10,7 +10,6 @@ type allowedAttribute =
   | 'RETRY'
   | 'STORE'
   | 'SETTINGS'
-  | 'SETTINGS_VOLUME'
   | 'SETTINGS_VOICE'
   | 'SETTINGS_LANGUAGE'
   | 'SETTINGS_C2A'
@@ -28,7 +27,8 @@ type allowedAttribute =
   | 'GAME_END_INFORMATION'
   | 'GAME_HINT_INFORMATION'
   | 'GAME_LOADING_INFORMATION'
-  | 'GAME_LOADING_TITLE';
+  | 'GAME_LOADING_TITLE'
+  | 'GAME_DETAIL_SHOW';
 
 function useLocale(wantedLanguage: string, wantedAttribute: allowedAttribute) {
   switch (wantedLanguage) {
