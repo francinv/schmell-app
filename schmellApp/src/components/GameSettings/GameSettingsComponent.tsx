@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import {Dispatch} from '@reduxjs/toolkit';
+import React, {FC, useEffect, useState} from 'react';
 import {Animated, KeyboardAvoidingView, Platform, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {fetchWeek} from '../../features/game/gameSlice';
+import {useAppDispatch} from '../../features/hooks';
+import {selectedGame} from '../../features/selectors';
 import colorStyles from '../../styles/color.styles';
 import globalStyles from '../../styles/global.styles';
 import layoutStyles from '../../styles/layout.styles';
 import paddingStyles from '../../styles/padding.styles';
+import {getCurrentWeekNumber} from '../../utils/dateUtil';
 import LayoutContainer from '../Background/LayoutContainer';
 import StartButton from '../Buttons/StartButton';
 import Header from '../Header/Header';
@@ -13,11 +19,23 @@ import PlayerInput from './PlayerInput';
   settingsState as settingsStateType,
 } from './SettingsSection'; */
 
-const GameSettingsComponent: React.FC = () => {
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setWeek: (query: {weekNumber: number; idGame: number}) =>
+    dispatch(fetchWeek(query)),
+});
+
+const GameSettingsComponent: FC = () => {
   /* const [settingsState, setSettingsState] = useState<settingsStateType>({
     show: false,
     wantedSettings: '',
   }); */
+  const game = useSelector(selectedGame);
+  const {setWeek} = actionDispatch(useAppDispatch());
+
+  useEffect(() => {
+    setWeek({weekNumber: getCurrentWeekNumber(), idGame: game.id});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [game]);
 
   const [buttonText, setButtonText] = useState('Start');
   const [shakeAnimation] = useState(new Animated.Value(0));

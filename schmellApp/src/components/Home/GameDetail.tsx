@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {Dispatch} from '@reduxjs/toolkit';
 import React, {FC, useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Animated, Image, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {fetchWeek, setSelectedGame} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
@@ -25,6 +25,7 @@ import Checkbox from '../Form/Checkbox';
 
 interface Props {
   game: gameType;
+  opacityAnim: Animated.Value;
 }
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
@@ -32,13 +33,14 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
     id: number;
     show: boolean;
     currentState: showDetailType[];
+    update: boolean;
   }) => dispatch(postDetail(query)),
   selectedGame: (query: number) => dispatch(setSelectedGame(query)),
   setWeek: (query: {weekNumber: number; idGame: number}) =>
     dispatch(fetchWeek(query)),
 });
 
-const GameDetail: FC<Props> = ({game}) => {
+const GameDetail: FC<Props> = ({game, opacityAnim}) => {
   const {description, logo, name, id} = game;
   const {setDetailShow, selectedGame, setWeek} = actionDispatch(
     useAppDispatch(),
@@ -50,10 +52,29 @@ const GameDetail: FC<Props> = ({game}) => {
   const [showCheckbox, setShowCheckbox] = useState(false);
 
   const handleClick = () => {
-    setDetailShow({id: id, show: showCheckbox, currentState: showDetail});
+    if (!showDetail.some(e => e.id === id)) {
+      setDetailShow({
+        id: id,
+        show: showCheckbox,
+        currentState: showDetail,
+        update: false,
+      });
+    } else {
+      setDetailShow({
+        id: id,
+        show: showCheckbox,
+        currentState: showDetail,
+        update: true,
+      });
+    }
+
     setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
     selectedGame(id);
     navigation.navigate('GameSettings');
+  };
+
+  const opacityStyle = {
+    opacity: opacityAnim,
   };
 
   const CheckBoxView = (
@@ -84,7 +105,7 @@ const GameDetail: FC<Props> = ({game}) => {
   );
 
   return (
-    <View
+    <Animated.View
       style={[
         widthStyles(0).w_p_85,
         globalStyles.border_bottom_10,
@@ -92,6 +113,8 @@ const GameDetail: FC<Props> = ({game}) => {
         paddingStyles.p_ver_10,
         paddingStyles.pb_20,
         layoutStyles.flex_center,
+        globalStyles.z_1,
+        opacityStyle,
       ]}>
       <Image
         source={{uri: logo}}
@@ -129,7 +152,7 @@ const GameDetail: FC<Props> = ({game}) => {
         customStyle={[widthStyles(0).w_p_80, heightStyles(60).h_custom]}
         customTextStyle={textStyles.text_30}
       />
-    </View>
+    </Animated.View>
   );
 };
 
