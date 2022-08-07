@@ -1,4 +1,9 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {
+  AnyAction,
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import {gameType} from '../../typings/gameTypes';
 import {weekType} from '../../typings/weekTypes';
 import {questionType} from '../../typings/questionTypes';
@@ -57,6 +62,23 @@ export const fetchQuestions = createAsyncThunk(
   },
 );
 
+const hasPrefix = (action: AnyAction, prefix: string) =>
+  action.type.startsWith(prefix);
+const isPending = (action: AnyAction) => action.type.endsWith('/pending');
+const isRejected = (action: AnyAction) => action.type.endsWith('/rejected');
+
+const isPendingAction =
+  (prefix: string) =>
+  (action: AnyAction): action is AnyAction => {
+    return hasPrefix(action, prefix) && isPending(action);
+  };
+
+const isRejectedAction =
+  (prefix: string) =>
+  (action: AnyAction): action is AnyAction => {
+    return hasPrefix(action, prefix) && isRejected(action);
+  };
+
 const GameSlice = createSlice({
   name: 'game',
   initialState: initialState,
@@ -74,23 +96,11 @@ const GameSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchGames.pending, state => {
-      state.status = 'loading';
-    });
     builder.addCase(fetchGames.fulfilled, (state, action) => {
       if (action.payload) {
         state.games = action.payload;
       }
       state.status = 'succeeded';
-    });
-    builder.addCase(fetchGames.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(fetchWeek.pending, state => {
-      state.status = 'loading';
     });
     builder.addCase(fetchWeek.fulfilled, (state, action) => {
       if (action.payload) {
@@ -98,31 +108,21 @@ const GameSlice = createSlice({
       }
       state.status = 'succeeded';
     });
-    builder.addCase(fetchWeek.rejected, (state, action) => {
-      if (action.error.message) {
+    builder
+      .addCase(fetchQuestions.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.questions = action.payload;
+        }
+        state.status = 'succeeded';
+      })
+      .addMatcher(isPendingAction('usersetting/'), state => {
+        state.status = 'loading';
+        state.error = '';
+      })
+      .addMatcher(isRejectedAction('usersetting/'), (state, action) => {
+        state.status = 'failed';
         state.error = action.error.message;
-      }
-      state.status = 'failed';
-    });
-    builder.addCase(fetchQuestions.pending, state => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchQuestions.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.questions = action.payload;
-      }
-      state.status = 'succeeded';
-    });
-    builder.addCase(fetchQuestions.rejected, (state, action) => {
-      if (action.error.message) {
-        state.error = action.error.message;
-        console.log(
-          'something went wrong when fetching question',
-          action.error.message,
-        );
-      }
-      state.status = 'failed';
-    });
+      });
   },
 });
 

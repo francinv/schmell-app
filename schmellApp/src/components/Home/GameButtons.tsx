@@ -6,10 +6,7 @@ import layoutStyles from '../../styles/layout.styles';
 import widthStyles from '../../styles/width.styles';
 import GameButton from '../Buttons/GameButton';
 
-interface ButtonProps {
-  handleShow: () => void;
-}
-const HomeButtons: FC<ButtonProps> = ({handleShow}) => {
+const HomeButtons: FC = () => {
   const games = useSelector(selectGames);
 
   const GameWrapper: FC = ({children}) => (
@@ -30,12 +27,7 @@ const HomeButtons: FC<ButtonProps> = ({handleShow}) => {
   return (
     <GameWrapper>
       {games.map(game => (
-        <GameButton
-          key={game.id}
-          id={game.id}
-          name={game.name}
-          handleShow={handleShow}
-        />
+        <GameButton key={game.id} game={game} />
       ))}
     </GameWrapper>
   );

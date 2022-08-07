@@ -1,11 +1,10 @@
 import React from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import globalStyles from '../../styles/global.styles';
 import {
   BackIconButton,
   SettingsIconButton,
-  StoreIconButton,
+  /* StoreIconButton, */
 } from '../Buttons/IconButtons';
 import marginStyles from '../../styles/margin.styles';
 import heightStyles from '../../styles/height.styles';
@@ -21,12 +20,7 @@ const Header: React.FC = () => {
 
   if (title === 'Home') {
     return (
-      <SafeAreaView
-        style={[
-          heightStyles(95).h_custom,
-          globalStyles.border_bottom_end_20,
-          globalStyles.border_bottom_start_20,
-        ]}>
+      <SafeAreaView style={[heightStyles(95).h_custom]}>
         <View
           style={[
             widthStyles(0).w_p_100,
@@ -34,7 +28,7 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <StoreIconButton onPress={() => homeNavigation.navigate('Store')} />
+          {/* <StoreIconButton onPress={() => homeNavigation.navigate('Store')} /> */}
           <SettingsIconButton
             onPress={() => homeNavigation.navigate('Settings')}
           />
@@ -43,12 +37,7 @@ const Header: React.FC = () => {
     );
   } else {
     return (
-      <SafeAreaView
-        style={[
-          heightStyles(95).h_custom,
-          globalStyles.border_bottom_end_20,
-          globalStyles.border_bottom_start_20,
-        ]}>
+      <SafeAreaView style={[heightStyles(95).h_custom]}>
         <View
           style={[
             widthStyles(0).w_p_100,

@@ -22,3 +22,15 @@ export const XIconModal: FC = () => (
     />
   </Svg>
 );
+
+export const XIconPlayerDisplay: FC = () => (
+  <Svg width={16} height={16} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <Path
+      d="m12 4-8 8M4 4l8 8"
+      stroke="#fff"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);

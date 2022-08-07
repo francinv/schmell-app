@@ -26,6 +26,9 @@ const marginStyles = StyleSheet.create({
   mt_0: {
     marginTop: 0,
   },
+  mt_5: {
+    marginTop: 5,
+  },
   mt_10: {
     marginTop: 10,
   },
@@ -58,6 +61,9 @@ const marginStyles = StyleSheet.create({
   },
   mt_40: {
     marginTop: 40,
+  },
+  m_hor_10: {
+    marginHorizontal: 10,
   },
   m_hor_14: {
     marginLeft: 14,
