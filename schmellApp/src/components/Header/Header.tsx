@@ -4,7 +4,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {
   BackIconButton,
   SettingsIconButton,
-  StoreIconButton,
+  /* StoreIconButton, */
 } from '../Buttons/IconButtons';
 import marginStyles from '../../styles/margin.styles';
 import heightStyles from '../../styles/height.styles';
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
             layoutStyles.align_center,
             layoutStyles.justify_space,
           ]}>
-          <StoreIconButton onPress={() => homeNavigation.navigate('Store')} />
+          {/* <StoreIconButton onPress={() => homeNavigation.navigate('Store')} /> */}
           <SettingsIconButton
             onPress={() => homeNavigation.navigate('Settings')}
           />
