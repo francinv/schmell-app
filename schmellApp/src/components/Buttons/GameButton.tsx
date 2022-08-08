@@ -56,7 +56,7 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
 
   const shadowInterpolation = shadowAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [4, 0],
+    outputRange: [6, 0],
   });
   const borderInterpolation = borderAnim.interpolate({
     inputRange: [0, 1],
