@@ -42,9 +42,9 @@ const globalStyles = StyleSheet.create({
   },
   boxShadow: {
     shadowColor: '#000',
-    shadowOpacity: 0.25,
-    shadowOffset: {width: 4, height: 4},
-    shadowRadius: 4,
+    shadowOpacity: 0.75,
+    shadowOffset: {width: 6, height: 6},
+    shadowRadius: 6,
   },
   modalView: {
     backgroundColor: '#FFD700',

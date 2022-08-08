@@ -53,7 +53,6 @@ const PlayerInput: FC<InputProps> = props => {
           widthStyles(0).w_p_80,
           colorStyles.bg_senary,
           globalStyles.border_radius_4,
-          globalStyles.boxShadow,
           paddingStyles.p_hor_5,
           textStyles.text_font_secondary,
           colorStyles.color_tertiary,

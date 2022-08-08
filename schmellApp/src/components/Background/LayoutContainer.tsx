@@ -1,40 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import {Animated} from 'react-native';
+import colorStyles from '../../styles/color.styles';
 import layoutStyles from '../../styles/layout.styles';
 
-const LayoutContainer: React.FC = ({children}) => {
-  const [animation] = useState(new Animated.Value(0));
-
-  const handleAnimation = () => {
-    Animated.timing(animation, {
-      toValue: 1,
-      duration: 5000,
-      useNativeDriver: false,
-    }).start(() => {
-      Animated.timing(animation, {
-        toValue: 0,
-        duration: 5000,
-        useNativeDriver: false,
-      }).start(() => handleAnimation());
-    });
-  };
-
-  const boxInterpolation = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['rgb(0, 226, 191)', 'rgb(110, 82, 143)'],
-  });
-
-  const animatedStyle = {
-    backgroundColor: boxInterpolation,
-  };
-
-  useEffect(() => {
-    handleAnimation();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+const LayoutContainer: FC = ({children}) => {
   return (
-    <Animated.View style={[layoutStyles.flex_1, animatedStyle]}>
+    <Animated.View style={[layoutStyles.flex_1, colorStyles.bg_septenary]}>
       {children}
     </Animated.View>
   );
