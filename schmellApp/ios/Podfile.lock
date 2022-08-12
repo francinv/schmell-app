@@ -6,6 +6,10 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXApplication (4.2.2):
     - ExpoModulesCore
+  - EXAV (12.0.4):
+    - ExpoModulesCore
+    - React-runtimeexecutor
+    - ReactCommon
   - EXConstants (13.2.3):
     - ExpoModulesCore
   - EXErrorRecovery (3.2.0):
@@ -369,6 +373,25 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.69.1)
   - React-runtimeexecutor (0.69.1):
     - React-jsi (= 0.69.1)
+  - ReactCommon (0.69.1):
+    - React-logger (= 0.69.1)
+    - ReactCommon/react_debug_core (= 0.69.1)
+    - ReactCommon/turbomodule (= 0.69.1)
+  - ReactCommon/react_debug_core (0.69.1):
+    - React-logger (= 0.69.1)
+  - ReactCommon/turbomodule (0.69.1):
+    - DoubleConversion
+    - glog
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - React-bridging (= 0.69.1)
+    - React-callinvoker (= 0.69.1)
+    - React-Core (= 0.69.1)
+    - React-cxxreact (= 0.69.1)
+    - React-jsi (= 0.69.1)
+    - React-logger (= 0.69.1)
+    - React-perflogger (= 0.69.1)
+    - ReactCommon/turbomodule/core (= 0.69.1)
+    - ReactCommon/turbomodule/samples (= 0.69.1)
   - ReactCommon/turbomodule/core (0.69.1):
     - DoubleConversion
     - glog
@@ -380,6 +403,18 @@ PODS:
     - React-jsi (= 0.69.1)
     - React-logger (= 0.69.1)
     - React-perflogger (= 0.69.1)
+  - ReactCommon/turbomodule/samples (0.69.1):
+    - DoubleConversion
+    - glog
+    - RCT-Folly (= 2021.06.28.00-v2)
+    - React-bridging (= 0.69.1)
+    - React-callinvoker (= 0.69.1)
+    - React-Core (= 0.69.1)
+    - React-cxxreact (= 0.69.1)
+    - React-jsi (= 0.69.1)
+    - React-logger (= 0.69.1)
+    - React-perflogger (= 0.69.1)
+    - ReactCommon/turbomodule/core (= 0.69.1)
   - RNCAsyncStorage (1.16.1):
     - React-Core
   - RNScreens (3.13.1):
@@ -397,6 +432,7 @@ DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXApplication (from `../node_modules/expo-application/ios`)
+  - EXAV (from `../node_modules/expo-av/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
@@ -492,6 +528,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXApplication:
     :path: "../node_modules/expo-application/ios"
+  EXAV:
+    :path: "../node_modules/expo-av/ios"
   EXConstants:
     :path: "../node_modules/expo-constants/ios"
   EXErrorRecovery:
@@ -585,6 +623,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   EXApplication: e418d737a036e788510f2c4ad6c10a7d54d18586
+  EXAV: 596506c9bee54ad52f2f3b625cdaeb9d9f2dd6b7
   EXConstants: 75c40827af38bd6bfcf69f880a5b45037eeff9c9
   EXErrorRecovery: 74d71ee59f6814315457b09d68e86aa95cc7d05d
   EXFileSystem: 927e0a8885aa9c49e50fc38eaba2c2389f2f1019
