@@ -25,4 +25,9 @@ export default {
     'Antalet klunkar som ska drickas kan ses i det vänstra hörnet.',
   GAME_LOADING_INFORMATION: 'hämtar frågorna... ⚡️',
   GAME_LOADING_TITLE: 'Vänta!',
+  BUTTON_MISSING: 'Saknas',
+  BUTTON_PLAYERS: 'spelare',
+  BUTTON_PLAYER: 'spelare',
+  SHOW_ANSWER: 'Visa svar',
+  HIDE_ANSWER: 'Dölj svaret',
 };

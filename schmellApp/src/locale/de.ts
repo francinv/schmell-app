@@ -25,4 +25,9 @@ export default {
     'Antallet af slurke, der skal drikkes, kan ses i venstre hjørne.',
   GAME_LOADING_INFORMATION: 'henter spørgsmålene... ⚡️',
   GAME_LOADING_TITLE: 'Vent!',
+  BUTTON_MISSING: 'Mangler',
+  BUTTON_PLAYERS: 'spillere',
+  BUTTON_PLAYER: 'spiller',
+  SHOW_ANSWER: 'Vis svar',
+  HIDE_ANSWER: 'Skju svar',
 };

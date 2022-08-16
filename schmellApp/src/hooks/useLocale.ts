@@ -28,7 +28,12 @@ type allowedAttribute =
   | 'GAME_HINT_INFORMATION'
   | 'GAME_LOADING_INFORMATION'
   | 'GAME_LOADING_TITLE'
-  | 'GAME_DETAIL_SHOW';
+  | 'GAME_DETAIL_SHOW'
+  | 'BUTTON_MISSING'
+  | 'BUTTON_PLAYERS'
+  | 'BUTTON_PLAYER'
+  | 'SHOW_ANSWER'
+  | 'HIDE_ANSWER';
 
 function useLocale(wantedLanguage: string, wantedAttribute: allowedAttribute) {
   switch (wantedLanguage) {

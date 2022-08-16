@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export async function asyncStorageService(
+export const asyncStorageService = async (
   key: string,
   value: any,
-  type: string,
-) {
+  type: 'GET' | 'SET',
+) => {
   switch (type) {
     case 'GET':
       const temp_get = await AsyncStorage.getItem(key);
@@ -17,4 +17,4 @@ export async function asyncStorageService(
       await AsyncStorage.setItem(key, temp_set);
       break;
   }
-}
+};

@@ -4,39 +4,9 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import {gameType} from '../../typings/gameTypes';
-import {weekType} from '../../typings/weekTypes';
-import {questionType} from '../../typings/questionTypes';
 import axiosService from '../../services/axiosService';
+import {initialGameSlice} from '../../typings/stateTypes';
 import {decrypt} from '../../utils/crypto';
-
-const games: gameType[] = [];
-const week: weekType = {
-  id: 0,
-  week_number: 0,
-  game: 0,
-};
-const questions: questionType[] = [];
-
-const selectedGame: gameType = {
-  id: 1,
-  name: '',
-  description: '',
-  related_question: false,
-  last_updated: '',
-  status: '',
-  logo: '',
-  release_date: '',
-};
-
-const initialState = {
-  games,
-  week,
-  questions,
-  status: 'idle',
-  error: '',
-  selectedGame,
-};
 
 export const fetchGames = createAsyncThunk('game/fetchGames', async () => {
   return axiosService.get(decrypt('Y21zL2dhbWUv')).then(res => res.data);
@@ -81,7 +51,7 @@ const isRejectedAction =
 
 const GameSlice = createSlice({
   name: 'game',
-  initialState: initialState,
+  initialState: initialGameSlice,
   reducers: {
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
@@ -115,11 +85,11 @@ const GameSlice = createSlice({
         }
         state.status = 'succeeded';
       })
-      .addMatcher(isPendingAction('usersetting/'), state => {
+      .addMatcher(isPendingAction('game/'), state => {
         state.status = 'loading';
         state.error = '';
       })
-      .addMatcher(isRejectedAction('usersetting/'), (state, action) => {
+      .addMatcher(isRejectedAction('game/'), (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

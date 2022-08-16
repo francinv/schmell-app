@@ -1,0 +1,68 @@
+import {StyleSheet} from 'react-native';
+
+const gameFunctionStyles = StyleSheet.create({
+  simpleText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: '500',
+    textAlign: 'center',
+    zIndex: 100,
+    fontFamily: 'Quicksand-Regular',
+  },
+  countDownText: {
+    fontSize: 25,
+    textAlign: 'center',
+    fontFamily: 'CCBiffBamBoomW00-Regular',
+    padding: 3,
+    zIndex: 100,
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: {width: 0, height: 4},
+    textShadowRadius: 4,
+    color: '#FFFFFF',
+  },
+  countDownContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 7.5,
+    borderRadius: 10,
+    width: 120,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    backgroundColor: 'rgba(159, 162, 180, 0.2)',
+  },
+  countDownButton: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 50,
+    height: 50,
+    borderRadius: 50 / 2,
+    backgroundColor: '#262423',
+    marginTop: 5,
+  },
+  cardShowContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    zIndex: 100,
+    minWidth: 400,
+    minHeight: 155,
+    marginTop: 10,
+    backgroundColor: 'rgba(20, 20, 0, 0.3)',
+    shadowColor: '#000',
+    shadowOpacity: 0.75,
+    shadowOffset: {width: 6, height: 6},
+    shadowRadius: 6,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  customButtonStyling: {
+    marginBottom: 10,
+    minWidth: 200,
+  },
+});
+
+export default gameFunctionStyles;
