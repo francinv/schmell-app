@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-const BombIcon = () => (
+export default () => (
   <Svg width={384} height={388} fill="none" xmlns="http://www.w3.org/2000/svg">
     <Path
       fillRule="evenodd"
@@ -68,5 +68,3 @@ const BombIcon = () => (
     />
   </Svg>
 );
-
-export default BombIcon;

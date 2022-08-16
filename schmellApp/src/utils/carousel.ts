@@ -1,6 +1,6 @@
 import {Dispatch, SetStateAction} from 'react';
 import {Animated} from 'react-native';
-import {carouselType} from '../components/Game/GamePlay';
+import {carouselType} from '../typings/common';
 
 export const carouselPrev = (
   carouselState: carouselType,

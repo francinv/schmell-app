@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
 
-const SettingsIcon: React.FC = () => {
+export default () => {
   return (
     <Svg xmlns="http://www.w3.org/2000/svg" width={42} height={45} fill="none">
       <G>
@@ -13,5 +13,3 @@ const SettingsIcon: React.FC = () => {
     </Svg>
   );
 };
-
-export default SettingsIcon;

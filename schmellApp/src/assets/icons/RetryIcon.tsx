@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-const RetryIcon = () => (
+export default () => (
   <Svg width={40} height={40} fill="none" xmlns="http://www.w3.org/2000/svg">
     <Path
       d="m16.333 28.333-1.06-1.06-1.061 1.06 1.06 1.061 1.061-1.06Zm5.606-7.727-6.666 6.667 2.121 2.121 6.667-6.667-2.122-2.121Zm-6.666 8.788 6.666 6.667 2.122-2.122-6.667-6.666-2.121 2.121Z"
@@ -15,5 +15,3 @@ const RetryIcon = () => (
     />
   </Svg>
 );
-
-export default RetryIcon;

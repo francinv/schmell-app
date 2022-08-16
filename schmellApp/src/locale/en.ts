@@ -24,4 +24,9 @@ export default {
   GAME_HINT_INFORMATION: 'The number of sips can be seen in the left corner.',
   GAME_LOADING_INFORMATION: 'fetching the questions... ⚡️',
   GAME_LOADING_TITLE: 'Hold on!',
+  BUTTON_MISSING: 'Missing',
+  BUTTON_PLAYERS: 'players',
+  BUTTON_PLAYER: 'player',
+  SHOW_ANSWER: 'Show answer',
+  HIDE_ANSWER: 'Hide answer',
 };
