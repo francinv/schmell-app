@@ -20,7 +20,6 @@ import checkIfSettingsSet from '../../utils/checkIfSettingsSet';
 import {useSelector} from 'react-redux';
 import {selectGameStatus} from '../../features/selectors';
 import {lockPortrait} from '../../utils/orientationLocker';
-import {decrypt, encrypt} from '../../utils/crypto';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   fetchData: () => dispatch(fetchGames()),
@@ -34,8 +33,6 @@ export default () => {
   const gameStatus = useSelector(selectGameStatus);
 
   useEffect(() => {
-    console.log(encrypt('Y21zL2dhbWUv'));
-    console.log(decrypt('cms/game/?status=P/'));
     const {uniqueString} = RNUniqueId.getConstants();
     const hasToken = async () => {
       const token = await encryptedStorageService(

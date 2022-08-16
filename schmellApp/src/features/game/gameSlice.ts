@@ -9,7 +9,9 @@ import {initialGameSlice} from '../../typings/stateTypes';
 import {decrypt} from '../../utils/crypto';
 
 export const fetchGames = createAsyncThunk('game/fetchGames', async () => {
-  return axiosService.get(decrypt('Y21zL2dhbWUv')).then(res => res.data);
+  return axiosService
+    .get(decrypt('Y21zL2dhbWUvP3N0YXR1cz1QL'))
+    .then(res => res.data);
 });
 
 export const fetchWeek = createAsyncThunk(
