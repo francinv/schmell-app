@@ -1,17 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-const players: string[] = [];
-
-const initialState = {
-  players,
-  teams: 0,
-  readOut: false,
-  lastPlayer: '',
-};
+import {initialGameSettingSlice} from '../../typings/stateTypes';
 
 const GameSettingSlice = createSlice({
   name: 'gamesetting',
-  initialState: initialState,
+  initialState: initialGameSettingSlice,
   reducers: {
     setPlayers(state, action: PayloadAction<[]>) {
       state.players = action.payload;

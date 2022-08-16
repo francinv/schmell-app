@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import Svg, {Circle, G, Path} from 'react-native-svg';
 import {IconProps} from './props';
 
-const PlusIcon: FC<IconProps> = ({color}) => (
+export const PlusIcon: FC<IconProps> = ({color}) => (
   <Svg width={45} height={48} fill="none" xmlns="http://www.w3.org/2000/svg">
     <G>
       <Path
@@ -26,5 +26,3 @@ export const GamePlusIcon = () => (
     />
   </Svg>
 );
-
-export default PlusIcon;

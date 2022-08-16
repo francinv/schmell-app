@@ -4,8 +4,3 @@
   RCT_EXTERN_METHOD(getUniqueCallback: (RCTResponseSenderBlock *)callback)
 @end
 
-@interface RCT_EXTERN_MODULE(RNMp3Player, NSObject)
-RCT_EXTERN_METHOD(
-  playSound: (NSString *)urlOfFile
-)
-@end

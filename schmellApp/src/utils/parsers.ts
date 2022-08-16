@@ -1,4 +1,4 @@
-export const parseFunction = (questionFunc: string) =>
+export const parseFunctionAnswer = (questionFunc: string) =>
   JSON.parse(questionFunc).answer;
 
 export const parseFunctionTimer = (questionFunc: string) =>

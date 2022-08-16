@@ -1,15 +1,15 @@
 import React from 'react';
-import {store} from './src/services/store';
+import {StatusBar, useColorScheme} from 'react-native';
+import Home from './src/screens/Home';
 import {Provider} from 'react-redux';
+import {store} from './src/services/store';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeComponent from './src/components/Home/HomeComponent';
-import SettingsComponent from './src/components/Settings/SettingsComponent';
-import StoreComponent from './src/components/Store/StoreComponent';
-import GameSettingsComponent from './src/components/GameSettings/GameSettingsComponent';
-import {StatusBar, useColorScheme} from 'react-native';
-import GamePlay from './src/components/Game/GamePlay';
 import {Provider as PaperProvider} from 'react-native-paper';
+import Settings from './src/screens/Settings';
+import Store from './src/screens/Store';
+import GameSettings from './src/screens/GameSettings';
+import GamePlay from './src/screens/GamePlay';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -29,13 +29,10 @@ const App = () => {
               headerTransparent: true,
               headerShown: false,
             }}>
-            <Stack.Screen name="Home" component={HomeComponent} />
-            <Stack.Screen name="Settings" component={SettingsComponent} />
-            <Stack.Screen name="Store" component={StoreComponent} />
-            <Stack.Screen
-              name="GameSettings"
-              component={GameSettingsComponent}
-            />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Settings" component={Settings} />
+            <Stack.Screen name="Store" component={Store} />
+            <Stack.Screen name="GameSettings" component={GameSettings} />
             <Stack.Screen name="Game" component={GamePlay} />
           </Stack.Navigator>
         </PaperProvider>

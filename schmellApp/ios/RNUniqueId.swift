@@ -26,8 +26,8 @@ class RNUniqueId: NSObject {
   }
 
   @objc
- func constantsToExport() -> [String: Any]! {
-   return ["uniqueString": self._getUniqueString()]
- }
+   func constantsToExport() -> [String: Any]! {
+     return ["uniqueString": self._getUniqueString()]
+   }
 
 }
