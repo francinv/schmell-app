@@ -4,14 +4,13 @@ import {Dispatch} from '@reduxjs/toolkit';
 import {gameType} from '../../typings/gameTypes';
 import {showDetailType} from '../../typings/settingsTypes';
 import {postDetail} from '../../features/usersettings/userSettingSlice';
-import {fetchWeek, setSelectedGame} from '../../features/game/gameSlice';
+import {setSelectedGame} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {selectGameDetail, selectLanguage} from '../../features/selectors';
 import useLocale from '../../hooks/useLocale';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
-import {getCurrentWeekNumber} from '../../utils/dateUtil';
 import homeStyle from './style';
 import Checkbox from '../../components/Forms/Checkbox';
 import SchmellButton from '../../components/Buttons/SchmellButton';
@@ -29,16 +28,12 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
     update: boolean;
   }) => dispatch(postDetail(query)),
   selectedGame: (query: number) => dispatch(setSelectedGame(query)),
-  setWeek: (query: {weekNumber: number; idGame: number}) =>
-    dispatch(fetchWeek(query)),
 });
 
 const GameDetail: FC<GameDetailProps> = ({game, opacityAnim}) => {
   const {description, logo, name, id} = game;
 
-  const {setDetailShow, selectedGame, setWeek} = actionDispatch(
-    useAppDispatch(),
-  );
+  const {setDetailShow, selectedGame} = actionDispatch(useAppDispatch());
 
   const showDetail = useSelector(selectGameDetail);
   const lang = useSelector(selectLanguage);
@@ -65,8 +60,6 @@ const GameDetail: FC<GameDetailProps> = ({game, opacityAnim}) => {
         update: true,
       });
     }
-
-    setWeek({weekNumber: getCurrentWeekNumber(), idGame: id});
     selectedGame(id);
     navigation.navigate('GameSettings');
   };
