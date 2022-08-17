@@ -2,9 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const homeStyle = StyleSheet.create({
   img: {
-    height: 80,
     width: '90%',
     marginTop: 'auto',
+    maxHeight: 70,
   },
   detailView: {
     width: '90%',
