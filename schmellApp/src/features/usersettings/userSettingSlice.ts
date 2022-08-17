@@ -9,18 +9,8 @@ import {asyncStorageService} from '../../services/asyncStorageService';
 import {authService} from '../../services/axiosService';
 import encryptedStorageService from '../../services/encryptedStorageService';
 import {showDetailType, userSettings} from '../../typings/settingsTypes';
+import {initialUserSettingsSlice} from '../../typings/stateTypes';
 import {decrypt} from '../../utils/crypto';
-
-const showDetail: showDetailType[] = [];
-
-const initialState = {
-  api_key: '',
-  voice: 'F',
-  showDetail,
-  language: 'nb-NO',
-  status: 'idle',
-  error: '',
-};
 
 export const setTokens = createAsyncThunk(
   'usersetting/setTokens',
@@ -33,23 +23,6 @@ export const setTokens = createAsyncThunk(
   },
 );
 
-export const fetchSettings = createAsyncThunk(
-  'usersetting/fetchSettings',
-  async () => {
-    return {
-      voi: await asyncStorageService(VOICE_KEY, '', 'GET'),
-      lang: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
-    };
-  },
-);
-
-export const fetchDetail = createAsyncThunk(
-  'userSetting/fetchDetail',
-  async () => {
-    return asyncStorageService(SHOW_DETAIL_KEY, '', 'GET');
-  },
-);
-
 export const postSettings = createAsyncThunk(
   'usersetting/postSettings',
   async (data: userSettings) => {
@@ -57,6 +30,17 @@ export const postSettings = createAsyncThunk(
     await asyncStorageService(LANGUAGE_KEY, data.language, 'SET');
     await asyncStorageService(SHOW_DETAIL_KEY, data.showDetail, 'SET');
     return data;
+  },
+);
+
+export const fetchSettings = createAsyncThunk(
+  'usersetting/fetchSettings',
+  async () => {
+    return {
+      voice: await asyncStorageService(VOICE_KEY, '', 'GET'),
+      language: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
+      showDetail: await asyncStorageService(SHOW_DETAIL_KEY, '', 'GET'),
+    };
   },
 );
 
@@ -80,6 +64,13 @@ export const postDetail = createAsyncThunk(
       await asyncStorageService(SHOW_DETAIL_KEY, arrayOfDetailShow, 'SET');
       return arrayOfDetailShow;
     }
+  },
+);
+
+export const fetchDetail = createAsyncThunk(
+  'userSetting/fetchDetail',
+  async () => {
+    return asyncStorageService(SHOW_DETAIL_KEY, '', 'GET');
   },
 );
 
@@ -118,26 +109,16 @@ const isRejectedAction =
 
 const UserSettingSlice = createSlice({
   name: 'usersetting',
-  initialState: initialState,
+  initialState: initialUserSettingsSlice,
   reducers: {
     setStatus(state, action: PayloadAction<string>) {
       state.status = action.payload;
     },
-    setApiKey(state, action: PayloadAction<string>) {
-      state.api_key = action.payload;
-    },
   },
   extraReducers: builder => {
-    builder.addCase(postSettings.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.voice = action.payload.voice;
-        state.language = action.payload.language;
-      }
-      state.status = 'succeeded';
-    });
     builder.addCase(setTokens.fulfilled, (state, action) => {
       if (action.payload) {
-        state.api_key = action.payload.api_key;
+        state.apiKey = action.payload.api_key;
         encryptedStorageService(
           `${action.payload.key}_key`,
           action.payload.api_key,
@@ -147,15 +128,11 @@ const UserSettingSlice = createSlice({
       state.status = 'succeeded';
     });
     builder.addCase(postVoice.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.voice = action.payload;
-      }
+      state.voice = action.payload;
       state.status = 'succeeded';
     });
     builder.addCase(postLanguage.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.language = action.payload;
-      }
+      state.language = action.payload;
       state.status = 'succeeded';
     });
     builder.addCase(fetchDetail.fulfilled, (state, action) => {
@@ -166,14 +143,19 @@ const UserSettingSlice = createSlice({
       state.showDetail = action.payload;
       state.status = 'succeeded';
     });
+    builder.addCase(fetchSettings.fulfilled, (state, action) => {
+      state.language = action.payload.language;
+      state.showDetail = action.payload.showDetail;
+      state.voice = action.payload.voice;
+      state.status = 'succeeded';
+    });
+    builder.addCase(postSettings.fulfilled, (state, action) => {
+      state.language = action.payload.language;
+      state.showDetail = action.payload.showDetail;
+      state.voice = action.payload.voice;
+      state.status = 'succeeded';
+    });
     builder
-      .addCase(fetchSettings.fulfilled, (state, action) => {
-        if (action.payload) {
-          state.voice = action.payload.voi;
-          state.language = action.payload.lang;
-        }
-        state.status = 'succeeded';
-      })
       .addMatcher(isPendingAction('usersetting/'), state => {
         state.status = 'loading';
         state.error = '';

@@ -25,4 +25,9 @@ export default {
     'Antall slurker som skal drikkes kan man se i venstre hjørne.',
   GAME_LOADING_INFORMATION: 'henter spørsmålene... ⚡️',
   GAME_LOADING_TITLE: 'Vent litt!',
+  BUTTON_MISSING: 'Mangler',
+  BUTTON_PLAYERS: 'spillere',
+  BUTTON_PLAYER: 'spiller',
+  SHOW_ANSWER: 'Vis svar',
+  HIDE_ANSWER: 'Skjul svar',
 };

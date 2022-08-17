@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Svg, {
   Defs,
   LinearGradient,
@@ -8,7 +8,7 @@ import Svg, {
   Stop,
 } from 'react-native-svg';
 
-export const FaceBookIcon: React.FC = () => {
+export const FaceBookIcon: FC = () => {
   return (
     <Svg width={40} height={40} fill="none" xmlns="http://www.w3.org/2000/svg">
       <Rect width={40} height={40} rx={20} fill="#0B84EE" />
@@ -20,7 +20,7 @@ export const FaceBookIcon: React.FC = () => {
   );
 };
 
-export const InstagramIcon: React.FC = () => {
+export const InstagramIcon: FC = () => {
   return (
     <Svg width={40} height={40} fill="none" xmlns="http://www.w3.org/2000/svg">
       <Rect width={40} height={40} rx={20} fill="url(#a)" />
@@ -52,7 +52,7 @@ export const InstagramIcon: React.FC = () => {
   );
 };
 
-export const TikTokIcon: React.FC = () => {
+export const TikTokIcon: FC = () => {
   return (
     <Svg width={40} height={40} fill="none" xmlns="http://www.w3.org/2000/svg">
       <Rect width={40} height={40} rx={20} fill="#111" />
