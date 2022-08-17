@@ -22,6 +22,9 @@ export default (question: questionType, isLast: boolean) => {
     }
   };
   switch (question?.type) {
+    case 'Guess The Country':
+    case 'Guess The Movie':
+    case 'Guess The Song':
     case 'Guess The Gibberish':
       return (
         <CardShow
