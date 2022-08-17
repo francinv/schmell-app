@@ -16,11 +16,13 @@
 		24B0A0AF30994240B526FF01 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66B25910358847C6AE6F2E79 /* Quicksand-Regular.ttf */; };
 		4023409101C14EC09693EDCE /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7006F262FD1C43F0B5361B3C /* Quicksand-Light.ttf */; };
 		4969C382E4C444EE918348B5 /* Quicksand-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A24E237B7404CF4BC5CB21C /* Quicksand-Medium.ttf */; };
+		731B05C98DF04BF7A9D52228 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4C6FC4441C717494530FF /* ExpoModulesProvider.swift */; };
 		756CA72F28A7E87F00ED30C5 /* RNUniqueId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CA72E28A7E87F00ED30C5 /* RNUniqueId.swift */; };
 		756CA73128A7E8C900ED30C5 /* schmell-Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 756CA73028A7E8C900ED30C5 /* schmell-Bridge.m */; };
 		7699B88040F8A987B510C191 /* libPods-schmellApp-schmellAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-schmellApp-schmellAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		91E3DA3C6D5C4A66B3984AB5 /* CCBiffBamBoomW00-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A8EA66B37754BA3AAC59CEB /* CCBiffBamBoomW00-Regular.ttf */; };
+		A5F4169ACAFD05A521459453 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B7B4D6D3D8FDD03A776527 /* ExpoModulesProvider.swift */; };
 		B119B3AEFCA94436873B2D93 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6278A70DDE6145E6B05C213B /* Quicksand-Bold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,7 @@
 		3B4392A12AC88292D35C810B /* Pods-schmellApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-schmellApp.debug.xcconfig"; path = "Target Support Files/Pods-schmellApp/Pods-schmellApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-schmellApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-schmellApp.release.xcconfig"; path = "Target Support Files/Pods-schmellApp/Pods-schmellApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-schmellApp-schmellAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-schmellApp-schmellAppTests.debug.xcconfig"; path = "Target Support Files/Pods-schmellApp-schmellAppTests/Pods-schmellApp-schmellAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5CF4C6FC4441C717494530FF /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-schmellApp-schmellAppTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-schmellApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-schmellApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6278A70DDE6145E6B05C213B /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Bold.ttf"; path = "../src/assets/fonts/Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		66B25910358847C6AE6F2E79 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-Regular.ttf"; path = "../src/assets/fonts/Quicksand-Regular.ttf"; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		756CA73028A7E8C900ED30C5 /* schmell-Bridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "schmell-Bridge.m"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = schmellApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-schmellApp-schmellAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-schmellApp-schmellAppTests.release.xcconfig"; path = "Target Support Files/Pods-schmellApp-schmellAppTests/Pods-schmellApp-schmellAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		A7B7B4D6D3D8FDD03A776527 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-schmellApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		BE167567E11F4AD494FDDBC0 /* Quicksand-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Quicksand-SemiBold.ttf"; path = "../src/assets/fonts/Quicksand-SemiBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -136,6 +140,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6E6131239CC6F3506EDB1F7C /* schmellAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				5CF4C6FC4441C717494530FF /* ExpoModulesProvider.swift */,
+			);
+			name = schmellAppTests;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +168,7 @@
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				756CA72D28A7E87F00ED30C5 /* schmellApp-Bridging-Header.h */,
 				2657E3461BF0477EAF9AF9E9 /* Resources */,
+				DA5888D6057BA93658F62B78 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -180,6 +193,23 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-schmellApp-schmellAppTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DA5888D6057BA93658F62B78 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				FE28821AC8F3492135524913 /* schmellApp */,
+				6E6131239CC6F3506EDB1F7C /* schmellAppTests */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		FE28821AC8F3492135524913 /* schmellApp */ = {
+			isa = PBXGroup;
+			children = (
+				A7B7B4D6D3D8FDD03A776527 /* ExpoModulesProvider.swift */,
+			);
+			name = schmellApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* schmellAppTests.m in Sources */,
+				731B05C98DF04BF7A9D52228 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +487,7 @@
 				756CA73128A7E8C900ED30C5 /* schmell-Bridge.m in Sources */,
 				756CA72F28A7E87F00ED30C5 /* RNUniqueId.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				A5F4169ACAFD05A521459453 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +524,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/schmellApp.app/schmellApp";
@@ -517,6 +550,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/schmellApp.app/schmellApp";
@@ -530,18 +564,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBWS9DLX89;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = schmellApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.schmell.schmellApp;
 				PRODUCT_NAME = schmellApp;
 				SWIFT_OBJC_BRIDGING_HEADER = "schmellApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -557,17 +594,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RBWS9DLX89;
 				INFOPLIST_FILE = schmellApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.schmell.schmellApp;
 				PRODUCT_NAME = schmellApp;
 				SWIFT_OBJC_BRIDGING_HEADER = "schmellApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -25,7 +25,7 @@ import {useNavigation} from '@react-navigation/native';
 import {GameScreenNavigationProp} from '../../typings/navigationTypes';
 import shakeButtonAnimation from '../../animations/moveAnimations/shakeAnimation';
 import useLocale from '../../hooks/useLocale';
-import {lockToLandscape} from '../../utils/orientationLocker';
+import {lockLandscape} from '../../utils/orientationLocker';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setWeek: (query: {weekNumber: number; idGame: number}) =>
@@ -86,7 +86,7 @@ export default () => {
       setQuestions(week.id);
       setButtonText("Let's go!");
       navigation.navigate('Game');
-      lockToLandscape();
+      lockLandscape();
     }
   };
 
