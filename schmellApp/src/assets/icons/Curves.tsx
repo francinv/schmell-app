@@ -9,8 +9,13 @@ interface CurveProps {
 }
 
 export const LeftCurve: FC<CurveProps> = ({carouselState}) => {
-  const currentType =
-    carouselState.questionList[carouselState.currentQuestionIndex].type;
+  const isUndefined =
+    carouselState.questionList[carouselState.currentQuestionIndex].type ===
+    undefined;
+
+  const currentType = isUndefined
+    ? 'Pekelek'
+    : carouselState.questionList[carouselState.currentQuestionIndex].type;
 
   const fillColor = useColor(currentType);
 
@@ -250,8 +255,13 @@ export const LeftCurve: FC<CurveProps> = ({carouselState}) => {
 };
 
 export const RightCurve: FC<CurveProps> = ({carouselState}) => {
-  const currentType =
-    carouselState.questionList[carouselState.currentQuestionIndex].type;
+  const isUndefined =
+    carouselState.questionList[carouselState.currentQuestionIndex].type ===
+    undefined;
+
+  const currentType = isUndefined
+    ? 'Pekelek'
+    : carouselState.questionList[carouselState.currentQuestionIndex].type;
 
   const fillColor = useColor(currentType);
 
