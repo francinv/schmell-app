@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {showDetailType} from '../typings/settingsTypes';
 
 export const asyncStorageService = async (
   key: string,
-  value: any,
   type: 'GET' | 'SET',
+  value?: string | showDetailType[],
 ) => {
   switch (type) {
     case 'GET':
