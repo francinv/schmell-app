@@ -6,16 +6,23 @@ import IconButton from '../../components/Buttons/IconButton';
 import PlayerInput from '../../components/Forms/PlayerInput';
 import SchmellModal from '../../components/Modal';
 import ModalTitle from '../../components/Styled/ModalTitle';
-import {selectLanguage} from '../../features/selectors';
+import {
+  selectCurrentQuestion,
+  selectCurrentQuestionIndex,
+  selectGamePlayQuestions,
+  selectLanguage,
+  selectPlayers,
+  selectQuestions,
+} from '../../features/selectors';
 import useHint from '../../hooks/useHint';
 import useLocale from '../../hooks/useLocale';
-import {carouselType, modalShowType} from '../../typings/common';
+import {modalShowType} from '../../typings/common';
 import gamePlayStyles from './style';
 
 interface GameModalProps {
-  carouselState: carouselType;
   handleShow: () => void;
   modalShow: modalShowType;
+  trigger: any;
 }
 
 interface ModalContentProps {
@@ -23,15 +30,33 @@ interface ModalContentProps {
 }
 
 const GameModal: FC<GameModalProps> = props => {
-  const {carouselState, handleShow, modalShow} = props;
+  const {handleShow, modalShow, trigger} = props;
 
-  const currentQuestion =
-    carouselState.questionList[carouselState.currentQuestionIndex];
+  const lang = useSelector(selectLanguage);
+  const currentQuestion = useSelector(selectCurrentQuestion);
+  const players = useSelector(selectPlayers);
+  const currentIndex = useSelector(selectCurrentQuestionIndex);
+  const editedQuestions = useSelector(selectGamePlayQuestions);
+  const uneditedQuestions = useSelector(selectQuestions);
+
+  const addPlayerTitle = useLocale(lang, 'GAME_PLAYER_INPUT');
+
   const isTypeHint = modalShow.modalType === 'H';
+
+  const title = isTypeHint ? currentQuestion?.type : addPlayerTitle;
+
+  const playerAddCallback = () => {
+    trigger({
+      currentIndex: currentIndex,
+      players: players,
+      editedQuestions: editedQuestions,
+      uneditedQuestions: uneditedQuestions,
+    });
+  };
 
   return (
     <SchmellModal handleShow={handleShow} modalShow={modalShow}>
-      <ModalTitle title={currentQuestion?.type} />
+      <ModalTitle title={title as string} />
       <IconButton
         handlePress={handleShow}
         wantShadow={false}
@@ -42,7 +67,7 @@ const GameModal: FC<GameModalProps> = props => {
         {isTypeHint ? (
           <HintContent currentType={currentQuestion?.type} />
         ) : (
-          <PlayerInput inputPlace="InGame" />
+          <PlayerInput inputPlace="InGame" callback={playerAddCallback} />
         )}
       </View>
     </SchmellModal>

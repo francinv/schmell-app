@@ -1,21 +1,20 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
+import {useSelector} from 'react-redux';
 import {GamePlusIcon} from '../../assets/icons/PlusIcon';
 import IconButton from '../../components/Buttons/IconButton';
 import CountDown from '../../components/GameFunctions/Countdown';
-import {carouselType} from '../../typings/common';
+import {selectCurrentQuestion} from '../../features/selectors';
 import {parseFunctionTimer} from '../../utils/parsers';
 import Punishment from './Punishment';
 import gamePlayStyles from './style';
 
 interface GameFooterProps {
   handleShow: () => void;
-  carouselState: carouselType;
 }
 
-const GameFooter: FC<GameFooterProps> = ({carouselState, handleShow}) => {
-  const currentQuestion =
-    carouselState.questionList[carouselState.currentQuestionIndex];
+const GameFooter: FC<GameFooterProps> = ({handleShow}) => {
+  const currentQuestion = useSelector(selectCurrentQuestion);
 
   const countDownSeconds = parseFunctionTimer(currentQuestion?.function);
 

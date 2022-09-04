@@ -1,15 +1,13 @@
-import {Dispatch, SetStateAction} from 'react';
 import {Animated} from 'react-native';
-import {carouselType} from '../typings/common';
+import {questionType} from '../typings/questionTypes';
 
 export const carouselPrev = (
-  carouselState: carouselType,
-  setCarouselState: Dispatch<SetStateAction<carouselType>>,
+  firstId: number,
+  currentIndex: number,
+  setIndex: any,
   moveAnim: Animated.Value,
 ) => {
-  const {firstQuestionId, currentQuestionIndex} = carouselState;
-
-  if (!firstQuestionId) {
+  if (!firstId) {
     return;
   }
 
@@ -18,10 +16,7 @@ export const carouselPrev = (
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
-    setCarouselState({
-      ...carouselState,
-      currentQuestionIndex: currentQuestionIndex - 1,
-    });
+    setIndex(currentIndex - 1);
     moveAnim.setValue(-600);
     Animated.timing(moveAnim, {
       toValue: 0,
@@ -32,13 +27,13 @@ export const carouselPrev = (
 };
 
 export const carouselNext = (
-  carouselState: carouselType,
-  setCarouselState: Dispatch<SetStateAction<carouselType>>,
   moveAnim: Animated.Value,
+  currentIndex: number,
+  questionList: questionType[],
+  setIndex: any,
+  setId: any,
 ) => {
-  const {currentQuestionIndex, questionList} = carouselState;
-
-  if (currentQuestionIndex + 1 > questionList.length) {
+  if (currentIndex + 1 > questionList.length) {
     return;
   }
 
@@ -47,11 +42,8 @@ export const carouselNext = (
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
-    setCarouselState({
-      ...carouselState,
-      currentQuestionIndex: currentQuestionIndex + 1,
-      firstQuestionId: questionList[0].id,
-    });
+    setIndex(currentIndex + 1);
+    setId(questionList[0].id);
     moveAnim.setValue(600);
     Animated.timing(moveAnim, {
       toValue: 0,
