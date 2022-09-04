@@ -1,22 +1,18 @@
 import React, {FC} from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
-import {fetchGames} from '../../features/game/gameSlice';
 import {selectLanguage} from '../../features/selectors';
 import {useSelector} from 'react-redux';
-import {useAppDispatch} from '../../features/hooks';
 import {StyleSheet, Text, View} from 'react-native';
 import HomeWrapper from '../Wrappers/HomeWrapper';
 import useLocale from '../../hooks/useLocale';
 import SchmellButton from '../Buttons/SchmellButton';
 import RetryIcon from '../../assets/icons/RetryIcon';
 
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  fetchData: () => dispatch(fetchGames()),
-});
+interface FailedProps {
+  refetch: () => void;
+}
 
-const Failed: FC = () => {
+const Failed: FC<FailedProps> = ({refetch}) => {
   const lang = useSelector(selectLanguage);
-  const {fetchData} = actionDispatch(useAppDispatch());
 
   return (
     <HomeWrapper>
@@ -30,7 +26,7 @@ const Failed: FC = () => {
       </View>
       <SchmellButton
         content={useLocale(lang, 'RETRY') as string}
-        handlePress={fetchData}
+        handlePress={refetch}
         type="S"
         wantShadow={true}
         endIcon={<RetryIcon />}
