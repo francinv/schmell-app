@@ -1,27 +1,54 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import {Dispatch} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
 import {Animated} from 'react-native';
 import {useSelector} from 'react-redux';
 import {LeftCurve, RightCurve} from '../../assets/icons/Curves';
 import QuestionWrapper from '../../components/Wrappers/QuestionWrapper';
-import {selectPlayers, selectQuestions} from '../../features/selectors';
-import {carouselType, modalShowType} from '../../typings/common';
-import {playerInGamePush, playerPush} from '../../utils/selectPlayer';
+import {setQuestions} from '../../features/gameplay/gamePlaySlice';
+import {useAppDispatch} from '../../features/hooks';
+import {
+  selectedWeekId,
+  selectPlayers,
+  selectPlayStatus,
+  selectQuestions,
+} from '../../features/selectors';
+import {
+  useAddPlayerToQuestionsQuery,
+  useGetQuestionsQuery,
+  useLazyAddPlayerInGameQuery,
+} from '../../services/apiService';
+import {modalShowType} from '../../typings/common';
+import {questionType} from '../../typings/questionTypes';
 import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 import Questions from './Questions';
 
-export default () => {
-  const questions = useSelector(selectQuestions);
-  const players = useSelector(selectPlayers);
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  fetchAllQuestions: (questions: questionType[]) =>
+    dispatch(setQuestions(questions)),
+});
 
-  const [carouselState, setCarouselState] = useState<carouselType>({
-    currentQuestionIndex: 0,
-    firstQuestionId: 0,
-    questionList: playerPush(questions, players),
+export default () => {
+  const players = useSelector(selectPlayers);
+  const carouselStatus = useSelector(selectPlayStatus);
+  const week = useSelector(selectedWeekId);
+  const questions = useSelector(selectQuestions);
+
+  const [trigger, result] = useLazyAddPlayerInGameQuery();
+
+  const {fetchAllQuestions} = actionDispatch(useAppDispatch());
+
+  const {isSuccess} = useGetQuestionsQuery({
+    idWeek: week,
   });
+
+  const {isFetching, data} = useAddPlayerToQuestionsQuery({
+    players: players,
+    questions: questions,
+  });
+
   const [modalShow, setModalShow] = useState<modalShowType>({
     modalType: '',
     show: false,
@@ -29,55 +56,34 @@ export default () => {
 
   const [moveAnimation] = useState(new Animated.Value(0));
 
-  const isLast =
-    carouselState?.currentQuestionIndex + 1 > carouselState.questionList.length;
-
   const handleShow = (modalInfo: modalShowType) => setModalShow(modalInfo);
 
   useEffect(() => {
-    setCarouselState({
-      ...carouselState,
-      questionList: playerPush(questions, players),
-    });
-  }, [questions]);
+    if (carouselStatus === 'idle' && isSuccess && data) {
+      fetchAllQuestions(data);
+    }
 
-  useEffect(() => {
-    setCarouselState({
-      ...carouselState,
-      questionList: playerInGamePush(
-        questions,
-        carouselState.questionList,
-        players,
-        carouselState.currentQuestionIndex,
-      ),
-    });
-  }, [players]);
+    if (!result.isUninitialized && result.isSuccess) {
+      fetchAllQuestions(result.data);
+    }
+  }, [carouselStatus, data, isSuccess, players, fetchAllQuestions, result]);
 
-  return (
-    <QuestionWrapper>
-      <LeftCurve carouselState={carouselState} />
-      <RightCurve carouselState={carouselState} />
+  const GamePlayInnerContent = () => (
+    <>
+      <LeftCurve />
+      <RightCurve />
       <GameHeader handleShow={() => handleShow({show: true, modalType: 'H'})} />
-      <Questions
-        carouselState={carouselState}
-        isLast={isLast}
-        moveAnimation={moveAnimation}
-      />
-      <GameFooter
-        carouselState={carouselState}
-        handleShow={() => handleShow({show: true, modalType: 'P'})}
-      />
+      <Questions moveAnimation={moveAnimation} isLoading={isFetching} />
+      <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
       <GameModal
-        carouselState={carouselState}
+        trigger={trigger}
         handleShow={() => handleShow({show: false, modalType: ''})}
         modalShow={modalShow}
       />
-      <Carousel
-        carouselState={carouselState}
-        isLast={isLast}
-        setCarouselState={setCarouselState}
-        moveAnimation={moveAnimation}
-      />
-    </QuestionWrapper>
+      <Carousel moveAnimation={moveAnimation} />
+    </>
+  );
+  return (
+    <QuestionWrapper>{data ? <GamePlayInnerContent /> : null}</QuestionWrapper>
   );
 };

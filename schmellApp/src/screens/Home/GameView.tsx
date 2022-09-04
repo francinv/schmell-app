@@ -1,14 +1,13 @@
 import React, {FC} from 'react';
 import ScrollWrapper from '../../components/Wrappers/ScrollWrapper';
-import {selectGames} from '../../features/selectors';
-import {useSelector} from 'react-redux';
 import GameButton from './GameButton';
+import {useGetGamesQuery} from '../../services/apiService';
 
 const GameView: FC = () => {
-  const games = useSelector(selectGames);
+  const {data} = useGetGamesQuery('P');
   return (
     <ScrollWrapper>
-      {games.map(game => (
+      {data!.map(game => (
         <GameButton game={game} key={game.id} />
       ))}
     </ScrollWrapper>
