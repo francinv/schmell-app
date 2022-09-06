@@ -1,18 +1,16 @@
 import React, {FC} from 'react';
 import {StyleSheet} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
+import {useSelector} from 'react-redux';
+import {selectCurrentQuestion} from '../../features/selectors';
 import useColor from '../../hooks/useColor';
-import {carouselType} from '../../typings/common';
 
-interface CurveProps {
-  carouselState: carouselType;
-}
+export const LeftCurve: FC = () => {
+  const currentQuestion = useSelector(selectCurrentQuestion);
 
-export const LeftCurve: FC<CurveProps> = ({carouselState}) => {
-  const currentType =
-    carouselState.questionList[carouselState.currentQuestionIndex].type;
+  const type = currentQuestion?.type || 'Pekelek';
 
-  const fillColor = useColor(currentType);
+  const fillColor = useColor(type);
 
   return (
     <Svg
@@ -249,11 +247,12 @@ export const LeftCurve: FC<CurveProps> = ({carouselState}) => {
   );
 };
 
-export const RightCurve: FC<CurveProps> = ({carouselState}) => {
-  const currentType =
-    carouselState.questionList[carouselState.currentQuestionIndex].type;
+export const RightCurve: FC = () => {
+  const currentQuestion = useSelector(selectCurrentQuestion);
 
-  const fillColor = useColor(currentType);
+  const type = currentQuestion?.type || 'Pekelek';
+
+  const fillColor = useColor(type);
 
   return (
     <Svg

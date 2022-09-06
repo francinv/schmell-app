@@ -1,36 +1,49 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import React, {FC} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Pressable, useWindowDimensions, View} from 'react-native';
-import {carouselType} from '../../typings/common';
 import {GameScreenNavigationProp} from '../../typings/navigationTypes';
 import {carouselNext, carouselPrev} from '../../utils/carousel';
 import gamePlayStyles from './style';
 import {lockPortrait} from '../../utils/orientationLocker';
+import {useSelector} from 'react-redux';
+import {
+  selectCurrentQuestion,
+  selectCurrentQuestionIndex,
+  selectFirstQuestionId,
+  selectIsLast,
+  selectGamePlayQuestions,
+} from '../../features/selectors';
+import {Dispatch} from '@reduxjs/toolkit';
+import {setId, setIndex} from '../../features/gameplay/gamePlaySlice';
+import {useAppDispatch} from '../../features/hooks';
 
 interface CarouselProps {
-  carouselState: carouselType;
-  setCarouselState: Dispatch<SetStateAction<carouselType>>;
   moveAnimation: Animated.Value;
-  isLast: boolean;
 }
 
-const Carousel: FC<CarouselProps> = props => {
-  const {carouselState, isLast, moveAnimation, setCarouselState} = props;
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setCurrentIndex: (index: number) => dispatch(setIndex(index)),
+  setFirstId: (id: number) => dispatch(setId(id)),
+});
 
+const Carousel: FC<CarouselProps> = ({moveAnimation}) => {
   const navigation = useNavigation<GameScreenNavigationProp>();
   const {width, height} = useWindowDimensions();
 
-  const {currentQuestionIndex, questionList, firstQuestionId} = carouselState;
+  const isLast = useSelector(selectIsLast);
+  const currentIndex = useSelector(selectCurrentQuestionIndex);
+  const questions = useSelector(selectGamePlayQuestions);
+  const firstId = useSelector(selectFirstQuestionId);
+  const currentQuestion = useSelector(selectCurrentQuestion);
+
+  const {setCurrentIndex, setFirstId} = actionDispatch(useAppDispatch());
 
   const isFirstQuestion = () => {
     if (isLast) {
       return false;
     }
-    return (
-      questionList[currentQuestionIndex].id === firstQuestionId ||
-      carouselState.firstQuestionId === 0
-    );
+    return currentQuestion.id === firstId || firstId === 0;
   };
 
   const handleExit = () => {
@@ -41,7 +54,7 @@ const Carousel: FC<CarouselProps> = props => {
   const handlePrevPress = () => {
     isFirstQuestion()
       ? handleExit()
-      : carouselPrev(carouselState, setCarouselState, moveAnimation);
+      : carouselPrev(firstId, currentIndex, setCurrentIndex, moveAnimation);
   };
 
   return (
@@ -54,7 +67,13 @@ const Carousel: FC<CarouselProps> = props => {
       <Pressable
         disabled={isLast}
         onPress={() =>
-          carouselNext(carouselState, setCarouselState, moveAnimation)
+          carouselNext(
+            moveAnimation,
+            currentIndex,
+            questions,
+            setCurrentIndex,
+            setFirstId,
+          )
         }
         style={gamePlayStyles.carouselNext}
       />

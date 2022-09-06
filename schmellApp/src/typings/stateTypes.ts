@@ -1,33 +1,12 @@
-import {gameType} from './gameTypes';
 import {questionType} from './questionTypes';
 import {showDetailType} from './settingsTypes';
-import {weekType} from './weekTypes';
 
-const games: gameType[] = [];
-const week: weekType = {
-  id: 0,
-  week_number: 0,
-  game: 0,
-};
-const questions: questionType[] = [];
-const selectedGame: gameType = {
-  id: 0,
-  name: '',
-  description: '',
-  related_question: false,
-  last_updated: '',
-  status: '',
-  logo: '',
-  release_date: '',
-};
+const questionList: questionType[] = [];
 
 export const initialGameSlice = {
-  games,
-  week,
-  questions,
-  selectedGame,
-  status: 'idle',
-  error: '',
+  selectedGameId: 0,
+  selectedWeekId: 0,
+  questionList,
 };
 
 const players: string[] = [];
@@ -42,10 +21,19 @@ export const initialGameSettingSlice = {
 const showDetail: showDetailType[] = [];
 
 export const initialUserSettingsSlice = {
-  apiKey: '',
   voice: 'F',
   showDetail,
   language: 'nb-NO',
   status: 'idle',
   error: '',
+};
+
+type statusType = 'idle' | 'failed' | 'succeeded';
+const status: statusType = 'idle' as statusType;
+
+export const initialGamePlaySlice = {
+  status,
+  firstQuestionId: 0,
+  currentQuestionIndex: 0,
+  questionList,
 };

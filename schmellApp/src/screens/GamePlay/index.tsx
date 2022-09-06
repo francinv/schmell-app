@@ -1,39 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import {Dispatch} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
-import {Animated, Text} from 'react-native';
+import {Animated} from 'react-native';
 import {useSelector} from 'react-redux';
 import {LeftCurve, RightCurve} from '../../assets/icons/Curves';
-import SimpleText from '../../components/GameFunctions/SimpleText';
 import QuestionWrapper from '../../components/Wrappers/QuestionWrapper';
-import {
-  selectLanguage,
-  selectPlayers,
-  selectQuestions,
-} from '../../features/selectors';
-import useColor from '../../hooks/useColor';
-import useLocale from '../../hooks/useLocale';
-import {carouselType, modalShowType} from '../../typings/common';
-import {playerInGamePush, playerPush} from '../../utils/selectPlayer';
+import {setQuestions} from '../../features/gameplay/gamePlaySlice';
+import {useAppDispatch} from '../../features/hooks';
+import {selectPlayers, selectQuestions} from '../../features/selectors';
+import {useAddPlayerToQuestionsQuery} from '../../services/apiService';
+import {modalShowType} from '../../typings/common';
+import {questionType} from '../../typings/questionTypes';
 import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
 import GameModal from './GameModal';
 import Questions from './Questions';
-import gamePlayStyles from './style';
+
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setGamePlayQuestions: (questions: questionType[]) =>
+    dispatch(setQuestions(questions)),
+});
 
 export default () => {
-  const questions = useSelector(selectQuestions);
   const players = useSelector(selectPlayers);
-  const lang = useSelector(selectLanguage);
+  const questions = useSelector(selectQuestions);
 
-  const loadingTitle = useLocale(lang, 'GAME_LOADING_TITLE');
-  const loading = useLocale(lang, 'GAME_LOADING_INFORMATION');
+  const {setGamePlayQuestions} = actionDispatch(useAppDispatch());
 
-  const [carouselState, setCarouselState] = useState<carouselType>({
-    currentQuestionIndex: 0,
-    firstQuestionId: 0,
-    questionList: playerPush(questions, players),
+  const {isFetching, data, isSuccess} = useAddPlayerToQuestionsQuery({
+    players: players,
+    questions: questions,
   });
+
   const [modalShow, setModalShow] = useState<modalShowType>({
     modalType: '',
     show: false,
@@ -41,72 +40,29 @@ export default () => {
 
   const [moveAnimation] = useState(new Animated.Value(0));
 
-  const isLast =
-    carouselState?.currentQuestionIndex + 1 > carouselState.questionList.length;
-
   const handleShow = (modalInfo: modalShowType) => setModalShow(modalInfo);
 
   useEffect(() => {
-    setCarouselState({
-      ...carouselState,
-      questionList: playerPush(questions, players),
-    });
-  }, [questions]);
+    if (isSuccess && data && !isFetching) {
+      setGamePlayQuestions(data);
+    }
+  }, [isSuccess, data, isFetching]);
 
-  useEffect(() => {
-    setCarouselState({
-      ...carouselState,
-      questionList: playerInGamePush(
-        questions,
-        carouselState.questionList,
-        players,
-        carouselState.currentQuestionIndex,
-      ),
-    });
-  }, [players]);
-
-  if (carouselState && carouselState.questionList.length) {
-    return (
-      <QuestionWrapper>
-        <LeftCurve carouselState={carouselState} />
-        <RightCurve carouselState={carouselState} />
-        <GameHeader
-          handleShow={() => handleShow({show: true, modalType: 'H'})}
-        />
-        <Questions
-          carouselState={carouselState}
-          isLast={isLast}
-          moveAnimation={moveAnimation}
-        />
-        <GameFooter
-          carouselState={carouselState}
-          handleShow={() => handleShow({show: true, modalType: 'P'})}
-        />
-        <GameModal
-          carouselState={carouselState}
-          handleShow={() => handleShow({show: false, modalType: ''})}
-          modalShow={modalShow}
-        />
-        <Carousel
-          carouselState={carouselState}
-          isLast={isLast}
-          setCarouselState={setCarouselState}
-          moveAnimation={moveAnimation}
-        />
-      </QuestionWrapper>
-    );
-  } else {
-    return (
-      <QuestionWrapper additionalStyling={gamePlayStyles.container}>
-        <Text
-          style={[
-            gamePlayStyles.questionText,
-            {textShadowColor: useColor('Pekelek')},
-          ]}>
-          {loadingTitle}
-        </Text>
-        <SimpleText text={loading as string} />
-      </QuestionWrapper>
-    );
-  }
+  const GamePlayInnerContent = () => (
+    <>
+      <LeftCurve />
+      <RightCurve />
+      <GameHeader handleShow={() => handleShow({show: true, modalType: 'H'})} />
+      <Questions moveAnimation={moveAnimation} isLoading={isFetching} />
+      <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
+      <GameModal
+        handleShow={() => handleShow({show: false, modalType: ''})}
+        modalShow={modalShow}
+      />
+      <Carousel moveAnimation={moveAnimation} />
+    </>
+  );
+  return (
+    <QuestionWrapper>{data ? <GamePlayInnerContent /> : null}</QuestionWrapper>
+  );
 };

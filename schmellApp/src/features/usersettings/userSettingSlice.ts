@@ -6,29 +6,16 @@ import {
 } from '@reduxjs/toolkit';
 import {LANGUAGE_KEY, SHOW_DETAIL_KEY, VOICE_KEY} from '../../constants/common';
 import {asyncStorageService} from '../../services/asyncStorageService';
-import {authService} from '../../services/axiosService';
-import encryptedStorageService from '../../services/encryptedStorageService';
 import {showDetailType, userSettings} from '../../typings/settingsTypes';
 import {initialUserSettingsSlice} from '../../typings/stateTypes';
-import {decrypt} from '../../utils/crypto';
-
-export const setTokens = createAsyncThunk(
-  'usersetting/setTokens',
-  async (id: string) => {
-    return authService
-      .post(decrypt('a2V5L2dlbmVyYXRlLw=='), {
-        name: id,
-      })
-      .then(res => res.data);
-  },
-);
 
 export const postSettings = createAsyncThunk(
   'usersetting/postSettings',
   async (data: userSettings) => {
-    await asyncStorageService(VOICE_KEY, data.voice, 'SET');
-    await asyncStorageService(LANGUAGE_KEY, data.language, 'SET');
-    await asyncStorageService(SHOW_DETAIL_KEY, data.showDetail, 'SET');
+    const {language, showDetail, voice} = data;
+    await asyncStorageService(VOICE_KEY, 'SET', voice);
+    await asyncStorageService(LANGUAGE_KEY, 'SET', language);
+    await asyncStorageService(SHOW_DETAIL_KEY, 'SET', showDetail);
     return data;
   },
 );
@@ -37,9 +24,9 @@ export const fetchSettings = createAsyncThunk(
   'usersetting/fetchSettings',
   async () => {
     return {
-      voice: await asyncStorageService(VOICE_KEY, '', 'GET'),
-      language: await asyncStorageService(LANGUAGE_KEY, '', 'GET'),
-      showDetail: await asyncStorageService(SHOW_DETAIL_KEY, '', 'GET'),
+      voice: await asyncStorageService(VOICE_KEY, 'GET'),
+      language: await asyncStorageService(LANGUAGE_KEY, 'GET'),
+      showDetail: await asyncStorageService(SHOW_DETAIL_KEY, 'GET'),
     };
   },
 );
@@ -57,11 +44,11 @@ export const postDetail = createAsyncThunk(
       const arrayAfterUpdate = currentState.map(item => {
         return item.id === id ? {id: id, show: show} : item;
       });
-      await asyncStorageService(SHOW_DETAIL_KEY, arrayAfterUpdate, 'SET');
+      await asyncStorageService(SHOW_DETAIL_KEY, 'SET', arrayAfterUpdate);
       return arrayAfterUpdate;
     } else {
       const arrayOfDetailShow = currentState.concat({id: id, show: show});
-      await asyncStorageService(SHOW_DETAIL_KEY, arrayOfDetailShow, 'SET');
+      await asyncStorageService(SHOW_DETAIL_KEY, 'SET', arrayOfDetailShow);
       return arrayOfDetailShow;
     }
   },
@@ -70,14 +57,14 @@ export const postDetail = createAsyncThunk(
 export const fetchDetail = createAsyncThunk(
   'userSetting/fetchDetail',
   async () => {
-    return asyncStorageService(SHOW_DETAIL_KEY, '', 'GET');
+    return asyncStorageService(SHOW_DETAIL_KEY, 'GET');
   },
 );
 
 export const postVoice = createAsyncThunk(
   'usersetting/postVoice',
   async (data: string) => {
-    await asyncStorageService(VOICE_KEY, data, 'SET');
+    await asyncStorageService(VOICE_KEY, 'SET', data);
     return data;
   },
 );
@@ -85,7 +72,7 @@ export const postVoice = createAsyncThunk(
 export const postLanguage = createAsyncThunk(
   'usersetting/postLanguage',
   async (data: string) => {
-    await asyncStorageService(LANGUAGE_KEY, data, 'SET');
+    await asyncStorageService(LANGUAGE_KEY, 'SET', data);
     return data;
   },
 );
@@ -116,17 +103,6 @@ const UserSettingSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(setTokens.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.apiKey = action.payload.api_key;
-        encryptedStorageService(
-          `${action.payload.key}_key`,
-          action.payload.api_key,
-          'SET',
-        );
-      }
-      state.status = 'succeeded';
-    });
     builder.addCase(postVoice.fulfilled, (state, action) => {
       state.voice = action.payload;
       state.status = 'succeeded';

@@ -1,35 +1,31 @@
 import React, {FC} from 'react';
 import {Animated, Text} from 'react-native';
 import {useSelector} from 'react-redux';
-import {selectGameStatus, selectLanguage} from '../../features/selectors';
+import {
+  selectCurrentQuestion,
+  selectIsLast,
+  selectLanguage,
+} from '../../features/selectors';
 import useColor from '../../hooks/useColor';
 import useFunctionByType from '../../hooks/useFunctionByType';
 import useLocale from '../../hooks/useLocale';
-import {carouselType} from '../../typings/common';
 import gamePlayStyles from './style';
 
 interface QuestionsProps {
-  carouselState: carouselType;
   moveAnimation: Animated.Value;
-  isLast: boolean;
+  isLoading: boolean;
 }
 
-const Questions: FC<QuestionsProps> = ({
-  carouselState,
-  isLast,
-  moveAnimation,
-}) => {
+const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
   const lang = useSelector(selectLanguage);
-  const gameStatus = useSelector(selectGameStatus);
+  const currentQuestion = useSelector(selectCurrentQuestion);
+  const isLast = useSelector(selectIsLast);
 
   const lastTitle = useLocale(lang, 'GAME_END_TITLE');
   const loadingTitle = useLocale(lang, 'GAME_LOADING_TITLE');
 
-  const currentQuestion =
-    carouselState?.questionList[carouselState.currentQuestionIndex];
-
   const getContent = () => {
-    if (gameStatus === 'loading') {
+    if (isLoading) {
       return loadingTitle;
     } else {
       return isLast ? lastTitle : currentQuestion.type;
@@ -49,7 +45,7 @@ const Questions: FC<QuestionsProps> = ({
         ]}>
         {getContent()}
       </Text>
-      {useFunctionByType(currentQuestion, isLast)}
+      {useFunctionByType(currentQuestion, isLast, isLoading)}
     </Animated.View>
   );
 };

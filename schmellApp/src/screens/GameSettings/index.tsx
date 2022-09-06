@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {Dispatch} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
@@ -6,13 +5,11 @@ import {Animated, KeyboardAvoidingView, Platform, View} from 'react-native';
 import Header from '../../components/Header';
 import InnerContainer from '../../components/Wrappers/InnerContainer';
 import Layout from '../../components/Wrappers/Layout';
-import {fetchQuestions, fetchWeek} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {
   selectedGame,
   selectLanguage,
   selectPlayers,
-  selectWeeks,
 } from '../../features/selectors';
 import gameSettingStyles from './style';
 import {getCurrentWeekNumber} from '../../utils/dateUtil';
@@ -26,20 +23,29 @@ import {GameScreenNavigationProp} from '../../typings/navigationTypes';
 import shakeButtonAnimation from '../../animations/moveAnimations/shakeAnimation';
 import useLocale from '../../hooks/useLocale';
 import {lockLandscape} from '../../utils/orientationLocker';
+import {setQuestions, setWeek} from '../../features/game/gameSlice';
+import {
+  useGetWeekQuery,
+  useLazyGetQuestionsQuery,
+} from '../../services/apiService';
+import {questionType} from '../../typings/questionTypes';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
-  setWeek: (query: {weekNumber: number; idGame: number}) =>
-    dispatch(fetchWeek(query)),
-  setQuestions: (query: number) => dispatch(fetchQuestions(query)),
+  setCurrentWeekId: (query: number) => dispatch(setWeek(query)),
+  fetchQuestions: (query: questionType[]) => dispatch(setQuestions(query)),
 });
 
 export default () => {
   const game = useSelector(selectedGame);
   const players = useSelector(selectPlayers);
-  const week = useSelector(selectWeeks);
   const lang = useSelector(selectLanguage);
 
-  const {setWeek, setQuestions} = actionDispatch(useAppDispatch());
+  const {isSuccess, data} = useGetWeekQuery({
+    idGame: game,
+    weekNumber: getCurrentWeekNumber(),
+  });
+
+  const {setCurrentWeekId, fetchQuestions} = actionDispatch(useAppDispatch());
 
   const [buttonText, setButtonText] = useState('Start');
   /* const [settingsState, setSettingsState] = useState<settingsStateType>({
@@ -51,6 +57,8 @@ export default () => {
     marginLeft: 'auto',
     marginRight: 'auto',
   };
+
+  const [trigger, result] = useLazyGetQuestionsQuery();
 
   const playerString = useLocale(lang, 'BUTTON_PLAYER') as string;
   const playersString = useLocale(lang, 'BUTTON_PLAYERS') as string;
@@ -83,7 +91,7 @@ export default () => {
       );
       shakeButtonAnimation(shakeAnimation);
     } else {
-      setQuestions(week.id);
+      trigger({idWeek: data![0].id});
       setButtonText("Let's go!");
       navigation.navigate('Game');
       lockLandscape();
@@ -91,8 +99,13 @@ export default () => {
   };
 
   useEffect(() => {
-    setWeek({weekNumber: getCurrentWeekNumber(), idGame: game.id});
-  }, [game]);
+    if (isSuccess && data[0]) {
+      setCurrentWeekId(data[0].id);
+    }
+    if (result.data && result.isSuccess) {
+      fetchQuestions(result.data);
+    }
+  }, [data, isSuccess, setCurrentWeekId, result, fetchQuestions]);
 
   return (
     <Layout>

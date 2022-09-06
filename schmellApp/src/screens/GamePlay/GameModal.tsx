@@ -1,4 +1,5 @@
-import React, {FC} from 'react';
+import {Dispatch} from '@reduxjs/toolkit';
+import React, {FC, useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {XIconModal} from '../../assets/icons/XIcon';
@@ -6,14 +7,24 @@ import IconButton from '../../components/Buttons/IconButton';
 import PlayerInput from '../../components/Forms/PlayerInput';
 import SchmellModal from '../../components/Modal';
 import ModalTitle from '../../components/Styled/ModalTitle';
-import {selectLanguage} from '../../features/selectors';
+import {setQuestions} from '../../features/gameplay/gamePlaySlice';
+import {useAppDispatch} from '../../features/hooks';
+import {
+  selectCurrentQuestion,
+  selectCurrentQuestionIndex,
+  selectGamePlayQuestions,
+  selectLanguage,
+  selectPlayers,
+  selectQuestions,
+} from '../../features/selectors';
 import useHint from '../../hooks/useHint';
 import useLocale from '../../hooks/useLocale';
-import {carouselType, modalShowType} from '../../typings/common';
+import {useLazyAddPlayerInGameQuery} from '../../services/apiService';
+import {modalShowType} from '../../typings/common';
+import {questionType} from '../../typings/questionTypes';
 import gamePlayStyles from './style';
 
 interface GameModalProps {
-  carouselState: carouselType;
   handleShow: () => void;
   modalShow: modalShowType;
 }
@@ -22,16 +33,50 @@ interface ModalContentProps {
   currentType: string;
 }
 
-const GameModal: FC<GameModalProps> = props => {
-  const {carouselState, handleShow, modalShow} = props;
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setGamePlayQuestions: (questions: questionType[]) =>
+    dispatch(setQuestions(questions)),
+});
 
-  const currentQuestion =
-    carouselState.questionList[carouselState.currentQuestionIndex];
+const GameModal: FC<GameModalProps> = props => {
+  const {handleShow, modalShow} = props;
+
+  const lang = useSelector(selectLanguage);
+  const currentQuestion = useSelector(selectCurrentQuestion);
+  const players = useSelector(selectPlayers);
+  const currentIndex = useSelector(selectCurrentQuestionIndex);
+  const editedQuestions = useSelector(selectGamePlayQuestions);
+  const uneditedQuestions = useSelector(selectQuestions);
+
+  const {setGamePlayQuestions} = actionDispatch(useAppDispatch());
+
+  const [trigger, result] = useLazyAddPlayerInGameQuery();
+
+  const addPlayerTitle = useLocale(lang, 'GAME_PLAYER_INPUT');
+
   const isTypeHint = modalShow.modalType === 'H';
+
+  const title = isTypeHint ? currentQuestion?.type : addPlayerTitle;
+
+  const playerAddCallback = () => {
+    trigger({
+      currentIndex: currentIndex,
+      players: players,
+      editedQuestions: editedQuestions,
+      uneditedQuestions: uneditedQuestions,
+    });
+    handleShow();
+  };
+
+  useEffect(() => {
+    if (result.isSuccess && result.data) {
+      setGamePlayQuestions(result.data);
+    }
+  }, [result, setGamePlayQuestions]);
 
   return (
     <SchmellModal handleShow={handleShow} modalShow={modalShow}>
-      <ModalTitle title={currentQuestion?.type} />
+      <ModalTitle title={title as string} />
       <IconButton
         handlePress={handleShow}
         wantShadow={false}
@@ -42,7 +87,7 @@ const GameModal: FC<GameModalProps> = props => {
         {isTypeHint ? (
           <HintContent currentType={currentQuestion?.type} />
         ) : (
-          <PlayerInput inputPlace="InGame" />
+          <PlayerInput inputPlace="InGame" callback={playerAddCallback} />
         )}
       </View>
     </SchmellModal>

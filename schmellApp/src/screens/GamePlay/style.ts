@@ -12,8 +12,6 @@ const gamePlayStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
   },
   questionContainer: {
     margin: 'auto',
@@ -41,9 +39,6 @@ const gamePlayStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginTop: 10,
-    paddingBottom: 10,
-    paddingRight: 20,
-    paddingLeft: 20,
   },
   punishmentContainerFlex: {
     display: 'flex',

@@ -16,6 +16,7 @@ interface InputProps {
   inputPlace: 'Settings' | 'InGame';
   buttonText?: string;
   setButtonText?: Dispatch<SetStateAction<string>>;
+  callback?: () => void;
 }
 
 const actionDispatch = (dispatch: ReduxDispatch<any>) => ({
@@ -23,7 +24,7 @@ const actionDispatch = (dispatch: ReduxDispatch<any>) => ({
 });
 
 const PlayerInput: FC<InputProps> = props => {
-  const {buttonText, inputPlace, setButtonText} = props;
+  const {buttonText, inputPlace, setButtonText, callback} = props;
 
   const [player, setPlayer] = useState('');
 
@@ -42,6 +43,9 @@ const PlayerInput: FC<InputProps> = props => {
   const handlePress = () => {
     if (player) {
       addPlayer(player);
+      if (callback) {
+        callback();
+      }
     }
     setPlayer('');
   };

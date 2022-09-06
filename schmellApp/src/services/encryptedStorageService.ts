@@ -1,6 +1,6 @@
 import EncryptedStorage from 'react-native-encrypted-storage';
 
-export default async (key: string, value: any, type: string) => {
+export default async (key: string, type: 'GET' | 'SET', value?: string) => {
   switch (type) {
     case 'GET':
       try {
