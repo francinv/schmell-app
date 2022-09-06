@@ -24,7 +24,19 @@ export default (type: string) => {
       return colors.FMK;
     case '2 truths and a lie':
       return colors.TWOTONEL;
+    case 'Fleip eller fakta':
+      return colors.FEF;
+    case 'Ikke se på meg':
+      return colors.ISPM;
+    case 'Klapp for faen':
+      return colors.KFF;
+    case 'Copycat':
+      return colors.CC;
+    case '5 up':
+      return colors.FIVEUP;
+    case 'Jæ ska te by`n':
+      return colors.JSTB;
     default:
-      break;
+      return colors.PL;
   }
 };

@@ -10,4 +10,10 @@ export default {
   TON: '#ECD4FF',
   TWOTONEL: '#EA9DE2',
   FMK: '#F18181',
+  FEF: '#DE72F9',
+  ISPM: '#0EF4DD',
+  KFF: '#C5FFB2',
+  FIVEUP: '#1AC0C6',
+  JSTB: '#E8A4E6',
+  CC: '#FFBBA3',
 };
