@@ -24,6 +24,18 @@ export default (type: string) => {
       return hints.TWOTONEL;
     case 'Fu*k/Marry/Kill':
       return hints.FMK;
+    case 'Fleip eller fakta':
+      return hints.FEF;
+    case 'Ikke se på meg':
+      return hints.ISPM;
+    case 'Klapp for faen':
+      return hints.KFF;
+    case '5 up':
+      return hints.FIVEUP;
+    case 'Jæ ska te by`n':
+      return hints.JSTB;
+    case 'Copycat':
+      return hints.CC;
     default:
       break;
   }
