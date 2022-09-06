@@ -8,7 +8,7 @@ import useColor from '../../hooks/useColor';
 export const LeftCurve: FC = () => {
   const currentQuestion = useSelector(selectCurrentQuestion);
 
-  const type = currentQuestion.type || 'Pekelek';
+  const type = currentQuestion?.type || 'Pekelek';
 
   const fillColor = useColor(type);
 
@@ -250,7 +250,7 @@ export const LeftCurve: FC = () => {
 export const RightCurve: FC = () => {
   const currentQuestion = useSelector(selectCurrentQuestion);
 
-  const type = currentQuestion.type || 'Pekelek';
+  const type = currentQuestion?.type || 'Pekelek';
 
   const fillColor = useColor(type);
 
