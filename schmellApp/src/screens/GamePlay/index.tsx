@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {Dispatch} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
 import {Animated} from 'react-native';
@@ -6,17 +7,8 @@ import {LeftCurve, RightCurve} from '../../assets/icons/Curves';
 import QuestionWrapper from '../../components/Wrappers/QuestionWrapper';
 import {setQuestions} from '../../features/gameplay/gamePlaySlice';
 import {useAppDispatch} from '../../features/hooks';
-import {
-  selectedWeekId,
-  selectPlayers,
-  selectPlayStatus,
-  selectQuestions,
-} from '../../features/selectors';
-import {
-  useAddPlayerToQuestionsQuery,
-  useGetQuestionsQuery,
-  useLazyAddPlayerInGameQuery,
-} from '../../services/apiService';
+import {selectPlayers, selectQuestions} from '../../features/selectors';
+import {useAddPlayerToQuestionsQuery} from '../../services/apiService';
 import {modalShowType} from '../../typings/common';
 import {questionType} from '../../typings/questionTypes';
 import Carousel from './Carousel';
@@ -26,25 +18,17 @@ import GameModal from './GameModal';
 import Questions from './Questions';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
-  fetchAllQuestions: (questions: questionType[]) =>
+  setGamePlayQuestions: (questions: questionType[]) =>
     dispatch(setQuestions(questions)),
 });
 
 export default () => {
   const players = useSelector(selectPlayers);
-  const carouselStatus = useSelector(selectPlayStatus);
-  const week = useSelector(selectedWeekId);
   const questions = useSelector(selectQuestions);
 
-  const [trigger, result] = useLazyAddPlayerInGameQuery();
+  const {setGamePlayQuestions} = actionDispatch(useAppDispatch());
 
-  const {fetchAllQuestions} = actionDispatch(useAppDispatch());
-
-  const {isSuccess} = useGetQuestionsQuery({
-    idWeek: week,
-  });
-
-  const {isFetching, data} = useAddPlayerToQuestionsQuery({
+  const {isFetching, data, isSuccess} = useAddPlayerToQuestionsQuery({
     players: players,
     questions: questions,
   });
@@ -59,14 +43,10 @@ export default () => {
   const handleShow = (modalInfo: modalShowType) => setModalShow(modalInfo);
 
   useEffect(() => {
-    if (carouselStatus === 'idle' && isSuccess && data) {
-      fetchAllQuestions(data);
+    if (isSuccess && data && !isFetching) {
+      setGamePlayQuestions(data);
     }
-
-    if (!result.isUninitialized && result.isSuccess) {
-      fetchAllQuestions(result.data);
-    }
-  }, [carouselStatus, data, isSuccess, players, fetchAllQuestions, result]);
+  }, [isSuccess, data, isFetching]);
 
   const GamePlayInnerContent = () => (
     <>
@@ -76,7 +56,6 @@ export default () => {
       <Questions moveAnimation={moveAnimation} isLoading={isFetching} />
       <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
       <GameModal
-        trigger={trigger}
         handleShow={() => handleShow({show: false, modalType: ''})}
         modalShow={modalShow}
       />

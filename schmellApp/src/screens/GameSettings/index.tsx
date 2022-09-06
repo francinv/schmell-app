@@ -23,13 +23,12 @@ import {GameScreenNavigationProp} from '../../typings/navigationTypes';
 import shakeButtonAnimation from '../../animations/moveAnimations/shakeAnimation';
 import useLocale from '../../hooks/useLocale';
 import {lockLandscape} from '../../utils/orientationLocker';
-import {setWeek} from '../../features/game/gameSlice';
+import {setQuestions, setWeek} from '../../features/game/gameSlice';
 import {
   useGetWeekQuery,
   useLazyGetQuestionsQuery,
 } from '../../services/apiService';
 import {questionType} from '../../typings/questionTypes';
-import {setQuestions} from '../../features/gameplay/gamePlaySlice';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setCurrentWeekId: (query: number) => dispatch(setWeek(query)),
@@ -92,9 +91,7 @@ export default () => {
       );
       shakeButtonAnimation(shakeAnimation);
     } else {
-      if (data) {
-        trigger({idWeek: data[0].id});
-      }
+      trigger({idWeek: data![0].id});
       setButtonText("Let's go!");
       navigation.navigate('Game');
       lockLandscape();
@@ -102,7 +99,7 @@ export default () => {
   };
 
   useEffect(() => {
-    if (isSuccess && data) {
+    if (isSuccess && data[0]) {
       setCurrentWeekId(data[0].id);
     }
     if (result.data && result.isSuccess) {

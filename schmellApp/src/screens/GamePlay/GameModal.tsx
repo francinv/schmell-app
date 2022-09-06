@@ -1,4 +1,5 @@
-import React, {FC} from 'react';
+import {Dispatch} from '@reduxjs/toolkit';
+import React, {FC, useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {XIconModal} from '../../assets/icons/XIcon';
@@ -6,6 +7,8 @@ import IconButton from '../../components/Buttons/IconButton';
 import PlayerInput from '../../components/Forms/PlayerInput';
 import SchmellModal from '../../components/Modal';
 import ModalTitle from '../../components/Styled/ModalTitle';
+import {setQuestions} from '../../features/gameplay/gamePlaySlice';
+import {useAppDispatch} from '../../features/hooks';
 import {
   selectCurrentQuestion,
   selectCurrentQuestionIndex,
@@ -16,21 +19,27 @@ import {
 } from '../../features/selectors';
 import useHint from '../../hooks/useHint';
 import useLocale from '../../hooks/useLocale';
+import {useLazyAddPlayerInGameQuery} from '../../services/apiService';
 import {modalShowType} from '../../typings/common';
+import {questionType} from '../../typings/questionTypes';
 import gamePlayStyles from './style';
 
 interface GameModalProps {
   handleShow: () => void;
   modalShow: modalShowType;
-  trigger: any;
 }
 
 interface ModalContentProps {
   currentType: string;
 }
 
+const actionDispatch = (dispatch: Dispatch<any>) => ({
+  setGamePlayQuestions: (questions: questionType[]) =>
+    dispatch(setQuestions(questions)),
+});
+
 const GameModal: FC<GameModalProps> = props => {
-  const {handleShow, modalShow, trigger} = props;
+  const {handleShow, modalShow} = props;
 
   const lang = useSelector(selectLanguage);
   const currentQuestion = useSelector(selectCurrentQuestion);
@@ -38,6 +47,10 @@ const GameModal: FC<GameModalProps> = props => {
   const currentIndex = useSelector(selectCurrentQuestionIndex);
   const editedQuestions = useSelector(selectGamePlayQuestions);
   const uneditedQuestions = useSelector(selectQuestions);
+
+  const {setGamePlayQuestions} = actionDispatch(useAppDispatch());
+
+  const [trigger, result] = useLazyAddPlayerInGameQuery();
 
   const addPlayerTitle = useLocale(lang, 'GAME_PLAYER_INPUT');
 
@@ -52,7 +65,14 @@ const GameModal: FC<GameModalProps> = props => {
       editedQuestions: editedQuestions,
       uneditedQuestions: uneditedQuestions,
     });
+    handleShow();
   };
+
+  useEffect(() => {
+    if (result.isSuccess && result.data) {
+      setGamePlayQuestions(result.data);
+    }
+  }, [result, setGamePlayQuestions]);
 
   return (
     <SchmellModal handleShow={handleShow} modalShow={modalShow}>

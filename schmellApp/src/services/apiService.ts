@@ -100,7 +100,7 @@ export const apiService = createApi({
     }),
     addPlayerInGame: builder.query<QuestionResponse, AddInGameFilter>({
       query: filter => ({
-        url: 'cms/game/players/add/inGame/',
+        url: 'cms/question/players/add/inGame/',
         method: 'POST',
         body: filter,
       }),
