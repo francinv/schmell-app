@@ -19,7 +19,7 @@ import PlayerDisplay from './PlayerDisplay';
 import PlayerInput from '../../components/Forms/PlayerInput';
 import SchmellButton from '../../components/Buttons/SchmellButton';
 import {useNavigation} from '@react-navigation/native';
-import {GameScreenNavigationProp} from '../../typings/navigationTypes';
+import {GameScreenNavigationProp} from '../../typings/navigation';
 import shakeButtonAnimation from '../../animations/moveAnimations/shakeAnimation';
 import useLocale from '../../hooks/useLocale';
 import {lockLandscape} from '../../utils/orientationLocker';
@@ -28,7 +28,7 @@ import {
   useGetWeekQuery,
   useLazyGetQuestionsQuery,
 } from '../../services/apiService';
-import {questionType} from '../../typings/questionTypes';
+import {questionType} from '../../typings/question';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setCurrentWeekId: (query: number) => dispatch(setWeek(query)),

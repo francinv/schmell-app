@@ -2,7 +2,7 @@
 import React, {FC} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Pressable, useWindowDimensions, View} from 'react-native';
-import {GameScreenNavigationProp} from '../../typings/navigationTypes';
+import {GameScreenNavigationProp} from '../../typings/navigation';
 import {carouselNext, carouselPrev} from '../../utils/carousel';
 import gamePlayStyles from './style';
 import {lockPortrait} from '../../utils/orientationLocker';

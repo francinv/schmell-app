@@ -10,7 +10,7 @@ import {useAppDispatch} from '../../features/hooks';
 import {selectPlayers, selectQuestions} from '../../features/selectors';
 import {useAddPlayerToQuestionsQuery} from '../../services/apiService';
 import {modalShowType} from '../../typings/common';
-import {questionType} from '../../typings/questionTypes';
+import {questionType} from '../../typings/question';
 import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';

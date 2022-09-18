@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Image, SafeAreaView, View} from 'react-native';
-import {HomeScreenNavigationProp} from '../../typings/navigationTypes';
+import {HomeScreenNavigationProp} from '../../typings/navigation';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import headerStyle from './style';
 import IconButton from '../Buttons/IconButton';

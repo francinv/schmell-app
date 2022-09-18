@@ -8,7 +8,7 @@ import homeStyle from './style';
 import {Dispatch} from '@reduxjs/toolkit';
 import {useAppDispatch} from '../../features/hooks';
 import {postSettings} from '../../features/usersettings/userSettingSlice';
-import {userSettings} from '../../typings/settingsTypes';
+import {userSettings} from '../../typings/settings';
 import checkIfSettingsSet from '../../utils/checkIfSettingsSet';
 import {useSelector} from 'react-redux';
 import {selectUserStatus} from '../../features/selectors';

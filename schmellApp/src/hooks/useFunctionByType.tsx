@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import CardShow from '../components/GameFunctions/CardShow';
 import SimpleText from '../components/GameFunctions/SimpleText';
 import {selectLanguage} from '../features/selectors';
-import {questionType} from '../typings/questionTypes';
+import {questionType} from '../typings/question';
 import {parseFunctionAnswer} from '../utils/parsers';
 import useLocale from './useLocale';
 

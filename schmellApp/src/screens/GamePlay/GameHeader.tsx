@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import LightBulbIcon from '../../assets/icons/LightBulbIcon';
 import {XIconHeader} from '../../assets/icons/XIcon';
 import IconButton from '../../components/Buttons/IconButton';
-import {GameScreenNavigationProp} from '../../typings/navigationTypes';
+import {GameScreenNavigationProp} from '../../typings/navigation';
 import gamePlayStyles from './style';
 import {lockPortrait} from '../../utils/orientationLocker';
 

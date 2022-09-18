@@ -1,6 +1,6 @@
-import {gameType} from './gameTypes';
-import {questionType} from './questionTypes';
-import {weekType} from './weekTypes';
+import {gameType} from './game';
+import {questionType} from './question';
+import {weekType} from './week';
 
 export type AuthResponse = {
   key: string;

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {questionType} from '../../typings/questionTypes';
-import {initialGameSlice} from '../../typings/stateTypes';
+import {questionType} from '../../typings/question';
+import {initialGameSlice} from '../../typings/state';
 
 const GameSlice = createSlice({
   name: 'game',

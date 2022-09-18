@@ -1,5 +1,5 @@
 import {Animated} from 'react-native';
-import {questionType} from '../typings/questionTypes';
+import {questionType} from '../typings/question';
 
 export const carouselPrev = (
   firstId: number,
