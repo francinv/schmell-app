@@ -24,6 +24,11 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
   const lastTitle = useLocale(lang, 'GAME_END_TITLE');
   const loadingTitle = useLocale(lang, 'GAME_LOADING_TITLE');
 
+  const isInGameCarouselType =
+    currentQuestion.type === 'Mimic Challenge' ||
+    currentQuestion.type === 'Instant Spoilers' ||
+    currentQuestion.type === 'Laveste kortet';
+
   const getContent = () => {
     if (isLoading) {
       return loadingTitle;
@@ -32,12 +37,8 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
     }
   };
 
-  return (
-    <Animated.View
-      style={[
-        gamePlayStyles.questionContainer,
-        {transform: [{translateX: moveAnimation}]},
-      ]}>
+  const NormalCarousel = (
+    <>
       <Text
         style={[
           gamePlayStyles.questionText,
@@ -46,6 +47,16 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
         {getContent()}
       </Text>
       {useFunctionByType(currentQuestion, isLast, isLoading)}
+    </>
+  );
+
+  return (
+    <Animated.View
+      style={[
+        gamePlayStyles.questionContainer,
+        {transform: [{translateX: moveAnimation}]},
+      ]}>
+      {!isInGameCarouselType && NormalCarousel}
     </Animated.View>
   );
 };
