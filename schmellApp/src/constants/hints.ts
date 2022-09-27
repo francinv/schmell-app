@@ -18,5 +18,5 @@ export default {
     'Alle holder fem fingre oppe, så starter en person å si “jeg har aldri xx”... For hver ting man har gjort tar man ned en finger. Den/de første som har tatt ned alle fingrene drikker opp resten av drikka.',
   JSTB: 'En person starter med å si “jæ ska te by`n og jæ tar med meg x”, så skal neste person til høyre si “je ska te by`n, og eg tar med meg x og y”.., neste person sier «Je skal te by`n og eg tar med meg x,y og z».. slik fortsetter spillet. Straffeslurk til den som fucker opp, maks tre straffeslurker per person.',
   CC: 'Det er om å telle fra 1 til antall personer dere er (feks 15). Altså 1-2-3...-15. Hver spiller har kun lov til å si et tall. Straffeslurk om to personer sier samme tall samtidig. Straffeslurk til den som sier siste tallet. Kjør spillet maks 5 ganger og gå videre om dere ikke kommer dere gjennom :)',
-  EG: '',
+  EG: 'Førstemann til å gjette hva emojien prøver å si!',
 };
