@@ -16,4 +16,5 @@ export default {
   FIVEUP: '#1AC0C6',
   JSTB: '#E8A4E6',
   CC: '#FFBBA3',
+  EG: '#0063A9',
 };

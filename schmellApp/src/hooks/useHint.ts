@@ -36,6 +36,8 @@ export default (type: string) => {
       return hints.JSTB;
     case 'Copycat':
       return hints.CC;
+    case 'Emoji Guessing':
+      return hints.EG;
     default:
       break;
   }
