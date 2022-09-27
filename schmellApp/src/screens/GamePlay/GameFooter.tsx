@@ -11,28 +11,42 @@ import gamePlayStyles from './style';
 
 interface GameFooterProps {
   handleShow: () => void;
+  setCountDownDone: (isDone: boolean) => void;
+  isCountDownDone: boolean;
 }
 
-const GameFooter: FC<GameFooterProps> = ({handleShow}) => {
+const GameFooter: FC<GameFooterProps> = ({
+  handleShow,
+  setCountDownDone,
+  isCountDownDone,
+}) => {
   const currentQuestion = useSelector(selectCurrentQuestion);
 
   const countDownSeconds = parseFunctionTimer(currentQuestion?.function);
 
   const shouldShowCountDown = () => {
-    if (!(currentQuestion?.type === 'Skal vi vedde' || 'Challenge accepted?')) {
-      return false;
-    }
     if (countDownSeconds === undefined) {
       return false;
     }
-    return true;
+    if (
+      currentQuestion?.type === 'Skal vi vedde' ||
+      'Challenge accepted?' ||
+      'Instant Spoilers'
+    ) {
+      return true;
+    }
+    return false;
   };
 
   return (
     <View style={gamePlayStyles.footerContainer}>
       <Punishment currentQuestion={currentQuestion} />
       {shouldShowCountDown() && (
-        <CountDown countDownSeconds={countDownSeconds} />
+        <CountDown
+          countDownSeconds={countDownSeconds}
+          setCountDownDone={setCountDownDone}
+          isCountDownDone={isCountDownDone}
+        />
       )}
       <IconButton
         handlePress={handleShow}

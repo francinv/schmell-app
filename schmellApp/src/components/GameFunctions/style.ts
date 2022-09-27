@@ -63,6 +63,9 @@ const gameFunctionStyles = StyleSheet.create({
     marginBottom: 10,
     minWidth: 200,
   },
+  largerSimpleText: {
+    fontSize: 26,
+  },
 });
 
 export default gameFunctionStyles;

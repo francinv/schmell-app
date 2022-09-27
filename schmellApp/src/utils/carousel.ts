@@ -6,6 +6,9 @@ export const carouselPrev = (
   currentIndex: number,
   setIndex: any,
   moveAnim: Animated.Value,
+  isInGameCarousel: boolean,
+  setInGameIndex: any,
+  inGameIndex: number,
 ) => {
   if (!firstId) {
     return;
@@ -16,7 +19,11 @@ export const carouselPrev = (
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
-    setIndex(currentIndex - 1);
+    if (isInGameCarousel && inGameIndex > 0) {
+      setInGameIndex(inGameIndex - 1);
+    } else {
+      setIndex(currentIndex - 1);
+    }
     moveAnim.setValue(-600);
     Animated.timing(moveAnim, {
       toValue: 0,
@@ -32,6 +39,12 @@ export const carouselNext = (
   questionList: questionType[],
   setIndex: any,
   setId: any,
+  isInGameCarousel: boolean,
+  setInGameIndex: any,
+  inGameList: string[],
+  inGameIndex: number,
+  isCountDownDone: boolean,
+  setCountDownDone: (done: boolean) => void,
 ) => {
   if (currentIndex + 1 > questionList.length) {
     return;
@@ -42,9 +55,21 @@ export const carouselNext = (
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
-    setIndex(currentIndex + 1);
-    setId(questionList[0].id);
+    if (
+      isInGameCarousel &&
+      !(inGameIndex === inGameList.length - 1) &&
+      !isCountDownDone
+    ) {
+      setInGameIndex(inGameIndex + 1);
+    } else {
+      if (isInGameCarousel && inGameIndex === inGameList.length - 1) {
+        setInGameIndex(0);
+      }
+      setIndex(currentIndex + 1);
+      setId(questionList[0].id);
+    }
     moveAnim.setValue(600);
+    setCountDownDone(false);
     Animated.timing(moveAnim, {
       toValue: 0,
       duration: 500,

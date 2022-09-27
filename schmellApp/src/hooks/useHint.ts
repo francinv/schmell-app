@@ -36,6 +36,10 @@ export default (type: string) => {
       return hints.JSTB;
     case 'Copycat':
       return hints.CC;
+    case 'Mimic Challenge':
+      return hints.MC;
+    case 'Instant Spoilers':
+      return hints.IS;
     default:
       break;
   }

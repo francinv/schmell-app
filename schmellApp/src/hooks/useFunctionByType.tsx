@@ -2,7 +2,11 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import CardShow from '../components/GameFunctions/CardShow';
 import SimpleText from '../components/GameFunctions/SimpleText';
-import {selectLanguage} from '../features/selectors';
+import gameFunctionStyles from '../components/GameFunctions/style';
+import {
+  selectInnerGameCurrentElement,
+  selectLanguage,
+} from '../features/selectors';
 import {questionType} from '../typings/question';
 import {parseFunctionAnswer} from '../utils/parsers';
 import useLocale from './useLocale';
@@ -13,6 +17,7 @@ export default (
   isLoading: boolean,
 ) => {
   const lang = useSelector(selectLanguage);
+  const currentInnerGameElement = useSelector(selectInnerGameCurrentElement);
 
   const information = useLocale(lang, 'GAME_END_INFORMATION');
   const loading = useLocale(lang, 'GAME_LOADING_INFORMATION');
@@ -34,6 +39,15 @@ export default (
         <CardShow
           answer={parseFunctionAnswer(question.function)}
           questionDesc={getContent() as string}
+        />
+      );
+    case 'Mimic Challenge':
+    case 'Instant Spoilers':
+    case 'Laveste kortet':
+      return (
+        <SimpleText
+          text={currentInnerGameElement}
+          style={gameFunctionStyles.largerSimpleText}
         />
       );
     default:

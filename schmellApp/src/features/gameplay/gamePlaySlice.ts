@@ -16,9 +16,21 @@ const GamePlaySlice = createSlice({
     setId(state, action: PayloadAction<number>) {
       state.firstQuestionId = action.payload;
     },
+    setInnerGamePlayList(state, action: PayloadAction<string[]>) {
+      state.innerGamePlayList = action.payload;
+    },
+    setInnerGameIndex(state, action: PayloadAction<number>) {
+      state.innerGamePlayIndex = action.payload;
+    },
   },
 });
 
-export const {setQuestions, setIndex, setId} = GamePlaySlice.actions;
+export const {
+  setQuestions,
+  setIndex,
+  setId,
+  setInnerGamePlayList,
+  setInnerGameIndex,
+} = GamePlaySlice.actions;
 
 export default GamePlaySlice.reducer;

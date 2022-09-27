@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Pressable, useWindowDimensions, View} from 'react-native';
 import {GameScreenNavigationProp} from '../../typings/navigation';
@@ -13,21 +14,38 @@ import {
   selectFirstQuestionId,
   selectIsLast,
   selectGamePlayQuestions,
+  selectInnerGameIndex,
+  selectInnerGamePlayList,
 } from '../../features/selectors';
 import {Dispatch} from '@reduxjs/toolkit';
-import {setId, setIndex} from '../../features/gameplay/gamePlaySlice';
+import {
+  setId,
+  setIndex,
+  setInnerGameIndex,
+  setInnerGamePlayList,
+} from '../../features/gameplay/gamePlaySlice';
 import {useAppDispatch} from '../../features/hooks';
+import {parseFunctionChallenges} from '../../utils/parsers';
 
 interface CarouselProps {
   moveAnimation: Animated.Value;
+  isCountDownDone: boolean;
+  setCountDownDone: (value: boolean) => void;
 }
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setCurrentIndex: (index: number) => dispatch(setIndex(index)),
   setFirstId: (id: number) => dispatch(setId(id)),
+  setInnerCarousel: (challenges: string[]) =>
+    dispatch(setInnerGamePlayList(challenges)),
+  setInnerIndex: (index: number) => dispatch(setInnerGameIndex(index)),
 });
 
-const Carousel: FC<CarouselProps> = ({moveAnimation}) => {
+const Carousel: FC<CarouselProps> = ({
+  moveAnimation,
+  isCountDownDone,
+  setCountDownDone,
+}) => {
   const navigation = useNavigation<GameScreenNavigationProp>();
   const {width, height} = useWindowDimensions();
 
@@ -36,8 +54,27 @@ const Carousel: FC<CarouselProps> = ({moveAnimation}) => {
   const questions = useSelector(selectGamePlayQuestions);
   const firstId = useSelector(selectFirstQuestionId);
   const currentQuestion = useSelector(selectCurrentQuestion);
+  const inGameIndex = useSelector(selectInnerGameIndex);
+  const inGameList = useSelector(selectInnerGamePlayList);
 
-  const {setCurrentIndex, setFirstId} = actionDispatch(useAppDispatch());
+  const isInGameCarouselType =
+    currentQuestion?.type === 'Mimic Challenge' ||
+    currentQuestion?.type === 'Instant Spoilers' ||
+    currentQuestion?.type === 'Laveste kortet';
+
+  const {setCurrentIndex, setFirstId, setInnerCarousel, setInnerIndex} =
+    actionDispatch(useAppDispatch());
+
+  useEffect(() => {
+    if (isInGameCarouselType && currentQuestion?.function) {
+      const listOfChallenges = parseFunctionChallenges(
+        currentQuestion?.function,
+      );
+      if (!(inGameIndex + 1 > listOfChallenges.length)) {
+        setInnerCarousel(listOfChallenges);
+      }
+    }
+  }, [isInGameCarouselType, currentQuestion, inGameIndex]);
 
   const isFirstQuestion = () => {
     if (isLast) {
@@ -54,7 +91,15 @@ const Carousel: FC<CarouselProps> = ({moveAnimation}) => {
   const handlePrevPress = () => {
     isFirstQuestion()
       ? handleExit()
-      : carouselPrev(firstId, currentIndex, setCurrentIndex, moveAnimation);
+      : carouselPrev(
+          firstId,
+          currentIndex,
+          setCurrentIndex,
+          moveAnimation,
+          isInGameCarouselType,
+          setInnerIndex,
+          inGameIndex,
+        );
   };
 
   return (
@@ -73,6 +118,12 @@ const Carousel: FC<CarouselProps> = ({moveAnimation}) => {
             questions,
             setCurrentIndex,
             setFirstId,
+            isInGameCarouselType,
+            setInnerIndex,
+            inGameList,
+            inGameIndex,
+            isCountDownDone,
+            setCountDownDone,
           )
         }
         style={gamePlayStyles.carouselNext}

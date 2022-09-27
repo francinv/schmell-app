@@ -24,11 +24,6 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
   const lastTitle = useLocale(lang, 'GAME_END_TITLE');
   const loadingTitle = useLocale(lang, 'GAME_LOADING_TITLE');
 
-  const isInGameCarouselType =
-    currentQuestion.type === 'Mimic Challenge' ||
-    currentQuestion.type === 'Instant Spoilers' ||
-    currentQuestion.type === 'Laveste kortet';
-
   const getContent = () => {
     if (isLoading) {
       return loadingTitle;
@@ -56,7 +51,7 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
         gamePlayStyles.questionContainer,
         {transform: [{translateX: moveAnimation}]},
       ]}>
-      {!isInGameCarouselType && NormalCarousel}
+      {NormalCarousel}
     </Animated.View>
   );
 };
