@@ -35,6 +35,7 @@ export default (
     case 'Guess The Song':
     case 'Guess The Gibberish':
     case 'Fleip eller fakta':
+    case 'Emoji Guessing':
       return (
         <CardShow
           answer={parseFunctionAnswer(question.function)}

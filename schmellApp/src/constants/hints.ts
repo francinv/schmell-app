@@ -20,4 +20,5 @@ export default {
   CC: 'Det er om å telle fra 1 til antall personer dere er (feks 15). Altså 1-2-3...-15. Hver spiller har kun lov til å si et tall. Straffeslurk om to personer sier samme tall samtidig. Straffeslurk til den som sier siste tallet. Kjør spillet maks 5 ganger og gå videre om dere ikke kommer dere gjennom :)',
   IS: 'Beskriv handlingen som til filmen er oppgitt, når gjengen greier å gjette dette gis telefonen videre til nestemann. Personen som har telefonen i hånda når tiden går ut må ta straffen.',
   MC: 'Mim ordet på telefonen til gruppen, når noen greier å gjette hva du mimer, gis telefonen videre til nestemann til høyre. Personen med telefonen i hånda når tiden går ut må ta straffen. ',
+  EG: 'Førstemann til å gjette hva emojien prøver å si!',
 };

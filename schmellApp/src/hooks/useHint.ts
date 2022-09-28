@@ -40,6 +40,8 @@ export default (type: string) => {
       return hints.MC;
     case 'Instant Spoilers':
       return hints.IS;
+    case 'Emoji Guessing':
+      return hints.EG;
     default:
       break;
   }

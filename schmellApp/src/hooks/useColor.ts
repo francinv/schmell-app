@@ -40,6 +40,8 @@ export default (type: string) => {
       return colors.MC;
     case 'Instant Spoilers':
       return colors.IS;
+    case 'Emoji Guessing':
+      return colors.EG;
     default:
       return colors.PL;
   }
