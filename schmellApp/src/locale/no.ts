@@ -30,4 +30,6 @@ export default {
   BUTTON_PLAYER: 'spiller',
   SHOW_ANSWER: 'Vis svar',
   HIDE_ANSWER: 'Skjul svar',
+  SHOW: 'Vis',
+  HIDE: 'Skjul',
 };

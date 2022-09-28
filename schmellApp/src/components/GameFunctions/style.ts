@@ -45,26 +45,29 @@ const gameFunctionStyles = StyleSheet.create({
   cardShowContainer: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     borderRadius: 10,
     zIndex: 100,
-    minWidth: 400,
-    minHeight: 155,
-    marginTop: 10,
+    marginTop: 16,
+    padding: 16,
+    minHeight: 120,
     backgroundColor: 'rgba(20, 20, 0, 0.3)',
     shadowColor: '#000',
     shadowOpacity: 0.75,
     shadowOffset: {width: 6, height: 6},
     shadowRadius: 6,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
   },
   customButtonStyling: {
-    marginBottom: 10,
-    minWidth: 200,
+    marginTop: 16,
+    marginBottom: 'auto',
   },
   largerSimpleText: {
     fontSize: 26,
+  },
+  multiShowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    minWidth: '100%',
   },
 });
 

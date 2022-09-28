@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import CardShow from '../components/GameFunctions/CardShow';
+import MultiShow from '../components/GameFunctions/MultiShow';
 import SimpleText from '../components/GameFunctions/SimpleText';
 import gameFunctionStyles from '../components/GameFunctions/style';
 import {
@@ -8,7 +9,7 @@ import {
   selectLanguage,
 } from '../features/selectors';
 import {questionType} from '../typings/question';
-import {parseFunctionAnswer} from '../utils/parsers';
+import {parseFunctionAnswer, parseFunctionQuestions} from '../utils/parsers';
 import useLocale from './useLocale';
 
 export default (
@@ -40,6 +41,7 @@ export default (
         <CardShow
           answer={parseFunctionAnswer(question.function)}
           questionDesc={getContent() as string}
+          numberOfCards={1}
         />
       );
     case 'Mimic Challenge':
@@ -49,6 +51,13 @@ export default (
         <SimpleText
           text={currentInnerGameElement}
           style={gameFunctionStyles.largerSimpleText}
+        />
+      );
+    case 'Shots under brikka':
+      return (
+        <MultiShow
+          questionDesc={question.question_desc}
+          answers={parseFunctionQuestions(question.function)}
         />
       );
     default:

@@ -19,4 +19,5 @@ export default {
   MC: '#6C6BB4',
   IS: '#AB75B1',
   EG: '#0063A9',
+  SUB: '#F9F871',
 };

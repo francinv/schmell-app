@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Animated} from 'react-native';
+import {Animated, StyleProp, ViewStyle} from 'react-native';
 import {useSelector} from 'react-redux';
 import rotatingAnimation from '../../animations/moveAnimations/rotatingAnimation';
 import {selectLanguage} from '../../features/selectors';
@@ -9,15 +9,18 @@ import SimpleText from './SimpleText';
 import gameFunctionStyles from './style';
 
 interface CardShowProps {
-  questionDesc: string;
+  questionDesc?: string;
   answer: string;
+  numberOfCards: number;
 }
 
-const CardShow: FC<CardShowProps> = ({questionDesc, answer}) => {
+const CardShow: FC<CardShowProps> = ({questionDesc, answer, numberOfCards}) => {
   const lang = useSelector(selectLanguage);
 
   const showString = useLocale(lang, 'SHOW_ANSWER') as string;
   const hideString = useLocale(lang, 'HIDE_ANSWER') as string;
+  const showQuestionString = useLocale(lang, 'SHOW') as string;
+  const hideQuestionString = useLocale(lang, 'HIDE') as string;
 
   const [show, setShow] = useState(false);
 
@@ -27,6 +30,13 @@ const CardShow: FC<CardShowProps> = ({questionDesc, answer}) => {
     inputRange: [0, 180],
     outputRange: ['0deg', '360deg'],
   });
+
+  const isSeveralCards = numberOfCards > 1;
+  const cardWidth = isSeveralCards ? '30%' : '80%';
+  const buttonWidth = isSeveralCards ? '50%' : '80%';
+
+  const buttonShowString = isSeveralCards ? showQuestionString : showString;
+  const buttonHideString = isSeveralCards ? hideQuestionString : hideString;
 
   const handlePress = () => {
     rotateAnimation.setValue(0);
@@ -41,24 +51,33 @@ const CardShow: FC<CardShowProps> = ({questionDesc, answer}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const boxAnimationStyle = {
+  const boxAnimationStyle: Animated.WithAnimatedObject<ViewStyle> = {
     transform: [
       {
         rotateY: rotateInterpolation,
       },
     ],
+    maxWidth: cardWidth,
+    minWidth: cardWidth,
+  };
+
+  const buttonStyle: StyleProp<ViewStyle> = {
+    minWidth: buttonWidth,
   };
 
   return (
     <Animated.View
       style={[boxAnimationStyle, gameFunctionStyles.cardShowContainer]}>
-      <SimpleText text={show ? answer : questionDesc} />
+      <SimpleText text={show ? answer : questionDesc || ''} />
       <SchmellButton
         handlePress={handlePress}
-        content={show ? hideString : showString}
-        type="L"
+        content={show ? buttonShowString : buttonHideString}
+        type={isSeveralCards ? 'S' : 'L'}
         wantShadow={true}
-        additionalStyling={gameFunctionStyles.customButtonStyling}
+        additionalStyling={[
+          gameFunctionStyles.customButtonStyling,
+          buttonStyle,
+        ]}
       />
     </Animated.View>
   );

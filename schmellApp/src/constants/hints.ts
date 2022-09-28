@@ -21,4 +21,5 @@ export default {
   IS: 'Beskriv handlingen som til filmen er oppgitt, når gjengen greier å gjette dette gis telefonen videre til nestemann. Personen som har telefonen i hånda når tiden går ut må ta straffen.',
   MC: 'Mim ordet på telefonen til gruppen, når noen greier å gjette hva du mimer, gis telefonen videre til nestemann til høyre. Personen med telefonen i hånda når tiden går ut må ta straffen. ',
   EG: 'Førstemann til å gjette hva emojien prøver å si!',
+  SUB: '',
 };

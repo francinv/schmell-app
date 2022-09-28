@@ -29,4 +29,6 @@ export default {
   BUTTON_PLAYER: 'player',
   SHOW_ANSWER: 'Show answer',
   HIDE_ANSWER: 'Hide answer',
+  SHOW: 'Show',
+  HIDE: 'Hide',
 };

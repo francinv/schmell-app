@@ -42,6 +42,8 @@ export default (type: string) => {
       return colors.IS;
     case 'Emoji Guessing':
       return colors.EG;
+    case 'Shots under brikka':
+      return colors.SUB;
     default:
       return colors.PL;
   }
