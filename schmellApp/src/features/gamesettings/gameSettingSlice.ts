@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {initialGameSettingSlice} from '../../typings/stateTypes';
+import {initialGameSettingSlice} from '../../typings/state';
 
 const GameSettingSlice = createSlice({
   name: 'gamesetting',

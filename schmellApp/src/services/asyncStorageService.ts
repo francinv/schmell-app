@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {showDetailType} from '../typings/settingsTypes';
+import {showDetailType} from '../typings/settings';
 
 export const asyncStorageService = async (
   key: string,

@@ -36,6 +36,10 @@ export default (type: string) => {
       return colors.FIVEUP;
     case 'Jæ ska te by`n':
       return colors.JSTB;
+    case 'Mimic Challenge':
+      return colors.MC;
+    case 'Instant Spoilers':
+      return colors.IS;
     case 'Emoji Guessing':
       return colors.EG;
     default:

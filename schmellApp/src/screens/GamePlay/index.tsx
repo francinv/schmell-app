@@ -10,7 +10,7 @@ import {useAppDispatch} from '../../features/hooks';
 import {selectPlayers, selectQuestions} from '../../features/selectors';
 import {useAddPlayerToQuestionsQuery} from '../../services/apiService';
 import {modalShowType} from '../../typings/common';
-import {questionType} from '../../typings/questionTypes';
+import {questionType} from '../../typings/question';
 import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
@@ -37,6 +37,7 @@ export default () => {
     modalType: '',
     show: false,
   });
+  const [isCountDownDone, setIsCountDownDone] = useState(false);
 
   const [moveAnimation] = useState(new Animated.Value(0));
 
@@ -54,12 +55,20 @@ export default () => {
       <RightCurve />
       <GameHeader handleShow={() => handleShow({show: true, modalType: 'H'})} />
       <Questions moveAnimation={moveAnimation} isLoading={isFetching} />
-      <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
+      <GameFooter
+        handleShow={() => handleShow({show: true, modalType: 'P'})}
+        setCountDownDone={setIsCountDownDone}
+        isCountDownDone={isCountDownDone}
+      />
       <GameModal
         handleShow={() => handleShow({show: false, modalType: ''})}
         modalShow={modalShow}
       />
-      <Carousel moveAnimation={moveAnimation} />
+      <Carousel
+        moveAnimation={moveAnimation}
+        isCountDownDone={isCountDownDone}
+        setCountDownDone={setIsCountDownDone}
+      />
     </>
   );
   return (

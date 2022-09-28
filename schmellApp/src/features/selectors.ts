@@ -28,3 +28,12 @@ export const selectIsLast = (state: RootState) =>
   state.gamePlay.currentQuestionIndex + 1 > state.gamePlay.questionList.length;
 export const selectCurrentQuestion = (state: RootState) =>
   state.gamePlay.questionList[state.gamePlay.currentQuestionIndex];
+export const selectInnerGamePlayList = (state: RootState) =>
+  state.gamePlay.innerGamePlayList;
+export const selectInnerGameIndex = (state: RootState) =>
+  state.gamePlay.innerGamePlayIndex;
+export const selectInnerGameCurrentElement = (state: RootState) =>
+  state.gamePlay.innerGamePlayList[state.gamePlay.innerGamePlayIndex];
+export const selectIsLastInnerGame = (state: RootState) =>
+  state.gamePlay.innerGamePlayIndex + 1 >
+  state.gamePlay.innerGamePlayList.length;

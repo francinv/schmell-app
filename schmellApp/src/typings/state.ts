@@ -1,7 +1,8 @@
-import {questionType} from './questionTypes';
-import {showDetailType} from './settingsTypes';
+import {questionType} from './question';
+import {showDetailType} from './settings';
 
 const questionList: questionType[] = [];
+const innerGamePlayList: string[] = [];
 
 export const initialGameSlice = {
   selectedGameId: 0,
@@ -36,4 +37,6 @@ export const initialGamePlaySlice = {
   firstQuestionId: 0,
   currentQuestionIndex: 0,
   questionList,
+  innerGamePlayList,
+  innerGamePlayIndex: 0,
 };

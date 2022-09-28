@@ -8,9 +8,15 @@ import gameFunctionStyles from './style';
 
 interface CountDownProps {
   countDownSeconds: number;
+  setCountDownDone: (isDone: boolean) => void;
+  isCountDownDone: boolean;
 }
 
-const CountDown: FC<CountDownProps> = ({countDownSeconds}) => {
+const CountDown: FC<CountDownProps> = ({
+  countDownSeconds,
+  setCountDownDone,
+  isCountDownDone,
+}) => {
   const [counter, setCounter] = useState(countDownSeconds);
   const [started, setStarted] = useState(false);
 
@@ -53,9 +59,16 @@ const CountDown: FC<CountDownProps> = ({countDownSeconds}) => {
     }
     if (isFinished) {
       setStarted(false);
-      shakeAnimation(bounceAnimation);
+      shakeAnimation(bounceAnimation, setCountDownDone);
     }
-  }, [counter, started, isFinished, bounceAnimation]);
+  }, [
+    counter,
+    started,
+    isFinished,
+    bounceAnimation,
+    isCountDownDone,
+    setCountDownDone,
+  ]);
 
   const Timer = (
     <Animated.Text
