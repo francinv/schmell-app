@@ -1,8 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
 import {Animated} from 'react-native';
-import {setSelectedGame} from '../../features/game/gameSlice';
-import {useAppDispatch} from '../../features/hooks';
 import {selectGameDetail} from '../../features/selectors';
 import {gameType} from '../../types/game';
 import {HomeScreenNavigationProp} from '../../types/navigation';
@@ -17,10 +14,6 @@ interface GameButtonProps {
   game: gameType;
 }
 
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  selectedGame: (query: number) => dispatch(setSelectedGame(query)),
-});
-
 const GameButton: FC<GameButtonProps> = ({game}) => {
   const {id, name} = game;
 
@@ -32,8 +25,6 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
 
   const [shouldShowDetail, setShouldShowDetail] = useState(true);
   const [showDetail, setShowDetail] = useState(false);
-
-  const {selectedGame} = actionDispatch(useAppDispatch());
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
@@ -76,8 +67,10 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
         rollOutAnimation(opacityAnim, setShowDetail, shadowAnim, borderAnim);
       }
     } else {
-      selectedGame(id);
-      navigation.navigate('GameSettings');
+      console.log(id);
+      navigation.navigate('GameSettings', {
+        selectedGameId: id,
+      });
     }
   };
 
@@ -90,7 +83,7 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
         wantShadow={!showDetail}
         additionalStyling={buttonStyle}
       />
-      {showDetail ? <GameDetail game={game} opacityAnim={opacityAnim} /> : null}
+      {showDetail && <GameDetail game={game} opacityAnim={opacityAnim} />}
     </>
   );
 };

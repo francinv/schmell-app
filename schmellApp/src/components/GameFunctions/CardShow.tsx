@@ -33,8 +33,8 @@ const CardShow: FC<CardShowProps> = ({questionDesc, answer, numberOfCards}) => {
 
   const isSeveralCards = numberOfCards > 1;
 
-  const buttonShowString = isSeveralCards ? showQuestionString : showString;
-  const buttonHideString = isSeveralCards ? hideQuestionString : hideString;
+  const buttonHideString = isSeveralCards ? showQuestionString : showString;
+  const buttonShowString = isSeveralCards ? hideQuestionString : hideString;
 
   const handlePress = () => {
     rotateAnimation.setValue(0);

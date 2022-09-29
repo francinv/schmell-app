@@ -6,10 +6,6 @@ export const selectReadOut = (state: RootState) => state.gamesetting.readOut;
 export const selectLastPlayer = (state: RootState) =>
   state.gamesetting.lastPlayer;
 
-export const selectedGame = (state: RootState) => state.game.selectedGameId;
-export const selectedWeekId = (state: RootState) => state.game.selectedWeekId;
-export const selectQuestions = (state: RootState) => state.game.questionList;
-
 export const selectUserStatus = (state: RootState) => state.usersetting.status;
 export const selectUserError = (state: RootState) => state.usersetting.error;
 export const selectVoice = (state: RootState) => state.usersetting.voice;

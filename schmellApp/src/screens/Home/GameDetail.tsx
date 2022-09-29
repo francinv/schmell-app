@@ -4,7 +4,6 @@ import {Dispatch} from '@reduxjs/toolkit';
 import {gameType} from '../../types/game';
 import {showDetailType} from '../../types/settings';
 import {postDetail} from '../../features/usersettings/userSettingSlice';
-import {setSelectedGame} from '../../features/game/gameSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {selectGameDetail, selectLanguage} from '../../features/selectors';
 import useLocale from '../../hooks/useLocale';
@@ -27,13 +26,12 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
     currentState: showDetailType[];
     update: boolean;
   }) => dispatch(postDetail(query)),
-  selectedGame: (query: number) => dispatch(setSelectedGame(query)),
 });
 
 const GameDetail: FC<GameDetailProps> = ({game, opacityAnim}) => {
   const {description, logo, name, id} = game;
 
-  const {setDetailShow, selectedGame} = actionDispatch(useAppDispatch());
+  const {setDetailShow} = actionDispatch(useAppDispatch());
 
   const showDetail = useSelector(selectGameDetail);
   const lang = useSelector(selectLanguage);
@@ -60,8 +58,9 @@ const GameDetail: FC<GameDetailProps> = ({game, opacityAnim}) => {
         update: true,
       });
     }
-    selectedGame(id);
-    navigation.navigate('GameSettings');
+    navigation.navigate('GameSettings', {
+      selectedGameId: id,
+    });
   };
 
   const opacityStyle = {opacity: opacityAnim};

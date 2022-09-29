@@ -1,3 +1,4 @@
+import {useRoute} from '@react-navigation/native';
 import {Dispatch} from '@reduxjs/toolkit';
 import React, {FC, useEffect} from 'react';
 import {Text} from 'react-native';
@@ -15,12 +16,12 @@ import {
   selectGamePlayQuestions,
   selectLanguage,
   selectPlayers,
-  selectQuestions,
 } from '../../features/selectors';
 import useHint from '../../hooks/useHint';
 import useLocale from '../../hooks/useLocale';
 import {useLazyAddPlayerInGameQuery} from '../../services/apiService';
 import {modalShowType} from '../../types/common';
+import {GameRouteProp} from '../../types/navigation';
 import {questionType} from '../../types/question';
 import gamePlayStyles from './style';
 
@@ -41,12 +42,13 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 const GameModal: FC<GameModalProps> = props => {
   const {handleShow, modalShow} = props;
 
+  const route = useRoute<GameRouteProp>();
+
   const lang = useSelector(selectLanguage);
   const currentQuestion = useSelector(selectCurrentQuestion);
   const players = useSelector(selectPlayers);
   const currentIndex = useSelector(selectCurrentQuestionIndex);
   const editedQuestions = useSelector(selectGamePlayQuestions);
-  const uneditedQuestions = useSelector(selectQuestions);
 
   const {setGamePlayQuestions} = actionDispatch(useAppDispatch());
 
@@ -63,7 +65,7 @@ const GameModal: FC<GameModalProps> = props => {
       currentIndex: currentIndex,
       players: players,
       editedQuestions: editedQuestions,
-      uneditedQuestions: uneditedQuestions,
+      uneditedQuestions: route.params.questions,
     });
     handleShow();
   };
