@@ -32,4 +32,6 @@ export default {
   HIDE_ANSWER: 'Dölj svaret',
   SHOW: 'Visa',
   HIDE: 'Dölj',
+  CORRECT: 'Rätt 🎉',
+  WRONG: 'Fel 😿',
 };

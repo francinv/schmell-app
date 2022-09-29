@@ -32,4 +32,6 @@ export default {
   HIDE_ANSWER: 'Skjul svar',
   SHOW: 'Vis',
   HIDE: 'Skjul',
+  CORRECT: 'Riktig 🎉',
+  WRONG: 'Feil 😿',
 };

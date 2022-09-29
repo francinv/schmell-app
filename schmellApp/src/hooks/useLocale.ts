@@ -35,7 +35,9 @@ type allowedAttribute =
   | 'SHOW_ANSWER'
   | 'HIDE_ANSWER'
   | 'SHOW'
-  | 'HIDE';
+  | 'HIDE'
+  | 'CORRECT'
+  | 'WRONG';
 
 function useLocale(wantedLanguage: string, wantedAttribute: allowedAttribute) {
   switch (wantedLanguage) {

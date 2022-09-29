@@ -9,3 +9,9 @@ export const parseFunctionChallenges = (questionFunc: string) =>
 
 export const parseFunctionQuestions = (questionFunc: string) =>
   JSON.parse(questionFunc).questions;
+
+export const parseFunctionOptions = (questionFunc: string) =>
+  JSON.parse(questionFunc).options;
+
+export const parseFunctionCorrectAnswer = (questionFunc: string) =>
+  JSON.parse(questionFunc).correctAnswer;

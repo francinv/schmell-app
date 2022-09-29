@@ -2,6 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import CardShow from '../components/GameFunctions/CardShow';
 import MultiShow from '../components/GameFunctions/MultiShow';
+import QuizCardContainer from '../components/GameFunctions/QuizCardContainer';
 import SimpleText from '../components/GameFunctions/SimpleText';
 import gameFunctionStyles from '../components/GameFunctions/style';
 import {
@@ -9,7 +10,12 @@ import {
   selectLanguage,
 } from '../features/selectors';
 import {questionType} from '../types/question';
-import {parseFunctionAnswer, parseFunctionQuestions} from '../utils/parsers';
+import {
+  parseFunctionAnswer,
+  parseFunctionCorrectAnswer,
+  parseFunctionOptions,
+  parseFunctionQuestions,
+} from '../utils/parsers';
 import useLocale from './useLocale';
 
 export default (
@@ -58,6 +64,14 @@ export default (
         <MultiShow
           questionDesc={question.question_desc}
           answers={parseFunctionQuestions(question.function)}
+        />
+      );
+    case 'Quiz Game':
+      return (
+        <QuizCardContainer
+          questionDesc={question.question_desc}
+          correctAnswer={parseFunctionCorrectAnswer(question.function)}
+          options={parseFunctionOptions(question.function)}
         />
       );
     default:
