@@ -59,15 +59,18 @@ const gameFunctionStyles = StyleSheet.create({
   },
   customButtonStyling: {
     marginTop: 16,
-    marginBottom: 'auto',
   },
   largerSimpleText: {
     fontSize: 26,
+  },
+  smallerSimpleText: {
+    fontSize: 14,
   },
   multiShowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     minWidth: '100%',
+    flex: 1,
   },
 });
 

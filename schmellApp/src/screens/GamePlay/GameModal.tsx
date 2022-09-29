@@ -1,6 +1,6 @@
 import {Dispatch} from '@reduxjs/toolkit';
 import React, {FC, useEffect} from 'react';
-import {KeyboardAvoidingView, Text} from 'react-native';
+import {Text} from 'react-native';
 import {useSelector} from 'react-redux';
 import {XIconModal} from '../../assets/icons/XIcon';
 import IconButton from '../../components/Buttons/IconButton';
@@ -76,20 +76,20 @@ const GameModal: FC<GameModalProps> = props => {
 
   return (
     <SchmellModal handleShow={handleShow} modalShow={modalShow}>
-      <ModalTitle title={title as string} />
-      <IconButton
-        handlePress={handleShow}
-        wantShadow={false}
-        additionalStyling={gamePlayStyles.modalButton}>
-        <XIconModal />
-      </IconButton>
-      <KeyboardAvoidingView style={gamePlayStyles.modalContentContainer}>
+      <>
+        <ModalTitle title={title as string} />
+        <IconButton
+          handlePress={handleShow}
+          wantShadow={false}
+          additionalStyling={gamePlayStyles.modalButton}>
+          <XIconModal />
+        </IconButton>
         {isTypeHint ? (
           <HintContent currentType={currentQuestion?.type} />
         ) : (
           <PlayerInput inputPlace="InGame" callback={playerAddCallback} />
         )}
-      </KeyboardAvoidingView>
+      </>
     </SchmellModal>
   );
 };

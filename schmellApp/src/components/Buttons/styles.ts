@@ -43,7 +43,7 @@ const buttonStyles = StyleSheet.create({
     width: '100%',
   },
   textSmall: {
-    fontSize: 22,
+    fontSize: 14,
     fontFamily: 'CCBiffBamBoomW00-Regular',
     textAlign: 'center',
     color: '#141400',

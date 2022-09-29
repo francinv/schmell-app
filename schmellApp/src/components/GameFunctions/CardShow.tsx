@@ -32,8 +32,6 @@ const CardShow: FC<CardShowProps> = ({questionDesc, answer, numberOfCards}) => {
   });
 
   const isSeveralCards = numberOfCards > 1;
-  const cardWidth = isSeveralCards ? '30%' : '80%';
-  const buttonWidth = isSeveralCards ? '50%' : '80%';
 
   const buttonShowString = isSeveralCards ? showQuestionString : showString;
   const buttonHideString = isSeveralCards ? hideQuestionString : hideString;
@@ -57,18 +55,21 @@ const CardShow: FC<CardShowProps> = ({questionDesc, answer, numberOfCards}) => {
         rotateY: rotateInterpolation,
       },
     ],
-    maxWidth: cardWidth,
-    minWidth: cardWidth,
+    maxWidth: isSeveralCards ? '30%' : '80%',
+    minWidth: isSeveralCards ? '30%' : '80%',
   };
 
   const buttonStyle: StyleProp<ViewStyle> = {
-    minWidth: buttonWidth,
+    minWidth: isSeveralCards ? '50%' : '80%',
   };
 
   return (
     <Animated.View
       style={[boxAnimationStyle, gameFunctionStyles.cardShowContainer]}>
-      <SimpleText text={show ? answer : questionDesc || ''} />
+      <SimpleText
+        text={show ? answer : questionDesc || ''}
+        style={isSeveralCards && gameFunctionStyles.smallerSimpleText}
+      />
       <SchmellButton
         handlePress={handlePress}
         content={show ? buttonShowString : buttonHideString}

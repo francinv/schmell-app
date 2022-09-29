@@ -32,8 +32,12 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
     }
   };
 
-  const NormalCarousel = (
-    <>
+  return (
+    <Animated.View
+      style={[
+        gamePlayStyles.questionContainer,
+        {transform: [{translateX: moveAnimation}]},
+      ]}>
       <Text
         style={[
           gamePlayStyles.questionText,
@@ -42,16 +46,6 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
         {getContent()}
       </Text>
       {useFunctionByType(currentQuestion, isLast, isLoading)}
-    </>
-  );
-
-  return (
-    <Animated.View
-      style={[
-        gamePlayStyles.questionContainer,
-        {transform: [{translateX: moveAnimation}]},
-      ]}>
-      {NormalCarousel}
     </Animated.View>
   );
 };
