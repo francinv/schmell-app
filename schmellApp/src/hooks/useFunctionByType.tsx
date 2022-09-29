@@ -8,7 +8,7 @@ import {
   selectInnerGameCurrentElement,
   selectLanguage,
 } from '../features/selectors';
-import {questionType} from '../typings/question';
+import {questionType} from '../types/question';
 import {parseFunctionAnswer, parseFunctionQuestions} from '../utils/parsers';
 import useLocale from './useLocale';
 

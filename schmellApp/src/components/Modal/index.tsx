@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from 'react';
 import {KeyboardAvoidingView, View} from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
-import {modalShowType} from '../../typings/common';
+import {modalShowType} from '../../types/common';
 import modalStyles from './style';
 
 interface ModalProps {

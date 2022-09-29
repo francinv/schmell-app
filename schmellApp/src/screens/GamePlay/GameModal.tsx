@@ -20,8 +20,8 @@ import {
 import useHint from '../../hooks/useHint';
 import useLocale from '../../hooks/useLocale';
 import {useLazyAddPlayerInGameQuery} from '../../services/apiService';
-import {modalShowType} from '../../typings/common';
-import {questionType} from '../../typings/question';
+import {modalShowType} from '../../types/common';
+import {questionType} from '../../types/question';
 import gamePlayStyles from './style';
 
 interface GameModalProps {

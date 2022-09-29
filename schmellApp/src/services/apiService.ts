@@ -16,7 +16,7 @@ import {
   QuestionResponse,
   WeekFilters,
   WeekResponse,
-} from '../typings/api';
+} from '../types/api';
 import {decrypt} from '../utils/crypto';
 import encryptedStorageService from './encryptedStorageService';
 

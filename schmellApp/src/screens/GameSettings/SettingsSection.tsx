@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import Megaphone from '../../assets/icons/Megaphone';
 import UsersIcon from '../../assets/icons/UsersIcon';
 import IconButton from '../../components/Buttons/IconButton';
-import {settingsStateType} from '../../typings/common';
+import {settingsStateType} from '../../types/common';
 import ReadOut from './ReadOut';
 import gameSettingStyles from './style';
 import Teams from './Teams';

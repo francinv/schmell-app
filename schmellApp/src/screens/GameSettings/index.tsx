@@ -12,23 +12,23 @@ import {
   selectPlayers,
 } from '../../features/selectors';
 import gameSettingStyles from './style';
-import {getCurrentWeekNumber} from '../../utils/dateUtil';
+import {getCurrentWeekNumber} from '../../utils/date';
 /* import {settingsStateType} from '../../typings/common'; */
 import PlayerDisplay from './PlayerDisplay';
 /* import SettingsSection from './SettingsSection'; */
 import PlayerInput from '../../components/Forms/PlayerInput';
 import SchmellButton from '../../components/Buttons/SchmellButton';
 import {useNavigation} from '@react-navigation/native';
-import {GameScreenNavigationProp} from '../../typings/navigation';
+import {GameScreenNavigationProp} from '../../types/navigation';
 import shakeButtonAnimation from '../../animations/moveAnimations/shakeAnimation';
 import useLocale from '../../hooks/useLocale';
-import {lockLandscape} from '../../utils/orientationLocker';
+import {lockLandscape} from '../../utils/orientation';
 import {setQuestions, setWeek} from '../../features/game/gameSlice';
 import {
   useGetWeekQuery,
   useLazyGetQuestionsQuery,
 } from '../../services/apiService';
-import {questionType} from '../../typings/question';
+import {questionType} from '../../types/question';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setCurrentWeekId: (query: number) => dispatch(setWeek(query)),

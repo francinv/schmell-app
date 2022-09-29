@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {showDetailType} from '../typings/settings';
+import {showDetailType} from '../types/settings';
 
 export const asyncStorageService = async (
   key: string,
@@ -8,14 +8,14 @@ export const asyncStorageService = async (
 ) => {
   switch (type) {
     case 'GET':
-      const temp_get = await AsyncStorage.getItem(key);
-      if (temp_get) {
-        return JSON.parse(temp_get);
+      const response = await AsyncStorage.getItem(key);
+      if (response) {
+        return JSON.parse(response);
       }
       break;
     case 'SET':
-      const temp_set = JSON.stringify(value);
-      await AsyncStorage.setItem(key, temp_set);
+      const stringifyedValue = JSON.stringify(value);
+      await AsyncStorage.setItem(key, stringifyedValue);
       break;
   }
 };

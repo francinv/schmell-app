@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import CocktailIcon from '../../assets/icons/CocktailIcon';
-import {questionType} from '../../typings/question';
+import {questionType} from '../../types/question';
 import gamePlayStyles from './style';
 
 interface PunishmentProps {
