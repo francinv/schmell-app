@@ -1,5 +1,4 @@
 import React from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
 import SelectButton from '../../components/Buttons/SelectButton';
@@ -7,19 +6,15 @@ import SubTitle from '../../components/Styled/SubTitle';
 import InputContainer from '../../components/Wrappers/InputContainer';
 import {useAppDispatch} from '../../features/hooks';
 import {selectLanguage, selectVoice} from '../../features/selectors';
-import {postVoice} from '../../features/usersettings/userSettingSlice';
 import useLocale from '../../hooks/useLocale';
 import settingStyles from './style';
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  setVoice: (query: string) => dispatch(postVoice(query)),
-});
+import {apiDispatch} from '../../features/dispatch';
 
 export default () => {
   const voice = useSelector(selectVoice);
   const language = useSelector(selectLanguage);
 
-  const {setVoice} = actionDispatch(useAppDispatch());
+  const {setVoice} = apiDispatch(useAppDispatch());
 
   return (
     <InputContainer>

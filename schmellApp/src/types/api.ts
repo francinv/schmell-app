@@ -1,5 +1,6 @@
 import {gameType} from './game';
 import {questionType} from './question';
+import {showDetailType} from './settings';
 import {weekType} from './week';
 
 export type AuthResponse = {
@@ -36,4 +37,11 @@ export type AddInGameFilter = {
   players: string[];
   uneditedQuestions: questionType[];
   editedQuestions: questionType[];
+};
+
+export type PostDetailShow = {
+  id: number;
+  show: boolean;
+  currentState: showDetailType[];
+  update: boolean;
 };

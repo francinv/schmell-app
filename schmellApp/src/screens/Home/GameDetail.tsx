@@ -1,9 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Animated, Image, Text, View} from 'react-native';
-import {Dispatch} from '@reduxjs/toolkit';
 import {gameType} from '../../types/game';
-import {showDetailType} from '../../types/settings';
-import {postDetail} from '../../features/usersettings/userSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {selectGameDetail, selectLanguage} from '../../features/selectors';
 import useLocale from '../../hooks/useLocale';
@@ -13,25 +10,17 @@ import {HomeScreenNavigationProp} from '../../types/navigation';
 import homeStyle from './style';
 import Checkbox from '../../components/Forms/Checkbox';
 import SchmellButton from '../../components/Buttons/SchmellButton';
+import {apiDispatch} from '../../features/dispatch';
 
 interface GameDetailProps {
   game: gameType;
   opacityAnim: Animated.Value;
 }
 
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  setDetailShow: (query: {
-    id: number;
-    show: boolean;
-    currentState: showDetailType[];
-    update: boolean;
-  }) => dispatch(postDetail(query)),
-});
-
 const GameDetail: FC<GameDetailProps> = ({game, opacityAnim}) => {
   const {description, logo, name, id} = game;
 
-  const {setDetailShow} = actionDispatch(useAppDispatch());
+  const {setDetailShow} = apiDispatch(useAppDispatch());
 
   const showDetail = useSelector(selectGameDetail);
   const lang = useSelector(selectLanguage);

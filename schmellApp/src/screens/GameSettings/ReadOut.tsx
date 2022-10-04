@@ -1,17 +1,12 @@
 import React, {FC} from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
-import {setReadOut} from '../../features/gamesettings/gameSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
 import {selectLanguage, selectReadOut} from '../../features/selectors';
 import {Text, View} from 'react-native';
 import gameSettingStyles from './style';
 import useLocale from '../../hooks/useLocale';
 import ToggleButton from '../../components/Buttons/ToggleButton';
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  readOut: (query: boolean) => dispatch(setReadOut(query)),
-});
+import actionDispatch from '../../features/dispatch';
 
 const ReadOut: FC = () => {
   const {readOut} = actionDispatch(useAppDispatch());

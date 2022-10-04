@@ -7,25 +7,16 @@ import IconButton from '../../components/Buttons/IconButton';
 import {GameScreenNavigationProp} from '../../types/navigation';
 import gamePlayStyles from './style';
 import {lockPortrait} from '../../utils/orientation';
-import {AnyAction, Dispatch} from '@reduxjs/toolkit';
-import {
-  setIndex,
-  setInnerGameIndex,
-} from '../../features/gameplay/gamePlaySlice';
 import {useAppDispatch} from '../../features/hooks';
+import actionDispatch from '../../features/dispatch';
 
 interface GameHeaderProps {
   handleShow: () => void;
 }
 
-const actionDispatch = (dispatch: Dispatch<AnyAction>) => ({
-  setQuestionIndex: (index: number) => dispatch(setIndex(index)),
-  setInnerIndex: (index: number) => dispatch(setInnerGameIndex(index)),
-});
-
 const GameHeader: FC<GameHeaderProps> = ({handleShow}) => {
   const navigation = useNavigation<GameScreenNavigationProp>();
-  const {setInnerIndex, setQuestionIndex} = actionDispatch(useAppDispatch());
+  const {setInnerIndex, setCurrentIndex} = actionDispatch(useAppDispatch());
 
   return (
     <View style={gamePlayStyles.headerContainer}>
@@ -37,7 +28,7 @@ const GameHeader: FC<GameHeaderProps> = ({handleShow}) => {
           navigation.goBack();
           lockPortrait();
           setInnerIndex(0);
-          setQuestionIndex(0);
+          setCurrentIndex(0);
         }}>
         <XIconHeader />
       </IconButton>

@@ -16,7 +16,7 @@ const GamePlaySlice = createSlice({
     setId(state, action: PayloadAction<number>) {
       state.firstQuestionId = action.payload;
     },
-    setInnerGamePlayList(state, action: PayloadAction<string[]>) {
+    setInnerGamePlayList(state, action: PayloadAction<string[] | number[]>) {
       state.innerGamePlayList = action.payload;
     },
     setInnerGameIndex(state, action: PayloadAction<number>) {

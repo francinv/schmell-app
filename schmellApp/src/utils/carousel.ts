@@ -41,7 +41,7 @@ export const carouselNext = (
   setId: any,
   isInGameCarousel: boolean,
   setInGameIndex: any,
-  inGameList: string[],
+  inGameList: string[] | number[],
   inGameIndex: number,
   isCountDownDone: boolean,
   setCountDownDone: (done: boolean) => void,

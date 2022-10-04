@@ -3,7 +3,7 @@ import {StyleProp, Text, TextStyle} from 'react-native';
 import gameFunctionStyles from './style';
 
 interface SimpleTextProps {
-  text: string;
+  text: string | number;
   style?: StyleProp<TextStyle>;
 }
 

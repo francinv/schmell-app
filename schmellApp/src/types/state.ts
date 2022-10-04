@@ -2,7 +2,7 @@ import {questionType} from './question';
 import {showDetailType} from './settings';
 
 const questionList: questionType[] = [];
-const innerGamePlayList: string[] = [];
+const innerGamePlayList: string[] | number[] = [];
 
 export const initialGameSlice = {
   selectedGameId: 0,
