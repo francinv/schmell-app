@@ -5,8 +5,8 @@ const SEVEND = () => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={240}
-    height={336}
+    width={240 / 2}
+    height={336 / 2}
     viewBox="-120 -168 240 336"
     preserveAspectRatio="none"
     className="prefix__card">

@@ -5,8 +5,8 @@ import Svg, {G, Path} from 'react-native-svg';
 const FIVE5 = () => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={208}
-    height={303}
+    width={240 / 2}
+    height={336 / 2}
     viewBox="0 0 167.086 242.667"
     xmlSpace="preserve">
     <G

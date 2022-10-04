@@ -5,8 +5,8 @@ const TWOS = () => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={240}
-    height={336}
+    width={240 / 2}
+    height={336 / 2}
     viewBox="-120 -168 240 336"
     preserveAspectRatio="none"
     className="prefix__card">
@@ -14,7 +14,10 @@ const TWOS = () => (
       id="prefix__b"
       viewBox="-600 -600 1200 1200"
       preserveAspectRatio="xMinYMid">
-      <Path d="M0-500c100 250 355 400 355 685a150 150 0 0 1-300 0 10 10 0 0 0-20 0c0 200 50 215 95 315h-260c45-100 95-115 95-315a10 10 0 0 0-20 0 150 150 0 0 1-300 0c0-285 255-435 355-685Z" />
+      <Path
+        d="M0-500c100 250 355 400 355 685a150 150 0 0 1-300 0 10 10 0 0 0-20 0c0 200 50 215 95 315h-260c45-100 95-115 95-315a10 10 0 0 0-20 0 150 150 0 0 1-300 0c0-285 255-435 355-685Z"
+        fill="black"
+      />
     </Symbol>
     <Symbol
       id="prefix__a"

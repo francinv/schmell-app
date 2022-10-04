@@ -6,10 +6,10 @@ const ZEROS = () => (
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     className="prefix__card"
-    height={336}
+    height={336 / 2}
     preserveAspectRatio="none"
     viewBox="-120 -168 240 336"
-    width={240}>
+    width={240 / 2}>
     <Defs>
       <Symbol
         id="prefix__b"
@@ -17,7 +17,7 @@ const ZEROS = () => (
         preserveAspectRatio="xMinYMid">
         <Path
           d="M-270 460h160m-90-10L0-460l200 910m-90 10h160m-390-330h240"
-          stroke="#000"
+          stroke="black"
           strokeWidth={80}
           strokeLinecap="square"
           strokeMiterlimit={1.5}
@@ -28,7 +28,10 @@ const ZEROS = () => (
         id="prefix__a"
         viewBox="-600 -600 1200 1200"
         preserveAspectRatio="xMinYMid">
-        <Path d="M0-500c100 250 355 400 355 685a150 150 0 0 1-300 0 10 10 0 0 0-20 0c0 200 50 215 95 315h-260c45-100 95-115 95-315a10 10 0 0 0-20 0 150 150 0 0 1-300 0c0-285 255-435 355-685Z" />
+        <Path
+          d="M0-500c100 250 355 400 355 685a150 150 0 0 1-300 0 10 10 0 0 0-20 0c0 200 50 215 95 315h-260c45-100 95-115 95-315a10 10 0 0 0-20 0 150 150 0 0 1-300 0c0-285 255-435 355-685Z"
+          fill="black"
+        />
       </Symbol>
     </Defs>
     <Rect

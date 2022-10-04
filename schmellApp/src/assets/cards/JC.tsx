@@ -5,8 +5,8 @@ const ZEROC = () => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={240}
-    height={336}
+    width={240 / 2}
+    height={336 / 2}
     viewBox="-120 -168 240 336"
     preserveAspectRatio="none"
     className="prefix__card">
@@ -30,7 +30,10 @@ const ZEROC = () => (
       id="prefix__a"
       viewBox="-600 -600 1200 1200"
       preserveAspectRatio="xMinYMid">
-      <Path d="M30 150c5 235 55 250 100 350h-260c45-100 95-115 100-350a10 10 0 0 0-20 0 210 210 0 1 1-74-201 10 10 0 0 0 14-14 230 230 0 1 1 220 0 10 10 0 0 0 14 14 210 210 0 1 1-74 201 10 10 0 0 0-20 0Z" />
+      <Path
+        d="M30 150c5 235 55 250 100 350h-260c45-100 95-115 100-350a10 10 0 0 0-20 0 210 210 0 1 1-74-201 10 10 0 0 0 14-14 230 230 0 1 1 220 0 10 10 0 0 0 14 14 210 210 0 1 1-74 201 10 10 0 0 0-20 0Z"
+        fill={'black'}
+      />
     </Symbol>
     <Symbol id="prefix__b" preserveAspectRatio="none" viewBox="0 0 1300 2000">
       <Path
