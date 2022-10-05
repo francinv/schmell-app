@@ -22,6 +22,7 @@ const QuizCardContainer: FC<QuizCardContainerProps> = props => {
   const [textShadowColor, setTextShadowColor] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [bounceAnimation] = useState(new Animated.Value(0));
+  const [showButtonShadow, setShowButtonShadow] = useState(false);
 
   const shakeInterpolated = bounceAnimation.interpolate({
     inputRange: [0, 0.5, 1, 1.5, 2, 2.5, 3],
@@ -43,6 +44,7 @@ const QuizCardContainer: FC<QuizCardContainerProps> = props => {
       setStatusText(wrong as string);
       setTextShadowColor('red');
     }
+    setShowButtonShadow(true);
     shakeAnimation(bounceAnimation);
     setDisabled(true);
   };
@@ -70,6 +72,7 @@ const QuizCardContainer: FC<QuizCardContainerProps> = props => {
             isCorrectOption={option === correctAnswer}
             onPress={handlePress}
             lottieRef={lottieRef}
+            showShadow={showButtonShadow}
             disabled={disabled}
           />
         ))}
