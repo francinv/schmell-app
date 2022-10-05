@@ -31,6 +31,8 @@ type carouselNextProps = {
     setId: (id: number) => void;
     setInGameIndex: (index: number) => void;
     setCountDownDone: (query: boolean) => void;
+    setIsCardVisible: (query: boolean) => void;
+    setIsCardDisabled: (query: boolean) => void;
   };
 };
 
@@ -72,7 +74,14 @@ export const carouselNext = (props: carouselNextProps) => {
     isCountDownDone,
     questionList,
   } = props.currentState;
-  const {setCountDownDone, setId, setInGameIndex, setIndex} = props.dispatchers;
+  const {
+    setCountDownDone,
+    setId,
+    setInGameIndex,
+    setIndex,
+    setIsCardDisabled,
+    setIsCardVisible,
+  } = props.dispatchers;
   const {moveAnimationValue} = props;
 
   if (currentIndex + 1 > questionList.length) {
@@ -90,6 +99,8 @@ export const carouselNext = (props: carouselNextProps) => {
       !isCountDownDone
     ) {
       setInGameIndex(inGameIndex + 1);
+      setIsCardVisible(false);
+      setIsCardDisabled(false);
     } else {
       if (
         isInGameCarousel(currentQuestionType) &&

@@ -46,11 +46,17 @@ const Carousel: FC<CarouselProps> = ({
   const inGameList = useSelector(selectInnerGamePlayList);
   const players = useSelector(selectPlayers);
 
-  const {setCurrentIndex, setFirstId, setInnerCarousel, setInnerIndex} =
-    actionDispatch(useAppDispatch());
+  const {
+    setCurrentIndex,
+    setFirstId,
+    setInnerCarousel,
+    setInnerIndex,
+    setIsShown,
+    setDisabled,
+  } = actionDispatch(useAppDispatch());
 
   useEffect(() => {
-    if (isInGameCarousel(currentQuestion.type) && currentQuestion?.function) {
+    if (isInGameCarousel(currentQuestion?.type) && currentQuestion?.function) {
       const listOfChallenges = parseFunctionChallenges(
         currentQuestion?.function,
       );
@@ -113,6 +119,8 @@ const Carousel: FC<CarouselProps> = ({
         setId: setFirstId,
         setInGameIndex: setInnerIndex,
         setCountDownDone: setCountDownDone,
+        setIsCardVisible: setIsShown,
+        setIsCardDisabled: setDisabled,
       },
     });
   };
