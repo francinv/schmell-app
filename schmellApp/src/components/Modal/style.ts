@@ -2,10 +2,21 @@ import {StyleSheet} from 'react-native';
 
 const modalStyles = StyleSheet.create({
   container: {
+    flex: 1,
+    width: '70%',
+  },
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  keyboardAvoidingView: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  innerContainer: {
     backgroundColor: '#FFD700',
     borderRadius: 20,
     paddingVertical: 5,
-    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -14,12 +25,8 @@ const modalStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    width: '60%',
-  },
-  content: {
-    display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

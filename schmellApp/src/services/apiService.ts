@@ -16,12 +16,13 @@ import {
   QuestionResponse,
   WeekFilters,
   WeekResponse,
-} from '../typings/api';
+} from '../types/api';
 import {decrypt} from '../utils/crypto';
 import encryptedStorageService from './encryptedStorageService';
 
+const prod = 'aHR0cHM6Ly9zY2htZWxsLmhlcm9rdWFwcC5jb20vYXBpLw==';
 const baseQuery = fetchBaseQuery({
-  baseUrl: decrypt('aHR0cHM6Ly9zY2htZWxsLmhlcm9rdWFwcC5jb20vYXBpLw=='),
+  baseUrl: 'https://schmell-staging.herokuapp.com/api/',
   prepareHeaders: async headers => {
     const {uniqueString} = RNUniqueId.getConstants();
     const token = await encryptedStorageService(`${uniqueString}_key`, 'GET');

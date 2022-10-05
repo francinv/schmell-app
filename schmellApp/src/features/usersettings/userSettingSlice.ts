@@ -6,8 +6,8 @@ import {
 } from '@reduxjs/toolkit';
 import {LANGUAGE_KEY, SHOW_DETAIL_KEY, VOICE_KEY} from '../../constants/common';
 import {asyncStorageService} from '../../services/asyncStorageService';
-import {showDetailType, userSettings} from '../../typings/settings';
-import {initialUserSettingsSlice} from '../../typings/state';
+import {showDetailType, userSettings} from '../../types/settings';
+import {initialUserSettingsSlice} from '../../types/state';
 
 export const postSettings = createAsyncThunk(
   'usersetting/postSettings',

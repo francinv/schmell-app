@@ -1,5 +1,5 @@
 import React, {FC, ReactNode} from 'react';
-import {Animated, Pressable, Text} from 'react-native';
+import {Animated, Pressable, StyleProp, Text, ViewStyle} from 'react-native';
 import buttonStyles from './styles';
 
 interface SchmellButtonProps {
@@ -9,7 +9,7 @@ interface SchmellButtonProps {
   wantShadow: boolean;
   endIcon?: ReactNode;
   additionalStyling?: any;
-  additionalContainerStyling?: any;
+  additionalContainerStyling?: StyleProp<ViewStyle>;
 }
 
 const SchmellButton: FC<SchmellButtonProps> = ({

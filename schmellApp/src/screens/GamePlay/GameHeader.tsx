@@ -4,9 +4,9 @@ import {View} from 'react-native';
 import LightBulbIcon from '../../assets/icons/LightBulbIcon';
 import {XIconHeader} from '../../assets/icons/XIcon';
 import IconButton from '../../components/Buttons/IconButton';
-import {GameScreenNavigationProp} from '../../typings/navigation';
+import {GameScreenNavigationProp} from '../../types/navigation';
 import gamePlayStyles from './style';
-import {lockPortrait} from '../../utils/orientationLocker';
+import {lockPortrait} from '../../utils/orientation';
 import {AnyAction, Dispatch} from '@reduxjs/toolkit';
 import {
   setIndex,

@@ -3,10 +3,10 @@
 import React, {FC, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Animated, Pressable, useWindowDimensions, View} from 'react-native';
-import {GameScreenNavigationProp} from '../../typings/navigation';
+import {GameScreenNavigationProp} from '../../types/navigation';
 import {carouselNext, carouselPrev} from '../../utils/carousel';
 import gamePlayStyles from './style';
-import {lockPortrait} from '../../utils/orientationLocker';
+import {lockPortrait} from '../../utils/orientation';
 import {useSelector} from 'react-redux';
 import {
   selectCurrentQuestion,

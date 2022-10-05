@@ -33,7 +33,11 @@ type allowedAttribute =
   | 'BUTTON_PLAYERS'
   | 'BUTTON_PLAYER'
   | 'SHOW_ANSWER'
-  | 'HIDE_ANSWER';
+  | 'HIDE_ANSWER'
+  | 'SHOW'
+  | 'HIDE'
+  | 'CORRECT'
+  | 'WRONG';
 
 function useLocale(wantedLanguage: string, wantedAttribute: allowedAttribute) {
   switch (wantedLanguage) {

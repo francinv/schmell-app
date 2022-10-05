@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import {useRoute} from '@react-navigation/native';
 import {Dispatch} from '@reduxjs/toolkit';
 import React, {useEffect, useState} from 'react';
 import {Animated} from 'react-native';
@@ -7,10 +8,11 @@ import {LeftCurve, RightCurve} from '../../assets/icons/Curves';
 import QuestionWrapper from '../../components/Wrappers/QuestionWrapper';
 import {setQuestions} from '../../features/gameplay/gamePlaySlice';
 import {useAppDispatch} from '../../features/hooks';
-import {selectPlayers, selectQuestions} from '../../features/selectors';
+import {selectPlayers} from '../../features/selectors';
 import {useAddPlayerToQuestionsQuery} from '../../services/apiService';
-import {modalShowType} from '../../typings/common';
-import {questionType} from '../../typings/question';
+import {modalShowType} from '../../types/common';
+import {GameRouteProp} from '../../types/navigation';
+import {questionType} from '../../types/question';
 import Carousel from './Carousel';
 import GameFooter from './GameFooter';
 import GameHeader from './GameHeader';
@@ -23,14 +25,14 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 });
 
 export default () => {
+  const route = useRoute<GameRouteProp>();
   const players = useSelector(selectPlayers);
-  const questions = useSelector(selectQuestions);
 
   const {setGamePlayQuestions} = actionDispatch(useAppDispatch());
 
   const {isFetching, data, isSuccess} = useAddPlayerToQuestionsQuery({
     players: players,
-    questions: questions,
+    questions: route.params.questions,
   });
 
   const [modalShow, setModalShow] = useState<modalShowType>({

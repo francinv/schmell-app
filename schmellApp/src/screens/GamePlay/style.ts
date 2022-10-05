@@ -26,11 +26,11 @@ const gamePlayStyles = StyleSheet.create({
   questionText: {
     color: '#FFFFFF',
     fontFamily: 'CCBiffBamBoomW00-Regular',
-    fontSize: 45,
+    fontSize: 42,
     textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 4,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
     width: '100%',
     textAlign: 'center',
   },
@@ -39,6 +39,8 @@ const gamePlayStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     marginTop: 10,
+    zIndex: -50,
+    paddingBottom: 10,
   },
   punishmentContainerFlex: {
     display: 'flex',
@@ -52,7 +54,9 @@ const gamePlayStyles = StyleSheet.create({
     justifyContent: 'center',
   },
   modalContentContainer: {
-    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
   hintContent: {
     fontFamily: 'Quicksand-Regular',

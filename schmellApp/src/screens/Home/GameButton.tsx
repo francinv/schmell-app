@@ -1,11 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
 import {Animated} from 'react-native';
-import {setSelectedGame} from '../../features/game/gameSlice';
-import {useAppDispatch} from '../../features/hooks';
 import {selectGameDetail} from '../../features/selectors';
-import {gameType} from '../../typings/game';
-import {HomeScreenNavigationProp} from '../../typings/navigation';
+import {gameType} from '../../types/game';
+import {HomeScreenNavigationProp} from '../../types/navigation';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import SchmellButton from '../../components/Buttons/SchmellButton';
@@ -16,10 +13,6 @@ import GameDetail from './GameDetail';
 interface GameButtonProps {
   game: gameType;
 }
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  selectedGame: (query: number) => dispatch(setSelectedGame(query)),
-});
 
 const GameButton: FC<GameButtonProps> = ({game}) => {
   const {id, name} = game;
@@ -32,8 +25,6 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
 
   const [shouldShowDetail, setShouldShowDetail] = useState(true);
   const [showDetail, setShowDetail] = useState(false);
-
-  const {selectedGame} = actionDispatch(useAppDispatch());
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
@@ -76,8 +67,9 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
         rollOutAnimation(opacityAnim, setShowDetail, shadowAnim, borderAnim);
       }
     } else {
-      selectedGame(id);
-      navigation.navigate('GameSettings');
+      navigation.navigate('GameSettings', {
+        selectedGameId: id,
+      });
     }
   };
 
@@ -90,7 +82,7 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
         wantShadow={!showDetail}
         additionalStyling={buttonStyle}
       />
-      {showDetail ? <GameDetail game={game} opacityAnim={opacityAnim} /> : null}
+      {showDetail && <GameDetail game={game} opacityAnim={opacityAnim} />}
     </>
   );
 };

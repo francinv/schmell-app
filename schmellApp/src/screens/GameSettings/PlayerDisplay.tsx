@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Animated} from 'react-native';
 import {selectLanguage, selectPlayers} from '../../features/selectors';
-import {getInitialList} from '../../utils/listGenerators';
+import {getInitialList} from '../../utils/list';
 import {useSelector} from 'react-redux';
 import useLocale from '../../hooks/useLocale';
 import gameSettingStyles from './style';

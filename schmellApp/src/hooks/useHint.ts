@@ -42,6 +42,10 @@ export default (type: string) => {
       return hints.IS;
     case 'Emoji Guessing':
       return hints.EG;
+    case 'Shots under brikka':
+      return hints.SUB;
+    case 'Quiz Game':
+      return hints.QG;
     default:
       break;
   }

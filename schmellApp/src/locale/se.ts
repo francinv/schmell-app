@@ -30,4 +30,8 @@ export default {
   BUTTON_PLAYER: 'spelare',
   SHOW_ANSWER: 'Visa svar',
   HIDE_ANSWER: 'Dölj svaret',
+  SHOW: 'Visa',
+  HIDE: 'Dölj',
+  CORRECT: 'Rätt 🎉',
+  WRONG: 'Fel 😿',
 };
