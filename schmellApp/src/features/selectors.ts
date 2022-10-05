@@ -33,3 +33,9 @@ export const selectInnerGameCurrentElement = (state: RootState) =>
 export const selectIsLastInnerGame = (state: RootState) =>
   state.gamePlay.innerGamePlayIndex + 1 >
   state.gamePlay.innerGamePlayList.length;
+export const selectIsDeckCardDisabled = (state: RootState) =>
+  state.gamePlay.isDeckCardDisabled;
+export const selectDeckCardRandomNumber = (state: RootState) =>
+  state.gamePlay.randomNumber;
+export const selectIsDeckCardShown = (state: RootState) =>
+  state.gamePlay.isDeckCardShow;

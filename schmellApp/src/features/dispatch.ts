@@ -1,12 +1,15 @@
 import {AnyAction, Dispatch} from '@reduxjs/toolkit';
 import {PostDetailShow} from '../types/api';
-import {questionType} from '../types/question';
+import {question} from '../types/question';
 import {
   setId,
   setIndex,
   setInnerGameIndex,
   setInnerGamePlayList,
+  setIsDeckCardDisabled,
+  setIsDeckCardShow,
   setQuestions,
+  setRandomNumber,
 } from './gameplay/gamePlaySlice';
 import {
   addPlayers,
@@ -27,11 +30,14 @@ const actionDispatch = (dispatch: Dispatch<AnyAction>) => ({
   setInnerCarousel: (challenges: string[] | number[]) =>
     dispatch(setInnerGamePlayList(challenges)),
   setInnerIndex: (index: number) => dispatch(setInnerGameIndex(index)),
-  setGamePlayQuestions: (questions: questionType[]) =>
+  setGamePlayQuestions: (questions: question[]) =>
     dispatch(setQuestions(questions)),
   removeFromList: (query: number) => dispatch(removePlayer(query)),
   readOut: (query: boolean) => dispatch(setReadOut(query)),
   editTeams: (query: number) => dispatch(setTeams(query)),
+  setRandom: (query: number) => dispatch(setRandomNumber(query)),
+  setDisabled: (query: boolean) => dispatch(setIsDeckCardDisabled(query)),
+  setIsShown: (query: boolean) => dispatch(setIsDeckCardShow(query)),
 });
 
 export const apiDispatch = (dispatch: Dispatch<any>) => ({
