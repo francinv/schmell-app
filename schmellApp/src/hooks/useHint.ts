@@ -46,6 +46,8 @@ export default (type: string) => {
       return hints.SUB;
     case 'Quiz Game':
       return hints.QG;
+    case 'Laveste kortet':
+      return hints.LK;
     default:
       break;
   }
