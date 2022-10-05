@@ -76,7 +76,6 @@ const gameFunctionStyles = StyleSheet.create({
     backgroundColor: 'rgba(20, 20, 0, 0.3)',
     padding: 16,
     borderRadius: 10,
-    shadowColor: '#000',
     shadowOpacity: 0.75,
     shadowOffset: {width: 2, height: 2},
     shadowRadius: 2,
