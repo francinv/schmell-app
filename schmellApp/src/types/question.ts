@@ -1,4 +1,4 @@
-export type questionType = {
+export type question = {
   id: number;
   type: string;
   question_desc: string;

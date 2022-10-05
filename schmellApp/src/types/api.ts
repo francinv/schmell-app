@@ -1,5 +1,5 @@
 import {gameType} from './game';
-import {questionType} from './question';
+import {question} from './question';
 import {showDetailType} from './settings';
 import {weekType} from './week';
 
@@ -21,22 +21,22 @@ export type WeekFilters = {
   idGame: number;
 };
 
-export type QuestionResponse = Array<questionType>;
+export type QuestionResponse = Array<question>;
 
 export type QuestionFilter = {
   idWeek: number;
 };
 
 export type AddPlayerFilter = {
-  questions: questionType[];
+  questions: question[];
   players: string[];
 };
 
 export type AddInGameFilter = {
   currentIndex: number;
   players: string[];
-  uneditedQuestions: questionType[];
-  editedQuestions: questionType[];
+  uneditedQuestions: question[];
+  editedQuestions: question[];
 };
 
 export type PostDetailShow = {

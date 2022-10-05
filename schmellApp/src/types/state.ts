@@ -1,7 +1,7 @@
-import {questionType} from './question';
+import {question} from './question';
 import {showDetailType} from './settings';
 
-const questionList: questionType[] = [];
+const questionList: question[] = [];
 const innerGamePlayList: string[] | number[] = [];
 
 export const initialGameSlice = {
@@ -39,4 +39,7 @@ export const initialGamePlaySlice = {
   questionList,
   innerGamePlayList,
   innerGamePlayIndex: 0,
+  isDeckCardDisabled: false,
+  isDeckCardShow: false,
+  randomNumber: 0,
 };

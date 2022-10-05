@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import CardShow from '../components/GameFunctions/CardShow';
+import DeckDraw from '../components/GameFunctions/DeckDraw';
 import MultiShow from '../components/GameFunctions/MultiShow';
 import QuizCardContainer from '../components/GameFunctions/QuizCardContainer';
 import SimpleText from '../components/GameFunctions/SimpleText';
@@ -9,7 +10,7 @@ import {
   selectInnerGameCurrentElement,
   selectLanguage,
 } from '../features/selectors';
-import {questionType} from '../types/question';
+import {question} from '../types/question';
 import {
   parseFunctionAnswer,
   parseFunctionCorrectAnswer,
@@ -18,8 +19,8 @@ import {
 } from '../utils/parsers';
 import useLocale from './useLocale';
 
-export default (
-  question: questionType,
+const useFunctionByType = (
+  currentQuestion: question,
   isLast: boolean,
   isLoading: boolean,
 ) => {
@@ -33,10 +34,10 @@ export default (
     if (isLoading) {
       return loading;
     } else {
-      return isLast ? (information as string) : question.question_desc;
+      return isLast ? (information as string) : currentQuestion.question_desc;
     }
   };
-  switch (question?.type) {
+  switch (currentQuestion?.type) {
     case 'Guess The Country':
     case 'Guess The Movie':
     case 'Guess The Song':
@@ -45,36 +46,44 @@ export default (
     case 'Emoji Guessing':
       return (
         <CardShow
-          answer={parseFunctionAnswer(question.function)}
+          answer={parseFunctionAnswer(currentQuestion.function)}
           questionDesc={getContent() as string}
           numberOfCards={1}
         />
       );
     case 'Mimic Challenge':
     case 'Instant Spoilers':
-    case 'Laveste kortet':
       return (
         <SimpleText
           text={currentInnerGameElement}
           style={gameFunctionStyles.largerSimpleText}
         />
       );
+    case 'Laveste kortet':
+      return (
+        <>
+          <SimpleText text={getContent() as string} />
+          <DeckDraw />
+        </>
+      );
     case 'Shots under brikka':
       return (
         <MultiShow
-          questionDesc={question.question_desc}
-          answers={parseFunctionQuestions(question.function)}
+          questionDesc={currentQuestion.question_desc}
+          answers={parseFunctionQuestions(currentQuestion.function)}
         />
       );
     case 'Quiz Game':
       return (
         <QuizCardContainer
-          questionDesc={question.question_desc}
-          correctAnswer={parseFunctionCorrectAnswer(question.function)}
-          options={parseFunctionOptions(question.function)}
+          questionDesc={currentQuestion.question_desc}
+          correctAnswer={parseFunctionCorrectAnswer(currentQuestion.function)}
+          options={parseFunctionOptions(currentQuestion.function)}
         />
       );
     default:
       return <SimpleText text={getContent() as string} />;
   }
 };
+
+export default useFunctionByType;
