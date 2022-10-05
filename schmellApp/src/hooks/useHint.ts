@@ -44,6 +44,8 @@ export default (type: string) => {
       return hints.EG;
     case 'Shots under brikka':
       return hints.SUB;
+    case 'Quiz Game':
+      return hints.QG;
     default:
       break;
   }

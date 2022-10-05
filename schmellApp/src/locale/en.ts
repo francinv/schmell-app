@@ -31,4 +31,6 @@ export default {
   HIDE_ANSWER: 'Hide answer',
   SHOW: 'Show',
   HIDE: 'Hide',
+  CORRECT: 'Correct 🎉',
+  WRONG: 'Wrong 😿',
 };

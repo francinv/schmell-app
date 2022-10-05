@@ -22,4 +22,5 @@ export default {
   MC: 'Mim ordet på telefonen til gruppen, når noen greier å gjette hva du mimer, gis telefonen videre til nestemann til høyre. Personen med telefonen i hånda når tiden går ut må ta straffen. ',
   EG: 'Førstemann til å gjette hva emojien prøver å si!',
   SUB: 'Schmell velger personen som skal gjøre utfordringen. Trykk på kortene, og les spørsmålet for deg selv. Svar enten på spørsmålet eller ta straffeslurk. Om det er ønskelig å finne ut hva spørsmålet er kan de andre spillerne drikke antall slurker som vist.',
+  QG: 'Svar riktig eller drikk antall slurker som er vist.',
 };

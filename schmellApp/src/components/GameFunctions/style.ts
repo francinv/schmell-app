@@ -72,6 +72,32 @@ const gameFunctionStyles = StyleSheet.create({
     minWidth: '100%',
     flex: 1,
   },
+  quizCard: {
+    backgroundColor: 'rgba(20, 20, 0, 0.3)',
+    padding: 16,
+    borderRadius: 10,
+    shadowOpacity: 0.75,
+    shadowOffset: {width: 2, height: 2},
+    shadowRadius: 2,
+    marginLeft: 8,
+    marginRight: 8,
+  },
+  quizContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  quizStatusText: {
+    fontSize: 30,
+    fontFamily: 'CCBiffBamBoomW00-Regular',
+    color: '#fff',
+    paddingLeft: 5,
+    paddingRight: 5,
+    marginTop: 16,
+    textShadowOffset: {width: 0, height: 2},
+    textShadowRadius: 4,
+  },
 });
 
 export default gameFunctionStyles;

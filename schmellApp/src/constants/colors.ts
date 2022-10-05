@@ -20,4 +20,5 @@ export default {
   IS: '#AB75B1',
   EG: '#0063A9',
   SUB: '#F9F871',
+  QG: '#F88F6F',
 };

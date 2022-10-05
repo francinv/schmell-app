@@ -44,6 +44,8 @@ export default (type: string) => {
       return colors.EG;
     case 'Shots under brikka':
       return colors.SUB;
+    case 'Quiz Game':
+      return colors.QG;
     default:
       return colors.PL;
   }

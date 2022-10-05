@@ -67,7 +67,6 @@ const GameButton: FC<GameButtonProps> = ({game}) => {
         rollOutAnimation(opacityAnim, setShowDetail, shadowAnim, borderAnim);
       }
     } else {
-      console.log(id);
       navigation.navigate('GameSettings', {
         selectedGameId: id,
       });
