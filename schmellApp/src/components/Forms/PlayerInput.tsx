@@ -2,15 +2,14 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {View} from 'react-native';
 import {useSelector} from 'react-redux';
-import {Dispatch as ReduxDispatch} from '@reduxjs/toolkit';
 import SchmellInput from './SchmellInput';
 import {selectLanguage} from '../../features/selectors';
 import useLocale from '../../hooks/useLocale';
 import formStyles from './style';
-import {addPlayers} from '../../features/gamesettings/gameSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
 import IconButton from '../Buttons/IconButton';
 import {PlusIcon} from '../../assets/icons/PlusIcon';
+import actionDispatch from '../../features/dispatch';
 
 interface InputProps {
   inputPlace: 'Settings' | 'InGame';
@@ -18,10 +17,6 @@ interface InputProps {
   setButtonText?: Dispatch<SetStateAction<string>>;
   callback?: () => void;
 }
-
-const actionDispatch = (dispatch: ReduxDispatch<any>) => ({
-  addPlayer: (query: string) => dispatch(addPlayers(query)),
-});
 
 const PlayerInput: FC<InputProps> = props => {
   const {buttonText, inputPlace, setButtonText, callback} = props;

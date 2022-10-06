@@ -1,5 +1,4 @@
 import {useRoute} from '@react-navigation/native';
-import {Dispatch} from '@reduxjs/toolkit';
 import React, {FC, useEffect} from 'react';
 import {Text} from 'react-native';
 import {useSelector} from 'react-redux';
@@ -8,7 +7,7 @@ import IconButton from '../../components/Buttons/IconButton';
 import PlayerInput from '../../components/Forms/PlayerInput';
 import SchmellModal from '../../components/Modal';
 import ModalTitle from '../../components/Styled/ModalTitle';
-import {setQuestions} from '../../features/gameplay/gamePlaySlice';
+import actionDispatch from '../../features/dispatch';
 import {useAppDispatch} from '../../features/hooks';
 import {
   selectCurrentQuestion,
@@ -22,7 +21,6 @@ import useLocale from '../../hooks/useLocale';
 import {useLazyAddPlayerInGameQuery} from '../../services/apiService';
 import {modalShowType} from '../../types/common';
 import {GameRouteProp} from '../../types/navigation';
-import {questionType} from '../../types/question';
 import gamePlayStyles from './style';
 
 interface GameModalProps {
@@ -33,11 +31,6 @@ interface GameModalProps {
 interface ModalContentProps {
   currentType: string;
 }
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  setGamePlayQuestions: (questions: questionType[]) =>
-    dispatch(setQuestions(questions)),
-});
 
 const GameModal: FC<GameModalProps> = props => {
   const {handleShow, modalShow} = props;

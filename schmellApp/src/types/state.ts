@@ -1,8 +1,8 @@
-import {questionType} from './question';
+import {question} from './question';
 import {showDetailType} from './settings';
 
-const questionList: questionType[] = [];
-const innerGamePlayList: string[] = [];
+const questionList: question[] = [];
+const innerGamePlayList: string[] | number[] = [];
 
 export const initialGameSlice = {
   selectedGameId: 0,
@@ -34,9 +34,11 @@ const status: statusType = 'idle' as statusType;
 
 export const initialGamePlaySlice = {
   status,
-  firstQuestionId: 0,
   currentQuestionIndex: 0,
   questionList,
   innerGamePlayList,
   innerGamePlayIndex: 0,
+  isDeckCardDisabled: false,
+  isDeckCardShow: false,
+  randomNumber: 0,
 };

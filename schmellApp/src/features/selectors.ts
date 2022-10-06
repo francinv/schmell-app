@@ -19,7 +19,7 @@ export const selectPlayStatus = (state: RootState) => state.gamePlay.status;
 export const selectCurrentQuestionIndex = (state: RootState) =>
   state.gamePlay.currentQuestionIndex;
 export const selectFirstQuestionId = (state: RootState) =>
-  state.gamePlay.firstQuestionId;
+  state.gamePlay.questionList[0]?.id;
 export const selectIsLast = (state: RootState) =>
   state.gamePlay.currentQuestionIndex + 1 > state.gamePlay.questionList.length;
 export const selectCurrentQuestion = (state: RootState) =>
@@ -33,3 +33,9 @@ export const selectInnerGameCurrentElement = (state: RootState) =>
 export const selectIsLastInnerGame = (state: RootState) =>
   state.gamePlay.innerGamePlayIndex + 1 >
   state.gamePlay.innerGamePlayList.length;
+export const selectIsDeckCardDisabled = (state: RootState) =>
+  state.gamePlay.isDeckCardDisabled;
+export const selectDeckCardRandomNumber = (state: RootState) =>
+  state.gamePlay.randomNumber;
+export const selectIsDeckCardShown = (state: RootState) =>
+  state.gamePlay.isDeckCardShow;

@@ -1,6 +1,4 @@
 import React, {FC} from 'react';
-import {setTeams} from '../../features/gamesettings/gameSettingSlice';
-import {Dispatch} from '@reduxjs/toolkit';
 import {useSelector} from 'react-redux';
 import {selectLanguage, selectTeams} from '../../features/selectors';
 import {useAppDispatch} from '../../features/hooks';
@@ -8,10 +6,7 @@ import {Text, View} from 'react-native';
 import gameSettingStyles from './style';
 import useLocale from '../../hooks/useLocale';
 import ToggleButton from '../../components/Buttons/ToggleButton';
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  editTeams: (query: number) => dispatch(setTeams(query)),
-});
+import actionDispatch from '../../features/dispatch';
 
 const Teams: FC = () => {
   const activeTeam = useSelector(selectTeams);

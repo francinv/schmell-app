@@ -16,30 +16,19 @@ import {
   selectGamePlayQuestions,
   selectInnerGameIndex,
   selectInnerGamePlayList,
+  selectPlayers,
+  selectIsDeckCardShown,
 } from '../../features/selectors';
-import {Dispatch} from '@reduxjs/toolkit';
-import {
-  setId,
-  setIndex,
-  setInnerGameIndex,
-  setInnerGamePlayList,
-} from '../../features/gameplay/gamePlaySlice';
 import {useAppDispatch} from '../../features/hooks';
 import {parseFunctionChallenges} from '../../utils/parsers';
+import actionDispatch from '../../features/dispatch';
+import {isInGameCarousel} from '../../utils/question';
 
 interface CarouselProps {
   moveAnimation: Animated.Value;
   isCountDownDone: boolean;
   setCountDownDone: (value: boolean) => void;
 }
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  setCurrentIndex: (index: number) => dispatch(setIndex(index)),
-  setFirstId: (id: number) => dispatch(setId(id)),
-  setInnerCarousel: (challenges: string[]) =>
-    dispatch(setInnerGamePlayList(challenges)),
-  setInnerIndex: (index: number) => dispatch(setInnerGameIndex(index)),
-});
 
 const Carousel: FC<CarouselProps> = ({
   moveAnimation,
@@ -56,17 +45,19 @@ const Carousel: FC<CarouselProps> = ({
   const currentQuestion = useSelector(selectCurrentQuestion);
   const inGameIndex = useSelector(selectInnerGameIndex);
   const inGameList = useSelector(selectInnerGamePlayList);
+  const players = useSelector(selectPlayers);
+  const showCard = useSelector(selectIsDeckCardShown);
 
-  const isInGameCarouselType =
-    currentQuestion?.type === 'Mimic Challenge' ||
-    currentQuestion?.type === 'Instant Spoilers' ||
-    currentQuestion?.type === 'Laveste kortet';
-
-  const {setCurrentIndex, setFirstId, setInnerCarousel, setInnerIndex} =
-    actionDispatch(useAppDispatch());
+  const {
+    setCurrentIndex,
+    setInnerCarousel,
+    setInnerIndex,
+    setIsShown,
+    setDisabled,
+  } = actionDispatch(useAppDispatch());
 
   useEffect(() => {
-    if (isInGameCarouselType && currentQuestion?.function) {
+    if (isInGameCarousel(currentQuestion?.type) && currentQuestion?.function) {
       const listOfChallenges = parseFunctionChallenges(
         currentQuestion?.function,
       );
@@ -74,7 +65,14 @@ const Carousel: FC<CarouselProps> = ({
         setInnerCarousel(listOfChallenges);
       }
     }
-  }, [isInGameCarouselType, currentQuestion, inGameIndex]);
+
+    if (currentQuestion?.type === 'Laveste kortet') {
+      const listOfChallenges = [...Array(players.length).keys()];
+      if (!(inGameIndex + 1 > listOfChallenges.length)) {
+        setInnerCarousel(listOfChallenges);
+      }
+    }
+  }, [currentQuestion, inGameIndex]);
 
   const isFirstQuestion = () => {
     if (isLast) {
@@ -88,44 +86,59 @@ const Carousel: FC<CarouselProps> = ({
     lockPortrait();
   };
 
-  const handlePrevPress = () => {
+  const handlePrev = () => {
     isFirstQuestion()
       ? handleExit()
-      : carouselPrev(
-          firstId,
-          currentIndex,
-          setCurrentIndex,
-          moveAnimation,
-          isInGameCarouselType,
-          setInnerIndex,
-          inGameIndex,
-        );
+      : carouselPrev({
+          moveAnimationValue: moveAnimation,
+          currentState: {
+            firstId,
+            currentIndex,
+            currentQuestionType: currentQuestion?.type,
+            currentInGameIndex: inGameIndex,
+          },
+          dispatchers: {
+            setIndex: setCurrentIndex,
+            setInGameIndex: setInnerIndex,
+          },
+        });
+  };
+
+  const handleNext = () => {
+    carouselNext({
+      moveAnimationValue: moveAnimation,
+      currentState: {
+        currentIndex: currentIndex,
+        questionList: questions,
+        currentQuestionType: currentQuestion?.type,
+        inGameList: inGameList,
+        inGameIndex: inGameIndex,
+        isCountDownDone: isCountDownDone,
+      },
+      dispatchers: {
+        setIndex: setCurrentIndex,
+        setInGameIndex: setInnerIndex,
+        setCountDownDone: setCountDownDone,
+        setIsCardVisible: setIsShown,
+        setIsCardDisabled: setDisabled,
+      },
+    });
   };
 
   return (
-    <View style={[gamePlayStyles.carouselContainer, {width: width}]}>
+    <View
+      style={[
+        gamePlayStyles.carouselContainer,
+        {width: width, zIndex: showCard ? 100 : -50},
+      ]}>
       <Pressable
-        onPress={handlePrevPress}
-        style={[gamePlayStyles.carouselPrev, {height: height - 140}]}>
+        onPress={handlePrev}
+        style={[gamePlayStyles.carouselPrev, {height: height}]}>
         <View style={{backgroundColor: 'white'}} />
       </Pressable>
       <Pressable
         disabled={isLast}
-        onPress={() =>
-          carouselNext(
-            moveAnimation,
-            currentIndex,
-            questions,
-            setCurrentIndex,
-            setFirstId,
-            isInGameCarouselType,
-            setInnerIndex,
-            inGameList,
-            inGameIndex,
-            isCountDownDone,
-            setCountDownDone,
-          )
-        }
+        onPress={handleNext}
         style={gamePlayStyles.carouselNext}
       />
     </View>

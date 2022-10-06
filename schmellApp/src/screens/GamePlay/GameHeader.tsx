@@ -7,37 +7,62 @@ import IconButton from '../../components/Buttons/IconButton';
 import {GameScreenNavigationProp} from '../../types/navigation';
 import gamePlayStyles from './style';
 import {lockPortrait} from '../../utils/orientation';
-import {AnyAction, Dispatch} from '@reduxjs/toolkit';
-import {
-  setIndex,
-  setInnerGameIndex,
-} from '../../features/gameplay/gamePlaySlice';
 import {useAppDispatch} from '../../features/hooks';
+import actionDispatch from '../../features/dispatch';
+import {parseFunctionTimer} from '../../utils/parsers';
+import {useSelector} from 'react-redux';
+import {selectCurrentQuestion} from '../../features/selectors';
+import CountDown from '../../components/GameFunctions/Countdown';
 
 interface GameHeaderProps {
   handleShow: () => void;
+  setCountDownDone: (isDone: boolean) => void;
+  isCountDownDone: boolean;
 }
 
-const actionDispatch = (dispatch: Dispatch<AnyAction>) => ({
-  setQuestionIndex: (index: number) => dispatch(setIndex(index)),
-  setInnerIndex: (index: number) => dispatch(setInnerGameIndex(index)),
-});
+const GameHeader: FC<GameHeaderProps> = props => {
+  const {handleShow, isCountDownDone, setCountDownDone} = props;
 
-const GameHeader: FC<GameHeaderProps> = ({handleShow}) => {
+  const currentQuestion = useSelector(selectCurrentQuestion);
+
   const navigation = useNavigation<GameScreenNavigationProp>();
-  const {setInnerIndex, setQuestionIndex} = actionDispatch(useAppDispatch());
+
+  const {setInnerIndex, setCurrentIndex} = actionDispatch(useAppDispatch());
+
+  const countDownSeconds = parseFunctionTimer(currentQuestion?.function);
+
+  const shouldShowCountDown = () => {
+    if (countDownSeconds === undefined) {
+      return false;
+    }
+    if (
+      currentQuestion?.type === 'Skal vi vedde' ||
+      'Challenge accepted?' ||
+      'Instant Spoilers'
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <View style={gamePlayStyles.headerContainer}>
       <IconButton handlePress={handleShow}>
         <LightBulbIcon />
       </IconButton>
+      {shouldShowCountDown() && (
+        <CountDown
+          countDownSeconds={countDownSeconds}
+          setCountDownDone={setCountDownDone}
+          isCountDownDone={isCountDownDone}
+        />
+      )}
       <IconButton
         handlePress={() => {
           navigation.goBack();
           lockPortrait();
           setInnerIndex(0);
-          setQuestionIndex(0);
+          setCurrentIndex(0);
         }}>
         <XIconHeader />
       </IconButton>

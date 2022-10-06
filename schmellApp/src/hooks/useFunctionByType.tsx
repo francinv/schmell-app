@@ -1,15 +1,17 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import CardShow from '../components/GameFunctions/CardShow';
+import DeckDraw from '../components/GameFunctions/DeckDraw';
 import MultiShow from '../components/GameFunctions/MultiShow';
 import QuizCardContainer from '../components/GameFunctions/QuizCardContainer';
 import SimpleText from '../components/GameFunctions/SimpleText';
 import gameFunctionStyles from '../components/GameFunctions/style';
 import {
   selectInnerGameCurrentElement,
+  selectInnerGameIndex,
   selectLanguage,
 } from '../features/selectors';
-import {questionType} from '../types/question';
+import {question} from '../types/question';
 import {
   parseFunctionAnswer,
   parseFunctionCorrectAnswer,
@@ -18,25 +20,26 @@ import {
 } from '../utils/parsers';
 import useLocale from './useLocale';
 
-export default (
-  question: questionType,
+const useFunctionByType = (
+  currentQuestion: question,
   isLast: boolean,
   isLoading: boolean,
 ) => {
   const lang = useSelector(selectLanguage);
   const currentInnerGameElement = useSelector(selectInnerGameCurrentElement);
+  const currentInnerIndex = useSelector(selectInnerGameIndex);
 
   const information = useLocale(lang, 'GAME_END_INFORMATION');
   const loading = useLocale(lang, 'GAME_LOADING_INFORMATION');
 
-  const getContent = () => {
+  const getContent = (): string => {
     if (isLoading) {
-      return loading;
+      return loading as string;
     } else {
-      return isLast ? (information as string) : question.question_desc;
+      return isLast ? (information as string) : currentQuestion?.question_desc;
     }
   };
-  switch (question?.type) {
+  switch (currentQuestion?.type) {
     case 'Guess The Country':
     case 'Guess The Movie':
     case 'Guess The Song':
@@ -45,36 +48,52 @@ export default (
     case 'Emoji Guessing':
       return (
         <CardShow
-          answer={parseFunctionAnswer(question.function)}
-          questionDesc={getContent() as string}
+          answer={parseFunctionAnswer(currentQuestion.function)}
+          questionDesc={getContent()}
           numberOfCards={1}
         />
       );
     case 'Mimic Challenge':
     case 'Instant Spoilers':
+      return (
+        <>
+          {currentInnerIndex === 0 && (
+            <SimpleText
+              text={getContent()}
+              style={gameFunctionStyles.underlinedSimpleText}
+            />
+          )}
+          <SimpleText
+            text={currentInnerGameElement}
+            style={gameFunctionStyles.largerSimpleText}
+          />
+        </>
+      );
     case 'Laveste kortet':
       return (
-        <SimpleText
-          text={currentInnerGameElement}
-          style={gameFunctionStyles.largerSimpleText}
-        />
+        <>
+          <SimpleText text={getContent()} />
+          <DeckDraw />
+        </>
       );
     case 'Shots under brikka':
       return (
         <MultiShow
-          questionDesc={question.question_desc}
-          answers={parseFunctionQuestions(question.function)}
+          questionDesc={currentQuestion.question_desc}
+          answers={parseFunctionQuestions(currentQuestion.function)}
         />
       );
     case 'Quiz Game':
       return (
         <QuizCardContainer
-          questionDesc={question.question_desc}
-          correctAnswer={parseFunctionCorrectAnswer(question.function)}
-          options={parseFunctionOptions(question.function)}
+          questionDesc={currentQuestion.question_desc}
+          correctAnswer={parseFunctionCorrectAnswer(currentQuestion.function)}
+          options={parseFunctionOptions(currentQuestion.function)}
         />
       );
     default:
-      return <SimpleText text={getContent() as string} />;
+      return <SimpleText text={getContent()} />;
   }
 };
+
+export default useFunctionByType;

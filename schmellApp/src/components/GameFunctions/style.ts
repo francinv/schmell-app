@@ -60,8 +60,18 @@ const gameFunctionStyles = StyleSheet.create({
   customButtonStyling: {
     marginTop: 16,
   },
+  cardDeckBtnStyling: {
+    width: 240 / 2,
+    height: 336 / 2,
+  },
   largerSimpleText: {
     fontSize: 26,
+  },
+  underlinedSimpleText: {
+    fontSize: 30,
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
+    fontWeight: '700',
   },
   smallerSimpleText: {
     fontSize: 14,

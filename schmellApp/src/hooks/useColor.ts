@@ -46,6 +46,8 @@ export default (type: string) => {
       return colors.SUB;
     case 'Quiz Game':
       return colors.QG;
+    case 'Laveste kortet':
+      return colors.LK;
     default:
       return colors.PL;
   }

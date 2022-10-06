@@ -1,6 +1,6 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {questionType} from './question';
+import {question} from './question';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -10,7 +10,7 @@ export type RootStackParamList = {
     selectedGameId: number;
   };
   Game: {
-    questions: questionType[];
+    questions: question[];
   };
 };
 

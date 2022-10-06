@@ -6,7 +6,8 @@ import {
 } from '@reduxjs/toolkit';
 import {LANGUAGE_KEY, SHOW_DETAIL_KEY, VOICE_KEY} from '../../constants/common';
 import {asyncStorageService} from '../../services/asyncStorageService';
-import {showDetailType, userSettings} from '../../types/settings';
+import {PostDetailShow} from '../../types/api';
+import {userSettings} from '../../types/settings';
 import {initialUserSettingsSlice} from '../../types/state';
 
 export const postSettings = createAsyncThunk(
@@ -33,12 +34,7 @@ export const fetchSettings = createAsyncThunk(
 
 export const postDetail = createAsyncThunk(
   'userSetting/postDetail',
-  async (data: {
-    id: number;
-    show: boolean;
-    currentState: showDetailType[];
-    update: boolean;
-  }) => {
+  async (data: PostDetailShow) => {
     const {id, show, currentState, update} = data;
     if (update) {
       const arrayAfterUpdate = currentState.map(item => {

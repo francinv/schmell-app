@@ -1,7 +1,5 @@
 import React, {FC, useEffect} from 'react';
-import {Dispatch} from '@reduxjs/toolkit';
 import {Animated} from 'react-native';
-import {removePlayer} from '../../features/gamesettings/gameSettingSlice';
 import {useAppDispatch} from '../../features/hooks';
 import slideAnimation from '../../animations/moveAnimations/slideAnimation';
 import scaleAnimation from '../../animations/sizeAnimations/scaleAnimation';
@@ -9,6 +7,7 @@ import gameSettingStyles from './style';
 import UserIcon from '../../assets/icons/UserIcon';
 import IconButton from '../../components/Buttons/IconButton';
 import {XIconPlayerDisplay} from '../../assets/icons/XIcon';
+import actionDispatch from '../../features/dispatch';
 
 interface NameProps {
   name: string;
@@ -16,10 +15,6 @@ interface NameProps {
   scaleValue: Animated.Value[];
   moveValue: Animated.Value[];
 }
-
-const actionDispatch = (dispatch: Dispatch<any>) => ({
-  removeFromList: (query: number) => dispatch(removePlayer(query)),
-});
 
 const PlayerName: FC<NameProps> = props => {
   const {index, name, scaleValue, moveValue} = props;

@@ -28,7 +28,7 @@ const Questions: FC<QuestionsProps> = ({moveAnimation, isLoading}) => {
     if (isLoading) {
       return loadingTitle;
     } else {
-      return isLast ? lastTitle : currentQuestion.type;
+      return isLast ? lastTitle : currentQuestion?.type;
     }
   };
 

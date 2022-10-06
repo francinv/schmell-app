@@ -7,14 +7,12 @@ const gamePlayStyles = StyleSheet.create({
     alignItems: 'center',
   },
   headerContainer: {
-    display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingTop: 10,
   },
   questionContainer: {
-    margin: 'auto',
     maxWidth: '70%',
     display: 'flex',
     alignItems: 'center',
@@ -73,17 +71,14 @@ const gamePlayStyles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'row',
-    zIndex: -100,
     left: 0,
   },
   carouselPrev: {
     flex: 1,
-    zIndex: 1,
     position: 'relative',
   },
   carouselNext: {
     flex: 1,
-    zIndex: 1,
     position: 'relative',
   },
   modalButton: {

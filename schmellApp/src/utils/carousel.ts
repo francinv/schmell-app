@@ -1,31 +1,62 @@
 import {Animated} from 'react-native';
-import {questionType} from '../types/question';
+import {question} from '../types/question';
+import {isInGameCarousel} from './question';
 
-export const carouselPrev = (
-  firstId: number,
-  currentIndex: number,
-  setIndex: any,
-  moveAnim: Animated.Value,
-  isInGameCarousel: boolean,
-  setInGameIndex: any,
-  inGameIndex: number,
-) => {
+type carouselPrevProps = {
+  moveAnimationValue: Animated.Value;
+  currentState: {
+    firstId: number;
+    currentIndex: number;
+    currentQuestionType: question['type'];
+    currentInGameIndex: number;
+  };
+  dispatchers: {
+    setIndex: (index: number) => void;
+    setInGameIndex: (index: number) => void;
+  };
+};
+
+type carouselNextProps = {
+  moveAnimationValue: Animated.Value;
+  currentState: {
+    currentIndex: number;
+    questionList: question[];
+    currentQuestionType: question['type'];
+    inGameList: string[] | number[];
+    inGameIndex: number;
+    isCountDownDone: boolean;
+  };
+  dispatchers: {
+    setIndex: (index: number) => void;
+    setInGameIndex: (index: number) => void;
+    setCountDownDone: (query: boolean) => void;
+    setIsCardVisible: (query: boolean) => void;
+    setIsCardDisabled: (query: boolean) => void;
+  };
+};
+
+export const carouselPrev = (props: carouselPrevProps) => {
+  const {currentInGameIndex, currentIndex, currentQuestionType, firstId} =
+    props.currentState;
+  const {setInGameIndex, setIndex} = props.dispatchers;
+  const {moveAnimationValue} = props;
+
   if (!firstId) {
     return;
   }
 
-  Animated.timing(moveAnim, {
+  Animated.timing(moveAnimationValue, {
     toValue: 600,
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
-    if (isInGameCarousel && inGameIndex > 0) {
-      setInGameIndex(inGameIndex - 1);
+    if (isInGameCarousel(currentQuestionType) && currentInGameIndex > 0) {
+      setInGameIndex(currentInGameIndex - 1);
     } else {
       setIndex(currentIndex - 1);
     }
-    moveAnim.setValue(-600);
-    Animated.timing(moveAnim, {
+    moveAnimationValue.setValue(-600);
+    Animated.timing(moveAnimationValue, {
       toValue: 0,
       duration: 500,
       useNativeDriver: false,
@@ -33,44 +64,55 @@ export const carouselPrev = (
   });
 };
 
-export const carouselNext = (
-  moveAnim: Animated.Value,
-  currentIndex: number,
-  questionList: questionType[],
-  setIndex: any,
-  setId: any,
-  isInGameCarousel: boolean,
-  setInGameIndex: any,
-  inGameList: string[],
-  inGameIndex: number,
-  isCountDownDone: boolean,
-  setCountDownDone: (done: boolean) => void,
-) => {
+export const carouselNext = (props: carouselNextProps) => {
+  const {
+    currentIndex,
+    currentQuestionType,
+    inGameIndex,
+    inGameList,
+    isCountDownDone,
+    questionList,
+  } = props.currentState;
+  const {
+    setCountDownDone,
+    setInGameIndex,
+    setIndex,
+    setIsCardDisabled,
+    setIsCardVisible,
+  } = props.dispatchers;
+  const {moveAnimationValue} = props;
+
   if (currentIndex + 1 > questionList.length) {
     return;
   }
 
-  Animated.timing(moveAnim, {
+  Animated.timing(moveAnimationValue, {
     toValue: -600,
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
+    if (currentQuestionType === 'Laveste kortet') {
+      setIsCardVisible(false);
+      setIsCardDisabled(false);
+    }
     if (
-      isInGameCarousel &&
+      isInGameCarousel(currentQuestionType) &&
       !(inGameIndex === inGameList.length - 1) &&
       !isCountDownDone
     ) {
       setInGameIndex(inGameIndex + 1);
     } else {
-      if (isInGameCarousel && inGameIndex === inGameList.length - 1) {
+      if (
+        isInGameCarousel(currentQuestionType) &&
+        inGameIndex === inGameList.length - 1
+      ) {
         setInGameIndex(0);
       }
       setIndex(currentIndex + 1);
-      setId(questionList[0].id);
     }
-    moveAnim.setValue(600);
+    moveAnimationValue.setValue(600);
     setCountDownDone(false);
-    Animated.timing(moveAnim, {
+    Animated.timing(moveAnimationValue, {
       toValue: 0,
       duration: 500,
       useNativeDriver: false,
