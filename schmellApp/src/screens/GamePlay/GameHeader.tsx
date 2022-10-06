@@ -9,20 +9,54 @@ import gamePlayStyles from './style';
 import {lockPortrait} from '../../utils/orientation';
 import {useAppDispatch} from '../../features/hooks';
 import actionDispatch from '../../features/dispatch';
+import {parseFunctionTimer} from '../../utils/parsers';
+import {useSelector} from 'react-redux';
+import {selectCurrentQuestion} from '../../features/selectors';
+import CountDown from '../../components/GameFunctions/Countdown';
 
 interface GameHeaderProps {
   handleShow: () => void;
+  setCountDownDone: (isDone: boolean) => void;
+  isCountDownDone: boolean;
 }
 
-const GameHeader: FC<GameHeaderProps> = ({handleShow}) => {
+const GameHeader: FC<GameHeaderProps> = props => {
+  const {handleShow, isCountDownDone, setCountDownDone} = props;
+
+  const currentQuestion = useSelector(selectCurrentQuestion);
+
   const navigation = useNavigation<GameScreenNavigationProp>();
+
   const {setInnerIndex, setCurrentIndex} = actionDispatch(useAppDispatch());
+
+  const countDownSeconds = parseFunctionTimer(currentQuestion?.function);
+
+  const shouldShowCountDown = () => {
+    if (countDownSeconds === undefined) {
+      return false;
+    }
+    if (
+      currentQuestion?.type === 'Skal vi vedde' ||
+      'Challenge accepted?' ||
+      'Instant Spoilers'
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <View style={gamePlayStyles.headerContainer}>
       <IconButton handlePress={handleShow}>
         <LightBulbIcon />
       </IconButton>
+      {shouldShowCountDown() && (
+        <CountDown
+          countDownSeconds={countDownSeconds}
+          setCountDownDone={setCountDownDone}
+          isCountDownDone={isCountDownDone}
+        />
+      )}
       <IconButton
         handlePress={() => {
           navigation.goBack();

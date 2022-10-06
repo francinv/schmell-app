@@ -3,7 +3,6 @@ import {useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Animated} from 'react-native';
 import {useSelector} from 'react-redux';
-import {LeftCurve, RightCurve} from '../../assets/icons/Curves';
 import QuestionWrapper from '../../components/Wrappers/QuestionWrapper';
 import actionDispatch from '../../features/dispatch';
 import {useAppDispatch} from '../../features/hooks';
@@ -45,15 +44,13 @@ export default () => {
 
   const GamePlayInnerContent = () => (
     <>
-      <LeftCurve />
-      <RightCurve />
-      <GameHeader handleShow={() => handleShow({show: true, modalType: 'H'})} />
-      <Questions moveAnimation={moveAnimation} isLoading={isFetching} />
-      <GameFooter
-        handleShow={() => handleShow({show: true, modalType: 'P'})}
+      <GameHeader
+        handleShow={() => handleShow({show: true, modalType: 'H'})}
         setCountDownDone={setIsCountDownDone}
         isCountDownDone={isCountDownDone}
       />
+      <Questions moveAnimation={moveAnimation} isLoading={isFetching} />
+      <GameFooter handleShow={() => handleShow({show: true, modalType: 'P'})} />
       <GameModal
         handleShow={() => handleShow({show: false, modalType: ''})}
         modalShow={modalShow}
