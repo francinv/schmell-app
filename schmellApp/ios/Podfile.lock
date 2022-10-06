@@ -332,6 +332,7 @@ PODS:
     - react-native-config/App (= 1.4.6)
   - react-native-config/App (1.4.6):
     - React-Core
+  - react-native-config/Extension (1.4.6)
   - react-native-encrypted-storage (4.0.2):
     - React-Core
   - react-native-safe-area-context (4.4.1):
@@ -477,6 +478,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - react-native-config/Extension (from `../node_modules/react-native-config`)
   - react-native-encrypted-storage (from `../node_modules/react-native-encrypted-storage`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -688,6 +690,6 @@ SPEC CHECKSUMS:
   Yoga: 6c8252e38d65aa387daee699eacf027e055e0b31
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 230cda44100c3863f6ba07828fc54d068c3d205a
+PODFILE CHECKSUM: 75761544a779bbbd032e6034cefae4354813fd8e
 
 COCOAPODS: 1.11.3

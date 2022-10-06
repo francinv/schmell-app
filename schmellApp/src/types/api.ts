@@ -2,15 +2,6 @@ import {gameType} from './game';
 import {questionType} from './question';
 import {weekType} from './week';
 
-export type AuthResponse = {
-  key: string;
-  api_key: string;
-};
-
-export type AuthData = {
-  name: string;
-};
-
 export type GameResponse = Array<gameType>;
 
 export type WeekResponse = Array<weekType>;
