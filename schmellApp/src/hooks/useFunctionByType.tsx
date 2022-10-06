@@ -34,7 +34,7 @@ const useFunctionByType = (
     if (isLoading) {
       return loading;
     } else {
-      return isLast ? (information as string) : currentQuestion.question_desc;
+      return isLast ? (information as string) : currentQuestion?.question_desc;
     }
   };
   switch (currentQuestion?.type) {

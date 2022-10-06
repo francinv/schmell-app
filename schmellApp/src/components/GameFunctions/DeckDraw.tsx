@@ -3,7 +3,6 @@ import {Animated, Pressable, ViewStyle} from 'react-native';
 import rotatingAnimation from '../../animations/moveAnimations/rotatingAnimation';
 import CardBackground from '../../assets/cards/CardBackground';
 import cards from '../../constants/cards';
-import _ from 'lodash';
 import gameFunctionStyles from './style';
 import {useSelector} from 'react-redux';
 import {
@@ -13,6 +12,7 @@ import {
 } from '../../features/selectors';
 import actionDispatch from '../../features/dispatch';
 import {useAppDispatch} from '../../features/hooks';
+import {getRandomInt} from '../../utils/number';
 
 const DeckDraw: FC = () => {
   const [rotateAnimation] = useState(new Animated.Value(0));
@@ -28,11 +28,13 @@ const DeckDraw: FC = () => {
   });
 
   const handlePress = () => {
-    setRandom(_.random(0, cards.length));
-    rotateAnimation.setValue(0);
-    rotatingAnimation(rotateAnimation);
-    setIsShown(true);
-    setDisabled(true);
+    if (!isDisabled) {
+      setRandom(getRandomInt(0, cards.length - 1));
+      rotateAnimation.setValue(0);
+      rotatingAnimation(rotateAnimation);
+      setIsShown(true);
+      setDisabled(true);
+    }
   };
 
   const boxAnimationStyle: Animated.WithAnimatedObject<ViewStyle> = {
@@ -46,9 +48,12 @@ const DeckDraw: FC = () => {
   return (
     <Pressable
       onPress={handlePress}
-      style={gameFunctionStyles.customButtonStyling}
-      disabled={isDisabled}>
-      <Animated.View style={boxAnimationStyle}>
+      style={[
+        gameFunctionStyles.customButtonStyling,
+        gameFunctionStyles.cardDeckBtnStyling,
+      ]}>
+      <Animated.View
+        style={[boxAnimationStyle, {maxWidth: 240 / 2, maxHeight: 336 / 2}]}>
         {showCard && randomNumber ? cards[randomNumber] : <CardBackground />}
       </Animated.View>
     </Pressable>

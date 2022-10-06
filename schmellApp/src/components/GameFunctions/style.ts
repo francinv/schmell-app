@@ -60,6 +60,10 @@ const gameFunctionStyles = StyleSheet.create({
   customButtonStyling: {
     marginTop: 16,
   },
+  cardDeckBtnStyling: {
+    width: 240 / 2,
+    height: 336 / 2,
+  },
   largerSimpleText: {
     fontSize: 26,
   },

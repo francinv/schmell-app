@@ -17,6 +17,7 @@ import {
   selectInnerGameIndex,
   selectInnerGamePlayList,
   selectPlayers,
+  selectIsDeckCardShown,
 } from '../../features/selectors';
 import {useAppDispatch} from '../../features/hooks';
 import {parseFunctionChallenges} from '../../utils/parsers';
@@ -45,10 +46,10 @@ const Carousel: FC<CarouselProps> = ({
   const inGameIndex = useSelector(selectInnerGameIndex);
   const inGameList = useSelector(selectInnerGamePlayList);
   const players = useSelector(selectPlayers);
+  const showCard = useSelector(selectIsDeckCardShown);
 
   const {
     setCurrentIndex,
-    setFirstId,
     setInnerCarousel,
     setInnerIndex,
     setIsShown,
@@ -116,7 +117,6 @@ const Carousel: FC<CarouselProps> = ({
       },
       dispatchers: {
         setIndex: setCurrentIndex,
-        setId: setFirstId,
         setInGameIndex: setInnerIndex,
         setCountDownDone: setCountDownDone,
         setIsCardVisible: setIsShown,
@@ -126,10 +126,14 @@ const Carousel: FC<CarouselProps> = ({
   };
 
   return (
-    <View style={[gamePlayStyles.carouselContainer, {width: width}]}>
+    <View
+      style={[
+        gamePlayStyles.carouselContainer,
+        {width: width, zIndex: showCard ? 100 : -50},
+      ]}>
       <Pressable
         onPress={handlePrev}
-        style={[gamePlayStyles.carouselPrev, {height: height - 140}]}>
+        style={[gamePlayStyles.carouselPrev, {height: height}]}>
         <View style={{backgroundColor: 'white'}} />
       </Pressable>
       <Pressable
