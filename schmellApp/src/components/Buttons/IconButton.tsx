@@ -1,11 +1,11 @@
 import React, {FC, ReactNode} from 'react';
-import {Pressable} from 'react-native';
+import {Pressable, StyleProp, ViewStyle} from 'react-native';
 import buttonStyles from './styles';
 
 interface IconButtonProps {
   children: ReactNode;
   handlePress: () => void;
-  additionalStyling?: any;
+  additionalStyling?: StyleProp<ViewStyle>;
   disabled?: boolean;
   wantShadow?: boolean;
 }
