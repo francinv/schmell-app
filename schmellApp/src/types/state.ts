@@ -34,7 +34,6 @@ const status: statusType = 'idle' as statusType;
 
 export const initialGamePlaySlice = {
   status,
-  firstQuestionId: 0,
   currentQuestionIndex: 0,
   questionList,
   innerGamePlayList,

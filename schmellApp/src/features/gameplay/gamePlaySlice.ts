@@ -13,9 +13,6 @@ const GamePlaySlice = createSlice({
     setIndex(state, action: PayloadAction<number>) {
       state.currentQuestionIndex = action.payload;
     },
-    setId(state, action: PayloadAction<number>) {
-      state.firstQuestionId = action.payload;
-    },
     setInnerGamePlayList(state, action: PayloadAction<string[] | number[]>) {
       state.innerGamePlayList = action.payload;
     },
@@ -37,7 +34,6 @@ const GamePlaySlice = createSlice({
 export const {
   setQuestions,
   setIndex,
-  setId,
   setInnerGamePlayList,
   setInnerGameIndex,
   setRandomNumber,

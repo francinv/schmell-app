@@ -2,7 +2,6 @@ import {AnyAction, Dispatch} from '@reduxjs/toolkit';
 import {PostDetailShow} from '../types/api';
 import {question} from '../types/question';
 import {
-  setId,
   setIndex,
   setInnerGameIndex,
   setInnerGamePlayList,
@@ -26,7 +25,6 @@ import {
 const actionDispatch = (dispatch: Dispatch<AnyAction>) => ({
   addPlayer: (query: string) => dispatch(addPlayers(query)),
   setCurrentIndex: (index: number) => dispatch(setIndex(index)),
-  setFirstId: (id: number) => dispatch(setId(id)),
   setInnerCarousel: (challenges: string[] | number[]) =>
     dispatch(setInnerGamePlayList(challenges)),
   setInnerIndex: (index: number) => dispatch(setInnerGameIndex(index)),

@@ -19,7 +19,7 @@ export const selectPlayStatus = (state: RootState) => state.gamePlay.status;
 export const selectCurrentQuestionIndex = (state: RootState) =>
   state.gamePlay.currentQuestionIndex;
 export const selectFirstQuestionId = (state: RootState) =>
-  state.gamePlay.firstQuestionId;
+  state.gamePlay.questionList[0]?.id;
 export const selectIsLast = (state: RootState) =>
   state.gamePlay.currentQuestionIndex + 1 > state.gamePlay.questionList.length;
 export const selectCurrentQuestion = (state: RootState) =>

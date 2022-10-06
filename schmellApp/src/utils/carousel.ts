@@ -28,7 +28,6 @@ type carouselNextProps = {
   };
   dispatchers: {
     setIndex: (index: number) => void;
-    setId: (id: number) => void;
     setInGameIndex: (index: number) => void;
     setCountDownDone: (query: boolean) => void;
     setIsCardVisible: (query: boolean) => void;
@@ -76,7 +75,6 @@ export const carouselNext = (props: carouselNextProps) => {
   } = props.currentState;
   const {
     setCountDownDone,
-    setId,
     setInGameIndex,
     setIndex,
     setIsCardDisabled,
@@ -93,14 +91,16 @@ export const carouselNext = (props: carouselNextProps) => {
     duration: 500,
     useNativeDriver: false,
   }).start(() => {
+    if (currentQuestionType === 'Laveste kortet') {
+      setIsCardVisible(false);
+      setIsCardDisabled(false);
+    }
     if (
       isInGameCarousel(currentQuestionType) &&
       !(inGameIndex === inGameList.length - 1) &&
       !isCountDownDone
     ) {
       setInGameIndex(inGameIndex + 1);
-      setIsCardVisible(false);
-      setIsCardDisabled(false);
     } else {
       if (
         isInGameCarousel(currentQuestionType) &&
@@ -109,7 +109,6 @@ export const carouselNext = (props: carouselNextProps) => {
         setInGameIndex(0);
       }
       setIndex(currentIndex + 1);
-      setId(questionList[0].id);
     }
     moveAnimationValue.setValue(600);
     setCountDownDone(false);
