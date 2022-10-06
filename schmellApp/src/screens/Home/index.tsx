@@ -13,9 +13,6 @@ import checkIfSettingsSet from '../../utils/checkIfSettingsSet';
 import {useSelector} from 'react-redux';
 import {selectUserStatus} from '../../features/selectors';
 import {lockPortrait} from '../../utils/orientation';
-import {useSetTokensQuery} from '../../services/apiService';
-import RNUniqueId from '../../native/RNUniqueId';
-import encryptedStorageService from '../../services/encryptedStorageService';
 
 const actionDispatch = (dispatch: Dispatch<any>) => ({
   setSettings: (query: userSettings) => dispatch(postSettings(query)),
@@ -23,25 +20,10 @@ const actionDispatch = (dispatch: Dispatch<any>) => ({
 
 export default () => {
   const {setSettings} = actionDispatch(useAppDispatch());
-  const {uniqueString} = RNUniqueId.getConstants();
-
-  const {data, isSuccess, error} = useSetTokensQuery({
-    name: uniqueString,
-  });
 
   const userSettingStatus = useSelector(selectUserStatus);
 
   useEffect(() => {
-    const shouldSetNewKey = async () => {
-      if (isSuccess) {
-        await encryptedStorageService(
-          `${uniqueString}_key`,
-          'SET',
-          data.api_key,
-        );
-      }
-    };
-
     const hasSettings = async () => {
       setSettings(await checkIfSettingsSet());
     };
@@ -50,16 +32,8 @@ export default () => {
       hasSettings();
     }
 
-    shouldSetNewKey();
     lockPortrait();
-  }, [
-    data?.api_key,
-    error,
-    isSuccess,
-    setSettings,
-    uniqueString,
-    userSettingStatus,
-  ]);
+  }, [setSettings, userSettingStatus]);
 
   return (
     <Layout>

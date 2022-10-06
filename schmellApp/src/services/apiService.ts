@@ -1,86 +1,27 @@
-import {
-  BaseQueryFn,
-  createApi,
-  FetchArgs,
-  fetchBaseQuery,
-  FetchBaseQueryError,
-} from '@reduxjs/toolkit/query/react';
-import RNUniqueId from '../native/RNUniqueId';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import Config from 'react-native-config';
 import {
   AddInGameFilter,
   AddPlayerFilter,
-  AuthData,
-  AuthResponse,
   GameResponse,
   QuestionFilter,
   QuestionResponse,
   WeekFilters,
   WeekResponse,
 } from '../types/api';
-import {decrypt} from '../utils/crypto';
-import encryptedStorageService from './encryptedStorageService';
 
-const prod = 'aHR0cHM6Ly9zY2htZWxsLmhlcm9rdWFwcC5jb20vYXBpLw==';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://schmell-staging.herokuapp.com/api/',
+  baseUrl: Config.API_BASE_URL,
   prepareHeaders: async headers => {
-    const {uniqueString} = RNUniqueId.getConstants();
-    const token = await encryptedStorageService(`${uniqueString}_key`, 'GET');
-
-    if (token) {
-      headers.set('authorization', `Api-Key ${token}`);
-    }
-
+    headers.set('authorization', `Api-Key ${Config.API_KEY}`);
     return headers;
   },
 });
 
-const baseQueryWithAuthReauth: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  if (result.error && result.error.status === 401) {
-    const {uniqueString} = RNUniqueId.getConstants();
-
-    const newTokenRes = await baseQuery(
-      {
-        url: 'auth/key/generate/',
-        method: 'POST',
-        body: {name: uniqueString},
-      },
-      api,
-      extraOptions,
-    );
-
-    if (newTokenRes.data) {
-      const returnedData = newTokenRes.data as AuthResponse;
-
-      encryptedStorageService(
-        `${uniqueString}_key`,
-        'SET',
-        returnedData.api_key,
-      );
-
-      result = await baseQuery(args, api, extraOptions);
-    }
-  }
-
-  return result;
-};
-
 export const apiService = createApi({
   reducerPath: 'schmellApi',
-  baseQuery: baseQueryWithAuthReauth,
+  baseQuery: baseQuery,
   endpoints: builder => ({
-    setTokens: builder.query<AuthResponse, AuthData>({
-      query: keyData => ({
-        url: 'auth/key/generate/',
-        method: 'POST',
-        body: keyData,
-      }),
-    }),
     getGames: builder.query<GameResponse, string>({
       query: status => `cms/game/?status=${status}`,
     }),
@@ -113,7 +54,6 @@ export const {
   useGetGamesQuery,
   useLazyGetQuestionsQuery,
   useGetWeekQuery,
-  useSetTokensQuery,
   usePrefetch,
   useAddPlayerInGameQuery,
   useAddPlayerToQuestionsQuery,
