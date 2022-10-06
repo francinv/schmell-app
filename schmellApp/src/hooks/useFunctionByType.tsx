@@ -8,6 +8,7 @@ import SimpleText from '../components/GameFunctions/SimpleText';
 import gameFunctionStyles from '../components/GameFunctions/style';
 import {
   selectInnerGameCurrentElement,
+  selectInnerGameIndex,
   selectLanguage,
 } from '../features/selectors';
 import {question} from '../types/question';
@@ -26,13 +27,14 @@ const useFunctionByType = (
 ) => {
   const lang = useSelector(selectLanguage);
   const currentInnerGameElement = useSelector(selectInnerGameCurrentElement);
+  const currentInnerIndex = useSelector(selectInnerGameIndex);
 
   const information = useLocale(lang, 'GAME_END_INFORMATION');
   const loading = useLocale(lang, 'GAME_LOADING_INFORMATION');
 
-  const getContent = () => {
+  const getContent = (): string => {
     if (isLoading) {
-      return loading;
+      return loading as string;
     } else {
       return isLast ? (information as string) : currentQuestion?.question_desc;
     }
@@ -47,22 +49,30 @@ const useFunctionByType = (
       return (
         <CardShow
           answer={parseFunctionAnswer(currentQuestion.function)}
-          questionDesc={getContent() as string}
+          questionDesc={getContent()}
           numberOfCards={1}
         />
       );
     case 'Mimic Challenge':
     case 'Instant Spoilers':
       return (
-        <SimpleText
-          text={currentInnerGameElement}
-          style={gameFunctionStyles.largerSimpleText}
-        />
+        <>
+          {currentInnerIndex === 0 && (
+            <SimpleText
+              text={getContent()}
+              style={gameFunctionStyles.underlinedSimpleText}
+            />
+          )}
+          <SimpleText
+            text={currentInnerGameElement}
+            style={gameFunctionStyles.largerSimpleText}
+          />
+        </>
       );
     case 'Laveste kortet':
       return (
         <>
-          <SimpleText text={getContent() as string} />
+          <SimpleText text={getContent()} />
           <DeckDraw />
         </>
       );
@@ -82,7 +92,7 @@ const useFunctionByType = (
         />
       );
     default:
-      return <SimpleText text={getContent() as string} />;
+      return <SimpleText text={getContent()} />;
   }
 };
 

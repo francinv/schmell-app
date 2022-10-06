@@ -67,6 +67,12 @@ const gameFunctionStyles = StyleSheet.create({
   largerSimpleText: {
     fontSize: 26,
   },
+  underlinedSimpleText: {
+    fontSize: 30,
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
+    fontWeight: '700',
+  },
   smallerSimpleText: {
     fontSize: 14,
   },
