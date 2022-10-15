@@ -61,14 +61,14 @@ const Carousel: FC<CarouselProps> = ({
       const listOfChallenges = parseFunctionChallenges(
         currentQuestion?.function,
       );
-      if (!(inGameIndex + 1 > listOfChallenges.length)) {
+      if (!(inGameIndex + 1 > listOfChallenges?.length)) {
         setInnerCarousel(listOfChallenges);
       }
     }
 
     if (currentQuestion?.type === 'Laveste kortet') {
       const listOfChallenges = [...Array(players.length).keys()];
-      if (!(inGameIndex + 1 > listOfChallenges.length)) {
+      if (!(inGameIndex + 1 > listOfChallenges?.length)) {
         setInnerCarousel(listOfChallenges);
       }
     }
