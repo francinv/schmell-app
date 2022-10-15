@@ -14,7 +14,7 @@ const formStyles = StyleSheet.create({
     height: 45,
     width: '80%',
     borderRadius: 4,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Artifika-Regular',
     fontSize: 20,
     color: '#FFFFFF',
     backgroundColor: 'rgba(20, 20, 0, 0.3)',
