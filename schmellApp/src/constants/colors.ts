@@ -22,4 +22,10 @@ export default {
   SUB: '#F9F871',
   QG: '#F88F6F',
   LK: '#C76EA4',
+  SS: '#F07A97',
+  R: '#FF8F83',
+  NYP: '#FFAE70',
+  ILL: '#4E9435',
+  P: '#008546',
+  SÆ: '#00C9D7',
 };
