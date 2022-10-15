@@ -3,11 +3,12 @@ import {StyleSheet} from 'react-native';
 const gameFunctionStyles = StyleSheet.create({
   simpleText: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '500',
     textAlign: 'center',
     zIndex: 100,
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Artifika-Regular',
+    marginTop: 8,
   },
   countDownText: {
     fontSize: 25,

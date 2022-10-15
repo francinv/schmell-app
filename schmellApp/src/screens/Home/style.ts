@@ -31,7 +31,7 @@ const homeStyle = StyleSheet.create({
   },
   detailDescription: {
     textAlign: 'center',
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Artifika-Regular',
     color: '#FFFFFF',
     fontSize: 16,
     width: '90%',
@@ -48,7 +48,7 @@ const homeStyle = StyleSheet.create({
   checkBoxText: {
     fontSize: 20,
     fontWeight: '500',
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Artifika-Regular',
     color: '#FFFFFF',
   },
 });

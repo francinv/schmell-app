@@ -24,4 +24,10 @@ export default {
   SUB: 'Schmell velger personen som skal gjøre utfordringen. Trykk på kortene, og les spørsmålet for deg selv. Svar enten på spørsmålet eller ta straffeslurk. Om det er ønskelig å finne ut hva spørsmålet er kan de andre spillerne drikke antall slurker som vist.',
   QG: 'Svar riktig eller drikk antall slurker som er vist.',
   LK: 'Mobilen går rundt og alle trekker hvert sitt kort. Personen med det laveste kortet må chugge drikken sin.',
+  SS: 'Teller fra 1 og oppover. Hver gang man når et tall i 7 gangen, så må man si f**ck you, og veien snur retning. Spillet avsluttes når noen fucker opp. Stopper på eksempelvis 7/14/21.',
+  R: 'Roast personen til høyre for deg. Om flertallet liker roasten får du dele ut slurker, om flertallet ikke liker roasten må du drikke slurkene selv.',
+  NYP: 'Fyll opp drikken først. Dere får 20 sekunder på å komme opp med en fotballspiller som representer dicken din. Når tiden har gått ut forteller du hvem du valgte og hvorfor. Om gutta ikke godkjenner må du chugge resten av drikken din.',
+  ILL: '2 personer prøver å få hverandre til å le. Den som ler først må ta straffen.',
+  P: 'Gutta skal diskutere politikk innen et minutt. Hvis det ikke blir en enighet må begge to drikke.',
+  SÆ: 'En utvalgt person skal svare ærlig på spørsmålet som blir stilt. Om gutta backer kan personen dele ut slurker, hvis ikke må personen drikke slurkene selv.',
 };

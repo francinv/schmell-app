@@ -24,7 +24,7 @@ const gamePlayStyles = StyleSheet.create({
   questionText: {
     color: '#FFFFFF',
     fontFamily: 'CCBiffBamBoomW00-Regular',
-    fontSize: 42,
+    fontSize: 34,
     textShadowOffset: {width: 0, height: 2},
     textShadowRadius: 4,
     paddingLeft: 5,
@@ -57,7 +57,7 @@ const gamePlayStyles = StyleSheet.create({
     flex: 1,
   },
   hintContent: {
-    fontFamily: 'Quicksand-Regular',
+    fontFamily: 'Artifika-Regular',
     fontSize: 16,
     color: '#141400',
     textAlign: 'center',

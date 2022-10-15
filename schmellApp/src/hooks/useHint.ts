@@ -48,6 +48,18 @@ export default (type: string) => {
       return hints.QG;
     case 'Laveste kortet':
       return hints.LK;
+    case '7 spillet':
+      return hints.SS;
+    case 'Roasting':
+      return hints.R;
+    case 'Name Your Player':
+      return hints.NYP;
+    case 'Ikke lov å le':
+      return hints.ILL;
+    case 'Politikk':
+      return hints.P;
+    case 'Svar ærlig':
+      return hints.SÆ;
     default:
       break;
   }

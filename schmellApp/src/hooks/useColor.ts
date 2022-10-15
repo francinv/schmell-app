@@ -48,6 +48,18 @@ export default (type: string) => {
       return colors.QG;
     case 'Laveste kortet':
       return colors.LK;
+    case '7 spillet':
+      return colors.SS;
+    case 'Roasting':
+      return colors.R;
+    case 'Name Your Player':
+      return colors.NYP;
+    case 'Ikke lov å le':
+      return colors.ILL;
+    case 'Politikk':
+      return colors.P;
+    case 'Svar ærlig':
+      return colors.SÆ;
     default:
       return colors.PL;
   }
